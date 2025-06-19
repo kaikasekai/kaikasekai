@@ -6,7 +6,7 @@ import {
 } from 'recharts';
 import dayjs from 'dayjs';
 
-const RAW_URL = 'https://raw.githubusercontent.com/USERNAME/REPO/BRANCH/data.csv';
+const RAW_URL = 'https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/data.csv';
 const COLORS = ['#ffff00','#00ff00','#00ffff','#0080ff','#8000ff','#ff00ff','#ff0080'];
 
 function App() {
