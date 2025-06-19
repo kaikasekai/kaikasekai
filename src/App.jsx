@@ -11,47 +11,33 @@ const COLORS = ['#ffff00', '#00ff00', '#00ffff', '#0080ff', '#8000ff', '#ff00ff'
 
 function App() {
   const [data, setData] = useState([]);
-  const [mae, setMae] = useState(null);
+  const [mae, setMae] = useState('');
   const [mape, setMape] = useState('');
 
   useEffect(() => {
     axios.get(RAW_URL).then(r => {
       Papa.parse(r.data, {
         header: true,
-        dynamicTyping: false, // <- специально отключаем авто-типизацию
+        dynamicTyping: true,
         complete: (res) => {
-          const parsed = res.data.map(row => {
-            // Преобразуем нужные поля вручную
-            const numericFields = [
-              'BTC', 'moving_average', 'predict', 'prp_1', 'prp_2',
-              ...Object.keys(row).filter(k => k.startsWith('p_'))
-            ];
-            const cleaned = { ...row };
-            numericFields.forEach(field => {
-              if (row[field] !== undefined) {
-                const val = Number(row[field]);
-                cleaned[field] = isNaN(val) ? null : val;
-              }
-            });
-            return cleaned;
-          });
-
-          const rows = parsed.filter((_, i) => i >= 30);
+          const rows = res.data.filter((_, i) => i >= 30);
           setData(rows);
 
           const last30 = rows.slice(-30);
           const valid = last30.filter(r =>
-            typeof r.BTC === 'number' &&
             typeof r.predict === 'number' &&
-            !isNaN(r.BTC) &&
+            typeof r.BTC === 'number' &&
             !isNaN(r.predict) &&
+            !isNaN(r.BTC) &&
             r.BTC !== 0
           );
 
-          const maeSum = valid.reduce((sum, r) => sum + Math.abs(r.predict - r.BTC), 0);
-          const mapeSum = valid.reduce((sum, r) => sum + Math.abs((r.predict - r.BTC) / r.BTC), 0);
-
+          // MAE: среднее абсолютное отклонение (в долларах)
+          const maeSum = valid.reduce((s, r) => s + Math.abs(r.predict - r.BTC), 0);
           setMae(valid.length ? (maeSum / valid.length).toFixed(2) : 'N/A');
+
+          // MAPE: средняя процентная ошибка
+          const mapeSum = valid.reduce((s, r) => s + Math.abs((r.predict - r.BTC) / r.BTC), 0);
           setMape(valid.length ? ((mapeSum / valid.length) * 100).toFixed(2) : 'N/A');
         }
       });
@@ -63,6 +49,7 @@ function App() {
   return (
     <div style={{ padding: 20 }}>
       <h2>BTC Forecast Chart</h2>
+
       <ResponsiveContainer width="100%" height={500}>
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -79,19 +66,18 @@ function App() {
           <Line type="monotone" dataKey="predict" stroke="#0000ff" dot={false} />
           <Line type="monotone" dataKey="prp_1" stroke="#6666ff" dot={false} />
           <Line type="monotone" dataKey="prp_2" stroke="#9999ff" dot={false} />
-          {Object.keys(data[0])
-            .filter(k => k.startsWith('p_'))
-            .map((key, idx) => (
-              <Line
-                key={key}
-                type="monotone"
-                dataKey={key}
-                stroke={COLORS[idx % COLORS.length]}
-                dot={false}
-              />
+          {Object.keys(data[0]).filter(k => k.startsWith('p_')).map((key, idx) => (
+            <Line
+              key={key}
+              type="monotone"
+              dataKey={key}
+              stroke={COLORS[idx % COLORS.length]}
+              dot={false}
+            />
           ))}
         </LineChart>
       </ResponsiveContainer>
+
       <div style={{ marginTop: 10 }}>
         <strong>Среднее отклонение (MAE):</strong> {mae} USD<br />
         <strong>Средняя процентная ошибка (MAPE):</strong> {mape}%
