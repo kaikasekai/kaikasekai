@@ -18,24 +18,40 @@ function App() {
     axios.get(RAW_URL).then(r => {
       Papa.parse(r.data, {
         header: true,
-        dynamicTyping: true,
+        dynamicTyping: false, // <- специально отключаем авто-типизацию
         complete: (res) => {
-          const rows = res.data.filter((_, i) => i >= 30);
+          const parsed = res.data.map(row => {
+            // Преобразуем нужные поля вручную
+            const numericFields = [
+              'BTC', 'moving_average', 'predict', 'prp_1', 'prp_2',
+              ...Object.keys(row).filter(k => k.startsWith('p_'))
+            ];
+            const cleaned = { ...row };
+            numericFields.forEach(field => {
+              if (row[field] !== undefined) {
+                const val = Number(row[field]);
+                cleaned[field] = isNaN(val) ? null : val;
+              }
+            });
+            return cleaned;
+          });
+
+          const rows = parsed.filter((_, i) => i >= 30);
           setData(rows);
 
           const last30 = rows.slice(-30);
           const valid = last30.filter(r =>
-            typeof r.predict === 'number' &&
             typeof r.BTC === 'number' &&
-            !isNaN(r.predict) &&
+            typeof r.predict === 'number' &&
             !isNaN(r.BTC) &&
+            !isNaN(r.predict) &&
             r.BTC !== 0
           );
 
-          const maeSum = valid.reduce((s, r) => s + Math.abs(r.predict - r.BTC), 0);
-          setMae(valid.length ? (maeSum / valid.length).toFixed(2) : 'N/A');
+          const maeSum = valid.reduce((sum, r) => sum + Math.abs(r.predict - r.BTC), 0);
+          const mapeSum = valid.reduce((sum, r) => sum + Math.abs((r.predict - r.BTC) / r.BTC), 0);
 
-          const mapeSum = valid.reduce((s, r) => s + Math.abs((r.predict - r.BTC) / r.BTC), 0);
+          setMae(valid.length ? (maeSum / valid.length).toFixed(2) : 'N/A');
           setMape(valid.length ? ((mapeSum / valid.length) * 100).toFixed(2) : 'N/A');
         }
       });
