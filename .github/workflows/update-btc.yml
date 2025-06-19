@@ -1,0 +1,25 @@
+name: Update BTC Data Daily
+
+on:
+  schedule:
+    - cron: '59 23 * * *'  # 23:59 UTC ежедневно
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+      - run: pip install requests
+      - run: python update_data.py
+      - run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add data.csv
+          git commit -m "Update BTC data on $(date -u '+%Y-%m-%d')" || echo "No changes"
+          git push
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
