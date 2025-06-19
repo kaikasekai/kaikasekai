@@ -1,5 +1,8 @@
 name: Update BTC Data Daily
 
+permissions:
+  contents: write
+
 on:
   schedule:
     - cron: '59 23 * * *'  # 23:59 UTC ежедневно
