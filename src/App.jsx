@@ -12,6 +12,8 @@ const COLORS = ['#ffff00','#00ff00','#00ffff','#0080ff','#8000ff','#ff00ff','#ff
 function App() {
   const [data, setData] = useState([]);
   const [mae, setMae] = useState(null);
+  const [mape, setMape] = useState('');
+
 
   useEffect(() => {
     axios.get(RAW_URL).then(r => {
@@ -21,9 +23,23 @@ function App() {
         complete: (res) => {
           const rows = res.data.filter((_, i) => i >= 30);
           setData(rows);
-          const last30 = rows.slice(-30);
-          const sum = last30.reduce((s, r) => s + Math.abs(r.predict - r.BTC), 0);
-          setMae((sum/last30.length).toFixed(2));
+          const last30 = filtered.slice(-30);
+const valid = last30.filter(r =>
+  typeof r.predict === 'number' &&
+  typeof r.BTC === 'number' &&
+  !isNaN(r.predict) &&
+  !isNaN(r.BTC) &&
+  r.BTC !== 0
+);
+
+// MAE: абсолютная ошибка в USD
+const maeSum = valid.reduce((s, r) => s + Math.abs(r.predict - r.BTC), 0);
+setMae(valid.length ? (maeSum / valid.length).toFixed(2) : 'N/A');
+
+// MAPE: относительная ошибка в %
+const mapeSum = valid.reduce((s, r) => s + Math.abs((r.predict - r.BTC) / r.BTC), 0);
+setMape(valid.length ? ((mapeSum / valid.length) * 100).toFixed(2) : 'N/A');
+
         }
       });
     });
@@ -62,8 +78,10 @@ function App() {
         </LineChart>
       </ResponsiveContainer>
       <div style={{ marginTop: 10 }}>
-        <strong>Accuracy (Mean Absolute Error over last 30 days):</strong> {mae} USD
-      </div>
+  <strong>Среднее отклонение (MAE):</strong> {mae} USD<br />
+  <strong>Средняя процентная ошибка (MAPE):</strong> {mape}%
+</div>
+
     </div>
   );
 }
