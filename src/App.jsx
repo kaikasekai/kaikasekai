@@ -7,11 +7,11 @@ import {
 import dayjs from 'dayjs';
 
 const RAW_URL = 'https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/data.csv';
-const COLORS = ['#ffff00', '#00ff00', '#00ffff', '#0080ff', '#8000ff', '#ff00ff', '#ff0080'];
+const COLORS = ['#ffff00','#00ff00','#00ffff','#0080ff','#8000ff','#ff00ff','#ff0080'];
 
 function App() {
   const [data, setData] = useState([]);
-  const [mae, setMae] = useState('');
+  const [mae, setMae] = useState(null);
   const [mape, setMape] = useState('');
 
   useEffect(() => {
@@ -23,22 +23,22 @@ function App() {
           const rows = res.data.filter((_, i) => i >= 30);
           setData(rows);
 
-          const last30 = rows.slice(-30);
-          const valid = last30.filter(r =>
-            typeof r.predict === 'number' &&
+          const today = new Date().toISOString().slice(0, 10); // 'YYYY-MM-DD'
+          const validRows = rows.filter(r =>
             typeof r.BTC === 'number' &&
-            !isNaN(r.predict) &&
+            typeof r.predict === 'number' &&
             !isNaN(r.BTC) &&
-            r.BTC !== 0
+            !isNaN(r.predict) &&
+            r.date <= today
           );
 
-          // MAE: среднее абсолютное отклонение (в долларах)
-          const maeSum = valid.reduce((s, r) => s + Math.abs(r.predict - r.BTC), 0);
-          setMae(valid.length ? (maeSum / valid.length).toFixed(2) : 'N/A');
+          const last30 = validRows.slice(-30);
 
-          // MAPE: средняя процентная ошибка
-          const mapeSum = valid.reduce((s, r) => s + Math.abs((r.predict - r.BTC) / r.BTC), 0);
-          setMape(valid.length ? ((mapeSum / valid.length) * 100).toFixed(2) : 'N/A');
+          const maeSum = last30.reduce((sum, r) => sum + Math.abs(r.predict - r.BTC), 0);
+          const mapeSum = last30.reduce((sum, r) => sum + Math.abs((r.predict - r.BTC) / r.BTC), 0);
+
+          setMae(last30.length ? (maeSum / last30.length).toFixed(2) : 'N/A');
+          setMape(last30.length ? ((mapeSum / last30.length) * 100).toFixed(2) : 'N/A');
         }
       });
     });
@@ -49,7 +49,6 @@ function App() {
   return (
     <div style={{ padding: 20 }}>
       <h2>BTC Forecast Chart</h2>
-
       <ResponsiveContainer width="100%" height={500}>
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -58,7 +57,7 @@ function App() {
             tickFormatter={(d) => dayjs(d).format('MMM D')}
             minTickGap={10}
           />
-          <YAxis domain={['auto', 'auto']} />
+          <YAxis domain={['auto','auto']} />
           <Tooltip />
           <Legend />
           <Line type="monotone" dataKey="BTC" stroke="#f7931a" dot={false} />
@@ -77,7 +76,6 @@ function App() {
           ))}
         </LineChart>
       </ResponsiveContainer>
-
       <div style={{ marginTop: 10 }}>
         <strong>Среднее отклонение (MAE):</strong> {mae} USD<br />
         <strong>Средняя процентная ошибка (MAPE):</strong> {mape}%
