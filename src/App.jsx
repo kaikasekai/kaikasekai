@@ -77,8 +77,8 @@ function App() {
         </LineChart>
       </ResponsiveContainer>
       <div style={{ marginTop: 10 }}>
-        <strong>Среднее отклонение (MAE):</strong> {mae} USD<br />
-        <strong>Средняя процентная ошибка (MAPE):</strong> {mape}%
+        <br />
+        <strong>Average deviation over the last 30 days (MAPE):</strong> {mape}%
       </div>
     </div>
   );
