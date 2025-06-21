@@ -1,0 +1,22 @@
+/* index.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #1f1f2e, #2b2b3a);
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+}
+
+h2 {
+  font-weight: 400;
+}
+
+.MuiAccordion-root {
+  background-color: #2e2e3f !important;
+  color: #fff !important;
+}
+
+.MuiAccordionSummary-expandIconWrapper {
+  color: #fff;
+}
