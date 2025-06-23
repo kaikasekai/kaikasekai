@@ -54,7 +54,7 @@ function App() {
   if (!data.length) return <div>Loading...</div>;
 
   return (
-    <div style={{ padding: 20, background: '#1f1f2e', minHeight: '100vh', color: '#fff' }}>
+    <div style={{ padding: 20, background: '#3e3e3e', minHeight: '100vh', color: '#fff' }}>
       <h2>BTC Forecast Chart</h2>
 
       <ResponsiveContainer width="100%" height={500}>
@@ -67,7 +67,7 @@ function App() {
           />
           <YAxis domain={['auto','auto']} />
           <Tooltip
-            contentStyle={{ backgroundColor: '#333', borderColor: '#555', color: '#fff' }}
+            contentStyle={{ backgroundColor: '#6e6e6e', borderColor: '#555', color: '#fff' }}
             labelStyle={{ color: '#ccc' }}
             itemStyle={{ color: '#fff' }}
           />
