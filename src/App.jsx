@@ -5,6 +5,13 @@ import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid,
 } from 'recharts';
 import dayjs from 'dayjs';
+import {
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Typography
+} from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const RAW_URL = 'https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/data.csv';
 const COLORS = ['#ffff00','#00ff00','#00ffff','#0080ff','#8000ff','#ff00ff','#ff0080'];
@@ -80,6 +87,31 @@ function App() {
         <strong>Среднее отклонение (MAE):</strong> {mae} USD<br />
         <strong>Средняя процентная ошибка (MAPE):</strong> {mape}%
       </div>
+      <Accordion style={{ marginTop: 20 }}>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography>О проекте</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            Этот проект отображает прогнозы курса BTC на основе нескольких моделей.
+            Данные обновляются ежедневно и визуализируются вместе с фактическим курсом.
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion style={{ marginTop: 10 }}>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography>Как это работает</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            – Прогнозы берутся из CSV-файла на GitHub.<br />
+            – Ежедневно добавляется курс BTC с сайта CoinGecko.<br />
+            – Рассчитываются MAE и MAPE по последним 30 дням.<br />
+            – Отображаются линии: фактический BTC, прогнозы, moving average.
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
     </div>
   );
 }
