@@ -21,35 +21,38 @@ function App() {
   const [mae, setMae] = useState(null);
   const [mape, setMape] = useState('');
 
-  useEffect(() => {
-    axios.get(RAW_URL).then(r => {
-      Papa.parse(r.data, {
-        header: true,
-        dynamicTyping: true,
-        complete: (res) => {
-          const cleaned = res.data.filter(row => row.date && !Object.values(row).every(v => v === null || v === ''));
-          const rows = cleaned.filter((_, i) => i >= 30);
-          setData(rows);
+useEffect(() => {
+  axios.get(RAW_URL).then(r => {
+    Papa.parse(r.data, {
+      header: true,
+      dynamicTyping: true,
+      complete: (res) => {
+        const rows = res.data.filter((_, i) => i >= 30);
+        setData(rows);
 
-          const valid = rows
-            .slice(-30)
-            .filter(r =>
-              typeof r.predict === 'number' &&
-              typeof r.BTC === 'number' &&
-              !isNaN(r.predict) &&
-              !isNaN(r.BTC) &&
-              r.BTC !== 0
-            );
+        // отбираем строки с валидными BTC и predict, и только до сегодняшней даты
+        const today = new Date().toISOString().slice(0, 10); // 'YYYY-MM-DD'
+        const validRows = rows.filter(r =>
+          typeof r.BTC === 'number' &&
+          typeof r.predict === 'number' &&
+          !isNaN(r.BTC) &&
+          !isNaN(r.predict) &&
+          r.date <= today
+        );
 
-          const maeSum = valid.reduce((s, r) => s + Math.abs(r.predict - r.BTC), 0);
-          setMae(valid.length ? (maeSum / valid.length).toFixed(2) : 'N/A');
+        // последние 30 строк из валидных
+        const last30 = validRows.slice(-30);
 
-          const mapeSum = valid.reduce((s, r) => s + Math.abs((r.predict - r.BTC) / r.BTC), 0);
-          setMape(valid.length ? ((mapeSum / valid.length) * 100).toFixed(2) : 'N/A');
-        }
-      });
+        const maeSum = last30.reduce((sum, r) => sum + Math.abs(r.predict - r.BTC), 0);
+        const mapeSum = last30.reduce((sum, r) => sum + Math.abs((r.predict - r.BTC) / r.BTC), 0);
+
+        setMae(last30.length ? (maeSum / last30.length).toFixed(2) : 'N/A');
+        setMape(last30.length ? ((mapeSum / last30.length) * 100).toFixed(2) : 'N/A');
+      }
     });
-  }, []);
+  });
+}, []);
+
 
   if (!data.length) return <div>Loading...</div>;
 
