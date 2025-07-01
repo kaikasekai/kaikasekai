@@ -37,7 +37,7 @@ useEffect(() => {
           typeof r.predict === 'number' &&
           !isNaN(r.BTC) &&
           !isNaN(r.predict) &&
-          r.date <= today
+          //r.date <= today
         );
 
         // последние 30 строк из валидных
