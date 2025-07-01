@@ -101,7 +101,6 @@ function App() {
         <strong>Среднее отклонение (MAE):</strong> {mae} USD<br />
         <strong>Средняя процентная ошибка (MAPE):</strong> {mape}%
       </div>
-      <div>
       <Accordion style={{ marginTop: 20 }}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography>О проекте</Typography>
@@ -127,7 +126,6 @@ function App() {
           </Typography>
         </AccordionDetails>
       </Accordion>
-        </div>
     </div>
   );
 }
