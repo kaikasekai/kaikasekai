@@ -27,19 +27,26 @@ function App() {
         header: true,
         dynamicTyping: true,
         complete: (res) => {
-          const cleaned = res.data.filter(row => row.date && !Object.values(row).every(v => v === null || v === ''));
+          const cleaned = res.data.filter(row =>
+            row.date &&
+            !Object.values(row).every(v => v === null || v === '')
+          );
+
           const rows = cleaned.filter((_, i) => i >= 30);
           setData(rows);
 
-          const valid = rows
-            .slice(-30)
-            .filter(r =>
-              typeof r.predict === 'number' &&
-              typeof r.BTC === 'number' &&
-              !isNaN(r.predict) &&
-              !isNaN(r.BTC) &&
-              r.BTC !== 0
-            );
+          // Приводим значения BTC и predict к числу
+          const raw = rows.slice(-30).map(r => ({
+            ...r,
+            BTC: Number(r.BTC),
+            predict: Number(r.predict),
+          }));
+
+          const valid = raw.filter(r =>
+            !isNaN(r.BTC) &&
+            !isNaN(r.predict) &&
+            r.BTC !== 0
+          );
 
           const maeSum = valid.reduce((s, r) => s + Math.abs(r.predict - r.BTC), 0);
           setMae(valid.length ? (maeSum / valid.length).toFixed(2) : 'N/A');
