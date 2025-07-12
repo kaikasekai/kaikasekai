@@ -42,7 +42,7 @@ function App() {
           const last30 = validRows.slice(-30);
 
           const maeSum = last30.reduce((sum, r) => sum + Math.abs(r.predict - r.BTC), 0);
-          const mapeSum = last30.reduce((sum, r) => sum + Math.abs((r.predict - r.BTC) / r.BTC), 0);
+          const mapeSum = last30.reduce((sum, r) => sum + Math.abs(100-((r.predict - r.BTC) / r.BTC)), 0);
 
           setMae(last30.length ? (maeSum / last30.length).toFixed(2) : 'N/A');
           setMape(last30.length ? ((mapeSum / last30.length) * 100).toFixed(2) : 'N/A');
@@ -84,8 +84,9 @@ function App() {
         </LineChart>
       </ResponsiveContainer>
       <div style={{ marginTop: 10 }}>
-        <strong>Среднее отклонение (MAE):</strong> {mae} USD<br />
-        <strong>Средняя процентная ошибка (MAPE):</strong> {mape}%
+ //       <strong>Среднее отклонение (MAE):</strong> {mae} USD<br />
+ //       <strong>Средняя процентная ошибка (MAPE):</strong> {mape}%
+          <strong>Accuracy last 30 days:</strong> {mape}%
       </div>
       <div>
       <Accordion style={{ marginTop: 20 }}>
