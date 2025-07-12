@@ -62,7 +62,6 @@ function App() {
           <XAxis
             dataKey="date"
             tickFormatter={(d) => dayjs(d).format('MMM')}
-            minTickGap={1}
           />
           <YAxis domain={['70000','140000']} />
           <Tooltip />
