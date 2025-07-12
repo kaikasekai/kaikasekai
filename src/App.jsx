@@ -61,10 +61,11 @@ function App() {
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis
             dataKey="date"
-            tickFormatter={(d) => dayjs(d).format('MMM D')}
-            minTickGap={10}
+            tickFormatter={(d) => dayjs(d).format('MMM')}
+            {/*  minTickGap={10} */}
+            interval="preserveStartEnd"
           />
-          <YAxis domain={['auto','auto']} />
+          <YAxis domain={['70000','140000']} />
           <Tooltip />
           <Legend />
           <Line type="monotone" dataKey="BTC" stroke="#f7931a" dot={false} />
