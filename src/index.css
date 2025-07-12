@@ -1,11 +1,11 @@
 /* index.css */
 
 body {
-  background: #3e3e3e !important;
+  background: green !important;
   font-size: 10px;
   margin: 0;
   padding: 0;
-  color: #fff;
+  color: #ccc;
   font-family: 'Menlo';
 }
 
