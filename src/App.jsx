@@ -63,7 +63,7 @@ function App() {
             dataKey="date"
             tickFormatter={(d) => dayjs(d).format('MMM')}
             {/*  minTickGap={10} */}
-            interval="preserveStartEnd"
+            ticks={data.filter(row => row.date.endsWith('-01')).map(row => row.date)}
           />
           <YAxis domain={['70000','140000']} />
           <Tooltip />
