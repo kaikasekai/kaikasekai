@@ -63,7 +63,7 @@ function App() {
             dataKey="date"
             tickFormatter={(d) => dayjs(d).format('MMM')}
           />
-          <YAxis domain={['70000','140000']} />
+          <YAxis domain={['auto','auto']} />
           <Tooltip />
           <Legend />
           <Line type="monotone" dataKey="BTC" stroke="#f7931a" dot={false} />
