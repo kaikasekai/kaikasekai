@@ -62,8 +62,7 @@ function App() {
           <XAxis
             dataKey="date"
             tickFormatter={(d) => dayjs(d).format('MMM')}
-            {/*  minTickGap={10} */}
-            ticks={data.filter(row => row.date.endsWith('-01')).map(row => row.date)}
+            minTickGap={30}
           />
           <YAxis domain={['70000','140000']} />
           <Tooltip />
