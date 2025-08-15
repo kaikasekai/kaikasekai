@@ -84,34 +84,30 @@ function App() {
       </ResponsiveContainer>
       <div style={{ marginTop: 10 }}>
         {/*
-          <strong>Среднее отклонение (MAE):</strong> {mae} USD<br />
-          <strong>Средняя процентная ошибка (MAPE):</strong> {mape}%
+          <strong> (MAE):</strong> {mae} USD<br />
+          <strong> (MAPE):</strong> {mape}%
         */}
           <strong>Accuracy last 30 days:</strong> {mape}%
       </div>
       <div>
       <Accordion style={{ marginTop: 20 }}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography>О проекте</Typography>
+          <Typography>About</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            Этот проект отображает прогнозы курса BTC на основе нескольких моделей.
-            Данные обновляются ежедневно и визуализируются вместе с фактическим курсом.
+            The project predicts BTC values by the cluster of AI models.
           </Typography>
         </AccordionDetails>
       </Accordion>
 
       <Accordion style={{ marginTop: 10 }}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography>Как это работает</Typography>
+          <Typography>How it works</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            – Прогнозы берутся из CSV-файла на GitHub.<br />
-            – Ежедневно добавляется курс BTC с сайта CoinGecko.<br />
-            – Рассчитываются MAE и MAPE по последним 30 дням.<br />
-            – Отображаются линии: фактический BTC, прогнозы, moving average.
+            BTC, moving average.
           </Typography>
         </AccordionDetails>
       </Accordion>
