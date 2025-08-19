@@ -66,9 +66,9 @@ function App() {
           <YAxis domain={['auto','auto']} />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="BTC" stroke="#f7931a" dot={false} />
-          <Line type="monotone" dataKey="moving_average" stroke="#00c69e" dot={false} strokeDasharray="5 5" />
-          <Line type="monotone" dataKey="predict" stroke="#0000ff" dot={false} />
+          <Line type="monotone" dataKey="BTC" stroke="#f7931a" dot={false} strokeWidth={3}/>
+          <Line type="monotone" dataKey="moving_average" stroke="#00c69e" dot={false} strokeDasharray="5 5" strokeWidth={2}/>
+          <Line type="monotone" dataKey="predict" stroke="#0000ff" dot={false} strokeWidth={3}/>
           <Line type="monotone" dataKey="prp_1" stroke="#6666ff" dot={false} />
           <Line type="monotone" dataKey="prp_2" stroke="#9999ff" dot={false} />
           {Object.keys(data[0]).filter(k => k.startsWith('p_')).map((key, idx) => (
