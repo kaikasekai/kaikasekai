@@ -27,8 +27,14 @@ function App() {
         header: true,
         dynamicTyping: true,
         complete: (res) => {
-          const rows = res.data.filter((_, i) => i >= 30);
-          setData(rows);
+//          const rows = res.data.filter((_, i) => i >= 30);
+//          setData(rows);
+
+          const rows = res.data.filter((_, i) => i >= 30).map(r => ({
+  ...r,
+  monthLabel: dayjs(r.date).date() === 1 ? dayjs(r.date).format('MMM') : ''
+}));
+
 
           const today = new Date().toISOString().slice(0, 10); // 'YYYY-MM-DD'
           const validRows = rows.filter(r =>
@@ -60,10 +66,15 @@ function App() {
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis
+            {/*
             dataKey="date"
             tickFormatter={(d) => dayjs(d).format('MMM')}
+            */}
+  dataKey="monthLabel"
+  interval={0}          // показывать каждый тик (можно менять)
+  tick={{ fontSize: 12 }}
           />
-          <YAxis domain={['auto','auto']} />
+          <YAxis domain={[100000,160000]} />
           <Tooltip />
           <Legend />
           <Line type="monotone" dataKey="BTC" stroke="#f7931a" dot={false} strokeWidth={3}/>
