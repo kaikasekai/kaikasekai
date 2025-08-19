@@ -14,7 +14,7 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const RAW_URL = 'https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/data.csv';
-const COLORS = ['#ffff00','#00ff00','#00ffff','#0080ff','#8000ff','#ff00ff','#ff0080'];
+const COLORS = ['#ff8000','00ff80','#ffff00','#00ff00','#00ffff','#0080ff','#8000ff','#ff00ff','#0080ff','#ff0080'];
 
 function App() {
   const [data, setData] = useState([]);
@@ -27,15 +27,9 @@ function App() {
         header: true,
         dynamicTyping: true,
         complete: (res) => {
-//          const rows = res.data.filter((_, i) => i >= 30);
-//          setData(rows);
-
-          const rows = res.data.filter((_, i) => i >= 30).map(r => ({
-  ...r,
-  monthLabel: dayjs(r.date).date() === 1 ? dayjs(r.date).format('MMM') : ''
-}));
-
-
+          const rows = res.data.filter((_, i) => i >= 30);
+          setData(rows);
+          
           const today = new Date().toISOString().slice(0, 10); // 'YYYY-MM-DD'
           const validRows = rows.filter(r =>
             typeof r.BTC === 'number' &&
@@ -66,13 +60,8 @@ function App() {
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis
-            {/*
             dataKey="date"
             tickFormatter={(d) => dayjs(d).format('MMM')}
-            */}
-  dataKey="monthLabel"
-  interval={0}          // показывать каждый тик (можно менять)
-  tick={{ fontSize: 12 }}
           />
           <YAxis domain={[100000,160000]} />
           <Tooltip />
