@@ -14,7 +14,7 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const RAW_URL = 'https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/data.csv';
-const COLORS = ['#ff8000','00ff80','#ffff00','#00ff00','#00ffff','#0080ff','#8000ff','#ff00ff','#0080ff','#ff0080'];
+const COLORS = ['#ff8000','#00ff80','#ffff00','#00ff00','#00ffff','#0080ff','#8000ff','#ff00ff','#0080ff','#ff0080'];
 
 function App() {
   const [data, setData] = useState([]);
