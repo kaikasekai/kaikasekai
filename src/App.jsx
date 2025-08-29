@@ -188,96 +188,115 @@ const handleSubscribe = async () => {
     return d.isAfter(firstDayOfMonth) && d.isBefore(dayjs(today));
   });
 
-  return (
-    <div style={{ padding: 20 }}>
-      <h2>BTC Forecast Chart</h2>
+return (
+  <div style={{ padding: 20 }}>
+    <h2>BTC Forecast Chart</h2>
+    {!account ? (
+      <Button variant="contained" onClick={connectWallet}>Connect Wallet</Button>
+    ) : (
+      <div>
+        <p>Connected: {account}</p>
 
-      {!account ? (
-        <Button variant="contained" onClick={connectWallet}>Connect Wallet</Button>
-      ) : (
-        <div>
-          <p>Connected: {account}</p>
-         {subscriptionActive ? (
-  <p>✅ Subscription active</p>
-) : (
-  <div>
-    <p>⚠️ Subscription inactive</p>
-    {!hasSubscribed && (  // 👈 показываем поле только если юзер ещё ни разу не подписывался
-      <TextField 
-        label="Referrer address (optional)" 
-        value={referrer}
-        onChange={e => setReferrer(e.target.value)}
-        fullWidth
-        margin="dense"
-      />
+        {subscriptionActive ? (
+          <p>✅ Subscription active</p>
+        ) : (
+          <div>
+            <p>⚠️ Subscription inactive</p>
+
+            {!hasSubscribed && (
+              // 👇 правильное условие с () и без лишнего ;
+              <TextField
+                label="Referrer address (optional)"
+                value={referrer}
+                onChange={e => setReferrer(e.target.value)}
+                fullWidth
+                margin="dense"
+              />
+            )}
+
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleSubscribe}
+            >
+              See next month (Subscribe)
+            </Button>
+          </div>
+        )}
+
+        <ResponsiveContainer width="100%" height={500}>
+          <LineChart data={filteredData}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="date" tickFormatter={(d) => dayjs(d).format('MMM D')} />
+            <YAxis domain={[100000,160000]} />
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="BTC" stroke="#f7931a" dot={false} strokeWidth={3}/>
+            <Line type="monotone" dataKey="moving_average" stroke="#00c69e" dot={false} strokeDasharray="5 5" strokeWidth={2}/>
+            <Line type="monotone" dataKey="predict" stroke="#0000ff" dot={false} strokeWidth={3}/>
+            <Line type="monotone" dataKey="prp_1" stroke="#6666ff" dot={false} />
+            <Line type="monotone" dataKey="prp_2" stroke="#9999ff" dot={false} />
+            {Object.keys(data[0]).filter(k => k.startsWith('p_')).map((key, idx) => (
+              <Line
+                key={key}
+                type="monotone"
+                dataKey={key}
+                stroke={COLORS[idx % COLORS.length]}
+                dot={false}
+              />
+            ))}
+          </LineChart>
+        </ResponsiveContainer>
+
+        <div style={{ marginTop: 10 }}>
+          <strong>Accuracy last 30 days:</strong> {mape}%
+        </div>
+
+        {/* Donate */}
+        <div style={{ marginTop: 20 }}>
+          <h3>Donate</h3>
+          <TextField
+            label="Amount (USDC)"
+            value={donateAmount}
+            onChange={e => setDonateAmount(e.target.value)}
+            fullWidth
+            margin="dense"
+          />
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={handleDonate}
+          >
+            Donate
+          </Button>
+        </div>
+
+        {/* Accordions */}
+        <Accordion style={{ marginTop: 20 }}>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography>About</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              The project predicts BTC values by the cluster of AI models.
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+
+        <Accordion style={{ marginTop: 10 }}>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography>How it works</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              BTC, moving average, predictions and error metrics (MAE/MAPE).
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+      </div>
     )}
-    <Button variant="contained" color="primary" onClick={handleSubscribe}>
-      See next month (Subscribe)
-    </Button>
   </div>
-)}
-
-      <ResponsiveContainer width="100%" height={500}>
-        <LineChart data={filteredData}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="date" tickFormatter={(d) => dayjs(d).format('MMM D')} />
-          <YAxis domain={[100000,160000]} />
-          <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="BTC" stroke="#f7931a" dot={false} strokeWidth={3}/>
-          <Line type="monotone" dataKey="moving_average" stroke="#00c69e" dot={false} strokeDasharray="5 5" strokeWidth={2}/>
-          <Line type="monotone" dataKey="predict" stroke="#0000ff" dot={false} strokeWidth={3}/>
-          <Line type="monotone" dataKey="prp_1" stroke="#6666ff" dot={false} />
-          <Line type="monotone" dataKey="prp_2" stroke="#9999ff" dot={false} />
-          {Object.keys(data[0]).filter(k => k.startsWith('p_')).map((key, idx) => (
-            <Line key={key} type="monotone" dataKey={key} stroke={COLORS[idx % COLORS.length]} dot={false}/>
-          ))}
-        </LineChart>
-      </ResponsiveContainer>
-
-      <div style={{ marginTop: 10 }}>
-        <strong>Accuracy last 30 days:</strong> {mape}%
-      </div>
-
-      {/* Donate */}
-      <div style={{ marginTop: 20 }}>
-        <h3>Donate</h3>
-<TextField 
-  label="Amount (USDC)" 
-  value={donateAmount}
-  onChange={e => setDonateAmount(e.target.value)}
-  fullWidth
-  margin="dense"
-/>
-<Button variant="contained" color="secondary" onClick={handleDonate}>
-  Donate
-</Button>
-      </div>
-
-      {/* Accordions */}
-      <Accordion style={{ marginTop: 20 }}>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography>About</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            The project predicts BTC values by the cluster of AI models.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion style={{ marginTop: 10 }}>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography>How it works</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            BTC, moving average, predictions and error metrics (MAE/MAPE).
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-    </div>
-    );
-  }
+);
+}
 
 export default App;
