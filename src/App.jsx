@@ -277,7 +277,6 @@ const handleSubscribe = async () => {
         </AccordionDetails>
       </Accordion>
     </div>
-  );
-}
+  )}
 
 export default App;
