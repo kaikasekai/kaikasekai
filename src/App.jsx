@@ -21,7 +21,7 @@ const RAW_URL = 'https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/da
 const COLORS = ['#ff8000','#00ff80','#ffff00','#00ff00','#00ffff','#0080ff','#8000ff','#ff00ff','#0080ff','#ff0080'];
 
 // === Contract Config ===
-const CONTRACT_ADDRESS = "0xf994B67367B064Fb790aD17F08B91F7fCC980Ecb"; // вставь адрес контракта
+const CONTRACT_ADDRESS = "0xYourContractAddress"; // вставь адрес контракта
 
 const CONTRACT_ABI = [
   "function subscriptionEnd(address) view returns (uint256)",
@@ -34,7 +34,7 @@ const CONTRACT_ABI = [
 ];
 
 // === USDC Config (Polygon) ===
-const USDC_ADDRESS = "0xC4D7620b1DDE8ad477910eBc8F288E9b527E725a"; // USDC в Polygon
+const USDC_ADDRESS = "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"; // USDC в Polygon
 const USDC_ABI = [
   "function approve(address spender, uint256 amount) external returns (bool)"
 ];
@@ -91,7 +91,7 @@ function App() {
     const prov = new ethers.BrowserProvider(window.ethereum);
 
     const network = await prov.getNetwork();
-  if (network.chainId != 11155111) { // Polygon Mainnet
+  if (network.chainId !== 137) { // Polygon Mainnet
     return alert("⚠️ Please switch MetaMask to Polygon Mainnet (chainId 137)");
   }
 
@@ -178,11 +178,15 @@ const handleSubscribe = async () => {
   if (!data.length) return <div>Loading...</div>;
 
   // === Data Filtering ===
+  const today = new Date();
+  const firstDayOfMonth = dayjs(today).startOf("month");
+  const nextMonth = dayjs(today).add(1, "month").endOf("month");
+
   const filteredData = data.filter(r => {
-  const d = dayjs(r.date);
-  if (showTwoMonths) return d.isAfter(firstDayOfMonth) && d.isBefore(nextMonth);
-  return d.isAfter(firstDayOfMonth) && d.isBefore(dayjs(today));
-});
+    const d = dayjs(r.date);
+    if (showTwoMonths) return d.isAfter(firstDayOfMonth) && d.isBefore(nextMonth);
+    return d.isAfter(firstDayOfMonth) && d.isBefore(dayjs(today));
+  });
   
 return (
   <div style={{ padding: 20 }}>
