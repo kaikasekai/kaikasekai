@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Papa from 'papaparse';
 import axios from 'axios';
 import { ethers } from 'ethers';
-//import WalletConnectProvider from "@walletconnect/web3-provider";
+import WalletConnectProvider from "@walletconnect/web3-provider";
 import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid,
 } from 'recharts';
@@ -96,19 +96,20 @@ function App() {
   } else {
     // WalletConnect
     const wcProvider = new WalletConnectProvider({
-      rpc: {
-        137: "https://polygon-rpc.com",      // Polygon Mainnet
-        11155111: "https://sepolia.infura.io/v3/YOUR_INFURA_KEY" // Sepolia для теста
-      }
-    });
+  rpc: {
+    137: "https://polygon-rpc.com",      // Polygon Mainnet
+    11155111: "https://rpc.sepolia.org" // Sepolia testnet без ключей
+  }
+});
+    
     await wcProvider.enable(); // открыть кошелёк
     prov = new ethers.BrowserProvider(wcProvider);
   }
 
   const network = await prov.getNetwork();
-  if (network.chainId !== 11155111) {
-    return alert("⚠️ Switch to Polygon Mainnet!");
-  }
+  if (![137, 11155111].includes(Number(network.chainId))) {
+  return alert("⚠️ Please switch to Polygon (137) or Sepolia (11155111)");
+}
 
   const signer = await prov.getSigner();
   const acc = await signer.getAddress();
