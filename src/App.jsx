@@ -106,7 +106,7 @@ function App() {
   }
 
   const network = await prov.getNetwork();
-  if (network.chainId !== 137) {
+  if (network.chainId !== 11155111) {
     return alert("⚠️ Switch to Polygon Mainnet!");
   }
 
