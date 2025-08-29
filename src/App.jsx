@@ -6,6 +6,13 @@ import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid,
 } from 'recharts';
 import dayjs from 'dayjs';
+
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
+dayjs.extend(isSameOrAfter);
+dayjs.extend(isSameOrBefore);
+
+
 import {
   Accordion,
   AccordionSummary,
@@ -178,10 +185,6 @@ const handleSubscribe = async () => {
   if (!data.length) return <div>Loading...</div>;
 
   // === Data Filtering ===
-  const today = new Date();
-  const firstDayOfMonth = dayjs(today).startOf("month");
-  const nextMonth = dayjs(today).add(1, "month").endOf("month");
-
   const filteredData = data.filter(r => {
   const d = dayjs(r.date);
   const startCurrentMonth = dayjs().startOf("month");
@@ -189,11 +192,11 @@ const handleSubscribe = async () => {
   const endNextMonth = dayjs().add(1, "month").endOf("month");
 
   if (subscriptionActive) {
-    // показываем текущий + следующий месяц
-    return d.isBetween(startCurrentMonth.subtract(1, "second"), endNextMonth.add(1, "second"));
+    // текущий + следующий месяц
+    return d.isSameOrAfter(startCurrentMonth) && d.isSameOrBefore(endNextMonth);
   } else {
-    // показываем только текущий месяц
-    return d.isBetween(startCurrentMonth.subtract(1, "second"), endCurrentMonth.add(1, "second"));
+    // только текущий месяц
+    return d.isSameOrAfter(startCurrentMonth) && d.isSameOrBefore(endCurrentMonth);
   }
 });
   
