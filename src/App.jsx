@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Papa from 'papaparse';
 import axios from 'axios';
 import { ethers } from 'ethers';
+import WalletConnectProvider from "@walletconnect/web3-provider";
 import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid,
 } from 'recharts';
@@ -87,24 +88,38 @@ function App() {
 
   // === Connect Wallet ===
   const connectWallet = async () => {
-    if (!window.ethereum) return alert("MetaMask not found!");
-    const prov = new ethers.BrowserProvider(window.ethereum);
+  let prov;
 
-    const network = await prov.getNetwork();
-  if (network.chainId !== 137) { // Polygon Mainnet
-    return alert("⚠️ Please switch MetaMask to Polygon Mainnet (chainId 137)");
+  if (window.ethereum) {
+    // MetaMask
+    prov = new ethers.BrowserProvider(window.ethereum);
+  } else {
+    // WalletConnect
+    const wcProvider = new WalletConnectProvider({
+      rpc: {
+        137: "https://polygon-rpc.com",      // Polygon Mainnet
+        11155111: "https://sepolia.infura.io/v3/YOUR_INFURA_KEY" // Sepolia для теста
+      }
+    });
+    await wcProvider.enable(); // открыть кошелёк
+    prov = new ethers.BrowserProvider(wcProvider);
   }
 
-    const signer = await prov.getSigner();
-    const acc = await signer.getAddress();
-    setAccount(acc);
-    setProvider(prov);
+  const network = await prov.getNetwork();
+  if (network.chainId !== 137) {
+    return alert("⚠️ Switch to Polygon Mainnet!");
+  }
 
-    const cont = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
-    setContract(cont);
+  const signer = await prov.getSigner();
+  const acc = await signer.getAddress();
+  setAccount(acc);
+  setProvider(prov);
 
-    checkSubscription(cont, acc);
-  };
+  const cont = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
+  setContract(cont);
+
+  checkSubscription(cont, acc);
+};
 
   // === Check Subscription ===
   const checkSubscription = async (cont, acc) => {
