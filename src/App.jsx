@@ -98,7 +98,7 @@ function App() {
     const wcProvider = new WalletConnectProvider({
   rpc: {
     137: "https://polygon-rpc.com",      // Polygon Mainnet
-    11155111: "https://rpc.sepolia.org" // Sepolia testnet без ключей
+    80001: "https://rpc-mumbai.maticvigil.com" // Mumbai testnet
   }
 });
     
@@ -107,8 +107,8 @@ function App() {
   }
 
   const network = await prov.getNetwork();
-  if (![137, 11155111].includes(Number(network.chainId))) {
-  return alert("⚠️ Please switch to Polygon (137) or Sepolia (11155111)");
+  if (![137, 80001].includes(Number(network.chainId))) {
+  return alert("⚠️ Please switch to Polygon (137)");
 }
 
   const signer = await prov.getSigner();
