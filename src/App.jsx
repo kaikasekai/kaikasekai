@@ -183,11 +183,20 @@ const handleSubscribe = async () => {
   const nextMonth = dayjs(today).add(1, "month").endOf("month");
 
   const filteredData = data.filter(r => {
-    const d = dayjs(r.date);
-    if (showTwoMonths) return d.isAfter(firstDayOfMonth) && d.isBefore(nextMonth);
-    return d.isAfter(firstDayOfMonth) && d.isBefore(dayjs(today));
-  });
+  const d = dayjs(r.date);
+  const startCurrentMonth = dayjs().startOf("month");
+  const endCurrentMonth = dayjs().endOf("month");
+  const endNextMonth = dayjs().add(1, "month").endOf("month");
 
+  if (subscriptionActive) {
+    // показываем текущий + следующий месяц
+    return d.isBetween(startCurrentMonth.subtract(1, "second"), endNextMonth.add(1, "second"));
+  } else {
+    // показываем только текущий месяц
+    return d.isBetween(startCurrentMonth.subtract(1, "second"), endCurrentMonth.add(1, "second"));
+  }
+});
+  
 return (
   <div style={{ padding: 20 }}>
     <h2>BTC Forecast Chart</h2>
