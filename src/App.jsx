@@ -211,6 +211,9 @@ const handleSubscribe = async () => {
   
 return (
   <div style={{ padding: 20 }}>
+    <h1 style={{ color: "green" }}>✅ React работает!</h1>
+  </div>
+  <div style={{ padding: 20 }}>
     <h2>BTC Forecast Chart</h2>
     {!account ? (
       <Button variant="contained" onClick={connectWallet}>Connect Wallet</Button>
