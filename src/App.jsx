@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Papa from 'papaparse';
 import axios from 'axios';
 import { BrowserProvider, Contract, ZeroAddress, parseUnits } from 'ethers';
-import WalletConnectProvider from "@walletconnect/web3-provider";
+//import WalletConnectProvider from "@walletconnect/web3-provider";
 import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid,
 } from 'recharts';
