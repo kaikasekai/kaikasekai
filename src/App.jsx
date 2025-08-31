@@ -108,8 +108,8 @@ const connectWallet = async () => {
     if (prov?.provider?.wc?.session) {
       await prov.provider.disconnect();
     }
-
-    await prov.enable();
+    await wcProvider.enable();
+    prov = new BrowserProvider(wcProvider);
   }
 
   const network = await prov.getNetwork();
