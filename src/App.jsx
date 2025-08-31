@@ -57,34 +57,14 @@ function App() {
 
   // === Fetch Data ===
   useEffect(() => {
-    axios.get(RAW_URL).then(r => {
-      Papa.parse(r.data, {
-        header: true,
-        dynamicTyping: true,
-        complete: (res) => {
-          const rows = res.data.filter((_, i) => i >= 30);
-          setData(rows);
-          
-          const today = new Date().toISOString().slice(0, 10); 
-          const validRows = rows.filter(r =>
-            typeof r.BTC === 'number' &&
-            typeof r.predict === 'number' &&
-            !isNaN(r.BTC) &&
-            !isNaN(r.predict) &&
-            r.date <= today
-          );
+  setData([
+    { date: "2025-08-01", BTC: 100000, predict: 101000 },
+    { date: "2025-08-02", BTC: 102000, predict: 103000 }
+  ]);
+  setMae(1000);
+  setMape("1.5");
+}, []);
 
-          const last30 = validRows.slice(-30);
-
-          const maeSum = last30.reduce((sum, r) => sum + Math.abs(r.predict - r.BTC), 0);
-          const mapeSum = last30.reduce((sum, r) => sum + Math.abs(1-((r.predict - r.BTC) / r.BTC)), 0);
-
-          setMae(last30.length ? (maeSum / last30.length).toFixed(2) : 'N/A');
-          setMape(last30.length ? ((mapeSum / last30.length) * 100).toFixed(2) : 'N/A');
-        }
-      });
-    });
-  }, []);
 
   // === Connect Wallet ===
   const connectWallet = async () => {
