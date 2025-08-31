@@ -97,7 +97,7 @@ function App() {
 
   if (window.ethereum) {
     // MetaMask
-    prov = new ethers.BrowserProvider(window.ethereum);
+    prov = new BrowserProvider(window.ethereum);
   } else {
     // WalletConnect
     const wcProvider = new WalletConnectProvider({
@@ -108,7 +108,7 @@ function App() {
 });
     
     await wcProvider.enable(); // open wallet
-    prov = new ethers.BrowserProvider(wcProvider);
+    prov = new BrowserProvider(wcProvider);
   }
 
   const network = await prov.getNetwork();
@@ -121,7 +121,7 @@ function App() {
   setAccount(acc);
   setProvider(prov);
 
-  const cont = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
+  const cont = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
   setContract(cont);
 
   checkSubscription(cont, acc);
@@ -148,7 +148,7 @@ const handleSubscribe = async () => {
   if (!contract || !provider) return;
   try {
     const signer = await provider.getSigner();
-    const usdc = new ethers.Contract(USDC_ADDRESS, USDC_ABI, signer);
+    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
     // узнаём цену из контракта
     const price = await contract.price();
@@ -177,7 +177,7 @@ const handleSubscribe = async () => {
 
   try {
     const signer = await provider.getSigner();
-    const usdc = new ethers.Contract(USDC_ADDRESS, USDC_ABI, signer);
+    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
     const amount = parseUnits(donateAmount, 6); // USDC decimals
 
