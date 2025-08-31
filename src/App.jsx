@@ -107,8 +107,8 @@ function App() {
   }
 
   const network = await prov.getNetwork();
-  if (![137, 11155111].includes(Number(network.chainId))) {
-  return alert("⚠️ Please switch to Polygon (137)");
+  if (Number(network.chainId) !== 11155111) {
+  return alert("⚠️ Please switch to Sepolia (11155111)");
 }
 
   const signer = await prov.getSigner();
