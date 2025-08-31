@@ -94,6 +94,10 @@ function App() {
     // MetaMask
     prov = new BrowserProvider(window.ethereum);
   } else {
+  
+    // Динамический импорт WalletConnect только при необходимости
+  const WalletConnectProvider = (await import("@walletconnect/web3-provider")).default;
+    
     // WalletConnect
     const wcProvider = new WalletConnectProvider({
   rpc: {
