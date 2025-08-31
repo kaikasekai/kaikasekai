@@ -22,7 +22,7 @@ const RAW_URL = 'https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/da
 const COLORS = ['#ff8000','#00ff80','#ffff00','#00ff00','#00ffff','#0080ff','#8000ff','#ff00ff','#0080ff','#ff0080'];
 
 // === Contract Config ===
-const CONTRACT_ADDRESS = "0xYourContractAddress"; // вставь адрес контракта
+const CONTRACT_ADDRESS = "0xf994B67367B064Fb790aD17F08B91F7fCC980Ecb"; // contract address
 
 const CONTRACT_ABI = [
   "function subscriptionEnd(address) view returns (uint256)",
@@ -35,7 +35,7 @@ const CONTRACT_ABI = [
 ];
 
 // === USDC Config (Polygon) ===
-const USDC_ADDRESS = "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"; // USDC в Polygon
+const USDC_ADDRESS = "0xC4D7620b1DDE8ad477910eBc8F288E9b527E725a"; // USDC в Polygon
 const USDC_ABI = [
   "function approve(address spender, uint256 amount) external returns (bool)"
 ];
@@ -98,16 +98,16 @@ function App() {
     const wcProvider = new WalletConnectProvider({
   rpc: {
     137: "https://polygon-rpc.com",      // Polygon Mainnet
-    80001: "https://rpc-mumbai.maticvigil.com" // Mumbai testnet
+    11155111: "https://rpc.sepolia.org" // Sepolia testnet
   }
 });
     
-    await wcProvider.enable(); // открыть кошелёк
+    await wcProvider.enable(); // open wallet
     prov = new ethers.BrowserProvider(wcProvider);
   }
 
   const network = await prov.getNetwork();
-  if (![137, 80001].includes(Number(network.chainId))) {
+  if (![137, 11155111].includes(Number(network.chainId))) {
   return alert("⚠️ Please switch to Polygon (137)");
 }
 
@@ -125,7 +125,7 @@ function App() {
   // === Check Subscription ===
   const checkSubscription = async (cont, acc) => {
   const end = await cont.subscriptionEnd(acc);
-  const subscribed = await cont.hasEverSubscribed(acc); // 👈 новый вызов
+  const subscribed = await cont.hasEverSubscribed(acc);
   setHasSubscribed(subscribed);
 
   const now = Math.floor(Date.now() / 1000);
