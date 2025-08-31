@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Papa from 'papaparse';
 import axios from 'axios';
 import { BrowserProvider, Contract, ZeroAddress, parseUnits } from 'ethers';
-//import WalletConnectProvider from "@walletconnect/web3-provider";
+import EthereumProvider from "@walletconnect/ethereum-provider";
 import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid,
 } from 'recharts';
@@ -87,30 +87,34 @@ function App() {
   }, []);
 
   // === Connect Wallet ===
-  const connectWallet = async () => {
+const connectWallet = async () => {
   let prov;
 
   if (window.ethereum) {
-    // Встроенный браузер MetaMask
+    // MetaMask
     prov = new BrowserProvider(window.ethereum);
   } else {
-    // Safari, Chrome и т.п. → открываем WalletConnect
-    const WalletConnectProvider = (await import("@walletconnect/web3-provider")).default;
-
-    const wcProvider = new WalletConnectProvider({
-      rpc: {
-        137: "https://polygon-rpc.com",
-        11155111: "https://rpc.sepolia.org"
-      }
+    // WalletConnect v2
+    const wcProvider = await EthereumProvider.init({
+      projectId: "88a4618bff0d86aab28197d3b42e7845", // ⚡ обязательно! Получить на https://cloud.walletconnect.com
+      chains: [11155111], // Sepolia
+      optionalChains: [137], // Polygon
+      showQrModal: true, // покажет QR на десктопе
+      methods: ["eth_sendTransaction", "personal_sign", "eth_signTypedData"],
+      events: ["chainChanged", "accountsChanged"],
     });
 
     await wcProvider.enable();
     prov = new BrowserProvider(wcProvider);
   }
 
+  const network = await prov.getNetwork();
+  if (Number(network.chainId) !== 11155111) {
+    return alert("⚠️ Please switch to Sepolia (11155111)");
+  }
+
   const signer = await prov.getSigner();
   const acc = await signer.getAddress();
-
   setAccount(acc);
   setProvider(prov);
 
