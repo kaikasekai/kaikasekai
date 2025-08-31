@@ -153,7 +153,7 @@ const handleSubscribe = async () => {
     await approveTx.wait();
 
     // теперь подписка
-    const endTime = dayjs().add(1, "month").endOf("month").valueOf() / 1000;
+    const endTime = Math.floor(dayjs().add(1, "month").endOf("month").valueOf() / 1000);
     const tx = await contract.subscribe(endTime, referrer || ZeroAddress);
     await tx.wait();
 
