@@ -42,12 +42,10 @@ const USDC_ABI = [
 
 
 function App() {
-  window.addEventListener("error", (e) => {
-  const div = document.createElement("div");
-  div.style.color = "red";
-  div.innerText = "JS Error: " + e.message;
-  document.body.prepend(div);
-});
+  document.body.prepend(Object.assign(document.createElement("div"), {
+    innerText: "✅ App started",
+    style: "color: green; font-weight: bold; padding: 10px; background: white"
+  }));
 
   const [data, setData] = useState([]);
   const [mae, setMae] = useState(null);
