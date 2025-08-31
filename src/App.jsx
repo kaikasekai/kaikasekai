@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Papa from 'papaparse';
 import axios from 'axios';
-import { ethers } from 'ethers';
+import { ethers, ZeroAddress, parseUnits } from 'ethers';
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid,
@@ -154,7 +154,7 @@ const handleSubscribe = async () => {
 
     // теперь подписка
     const endTime = dayjs().add(1, "month").endOf("month").unix();
-    const tx = await contract.subscribe(endTime, referrer || ethers.ZeroAddress);
+    const tx = await contract.subscribe(endTime, referrer || ZeroAddress);
     await tx.wait();
 
     checkSubscription(contract, account);
@@ -174,7 +174,7 @@ const handleSubscribe = async () => {
     const signer = await provider.getSigner();
     const usdc = new ethers.Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-    const amount = ethers.parseUnits(donateAmount, 6); // USDC decimals
+    const amount = parseUnits(donateAmount, 6); // USDC decimals
 
     // approve
     const approveTx = await usdc.approve(CONTRACT_ADDRESS, amount);
