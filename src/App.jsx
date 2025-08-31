@@ -104,9 +104,10 @@ const connectWallet = async () => {
       events: ["chainChanged", "accountsChanged"],
     });
 
-    await wcProvider.enable();
-    prov = new BrowserProvider(wcProvider);
-  }
+    // ⚡ вот здесь очищаем старую сессию, если она есть
+    if (prov?.provider?.wc?.session) {
+      await prov.provider.disconnect();
+    }
 
   const network = await prov.getNetwork();
   if (Number(network.chainId) !== 11155111) {
