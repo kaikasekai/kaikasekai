@@ -91,32 +91,26 @@ function App() {
   let prov;
 
   if (window.ethereum) {
-    // MetaMask
+    // Встроенный браузер MetaMask
     prov = new BrowserProvider(window.ethereum);
   } else {
-  
-    // Динамический импорт WalletConnect только при необходимости
-  const WalletConnectProvider = (await import("@walletconnect/web3-provider")).default;
-    
-    // WalletConnect
+    // Safari, Chrome и т.п. → открываем WalletConnect
+    const WalletConnectProvider = (await import("@walletconnect/web3-provider")).default;
+
     const wcProvider = new WalletConnectProvider({
-  rpc: {
-    137: "https://polygon-rpc.com",      // Polygon Mainnet
-    11155111: "https://rpc.sepolia.org" // Sepolia testnet
-  }
-});
-    
-    await wcProvider.enable(); // open wallet
+      rpc: {
+        137: "https://polygon-rpc.com",
+        11155111: "https://rpc.sepolia.org"
+      }
+    });
+
+    await wcProvider.enable();
     prov = new BrowserProvider(wcProvider);
   }
 
-  const network = await prov.getNetwork();
-  if (Number(network.chainId) !== 11155111) {
-  return alert("⚠️ Please switch to Sepolia (11155111)");
-}
-
   const signer = await prov.getSigner();
   const acc = await signer.getAddress();
+
   setAccount(acc);
   setProvider(prov);
 
