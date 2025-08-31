@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Papa from 'papaparse';
 import axios from 'axios';
-import { ethers, ZeroAddress, parseUnits } from 'ethers';
+import { BrowserProvider, Contract, ethers, ZeroAddress, parseUnits } from 'ethers';
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid,
@@ -42,6 +42,13 @@ const USDC_ABI = [
 
 
 function App() {
+  window.addEventListener("error", (e) => {
+  const div = document.createElement("div");
+  div.style.color = "red";
+  div.innerText = "JS Error: " + e.message;
+  document.body.prepend(div);
+});
+
   const [data, setData] = useState([]);
   const [mae, setMae] = useState(null);
   const [mape, setMape] = useState('');
