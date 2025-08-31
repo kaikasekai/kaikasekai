@@ -109,6 +109,9 @@ const connectWallet = async () => {
       await prov.provider.disconnect();
     }
 
+    await prov.enable();
+  }
+
   const network = await prov.getNetwork();
   if (Number(network.chainId) !== 11155111) {
     return alert("⚠️ Please switch to Sepolia (11155111)");
