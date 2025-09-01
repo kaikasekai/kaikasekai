@@ -86,6 +86,27 @@ function App() {
     });
   }, []);
 
+  // === Reset WalletConnect session on page load ===
+useEffect(() => {
+  (async () => {
+    try {
+      const prov = await EthereumProvider.init({
+        projectId: "88a4618bff0d86aab28197d3b42e7845",
+        chains: [11155111], // Sepolia
+        optionalChains: [137],
+        showQrModal: false, // не показываем QR при очистке
+      });
+
+      if (prov?.provider?.wc?.session) {
+        await prov.provider.disconnect();
+        console.log("🔄 Old WalletConnect session cleared");
+      }
+    } catch (err) {
+      console.warn("⚠️ No WalletConnect session to clear:", err);
+    }
+  })();
+}, []);
+
   // === Connect Wallet ===
 const connectWallet = async () => {
   let prov;
