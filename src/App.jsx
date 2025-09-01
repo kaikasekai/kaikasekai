@@ -106,6 +106,27 @@ useEffect(() => {
     }
   })();
 }, []);
+  
+const handleDisconnect = async () => {
+  try {
+    if (provider?.provider?.disconnect) {
+      // WalletConnect v2 умеет дисконнектиться
+      await provider.provider.disconnect();
+    }
+    // На всякий случай чистим localStorage от WalletConnect-сессии
+    Object.keys(localStorage).forEach(k => {
+      if (k.startsWith("wc@")) localStorage.removeItem(k);
+    });
+
+    setAccount(null);
+    setProvider(null);
+    setContract(null);
+    setSubscriptionActive(false);
+    console.log("🔌 Disconnected and cache cleared");
+  } catch (e) {
+    console.error("Disconnect error:", e);
+  }
+};
 
   // === Connect Wallet ===
 const connectWallet = async () => {
@@ -249,6 +270,12 @@ return (
     ) : (
       <div>
         <p>Connected: {account}</p>
+<div>
+  <p>Connected: {account}</p>
+  <Button variant="outlined" color="error" onClick={handleDisconnect}>
+    Disconnect
+  </Button>
+</div>
 
         {subscriptionActive ? (
           <p>✅ Subscription active</p>
