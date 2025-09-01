@@ -53,7 +53,7 @@ function App() {
   const [referrer, setReferrer] = useState('');
   const [donateAmount, setDonateAmount] = useState('');
   const [hasSubscribed, setHasSubscribed] = useState(false);
-
+  const [wcProvider, setWcProvider] = useState(null);
 
   // === Fetch Data ===
   useEffect(() => {
@@ -109,11 +109,11 @@ useEffect(() => {
   
 const handleDisconnect = async () => {
   try {
-    if (provider?.provider?.disconnect) {
-      // WalletConnect v2 умеет дисконнектиться
-      await provider.provider.disconnect();
+    if (wcProvider) {
+      await wcProvider.disconnect();
+      setWcProvider(null);
     }
-    // На всякий случай чистим localStorage от WalletConnect-сессии
+    // Удаляем ключи WC из localStorage
     Object.keys(localStorage).forEach(k => {
       if (k.startsWith("wc@")) localStorage.removeItem(k);
     });
@@ -122,7 +122,7 @@ const handleDisconnect = async () => {
     setProvider(null);
     setContract(null);
     setSubscriptionActive(false);
-    console.log("🔌 Disconnected and cache cleared");
+    console.log("🔌 Fully disconnected, WC session cleared");
   } catch (e) {
     console.error("Disconnect error:", e);
   }
@@ -138,30 +138,16 @@ const connectWallet = async () => {
   } else {
     // WalletConnect v2
     const wcProvider = await EthereumProvider.init({
-      projectId: "88a4618bff0d86aab28197d3b42e7845", // ⚡ обязательно! Получить на https://cloud.walletconnect.com
-      chains: [11155111], // Sepolia
-      optionalChains: [137], // Polygon
-      showQrModal: true, // покажет QR на десктопе
-      methods: ["eth_sendTransaction", "personal_sign", "eth_signTypedData"],
-      events: ["chainChanged", "accountsChanged"],
+      projectId: "88a4618bff0d86aab28197d3b42e7845",
+      chains: [137], // Polygon
+      optionalChains: [11155111], // Sepolia
+      showQrModal: true,
     });
 
-    // ⚡ вот здесь очищаем старую сессию, если она есть
-    if (prov?.provider?.wc?.session) {
-      await prov.provider.disconnect();
-    }
-    await wcProvider.enable();
-prov = new BrowserProvider(wcProvider);
+    await wc.enable();
+setWcProvider(wc);
+prov = new BrowserProvider(wc);
 
-// 👉 слушаем смену аккаунта
-wcProvider.on("accountsChanged", (accounts) => {
-  if (accounts.length > 0) {
-    setAccount(accounts[0]);
-    console.log("👤 Account switched:", accounts[0]);
-  } else {
-    setAccount(null);
-  }
-});
   }
 
   const network = await prov.getNetwork();
