@@ -130,7 +130,17 @@ const connectWallet = async () => {
       await prov.provider.disconnect();
     }
     await wcProvider.enable();
-    prov = new BrowserProvider(wcProvider);
+prov = new BrowserProvider(wcProvider);
+
+// 👉 слушаем смену аккаунта
+wcProvider.on("accountsChanged", (accounts) => {
+  if (accounts.length > 0) {
+    setAccount(accounts[0]);
+    console.log("👤 Account switched:", accounts[0]);
+  } else {
+    setAccount(null);
+  }
+});
   }
 
   const network = await prov.getNetwork();
