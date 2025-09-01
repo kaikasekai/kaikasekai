@@ -53,7 +53,7 @@ function App() {
   const [referrer, setReferrer] = useState('');
   const [donateAmount, setDonateAmount] = useState('');
   const [hasSubscribed, setHasSubscribed] = useState(false);
-  const [wcProvider, setWcProvider] = useState(null);
+
 
   // === Fetch Data ===
   useEffect(() => {
@@ -86,48 +86,6 @@ function App() {
     });
   }, []);
 
-  // === Reset WalletConnect session on page load ===
-useEffect(() => {
-  (async () => {
-    try {
-      const prov = await EthereumProvider.init({
-        projectId: "88a4618bff0d86aab28197d3b42e7845",
-        chains: [11155111], // Sepolia
-        optionalChains: [137],
-        showQrModal: false, // не показываем QR при очистке
-      });
-
-      if (prov?.provider?.wc?.session) {
-        await prov.provider.disconnect();
-        console.log("🔄 Old WalletConnect session cleared");
-      }
-    } catch (err) {
-      console.warn("⚠️ No WalletConnect session to clear:", err);
-    }
-  })();
-}, []);
-  
-const handleDisconnect = async () => {
-  try {
-    if (wcProvider) {
-      await wcProvider.disconnect();
-      setWcProvider(null);
-    }
-    // Удаляем ключи WC из localStorage
-    Object.keys(localStorage).forEach(k => {
-      if (k.startsWith("wc@")) localStorage.removeItem(k);
-    });
-
-    setAccount(null);
-    setProvider(null);
-    setContract(null);
-    setSubscriptionActive(false);
-    console.log("🔌 Fully disconnected, WC session cleared");
-  } catch (e) {
-    console.error("Disconnect error:", e);
-  }
-};
-
   // === Connect Wallet ===
 const connectWallet = async () => {
   let prov;
@@ -138,16 +96,20 @@ const connectWallet = async () => {
   } else {
     // WalletConnect v2
     const wcProvider = await EthereumProvider.init({
-      projectId: "88a4618bff0d86aab28197d3b42e7845",
-      chains: [137], // Polygon
-      optionalChains: [11155111], // Sepolia
-      showQrModal: true,
+      projectId: "88a4618bff0d86aab28197d3b42e7845", // ⚡ обязательно! Получить на https://cloud.walletconnect.com
+      chains: [11155111], // Sepolia
+      optionalChains: [137], // Polygon
+      showQrModal: true, // покажет QR на десктопе
+      methods: ["eth_sendTransaction", "personal_sign", "eth_signTypedData"],
+      events: ["chainChanged", "accountsChanged"],
     });
 
-    await wc.enable();
-setWcProvider(wc);
-prov = new BrowserProvider(wc);
-
+    // ⚡ вот здесь очищаем старую сессию, если она есть
+    if (prov?.provider?.wc?.session) {
+      await prov.provider.disconnect();
+    }
+    await wcProvider.enable();
+    prov = new BrowserProvider(wcProvider);
   }
 
   const network = await prov.getNetwork();
@@ -256,12 +218,6 @@ return (
     ) : (
       <div>
         <p>Connected: {account}</p>
-<div>
-  <p>Connected: {account}</p>
-  <Button variant="outlined" color="error" onClick={handleDisconnect}>
-    Disconnect
-  </Button>
-</div>
 
         {subscriptionActive ? (
           <p>✅ Subscription active</p>
