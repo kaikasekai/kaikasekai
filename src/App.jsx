@@ -30,8 +30,8 @@ const CONTRACT_ABI = [
   "function subscribe(uint256 endTime, address refAddr) external",
   "function donate(uint256 amount) external",
   "function price() view returns (uint256)",
-  "function hasEverSubscribed(address) view returns (bool)"
-
+  "function hasEverSubscribed(address) view returns (bool)",
+  "function isWhitelisted(address) view returns (bool)"
 ];
 
 // === USDC Config (Polygon) ===
@@ -147,11 +147,22 @@ const connectWallet = async () => {
   // === Subscribe ===
 const handleSubscribe = async () => {
   if (!contract || !provider) return;
+
+  let validReferrer = false;
+
+  // проверка реферала, если введён
+  if (referrer && ethers.isAddress(referrer)) {
+    try {
+      validReferrer = await contract.isWhitelisted(referrer);
+    } catch (e) {
+      console.error("Ошибка проверки реферала:", e);
+    }
+  }
+
   try {
     const signer = await provider.getSigner();
     const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-    // узнаём цену из контракта
     const price = await contract.price();
 
     // сначала approve
@@ -160,14 +171,28 @@ const handleSubscribe = async () => {
 
     // теперь подписка
     const endTime = Math.floor(dayjs().add(1, "month").endOf("month").valueOf() / 1000);
-    const tx = await contract.subscribe(endTime, referrer || ZeroAddress);
-    await tx.wait();
+
+    if (validReferrer) {
+      // ✅ адрес валидный
+      const tx = await contract.subscribe(endTime, referrer);
+      await tx.wait();
+      alert("✅ Подписка успешна с использованием реферала!");
+    } else if (referrer) {
+      // ❌ адрес введён, но недействителен
+      alert("❌ Адрес недействителен. Подписка будет без реферала.");
+      const tx = await contract.subscribe(endTime, ZeroAddress);
+      await tx.wait();
+    } else {
+      // адрес не введён
+      const tx = await contract.subscribe(endTime, ZeroAddress);
+      await tx.wait();
+      alert("✅ Подписка успешна!");
+    }
 
     checkSubscription(contract, account);
-    alert("✅ Subscription successful!");
   } catch (e) {
     console.error(e);
-    alert("❌ Subscription failed, check console");
+    alert("❌ Ошибка подписки, см. консоль");
   }
 };
 
