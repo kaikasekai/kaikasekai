@@ -22,7 +22,7 @@ const RAW_URL = 'https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/da
 const COLORS = ['#ff8000','#00ff80','#ffff00','#00ff00','#00ffff','#0080ff','#8000ff','#ff00ff','#0080ff','#ff0080'];
 
 // === Contract Config ===
-const CONTRACT_ADDRESS = "0xf994B67367B064Fb790aD17F08B91F7fCC980Ecb"; // contract address
+const CONTRACT_ADDRESS = "0xd031Ab2489e141520d3E553015e5a756FE926927"; // contract address
 
 const CONTRACT_ABI = [
   "function subscriptionEnd(address) view returns (uint256)",
