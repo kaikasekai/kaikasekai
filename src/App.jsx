@@ -188,8 +188,14 @@ const handleSubscribe = async () => {
     checkSubscription(contract, account);
     alert("✅ Subscription successful!");
   } catch (e) {
-    console.error(e);
-    alert("❌ Subscription failed, check console");
+  let msg = "❌ Subscription failed\n";
+
+  if (e.reason) msg += "Reason: " + e.reason + "\n";
+  if (e.error?.message) msg += "Error: " + e.error.message + "\n";
+  if (e.data?.message) msg += "Data: " + e.data.message + "\n";
+  if (e.message) msg += "Message: " + e.message + "\n";
+
+  alert(msg);
   }
 };
 
