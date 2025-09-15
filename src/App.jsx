@@ -91,23 +91,24 @@ const connectWallet = async () => {
   let prov;
 
   if (window.ethereum) {
-    // MetaMask
+    // MetaMask встроенный браузер
     prov = new BrowserProvider(window.ethereum);
   } else {
     // WalletConnect v2
     const wcProvider = await EthereumProvider.init({
-      projectId: "88a4618bff0d86aab28197d3b42e7845", // ⚡ обязательно! Получить на https://cloud.walletconnect.com
+      projectId: "88a4618bff0d86aab28197d3b42e7845",
       chains: [11155111], // Sepolia
       optionalChains: [137], // Polygon
-      showQrModal: true, // покажет QR на десктопе
+      showQrModal: true,
       methods: ["eth_sendTransaction", "personal_sign", "eth_signTypedData"],
       events: ["chainChanged", "accountsChanged"],
     });
 
-    // ⚡ вот здесь очищаем старую сессию, если она есть
-    if (prov?.provider?.wc?.session) {
-      await prov.provider.disconnect();
+    // ⚡ сброс старой сессии
+    if (wcProvider?.session?.namespaces) {
+      await wcProvider.disconnect();
     }
+
     await wcProvider.enable();
     prov = new BrowserProvider(wcProvider);
   }
@@ -146,38 +147,42 @@ const connectWallet = async () => {
 
 // === Subscribe ===
 const handleSubscribe = async () => {
-  if (!contract || !provider) return;
+  if (!contract || !provider) return alert("Connect wallet first!");
 
   try {
     const signer = await provider.getSigner();
-    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-    // Узнаём цену из контракта
-    const price = await contract.price();
-
-    // Обрабатываем адрес реферала
+    // Проверяем адрес реферала
     let ref = ZeroAddress;
-    if (referrer.trim() !== "") {
+    if (referrer && referrer !== "") {
       try {
-        ref = getAddress(referrer.trim()); // нормализуем адрес
+        ref = ethers.getAddress(referrer); // валидный формат адреса
       } catch {
         return alert("❌ Invalid referrer address format");
       }
     }
 
-    // ⚡ Пробуем подписку
-    // Сначала approve
-    const approveTx = await usdc.approve(CONTRACT_ADDRESS, price);
+    // Определяем цену с учётом реферала
+    let priceToPay = await contract.price();
+    if (ref !== ZeroAddress) {
+      const isWhitelisted = await contract.whitelistedReferrers(ref);
+      if (!isWhitelisted) {
+        alert("❌ Referrer not whitelisted");
+        ref = ZeroAddress; // без скидки
+      }
+    }
+
+    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
+
+    // approve
+    const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay);
     await approveTx.wait();
 
-    // Вычисляем конец подписки
+    // подписка
     const endTime = Math.floor(dayjs().add(1, "month").endOf("month").valueOf() / 1000);
-
-    // Подписка с проверкой whitelist на контракте
-    const tx = await contract.subscribe(endTime, ref);
+    const tx = await contract.connect(signer).subscribe(endTime, ref);
     await tx.wait();
 
-    // Проверяем и обновляем статус подписки
     checkSubscription(contract, account);
     alert("✅ Subscription successful!");
   } catch (e) {
