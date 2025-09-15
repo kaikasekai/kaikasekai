@@ -148,59 +148,42 @@ const connectWallet = async () => {
 const handleSubscribe = async () => {
   if (!contract || !provider) return;
 
-  let ref = ZeroAddress; // по умолчанию без реферала
-
-  // если пользователь что-то ввёл в поле referrer
-  if (referrer && referrer.trim() !== "") {
-    try {
-      // нормализуем и проверяем адрес
-      ref = getAddress(referrer.trim());
-    } catch (err) {
-      return alert("❌ Invalid referrer address format");
-    }
-
-    // проверяем whitelist на контракте
-    const isWhitelisted = await contract.whitelistedReferrers(ref);
-    if (!isWhitelisted) {
-      return alert("❌ Referrer address is not whitelisted");
-    }
-  }
-
   try {
     const signer = await provider.getSigner();
     const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
+    // Узнаём цену из контракта
     const price = await contract.price();
 
-    // если есть реферал, применяется скидка
-    let finalPrice = price;
-    if (ref !== ZeroAddress) {
-      const discount = (price * 20) / 100; // referralDiscount 20%
-      finalPrice = price - discount;
+    // Обрабатываем адрес реферала
+    let ref = ZeroAddress;
+    if (referrer.trim() !== "") {
+      try {
+        ref = getAddress(referrer.trim()); // нормализуем адрес
+      } catch {
+        return alert("❌ Invalid referrer address format");
+      }
     }
 
-    // approve USDC
-    const approveTx = await usdc.approve(CONTRACT_ADDRESS, finalPrice);
+    // ⚡ Пробуем подписку
+    // Сначала approve
+    const approveTx = await usdc.approve(CONTRACT_ADDRESS, price);
     await approveTx.wait();
 
-    // отправляем подписку
+    // Вычисляем конец подписки
     const endTime = Math.floor(dayjs().add(1, "month").endOf("month").valueOf() / 1000);
+
+    // Подписка с проверкой whitelist на контракте
     const tx = await contract.subscribe(endTime, ref);
     await tx.wait();
 
+    // Проверяем и обновляем статус подписки
     checkSubscription(contract, account);
     alert("✅ Subscription successful!");
   } catch (e) {
-  let msg = "❌ Subscription failed\n";
-
-  if (e.reason) msg += "Reason: " + e.reason + "\n";
-  if (e.error?.message) msg += "Error: " + e.error.message + "\n";
-  if (e.data?.message) msg += "Data: " + e.data.message + "\n";
-  if (e.message) msg += "Message: " + e.message + "\n";
-
-  alert(msg);
-}
-
+    console.error(e);
+    alert("❌ Subscription failed, check console");
+  }
 };
 
   // === Donate ===
