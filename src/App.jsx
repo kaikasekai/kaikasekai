@@ -144,57 +144,48 @@ const connectWallet = async () => {
   }
 };
 
-  // === Subscribe ===
+// === Subscribe ===
 const handleSubscribe = async () => {
   if (!contract || !provider) return;
-
-  let validReferrer = false;
-
-  // проверка реферала, если введён
-  if (referrer && ethers.isAddress(referrer)) {
-    try {
-      validReferrer = await contract.isWhitelisted(referrer);
-    } catch (e) {
-      console.error("Ошибка проверки реферала:", e);
-    }
-  }
-
   try {
     const signer = await provider.getSigner();
     const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
+    // узнаём цену из контракта
     const price = await contract.price();
 
-    // сначала approve
+    // 👉 чистим строку от пробелов
+    const cleanRef = referrer?.trim();
+
+    // 👉 проверка whitelist (если поле не пустое)
+    if (cleanRef && cleanRef !== "" && cleanRef !== ZeroAddress) {
+      const isWhite = await contract.whitelistedReferrers(cleanRef);
+      console.log("Referrer:", cleanRef, "Whitelisted:", isWhite);
+      if (!isWhite) {
+        alert("❌ Referrer not whitelisted");
+        return;
+      }
+    }
+
+    // approve
     const approveTx = await usdc.approve(CONTRACT_ADDRESS, price);
     await approveTx.wait();
 
     // теперь подписка
     const endTime = Math.floor(dayjs().add(1, "month").endOf("month").valueOf() / 1000);
 
-    if (validReferrer) {
-      // ✅ адрес валидный
-      const tx = await contract.subscribe(endTime, referrer);
-      await tx.wait();
-      alert("✅ Подписка успешна с использованием реферала!");
-    } else if (referrer) {
-      // ❌ адрес введён, но недействителен
-      alert("❌ Адрес недействителен. Подписка будет без реферала.");
-      const tx = await contract.subscribe(endTime, ZeroAddress);
-      await tx.wait();
-    } else {
-      // адрес не введён
-      const tx = await contract.subscribe(endTime, ZeroAddress);
-      await tx.wait();
-      alert("✅ Подписка успешна!");
-    }
+    // 👉 если поле пустое — шлём ZeroAddress
+    const tx = await contract.subscribe(endTime, cleanRef || ZeroAddress);
+    await tx.wait();
 
     checkSubscription(contract, account);
+    alert("✅ Subscription successful!");
   } catch (e) {
-    console.error(e);
-    alert("❌ Ошибка подписки, см. консоль");
+    console.error("Subscribe error:", e);
+    alert("❌ Subscription failed, check console");
   }
 };
+
 
   // === Donate ===
   const handleDonate = async () => {
