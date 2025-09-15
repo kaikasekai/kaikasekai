@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Papa from 'papaparse';
 import axios from 'axios';
-import { BrowserProvider, Contract, ZeroAddress, parseUnits } from 'ethers';
+import { BrowserProvider, Contract, ZeroAddress, parseUnits, utils } from 'ethers';
 import EthereumProvider from "@walletconnect/ethereum-provider";
 import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid,
@@ -144,48 +144,9 @@ const connectWallet = async () => {
   }
 };
 
-// === Subscribe ===
-const handleSubscribe = async () => {
-  if (!contract || !provider) return;
-  try {
-    const signer = await provider.getSigner();
-    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
-
-    // узнаём цену из контракта
-    const price = await contract.price();
-
-    // 👉 чистим строку от пробелов
-    const cleanRef = referrer?.trim();
-
-    // 👉 проверка whitelist (если поле не пустое)
-    if (cleanRef && cleanRef !== "" && cleanRef !== ZeroAddress) {
-      const isWhite = await contract.whitelistedReferrers(cleanRef);
-      console.log("Referrer:", cleanRef, "Whitelisted:", isWhite);
-      if (!isWhite) {
-        alert("❌ Referrer not whitelisted");
-        return;
-      }
-    }
-
-    // approve
-    const approveTx = await usdc.approve(CONTRACT_ADDRESS, price);
-    await approveTx.wait();
-
-    // теперь подписка
-    const endTime = Math.floor(dayjs().add(1, "month").endOf("month").valueOf() / 1000);
-
-    // 👉 если поле пустое — шлём ZeroAddress
-    const tx = await contract.subscribe(endTime, cleanRef || ZeroAddress);
-    await tx.wait();
-
-    checkSubscription(contract, account);
-    alert("✅ Subscription successful!");
-  } catch (e) {
-    console.error("Subscribe error:", e);
-    alert("❌ Subscription failed, check console");
+false);
   }
 };
-
 
   // === Donate ===
   const handleDonate = async () => {
