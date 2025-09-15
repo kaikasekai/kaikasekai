@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Papa from 'papaparse';
 import axios from 'axios';
-import { BrowserProvider, Contract, ZeroAddress, parseUnits, getAddress } from 'ethers';
+import { BrowserProvider, Contract, ZeroAddress, parseUnits, utils } from 'ethers';
 import EthereumProvider from "@walletconnect/ethereum-provider";
 import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid,
@@ -148,54 +148,51 @@ const connectWallet = async () => {
 const handleSubscribe = async () => {
   if (!contract || !provider) return;
 
+  let ref = ZeroAddress; // по умолчанию без реферала
+
+  // если пользователь что-то ввёл в поле referrer
+  if (referrer && referrer.trim() !== "") {
+    try {
+      // нормализуем и проверяем адрес
+      ref = utils.getAddress(referrer.trim());
+    } catch (err) {
+      return alert("❌ Invalid referrer address format");
+    }
+
+    // проверяем whitelist на контракте
+    const isWhitelisted = await contract.whitelistedReferrers(ref);
+    if (!isWhitelisted) {
+      return alert("❌ Referrer address is not whitelisted");
+    }
+  }
+
   try {
     const signer = await provider.getSigner();
     const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-    // 🔹 Проверка и очистка адреса реферала
-    let finalRef = ZeroAddress; // по умолчанию
-    if (referrer && referrer.trim() !== "") {
-      const cleanRef = referrer.trim();
-
-      if (!ethers.utils.isAddress(cleanRef)) {
-        alert("❌ Invalid address format");
-        return;
-      }
-
-      finalRef = ethers.utils.getAddress(cleanRef);
-
-      const isWhite = await contract.whitelistedReferrers(finalRef);
-      console.log("Referrer:", finalRef, "Whitelisted:", isWhite);
-
-      if (!isWhite) {
-        alert("❌ Referrer not whitelisted");
-        return;
-      }
-    }
-
-    // узнаём цену из контракта
     const price = await contract.price();
 
-    // сначала approve
-    const approveTx = await usdc.approve(CONTRACT_ADDRESS, price);
+    // если есть реферал, применяется скидка
+    let finalPrice = price;
+    if (ref !== ZeroAddress) {
+      const discount = (price * 20) / 100; // referralDiscount 20%
+      finalPrice = price - discount;
+    }
+
+    // approve USDC
+    const approveTx = await usdc.approve(CONTRACT_ADDRESS, finalPrice);
     await approveTx.wait();
 
-    // теперь подписка
+    // отправляем подписку
     const endTime = Math.floor(dayjs().add(1, "month").endOf("month").valueOf() / 1000);
-    const tx = await contract.subscribe(endTime, finalRef);
+    const tx = await contract.subscribe(endTime, ref);
     await tx.wait();
 
     checkSubscription(contract, account);
     alert("✅ Subscription successful!");
   } catch (e) {
-  let msg = "❌ Subscription failed\n";
-
-  if (e.reason) msg += "Reason: " + e.reason + "\n";
-  if (e.error?.message) msg += "Error: " + e.error.message + "\n";
-  if (e.data?.message) msg += "Data: " + e.data.message + "\n";
-  if (e.message) msg += "Message: " + e.message + "\n";
-
-  alert(msg);
+    console.error(e);
+    alert("❌ Subscription failed, check console");
   }
 };
 
