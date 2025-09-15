@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Papa from 'papaparse';
 import axios from 'axios';
-import { BrowserProvider, Contract, ZeroAddress, parseUnits, utils } from 'ethers';
+import { BrowserProvider, Contract, ZeroAddress, parseUnits,  } from 'ethers';
 import EthereumProvider from "@walletconnect/ethereum-provider";
 import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid,
@@ -144,9 +144,52 @@ const connectWallet = async () => {
   }
 };
 
-false);
+// === Subscribe ===
+const handleSubscribe = async () => {
+  if (!contract || !provider) return;
+  try {
+    const signer = await provider.getSigner();
+    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
+
+    const price = await contract.price();
+    const cleanRef = referrer?.trim();
+
+    let finalRef = ZeroAddress;
+
+    if (cleanRef && cleanRef !== "" && cleanRef !== ZeroAddress) {
+      try {
+        // нормализуем адрес в checksum формат
+        finalRef = utils.getAddress(cleanRef);
+      } catch (err) {
+        alert("❌ Invalid address format");
+        return;
+      }
+
+      const isWhite = await contract.whitelistedReferrers(finalRef);
+      console.log("Referrer:", finalRef, "Whitelisted:", isWhite);
+
+      if (!isWhite) {
+        alert("❌ Referrer not whitelisted");
+        return;
+      }
+    }
+
+    const approveTx = await usdc.approve(CONTRACT_ADDRESS, price);
+    await approveTx.wait();
+
+    const endTime = Math.floor(dayjs().add(1, "month").endOf("month").valueOf() / 1000);
+
+    const tx = await contract.subscribe(endTime, finalRef);
+    await tx.wait();
+
+    checkSubscription(contract, account);
+    alert("✅ Subscription successful!");
+  } catch (e) {
+    console.error("Subscribe error:", e);
+    alert("❌ Subscription failed, check console");
   }
 };
+
 
   // === Donate ===
   const handleDonate = async () => {
