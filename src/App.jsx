@@ -147,23 +147,22 @@ const connectWallet = async () => {
 // === Subscribe ===
 const handleSubscribe = async () => {
   if (!contract || !provider) return;
+
   try {
     const signer = await provider.getSigner();
     const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-    const price = await contract.price();
-    const cleanRef = referrer?.trim();
+    // 🔹 Проверка и очистка адреса реферала
+    let finalRef = ZeroAddress; // по умолчанию
+    if (referrer && referrer.trim() !== "") {
+      const cleanRef = referrer.trim();
 
-    let finalRef = ZeroAddress;
-
-    if (cleanRef && cleanRef !== "" && cleanRef !== ZeroAddress) {
-      try {
-        // нормализуем адрес в checksum формат
-        finalRef = utils.getAddress(cleanRef);
-      } catch (err) {
+      if (!ethers.utils.isAddress(cleanRef)) {
         alert("❌ Invalid address format");
         return;
       }
+
+      finalRef = ethers.utils.getAddress(cleanRef);
 
       const isWhite = await contract.whitelistedReferrers(finalRef);
       console.log("Referrer:", finalRef, "Whitelisted:", isWhite);
@@ -174,22 +173,25 @@ const handleSubscribe = async () => {
       }
     }
 
+    // узнаём цену из контракта
+    const price = await contract.price();
+
+    // сначала approve
     const approveTx = await usdc.approve(CONTRACT_ADDRESS, price);
     await approveTx.wait();
 
+    // теперь подписка
     const endTime = Math.floor(dayjs().add(1, "month").endOf("month").valueOf() / 1000);
-
     const tx = await contract.subscribe(endTime, finalRef);
     await tx.wait();
 
     checkSubscription(contract, account);
     alert("✅ Subscription successful!");
   } catch (e) {
-    console.error("Subscribe error:", e);
+    console.error(e);
     alert("❌ Subscription failed, check console");
   }
 };
-
 
   // === Donate ===
   const handleDonate = async () => {
