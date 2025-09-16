@@ -158,47 +158,38 @@ const handleSubscribe = async () => {
     const signer = await provider.getSigner();
     const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-    // === 1. Цена подписки ===
+    // 1. Цена
     const priceToPay = await contract.price();
     log("STEP1: priceToPay = " + priceToPay.toString());
 
-    // === 2. Approve ===
+    // 2. Approve (без populateTransaction)
     log("STEP2: sending approve tx...");
-    const approveTxData = await usdc.populateTransaction.approve(
-      CONTRACT_ADDRESS,
-      priceToPay.toString() // BigInt -> строка
-    );
-    const approveTx = await signer.sendTransaction({
-      to: approveTxData.to,
-      data: approveTxData.data,
-      value: approveTxData.value || 0
-    });
-    log("STEP2: approve sent, hash = " + approveTx.hash);
+    const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay.toString());
     await approveTx.wait();
     log("STEP2: approve confirmed");
 
+    // Проверка баланса и allowance
     const allowance = await usdc.allowance(account, CONTRACT_ADDRESS);
     log("Allowance after approve = " + allowance.toString());
     const bal = await usdc.balanceOf(account);
     log("USDC balance = " + bal.toString());
 
-    // === 3. endTime ===
+    // 3. endTime
     const endTime = BigInt(Math.floor(dayjs().add(1, "month").endOf("month").valueOf() / 1000));
     log("STEP3: endTime = " + endTime.toString());
 
-    // === 4. Подписка через populateTransaction + sendTransaction ===
+    // 4. Подписка через populateTransaction + sendTransaction
     log("STEP4: sending subscribe tx...");
-    const subscribeTxData = await contract.populateTransaction.subscribe(
+    const txData = await contract.populateTransaction.subscribe(
       endTime.toString(),
       referrer || ZeroAddress
     );
-    const subscribeTx = await signer.sendTransaction({
-      to: subscribeTxData.to,
-      data: subscribeTxData.data,
-      value: subscribeTxData.value || 0
+    const tx = await signer.sendTransaction({
+      to: txData.to,
+      data: txData.data,
+      value: 0
     });
-    log("STEP4: subscribe sent, hash = " + subscribeTx.hash);
-    await subscribeTx.wait();
+    await tx.wait();
     log("STEP4: subscribe confirmed ✅");
 
     await checkSubscription(contract, account);
