@@ -31,7 +31,7 @@ const CONTRACT_ABI = [
   "function donate(uint256 amount) external",
   "function price() view returns (uint256)",
   "function hasEverSubscribed(address) view returns (bool)",
-  "function isWhitelisted(address) view returns (bool)"
+  "function whitelistedReferrers(address) view returns (bool)"
 ];
 
 // === USDC Config (Polygon) ===
@@ -156,7 +156,7 @@ const handleSubscribe = async () => {
     let ref = ZeroAddress;
     if (referrer && referrer !== "") {
       try {
-        ref = ethers.getAddress(referrer); // валидный формат адреса
+        ref = getAddress(referrer); // валидный формат адреса
       } catch {
         return alert("❌ Invalid referrer address format");
       }
