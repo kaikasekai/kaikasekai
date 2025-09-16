@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Papa from 'papaparse';
 import axios from 'axios';
-import { BrowserProvider, Contract, ZeroAddress, getAddress } from 'ethers';
+import { BrowserProvider, Contract, ZeroAddress, getAddress, hexlify } from 'ethers';
 import EthereumProvider from "@walletconnect/ethereum-provider";
 import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid,
