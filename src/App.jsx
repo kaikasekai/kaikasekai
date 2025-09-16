@@ -155,45 +155,63 @@ const connectWallet = async () => {
 // === Subscribe ===
 const handleSubscribe = async () => {
   if (!contract || !provider) return alert("Connect wallet first!");
-
+  
   try {
     const signer = await provider.getSigner();
     const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-    // 1. Цена подписки
+    // === 1. Цена подписки ===
     const priceToPay = await contract.price();
     log("STEP1: priceToPay = " + priceToPay.toString());
 
-    // 2. Approve
-    const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay);
-    log("STEP2: approve sent, txHash = " + approveTx.hash);
+    // === 2. Approve через populateTransaction + sendTransaction ===
+    const approveTxData = await usdc.populateTransaction.approve(
+      CONTRACT_ADDRESS,
+      priceToPay.toString()  // BigInt -> строка
+    );
+    log("STEP2: sending approve tx...");
+
+    const approveTx = await signer.sendTransaction({
+      to: approveTxData.to,
+      data: approveTxData.data,
+      value: approveTxData.value || 0
+    });
+    log("STEP2: approve sent, hash = " + approveTx.hash);
     await approveTx.wait();
     log("STEP2: approve confirmed");
 
-    // 3. Проверка allowance и баланса
+    // Проверка баланса и allowance
     const allowance = await usdc.allowance(account, CONTRACT_ADDRESS);
     log("Allowance after approve = " + allowance.toString());
-
     const bal = await usdc.balanceOf(account);
     log("USDC balance = " + bal.toString());
 
-    // 4. endTime
-    const endTime = Math.floor(dayjs().add(1, "month").endOf("month").valueOf() / 1000);
+    // === 3. endTime ===
+    const endTime = BigInt(Math.floor(dayjs().add(1, "month").endOf("month").valueOf() / 1000));
     log("STEP3: endTime = " + endTime.toString());
 
-    // 5. Вызов подписки
-    log("STEP4: calling subscribe...");
-    const tx = await contract.subscribe(endTime.toString(), referrer || ZeroAddress);
-    log("Subscribe tx sent, hash = " + tx.hash);
+    // === 4. Подписка через populateTransaction + sendTransaction ===
+    const subscribeTxData = await contract.populateTransaction.subscribe(
+      endTime.toString(),
+      referrer || ZeroAddress
+    );
+    log("STEP4: sending subscribe tx...");
 
-    await tx.wait();
+    const subscribeTx = await signer.sendTransaction({
+      to: subscribeTxData.to,
+      data: subscribeTxData.data,
+      value: subscribeTxData.value || 0
+    });
+    log("STEP4: subscribe sent, hash = " + subscribeTx.hash);
+
+    await subscribeTx.wait();
     log("STEP4: subscribe confirmed ✅");
 
     await checkSubscription(contract, account);
     alert("✅ Subscription successful!");
   } catch (e) {
     log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
-    alert("❌ Subscription failed, see Debug section");
+    alert("❌ Subscription failed, see Debug log");
   }
 };
 
