@@ -37,9 +37,12 @@ const CONTRACT_ABI = [
 // === USDC Config (Polygon) ===
 const USDC_ADDRESS = "0xC4D7620b1DDE8ad477910eBc8F288E9b527E725a"; // USDC в Polygon
 const USDC_ABI = [
-  "function approve(address spender, uint256 amount) external returns (bool)"
+  "function approve(address spender, uint256 amount) external returns (bool)",
+  "function decimals() view returns (uint8)",
+  "function balanceOf(address) view returns (uint256)",
+  "function transferFrom(address from, address to, uint256 value) external returns (bool)",
+  "function transfer(address to, uint256 value) external returns (bool)"
 ];
-
 
 function App() {
   const [data, setData] = useState([]);
