@@ -155,7 +155,7 @@ const connectWallet = async () => {
 // === Subscribe ===
 const handleSubscribe = async () => {
   if (!contract || !provider) return alert("Connect wallet first!");
-  
+
   try {
     const signer = await provider.getSigner();
     const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
@@ -164,18 +164,9 @@ const handleSubscribe = async () => {
     const priceToPay = await contract.price();
     log("STEP1: priceToPay = " + priceToPay.toString());
 
-    // === 2. Approve через populateTransaction + sendTransaction ===
-    const approveTxData = await usdc.populateTransaction.approve(
-      CONTRACT_ADDRESS,
-      priceToPay.toString()  // BigInt -> строка
-    );
+    // === 2. Approve ===
     log("STEP2: sending approve tx...");
-
-    const approveTx = await signer.sendTransaction({
-      to: approveTxData.to,
-      data: approveTxData.data,
-      value: approveTxData.value || 0
-    });
+    const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay.toString());
     log("STEP2: approve sent, hash = " + approveTx.hash);
     await approveTx.wait();
     log("STEP2: approve confirmed");
@@ -190,20 +181,10 @@ const handleSubscribe = async () => {
     const endTime = BigInt(Math.floor(dayjs().add(1, "month").endOf("month").valueOf() / 1000));
     log("STEP3: endTime = " + endTime.toString());
 
-    // === 4. Подписка через populateTransaction + sendTransaction ===
-    const subscribeTxData = await contract.populateTransaction.subscribe(
-      endTime.toString(),
-      referrer || ZeroAddress
-    );
+    // === 4. Подписка ===
     log("STEP4: sending subscribe tx...");
-
-    const subscribeTx = await signer.sendTransaction({
-      to: subscribeTxData.to,
-      data: subscribeTxData.data,
-      value: subscribeTxData.value || 0
-    });
+    const subscribeTx = await contract.subscribe(endTime.toString(), referrer || ZeroAddress);
     log("STEP4: subscribe sent, hash = " + subscribeTx.hash);
-
     await subscribeTx.wait();
     log("STEP4: subscribe confirmed ✅");
 
