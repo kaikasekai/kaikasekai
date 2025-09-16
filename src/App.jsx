@@ -56,6 +56,11 @@ function App() {
   const [referrer, setReferrer] = useState('');
   const [donateAmount, setDonateAmount] = useState('');
   const [hasSubscribed, setHasSubscribed] = useState(false);
+  const [debug, setDebug] = useState([]);
+
+  const log = (msg) => {
+  setDebug((d) => [...d, `[${new Date().toLocaleTimeString()}] ${msg}`]);
+};
 
 
   // === Fetch Data ===
@@ -153,40 +158,42 @@ const handleSubscribe = async () => {
 
   try {
     const signer = await provider.getSigner();
-
-    // валидируем реферала
-    let ref = ZeroAddress;
-    if (referrer && referrer !== "") {
-      try {
-        ref = getAddress(referrer);
-      } catch {
-        return alert("❌ Invalid referrer address format");
-      }
-    }
-
-    // контракт USDC
     const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-    // цена
+    // 1. Цена подписки
     const priceToPay = await contract.price();
+    log("STEP1: priceToPay = " + priceToPay.toString());
 
-    // approve (BigInt → hex, чтобы не падал WC на iOS)
-    const approveTx = await usdc.approve(CONTRACT_ADDRESS, hexlify(priceToPay));
+    // 2. Approve
+    const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay);
+    log("STEP2: approve sent, txHash = " + approveTx.hash);
     await approveTx.wait();
+    log("STEP2: approve confirmed");
 
-    // endTime (тоже BigInt → hex-friendly)
-    const endTime = BigInt(
-      Math.floor(dayjs().add(1, "month").endOf("month").valueOf() / 1000)
-    );
+    // 3. Проверка allowance и баланса
+    const allowance = await usdc.allowance(account, CONTRACT_ADDRESS);
+    log("Allowance after approve = " + allowance.toString());
 
-    const tx = await contract.subscribe(endTime, ref);
+    const bal = await usdc.balanceOf(account);
+    log("USDC balance = " + bal.toString());
+
+    // 4. endTime
+    const endTime = Math.floor(dayjs().add(1, "month").endOf("month").valueOf() / 1000);
+    log("STEP3: endTime = " + endTime.toString());
+
+    // 5. Вызов подписки
+    log("STEP4: calling subscribe...");
+    const tx = await contract.subscribe(endTime.toString(), referrer || ZeroAddress);
+    log("Subscribe tx sent, hash = " + tx.hash);
+
     await tx.wait();
+    log("STEP4: subscribe confirmed ✅");
 
     await checkSubscription(contract, account);
     alert("✅ Subscription successful!");
   } catch (e) {
-    console.error(e);
-    alert("❌ Subscription failed, check console");
+    log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
+    alert("❌ Subscription failed, see Debug section");
   }
 };
 
@@ -336,6 +343,23 @@ return (
         </Accordion>
       </div>
     )}
+
+{/* Debug output */}
+<div style={{
+  marginTop: 20,
+  padding: 10,
+  background: "#111",
+  color: "#0f0",
+  fontSize: 12,
+  whiteSpace: "pre-wrap",
+  borderRadius: 8
+}}>
+  <strong>Debug log:</strong>
+  {"\n"}
+  {debug.join("\n")}
+</div>
+
+    
   </div>
 );
 }
