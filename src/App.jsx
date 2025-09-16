@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Papa from 'papaparse';
 import axios from 'axios';
-import { BrowserProvider, Contract, ZeroAddress, parseUnits, getAddress } from 'ethers';
+import { BrowserProvider, Contract, ZeroAddress, getAddress } from 'ethers';
 import EthereumProvider from "@walletconnect/ethereum-provider";
 import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid,
@@ -92,22 +92,21 @@ function App() {
   // === Connect Wallet ===
 const connectWallet = async () => {
   let prov;
-
   if (window.ethereum) {
-    // MetaMask встроенный браузер
+    // ✅ Десктоп (MetaMask расширение)
     prov = new BrowserProvider(window.ethereum);
   } else {
-    // WalletConnect v2
+    // ✅ Мобильные (iOS/Android Safari/Chrome)
     const wcProvider = await EthereumProvider.init({
       projectId: "88a4618bff0d86aab28197d3b42e7845",
       chains: [11155111], // Sepolia
-      optionalChains: [137], // Polygon
+      optionalChains: [137], // Polygon (опционально)
       showQrModal: true,
       methods: ["eth_sendTransaction", "personal_sign", "eth_signTypedData"],
       events: ["chainChanged", "accountsChanged"],
     });
 
-    // ⚡ сброс старой сессии
+    // закрываем старую сессию (чтобы не висло)
     if (wcProvider?.session?.namespaces) {
       await wcProvider.disconnect();
     }
@@ -131,7 +130,7 @@ const connectWallet = async () => {
 
   checkSubscription(cont, acc);
 };
-
+  
   // === Check Subscription ===
   const checkSubscription = async (cont, acc) => {
   const end = await cont.subscriptionEnd(acc);
@@ -155,38 +154,35 @@ const handleSubscribe = async () => {
   try {
     const signer = await provider.getSigner();
 
-    // Проверяем адрес реферала
+    // валидируем реферала
     let ref = ZeroAddress;
     if (referrer && referrer !== "") {
       try {
-        ref = getAddress(referrer); // валидный формат адреса
+        ref = getAddress(referrer);
       } catch {
         return alert("❌ Invalid referrer address format");
       }
     }
 
-    // Определяем цену с учётом реферала
-    let priceToPay = await contract.price();
-    if (ref !== ZeroAddress) {
-      const isWhitelisted = await contract.whitelistedReferrers(ref);
-      if (!isWhitelisted) {
-        alert("❌ Referrer not whitelisted");
-        ref = ZeroAddress; // без скидки
-      }
-    }
-
+    // контракт USDC
     const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-    // approve
-    const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay);
+    // цена
+    const priceToPay = await contract.price();
+
+    // approve (BigInt → hex, чтобы не падал WC на iOS)
+    const approveTx = await usdc.approve(CONTRACT_ADDRESS, hexlify(priceToPay));
     await approveTx.wait();
 
-    // подписка
-    const endTime = Math.floor(dayjs().add(1, "month").endOf("month").valueOf() / 1000);
-    const tx = await contract.connect(signer).subscribe(endTime, ref);
+    // endTime (тоже BigInt → hex-friendly)
+    const endTime = BigInt(
+      Math.floor(dayjs().add(1, "month").endOf("month").valueOf() / 1000)
+    );
+
+    const tx = await contract.subscribe(endTime, ref);
     await tx.wait();
 
-    checkSubscription(contract, account);
+    await checkSubscription(contract, account);
     alert("✅ Subscription successful!");
   } catch (e) {
     console.error(e);
