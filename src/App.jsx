@@ -38,10 +38,8 @@ const CONTRACT_ABI = [
 const USDC_ADDRESS = "0xC4D7620b1DDE8ad477910eBc8F288E9b527E725a"; // USDC в Polygon
 const USDC_ABI = [
   "function approve(address spender, uint256 amount) external returns (bool)",
-  "function decimals() view returns (uint8)",
-  "function balanceOf(address) view returns (uint256)",
-  "function transferFrom(address from, address to, uint256 value) external returns (bool)",
-  "function transfer(address to, uint256 value) external returns (bool)"
+  "function allowance(address owner, address spender) view returns (uint256)",
+  "function balanceOf(address account) view returns (uint256)"
 ];
 
 function App() {
@@ -166,12 +164,19 @@ const handleSubscribe = async () => {
 
     // === 2. Approve ===
     log("STEP2: sending approve tx...");
-    const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay.toString());
+    const approveTxData = await usdc.populateTransaction.approve(
+      CONTRACT_ADDRESS,
+      priceToPay.toString() // BigInt -> строка
+    );
+    const approveTx = await signer.sendTransaction({
+      to: approveTxData.to,
+      data: approveTxData.data,
+      value: approveTxData.value || 0
+    });
     log("STEP2: approve sent, hash = " + approveTx.hash);
     await approveTx.wait();
     log("STEP2: approve confirmed");
 
-    // Проверка баланса и allowance
     const allowance = await usdc.allowance(account, CONTRACT_ADDRESS);
     log("Allowance after approve = " + allowance.toString());
     const bal = await usdc.balanceOf(account);
@@ -181,9 +186,17 @@ const handleSubscribe = async () => {
     const endTime = BigInt(Math.floor(dayjs().add(1, "month").endOf("month").valueOf() / 1000));
     log("STEP3: endTime = " + endTime.toString());
 
-    // === 4. Подписка ===
+    // === 4. Подписка через populateTransaction + sendTransaction ===
     log("STEP4: sending subscribe tx...");
-    const subscribeTx = await contract.subscribe(endTime.toString(), referrer || ZeroAddress);
+    const subscribeTxData = await contract.populateTransaction.subscribe(
+      endTime.toString(),
+      referrer || ZeroAddress
+    );
+    const subscribeTx = await signer.sendTransaction({
+      to: subscribeTxData.to,
+      data: subscribeTxData.data,
+      value: subscribeTxData.value || 0
+    });
     log("STEP4: subscribe sent, hash = " + subscribeTx.hash);
     await subscribeTx.wait();
     log("STEP4: subscribe confirmed ✅");
