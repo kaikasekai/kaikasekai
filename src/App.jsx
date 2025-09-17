@@ -22,7 +22,7 @@ const RAW_URL = 'https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/da
 const COLORS = ['#ff8000','#00ff80','#ffff00','#00ff00','#00ffff','#0080ff','#8000ff','#ff00ff','#0080ff','#ff0080'];
 
 // === Contract Config ===
-const CONTRACT_ADDRESS = "0xd031Ab2489e141520d3E553015e5a756FE926927"; // contract address
+const CONTRACT_ADDRESS = "0xf994B67367B064Fb790aD17F08B91F7fCC980Ecb"; // contract address
 
 const CONTRACT_ABI = [
   "function subscriptionEnd(address) view returns (uint256)",
@@ -102,8 +102,8 @@ const connectWallet = async () => {
     // ✅ Мобильные (iOS/Android Safari/Chrome)
     const wcProvider = await EthereumProvider.init({
       projectId: "88a4618bff0d86aab28197d3b42e7845",
-      chains: [11155111], // Sepolia
-      optionalChains: [137], // Polygon (опционально)
+      chains: [137], // Polygon
+      optionalChains: [80002], // Amoy
       showQrModal: true,
       methods: ["eth_sendTransaction", "personal_sign", "eth_signTypedData"],
       events: ["chainChanged", "accountsChanged"],
@@ -119,8 +119,8 @@ const connectWallet = async () => {
   }
 
   const network = await prov.getNetwork();
-  if (Number(network.chainId) !== 11155111) {
-    return alert("⚠️ Please switch to Sepolia (11155111)");
+  if (Number(network.chainId) !== 80002) {
+    return alert("⚠️ Please switch to Amoy (80002)");
   }
 
   const signer = await prov.getSigner();
@@ -200,6 +200,36 @@ const handleSubscribe = async () => {
   }
 };
 
+    // Buy whitelist
+    const handleBuyWhitelist = async () => {
+      if (!contract || !provider) return alert("Connect wallet first!");
+
+  try {
+    const signer = await provider.getSigner();
+    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
+
+    const priceToPay = await contract.price();
+
+    log(`STEP1: Approving ${priceToPay} USDC for whitelist...`);
+
+    // approve
+    const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay);
+    await approveTx.wait();
+
+    log("STEP2: Calling buyWhitelist()...");
+
+    // call контракт
+    const tx = await contract.connect(signer).buyWhitelist();
+    await tx.wait();
+
+    log("✅ BuyWhitelist successful!");
+    alert("✅ You are now whitelisted!");
+  } catch (e) {
+    console.error(e);
+    alert("❌ BuyWhitelist failed, check console");
+  }
+};
+ 
   // === Donate ===
   const handleDonate = async () => {
   if (!contract || !provider) return;
@@ -272,6 +302,15 @@ return (
             >
               See next month (Subscribe)
             </Button>
+            <Button
+  variant="contained"
+  color="secondary"
+  onClick={handleBuyWhitelist}
+  style={{ marginTop: 10 }}
+>
+  Buy Whitelist (99 USDC)
+</Button>
+
           </div>
         )}
 
