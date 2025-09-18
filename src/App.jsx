@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Papa from 'papaparse';
 import axios from 'axios';
-import { BrowserProvider, Contract, ZeroAddress, getAddress, hexlify } from 'ethers';
+import { BrowserProvider, Contract, ZeroAddress, getAddress, hexlify, parseUnits } from 'ethers';
 import EthereumProvider from "@walletconnect/ethereum-provider";
 import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid,
@@ -107,10 +107,10 @@ function App() {
 const connectWallet = async () => {
   let prov;
   if (window.ethereum) {
-    // ✅ Десктоп (MetaMask расширение)
+    // Desktop (MetaMask)
     prov = new BrowserProvider(window.ethereum);
   } else {
-    // ✅ Мобильные (iOS/Android Safari/Chrome)
+    // Mobile / WalletConnect
     const wcProvider = await EthereumProvider.init({
       projectId: "88a4618bff0d86aab28197d3b42e7845",
       chains: [137], // Polygon
@@ -120,12 +120,21 @@ const connectWallet = async () => {
       events: ["chainChanged", "accountsChanged"],
     });
 
-    // закрываем старую сессию (чтобы не висло)
-    if (wcProvider?.session?.namespaces) {
-      await wcProvider.disconnect();
+    // НЕ вызываем disconnect() сразу после init() — это ломает enable().
+    // Если нужно принудительно сбросить старую сессию, вызывай disconnect() до init() или
+    // создай новый провайдер после disconnect.
+    const hasActiveSession =
+      wcProvider?.session?.namespaces &&
+      Object.keys(wcProvider.session.namespaces).length > 0;
+
+    // Если нет активной сессии — показываем QR (enable). Если есть — enable() обычно безопасно.
+    if (!hasActiveSession) {
+      await wcProvider.enable(); // откроет QR modal
+    } else {
+      // Можно не вызывать enable() — но иногда полезно, чтобы гарантировать, что accounts доступны:
+      await wcProvider.enable();
     }
 
-    await wcProvider.enable();
     prov = new BrowserProvider(wcProvider);
   }
 
@@ -175,31 +184,59 @@ const handleSubscribe = async () => {
     const signer = await provider.getSigner();
     const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-    // 1. Цена
+    // 1. Цена (BigNumber)
     const priceToPay = await contract.price();
     log("STEP1: priceToPay = " + priceToPay.toString());
 
-    // 2. Approve (без populateTransaction)
-    log("STEP2: sending approve tx...");
-    const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay.toString());
-    await approveTx.wait();
-    log("STEP2: approve confirmed");
-
-    // Проверка баланса и allowance
+    // 2. Allowance — проверяем, хватает ли allowance, иначе approve
     const allowance = await usdc.allowance(account, CONTRACT_ADDRESS);
-    log("Allowance after approve = " + allowance.toString());
+    log("STEP2: current allowance = " + allowance.toString());
+
+    if (allowance.lt(priceToPay)) {
+      log("STEP2: sending approve tx...");
+      const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay);
+      await approveTx.wait();
+      log("STEP2: approve confirmed");
+    } else {
+      log("STEP2: sufficient allowance, skipping approve");
+    }
+
+    // Проверка баланса (опционально — полезно раннее обнаружение)
     const bal = await usdc.balanceOf(account);
     log("USDC balance = " + bal.toString());
+    if (bal.lt(priceToPay)) {
+      return alert("Insufficient USDC balance");
+    }
 
     // 3. endTime
     const endTime = BigInt(Math.floor(dayjs().add(1, "month").endOf("month").valueOf() / 1000));
     log("STEP3: endTime = " + endTime.toString());
 
-    // 4. Подписка через populateTransaction + sendTransaction
-    log("STEP4: sending subscribe tx...");
+    // 4. referrer
+    // --- Referrer validation (перед формированием txData) ---
+let refAddr = ZeroAddress;
+if (referrer && referrer.trim() !== "") {
+  try {
+    const candidate = getAddress(referrer.trim()); // приведёт к checksummed адресу или бросит
+    if (candidate.toLowerCase() === account.toLowerCase()) {
+      // нельзя реферить самого себя — игнорируем
+      log("Referrer is same as account — ignoring referrer");
+      refAddr = ZeroAddress;
+    } else {
+      refAddr = candidate;
+      log("Using referrer: " + refAddr);
+    }
+  } catch (err) {
+    // Если адрес неверный — уведомляем юзера и прерываем процесс
+    alert("Invalid referrer address. Please check and try again.");
+    return;
+  }
+}
+
+    // 5. Подписка через populateTransaction + sendTransaction
     const txData = await contract.populateTransaction.subscribe(
       endTime.toString(),
-      referrer || ZeroAddress
+      refAddr // <-- см. п.5: переменная refAddr должна быть проверена/подставлена
     );
     const tx = await signer.sendTransaction({
       to: txData.to,
@@ -219,23 +256,26 @@ const handleSubscribe = async () => {
 
     // Buy whitelist
     const handleBuyWhitelist = async () => {
-      if (!contract || !provider) return alert("Connect wallet first!");
+  if (!contract || !provider) return alert("Connect wallet first!");
 
   try {
     const signer = await provider.getSigner();
     const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
     const priceToPay = await contract.whitelistPrice();
+    log(`STEP1: whitelistPrice = ${priceToPay.toString()}`);
 
-    log(`STEP1: Approving ${priceToPay} USDC for whitelist...`);
+    const allowance = await usdc.allowance(account, CONTRACT_ADDRESS);
+    if (allowance.lt(priceToPay)) {
+      log("STEP2: sending approve tx for whitelist...");
+      const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay);
+      await approveTx.wait();
+      log("STEP2: approve confirmed");
+    } else {
+      log("STEP2: sufficient allowance for whitelist");
+    }
 
-    // approve
-    const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay);
-    await approveTx.wait();
-
-    log("STEP2: Calling buyWhitelist()...");
-
-    // call контракт
+    log("STEP3: Calling buyWhitelist()...");
     const tx = await contract.connect(signer).buyWhitelist();
     await tx.wait();
 
