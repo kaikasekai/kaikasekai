@@ -35,7 +35,7 @@ const CONTRACT_ABI = [
 ];
 
 // === USDC Config (Polygon) ===
-const USDC_ADDRESS = "0xC4D7620b1DDE8ad477910eBc8F288E9b527E725a"; // USDC в Polygon
+const USDC_ADDRESS = "0x8B0180f2101c8260d49339abfEe87927412494B4"; // USDC в Polygon
 const USDC_ABI = [
   "function name() view returns (string)",
   "function symbol() view returns (string)",
@@ -44,7 +44,10 @@ const USDC_ABI = [
   "function balanceOf(address account) view returns (uint256)",
   "function transfer(address recipient, uint256 amount) returns (bool)",
   "function approve(address spender, uint256 amount) returns (bool)",
-  "function transferFrom(address sender, address recipient, uint256 amount) returns (bool)"
+  "function allowance(address owner, address spender) view returns (uint256)",
+  "function transferFrom(address sender, address recipient, uint256 amount) returns (bool)",
+  "event Transfer(address indexed from, address indexed to, uint256 value)",
+  "event Approval(address indexed owner, address indexed spender, uint256 value)"
 ];
 
 function App() {
