@@ -30,6 +30,7 @@ const CONTRACT_ABI = [
   "function subscribe(uint256 endTime, address refAddr) external",
   "function donate(uint256 amount) external",
   "function price() view returns (uint256)",
+  "function whitelistPrice() view returns (uint256)",
   "function hasEverSubscribed(address) view returns (bool)",
   "function whitelistedReferrers(address) view returns (bool)"
 ];
