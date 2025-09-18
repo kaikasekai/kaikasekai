@@ -35,7 +35,7 @@ const CONTRACT_ABI = [
 ];
 
 // === USDC Config (Polygon) ===
-const USDC_ADDRESS = "0x8B0180f2101c8260d49339abfEe87927412494B4"; // USDC в Polygon
+const USDC_ADDRESS = "0x41E94Eb019C0762f9Bfcf9Fb1E58725BfB0e7582"; // USDC в Polygon Amoy
 const USDC_ABI = [
   "function name() view returns (string)",
   "function symbol() view returns (string)",
