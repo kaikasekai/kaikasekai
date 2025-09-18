@@ -58,6 +58,8 @@ function App() {
   const [account, setAccount] = useState(null);
   const [provider, setProvider] = useState(null);
   const [contract, setContract] = useState(null);
+  const [price, setPrice] = useState(null);
+  const [whitelistPrice, setWhitelistPrice] = useState(null);
   const [subscriptionActive, setSubscriptionActive] = useState(false);
   const [showTwoMonths, setShowTwoMonths] = useState(false);
   const [referrer, setReferrer] = useState('');
@@ -140,6 +142,12 @@ const connectWallet = async () => {
   const cont = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
   setContract(cont);
 
+  const subPrice = await cont.price();
+  setPrice(Number(subPrice));
+
+  const wlPrice = await cont.whitelistPrice();
+  setWhitelistPrice(Number(wlPrice));
+
   checkSubscription(cont, acc);
 };
   
@@ -217,7 +225,7 @@ const handleSubscribe = async () => {
     const signer = await provider.getSigner();
     const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-    const priceToPay = await contract.price();
+    const priceToPay = await contract.whitelistPrice();
 
     log(`STEP1: Approving ${priceToPay} USDC for whitelist...`);
 
@@ -317,7 +325,7 @@ return (
   onClick={handleBuyWhitelist}
   style={{ marginTop: 10 }}
 >
-  Buy Whitelist (99 USDC)
+  Buy Whitelist ({whitelistPrice ? (whitelistPrice / 1e6).toFixed(2) : "..."}USDC)
 </Button>
 
           </div>
