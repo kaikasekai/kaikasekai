@@ -12,6 +12,7 @@ contract BTCForecastSubscriptions {
     address public owner;
 
     uint256 public price = 99e6; // 99 USDC (6 decimals)
+    uint256 public whitelistPrice = 99e6; // 99 USDC по умолчанию
     uint256 public referralDiscount = 20; // 20%
     uint256 public referralReward = 10;   // 10%
 
@@ -48,14 +49,10 @@ contract BTCForecastSubscriptions {
     // =========================
     function buyWhitelist() external {
         require(!whitelistedReferrers[msg.sender], "Already whitelisted");
-
-        // Оплата фиксированная
-        uint256 amount = price; // 99 USDC (6 decimals)
-        require(usdc.transferFrom(msg.sender, address(this), amount), "Payment failed");
+        require(usdc.transferFrom(msg.sender, address(this), whitelistPrice), "Payment failed");
 
         // Добавляем пользователя в whitelist
         whitelistedReferrers[msg.sender] = true;
-
         emit ReferrerWhitelisted(msg.sender, true);
     }
 
@@ -150,6 +147,10 @@ contract BTCForecastSubscriptions {
         require(newOwner != address(0), "Zero owner");
         emit OwnerChanged(owner, newOwner);
         owner = newOwner;
+    }
+
+    function setWhitelistPrice(uint256 newPrice) external onlyOwner {
+    whitelistPrice = newPrice;
     }
 
     function setPrice(uint256 newPrice) external onlyOwner {
