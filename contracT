@@ -150,7 +150,8 @@ contract BTCForecastSubscriptions {
     }
 
     function setWhitelistPrice(uint256 newPrice) external onlyOwner {
-    whitelistPrice = newPrice;
+        emit WhitelistPriceChanged(whitelistPrice, newPrice);
+        whitelistPrice = newPrice;
     }
 
     function setPrice(uint256 newPrice) external onlyOwner {
