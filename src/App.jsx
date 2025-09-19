@@ -139,9 +139,38 @@ const connectWallet = async () => {
   }
 
   const network = await prov.getNetwork();
-  if (Number(network.chainId) !== 80002) {
-    return alert("⚠️ Please switch to Amoy (80002)");
+console.log("Connected chainId:", Number(network.chainId));
+
+// Если сеть не Amoy, пробуем переключить
+if (Number(network.chainId) !== 80002) {
+  try {
+    await window.ethereum.request({
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId: "0x13882" }], // Amoy 80002
+    });
+  } catch (switchError) {
+    // Если сеть не добавлена в кошелёк → добавляем
+    if (switchError.code === 4902) {
+      await window.ethereum.request({
+        method: "wallet_addEthereumChain",
+        params: [{
+          chainId: "0x13882",
+          chainName: "Polygon Amoy",
+          nativeCurrency: {
+            name: "MATIC",
+            symbol: "MATIC",
+            decimals: 18,
+          },
+          rpcUrls: ["https://rpc-amoy.polygon.technology"],
+          blockExplorerUrls: ["https://www.oklink.com/amoy"],
+        }],
+      });
+    } else {
+      alert("⚠️ Please switch to Amoy (80002) in your wallet");
+    }
   }
+}
+
 
   const signer = await prov.getSigner();
   const acc = await signer.getAddress();
