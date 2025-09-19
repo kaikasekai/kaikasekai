@@ -106,9 +106,36 @@ function App() {
   // === Connect Wallet ===
 const connectWallet = async () => {
   let prov;
+
   if (window.ethereum) {
-    // Desktop (MetaMask)
+    // ✅ Сначала требуем Amoy
+    try {
+      await window.ethereum.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: "0x13882" }], // Amoy testnet
+      });
+    } catch (err) {
+      // Если сеть не добавлена — добавляем
+      if (err.code === 4902) {
+        await window.ethereum.request({
+          method: "wallet_addEthereumChain",
+          params: [{
+            chainId: "0x13882",
+            chainName: "Polygon Amoy",
+            nativeCurrency: { name: "MATIC", symbol: "MATIC", decimals: 18 },
+            rpcUrls: ["https://rpc-amoy.polygon.technology"],
+            blockExplorerUrls: ["https://www.oklink.com/amoy"],
+          }],
+        });
+      } else {
+        alert("⚠️ Please switch to Amoy (80002) in your wallet");
+        return;
+      }
+    }
+
+    // ✅ Только после переключения создаём провайдер
     prov = new BrowserProvider(window.ethereum);
+
   } else {
     // Mobile / WalletConnect
     const wcProvider = await EthereumProvider.init({
@@ -120,18 +147,13 @@ const connectWallet = async () => {
       events: ["chainChanged", "accountsChanged"],
     });
 
-    // НЕ вызываем disconnect() сразу после init() — это ломает enable().
-    // Если нужно принудительно сбросить старую сессию, вызывай disconnect() до init() или
-    // создай новый провайдер после disconnect.
     const hasActiveSession =
       wcProvider?.session?.namespaces &&
       Object.keys(wcProvider.session.namespaces).length > 0;
 
-    // Если нет активной сессии — показываем QR (enable). Если есть — enable() обычно безопасно.
     if (!hasActiveSession) {
-      await wcProvider.enable(); // откроет QR modal
+      await wcProvider.enable();
     } else {
-      // Можно не вызывать enable() — но иногда полезно, чтобы гарантировать, что accounts доступны:
       await wcProvider.enable();
     }
 
@@ -139,38 +161,7 @@ const connectWallet = async () => {
   }
 
   const network = await prov.getNetwork();
-console.log("Connected chainId:", Number(network.chainId));
-
-// Если сеть не Amoy, пробуем переключить
-if (Number(network.chainId) !== 80002) {
-  try {
-    await window.ethereum.request({
-      method: "wallet_switchEthereumChain",
-      params: [{ chainId: "0x13882" }], // Amoy 80002
-    });
-  } catch (switchError) {
-    // Если сеть не добавлена в кошелёк → добавляем
-    if (switchError.code === 4902) {
-      await window.ethereum.request({
-        method: "wallet_addEthereumChain",
-        params: [{
-          chainId: "0x13882",
-          chainName: "Polygon Amoy",
-          nativeCurrency: {
-            name: "MATIC",
-            symbol: "MATIC",
-            decimals: 18,
-          },
-          rpcUrls: ["https://rpc-amoy.polygon.technology"],
-          blockExplorerUrls: ["https://www.oklink.com/amoy"],
-        }],
-      });
-    } else {
-      alert("⚠️ Please switch to Amoy (80002) in your wallet");
-    }
-  }
-}
-
+  console.log("Connected chainId:", Number(network.chainId));
 
   const signer = await prov.getSigner();
   const acc = await signer.getAddress();
