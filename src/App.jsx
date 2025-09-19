@@ -204,15 +204,15 @@ const handleSubscribe = async () => {
     const signer = await provider.getSigner();
     const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-    // 1. Цена (BigNumber)
+    // 1. Цена (bigint)
     const priceToPay = await contract.price();
     log("STEP1: priceToPay = " + priceToPay.toString());
 
-    // 2. Allowance — проверяем, хватает ли allowance, иначе approve
+    // 2. Allowance — сравнение через <
     const allowance = await usdc.allowance(account, CONTRACT_ADDRESS);
     log("STEP2: current allowance = " + allowance.toString());
 
-    if (allowance.lt(priceToPay)) {
+    if (allowance < priceToPay) {
       log("STEP2: sending approve tx...");
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay);
       await approveTx.wait();
@@ -221,10 +221,10 @@ const handleSubscribe = async () => {
       log("STEP2: sufficient allowance, skipping approve");
     }
 
-    // Проверка баланса (опционально — полезно раннее обнаружение)
+    // Проверка баланса
     const bal = await usdc.balanceOf(account);
     log("USDC balance = " + bal.toString());
-    if (bal.lt(priceToPay)) {
+    if (bal < priceToPay) {
       return alert("Insufficient USDC balance");
     }
 
@@ -232,36 +232,32 @@ const handleSubscribe = async () => {
     const endTime = BigInt(Math.floor(dayjs().add(1, "month").endOf("month").valueOf() / 1000));
     log("STEP3: endTime = " + endTime.toString());
 
-    // 4. referrer
-    // --- Referrer validation (перед формированием txData) ---
-let refAddr = ZeroAddress;
-if (referrer && referrer.trim() !== "") {
-  try {
-    const candidate = getAddress(referrer.trim()); // приведёт к checksummed адресу или бросит
-    if (candidate.toLowerCase() === account.toLowerCase()) {
-      // нельзя реферить самого себя — игнорируем
-      log("Referrer is same as account — ignoring referrer");
-      refAddr = ZeroAddress;
-    } else {
-      refAddr = candidate;
-      log("Using referrer: " + refAddr);
+    // 4. Referrer
+    let refAddr = ZeroAddress;
+    if (referrer && referrer.trim() !== "") {
+      try {
+        const candidate = getAddress(referrer.trim());
+        if (candidate.toLowerCase() !== account.toLowerCase()) {
+          refAddr = candidate;
+          log("Using referrer: " + refAddr);
+        } else {
+          log("Referrer is same as account — ignored");
+        }
+      } catch (err) {
+        alert("Invalid referrer address. Please check and try again.");
+        return;
+      }
     }
-  } catch (err) {
-    // Если адрес неверный — уведомляем юзера и прерываем процесс
-    alert("Invalid referrer address. Please check and try again.");
-    return;
-  }
-}
 
-    // 5. Подписка через populateTransaction + sendTransaction
+    // 5. Вызов подписки
     const txData = await contract.populateTransaction.subscribe(
       endTime.toString(),
-      refAddr // <-- см. п.5: переменная refAddr должна быть проверена/подставлена
+      refAddr
     );
     const tx = await signer.sendTransaction({
       to: txData.to,
       data: txData.data,
-      value: 0
+      value: 0n
     });
     await tx.wait();
     log("STEP4: subscribe confirmed ✅");
@@ -286,7 +282,7 @@ if (referrer && referrer.trim() !== "") {
     log(`STEP1: whitelistPrice = ${priceToPay.toString()}`);
 
     const allowance = await usdc.allowance(account, CONTRACT_ADDRESS);
-    if (allowance.lt(priceToPay)) {
+    if (allowance < priceToPay) {
       log("STEP2: sending approve tx for whitelist...");
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay);
       await approveTx.wait();
@@ -316,13 +312,12 @@ if (referrer && referrer.trim() !== "") {
     const signer = await provider.getSigner();
     const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-    const amount = parseUnits(donateAmount, 6); // USDC decimals
+    const amount = parseUnits(donateAmount, 6); // bigint
+    log("Donate amount = " + amount.toString());
 
-    // approve
     const approveTx = await usdc.approve(CONTRACT_ADDRESS, amount);
     await approveTx.wait();
 
-    // donate
     const tx = await contract.donate(amount);
     await tx.wait();
 
