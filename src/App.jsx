@@ -141,7 +141,7 @@ const connectWallet = async () => {
     const wcProvider = await EthereumProvider.init({
       projectId: "88a4618bff0d86aab28197d3b42e7845",
       chains: [80002], // Amoy
-      optionalChains: [137], // Polygon
+      //optionalChains: [137], // Polygon
       showQrModal: true,
       methods: ["eth_sendTransaction", "personal_sign", "eth_signTypedData"],
       events: ["chainChanged", "accountsChanged"],
