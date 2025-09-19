@@ -25,6 +25,7 @@ const COLORS = ['#ff8000','#00ff80','#ffff00','#00ff00','#00ffff','#0080ff','#80
 const CONTRACT_ADDRESS = "0x94E0c3Df28322A10670837f886F9ccc256b73BCA"; // contract address
 
 const CONTRACT_ABI = [
+  "function setNextEndTime(uint256 _endTime) external",
   "function subscriptionEnd(address) view returns (uint256)",
   "function isActive(address) view returns (bool)",
   "function subscribe(uint256 endTime, address refAddr) external",
@@ -59,6 +60,7 @@ function App() {
   const [account, setAccount] = useState(null);
   const [provider, setProvider] = useState(null);
   const [contract, setContract] = useState(null);
+  const [nextEndTime, setNextEndTimeState] = useState(null);
   const [price, setPrice] = useState(null);
   const [whitelistPrice, setWhitelistPrice] = useState(null);
   const [subscriptionActive, setSubscriptionActive] = useState(false);
