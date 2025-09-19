@@ -11,11 +11,11 @@ contract BTCForecastSubscriptions {
     IERC20 public immutable usdc;
     address public owner;
 
-    uint256 public nextEndTime; // для подписки
+    uint256 public nextEndTime; // next subscription end timestamp
     uint256 public price = 99e6; // 99 USDC (6 decimals)
-    uint256 public whitelistPrice = 99e6; // 99 USDC по умолчанию
-    uint256 public referralDiscount = 20; // 20%
-    uint256 public referralReward = 10;   // 10%
+    uint256 public whitelistPrice = 99e6; // default whitelist price (99 USDC)
+    uint256 public referralDiscount = 20; // percent
+    uint256 public referralReward = 10;   // percent
 
     struct User {
         uint256 subscriptionEnd;
@@ -47,29 +47,24 @@ contract BTCForecastSubscriptions {
         owner = msg.sender;
     }
 
-    // =========================
-    //       BUY WHITELIST
-    // =========================
+    // BUY WHITELIST
     function buyWhitelist() external {
         require(!whitelistedReferrers[msg.sender], "Already whitelisted");
         require(usdc.transferFrom(msg.sender, address(this), whitelistPrice), "Payment failed");
 
-        // Добавляем пользователя в whitelist
         whitelistedReferrers[msg.sender] = true;
         emit ReferrerWhitelisted(msg.sender, true);
     }
 
-    // =========================
-    //          ПОДПИСКА
-    // =========================
+    // SUBSCRIBE
     function subscribe(address refAddr) external {
-        uint256 endTime = nextEndTime; // берём из контракта, игнорируем данные пользователя
+        uint256 endTime = nextEndTime; // use value set by owner, ignore user input
         require(endTime > block.timestamp, "endTime in past");
 
         User storage user = users[msg.sender];
         require(block.timestamp > user.subscriptionEnd, "Subscription active");
 
-        // ✅ Привязка реферала только при первой оплате
+        // bind referrer only on first subscription
         if (!user.hasSubscribed && refAddr != address(0) && refAddr != msg.sender) {
             require(whitelistedReferrers[refAddr], "Referrer not whitelisted");
             user.referrer = refAddr;
@@ -77,16 +72,16 @@ contract BTCForecastSubscriptions {
 
         uint256 finalPrice = price;
 
-        // скидка, если закреплённый реферал whitelisted
+        // apply referral discount if referrer is whitelisted
         if (user.referrer != address(0) && whitelistedReferrers[user.referrer]) {
             uint256 discount = (price * referralDiscount) / 100;
             finalPrice = price - discount;
         }
 
-        // Оплата на контракт
+        // payment to contract
         require(usdc.transferFrom(msg.sender, address(this), finalPrice), "Payment failed");
 
-        // Выплата рефералу
+        // referral reward payout
         uint256 rewardPaid = 0;
         if (user.referrer != address(0) && whitelistedReferrers[user.referrer] && referralReward > 0) {
             rewardPaid = (finalPrice * referralReward) / 100;
@@ -95,25 +90,21 @@ contract BTCForecastSubscriptions {
             }
         }
 
-        // Фиксация подписки
+        // finalize subscription
         user.subscriptionEnd = endTime;
         user.hasSubscribed = true;
 
         emit Subscribed(msg.sender, endTime, user.referrer, finalPrice, rewardPaid);
     }
 
-    // =========================
-    //           ДОНАТ
-    // =========================
+    // DONATE
     function donate(uint256 amount) external {
         require(amount > 0, "Zero amount");
         require(usdc.transferFrom(msg.sender, address(this), amount), "Donate failed");
         emit Donated(msg.sender, amount);
     }
 
-    // =========================
-    //         ВЫВОД СРЕДСТВ
-    // =========================
+    // WITHDRAW
     function withdraw(address to, uint256 amount) external onlyOwner {
         require(to != address(0), "Zero to");
         require(amount > 0, "Zero amount");
@@ -121,9 +112,7 @@ contract BTCForecastSubscriptions {
         emit Withdraw(to, amount);
     }
 
-    // =========================
-    //        ПРОСМОТР ДАННЫХ
-    // =========================
+    // VIEWERS / HELPERS
     function subscriptionEnd(address userAddr) external view returns (uint256) {
         return users[userAddr].subscriptionEnd;
     }
@@ -144,9 +133,8 @@ contract BTCForecastSubscriptions {
         return usdc.balanceOf(address(this));
     }
 
-    // =========================
-    //          АДМИНКА
-    // =========================
+    // ADMIN
+
     function setOwner(address newOwner) external onlyOwner {
         require(newOwner != address(0), "Zero owner");
         emit OwnerChanged(owner, newOwner);
@@ -154,10 +142,10 @@ contract BTCForecastSubscriptions {
     }
 
     function setNextEndTime(uint256 _endTime) external onlyOwner {
-    require(_endTime > block.timestamp, "Next endTime must be in future");
-    require(_endTime > nextEndTime, "Next endTime already set or in past");
-    nextEndTime = _endTime;
-    emit NextEndTimeUpdated(_endTime, msg.sender);
+        require(_endTime > block.timestamp, "Next endTime must be in future");
+        require(_endTime > nextEndTime, "Next endTime already set or in past");
+        nextEndTime = _endTime;
+        emit NextEndTimeUpdated(_endTime, msg.sender);
     }
 
     function setWhitelistPrice(uint256 newPrice) external onlyOwner {
