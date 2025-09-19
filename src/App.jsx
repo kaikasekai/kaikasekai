@@ -230,6 +230,31 @@ function App() {
     }
   };
 
+  // === Buy Whitelist ===
+  const handleBuyWhitelist = async () => {
+  if (!contract || !provider) return alert("Connect wallet first!");
+
+  try {
+    const signer = await provider.getSigner();
+    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
+
+    const wlPrice = await contract.whitelistPrice();
+
+    const allowance = await usdc.allowance(account, CONTRACT_ADDRESS);
+    if (allowance < wlPrice) {
+      const approveTx = await usdc.approve(CONTRACT_ADDRESS, wlPrice);
+      await approveTx.wait();
+    }
+
+    const tx = await contract.connect(signer).buyWhitelist();
+    await tx.wait();
+    alert("✅ You are now whitelisted!");
+  } catch (e) {
+    log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
+    alert("❌ Whitelist purchase failed, see Debug log");
+  }
+};
+
   // === Set nextEndTime (only owner) ===
   const setNextEndTime = async () => {
     if (!contract || !provider) return;
