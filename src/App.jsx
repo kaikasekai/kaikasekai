@@ -204,11 +204,9 @@ const handleSubscribe = async () => {
     const signer = await provider.getSigner();
     const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-    // 1. Цена (bigint)
     const priceToPay = await contract.price();
     log("STEP1: priceToPay = " + priceToPay.toString());
 
-    // 2. Allowance — сравнение через <
     const allowance = await usdc.allowance(account, CONTRACT_ADDRESS);
     log("STEP2: current allowance = " + allowance.toString());
 
@@ -217,48 +215,31 @@ const handleSubscribe = async () => {
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay);
       await approveTx.wait();
       log("STEP2: approve confirmed");
+      await new Promise(r => setTimeout(r, 1000)); // пауза для WalletConnect
     } else {
       log("STEP2: sufficient allowance, skipping approve");
     }
 
-    // Проверка баланса
     const bal = await usdc.balanceOf(account);
     log("USDC balance = " + bal.toString());
-    if (bal < priceToPay) {
-      return alert("Insufficient USDC balance");
-    }
+    if (bal < priceToPay) return alert("Insufficient USDC balance");
 
-    // 3. endTime
     const endTime = BigInt(Math.floor(dayjs().add(1, "month").endOf("month").valueOf() / 1000));
     log("STEP3: endTime = " + endTime.toString());
 
-    // 4. Referrer
     let refAddr = ZeroAddress;
     if (referrer && referrer.trim() !== "") {
       try {
         const candidate = getAddress(referrer.trim());
-        if (candidate.toLowerCase() !== account.toLowerCase()) {
-          refAddr = candidate;
-          log("Using referrer: " + refAddr);
-        } else {
-          log("Referrer is same as account — ignored");
-        }
+        if (candidate.toLowerCase() !== account.toLowerCase()) refAddr = candidate;
       } catch (err) {
-        alert("Invalid referrer address. Please check and try again.");
+        alert("Invalid referrer address");
         return;
       }
     }
 
-    // 5. Вызов подписки
-    const txData = await contract.populateTransaction.subscribe(
-      endTime.toString(),
-      refAddr
-    );
-    const tx = await signer.sendTransaction({
-      to: txData.to,
-      data: txData.data,
-      value: 0n
-    });
+    // ВАЖНО: вызываем напрямую метод контракта, без populateTransaction
+    const tx = await contract.connect(signer).subscribe(endTime.toString(), refAddr);
     await tx.wait();
     log("STEP4: subscribe confirmed ✅");
 
@@ -287,6 +268,7 @@ const handleSubscribe = async () => {
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay);
       await approveTx.wait();
       log("STEP2: approve confirmed");
+      await new Promise(r => setTimeout(r, 1000)); // пауза
     } else {
       log("STEP2: sufficient allowance for whitelist");
     }
@@ -294,12 +276,11 @@ const handleSubscribe = async () => {
     log("STEP3: Calling buyWhitelist()...");
     const tx = await contract.connect(signer).buyWhitelist();
     await tx.wait();
-
     log("✅ BuyWhitelist successful!");
     alert("✅ You are now whitelisted!");
   } catch (e) {
-    console.error(e);
-    alert("❌ BuyWhitelist failed, check console");
+    log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
+    alert("❌ BuyWhitelist failed, see Debug log");
   }
 };
  
@@ -312,19 +293,24 @@ const handleSubscribe = async () => {
     const signer = await provider.getSigner();
     const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-    const amount = parseUnits(donateAmount, 6); // bigint
+    const amount = parseUnits(donateAmount, 6); // USDC decimals
     log("Donate amount = " + amount.toString());
 
+    // 1. approve
     const approveTx = await usdc.approve(CONTRACT_ADDRESS, amount);
     await approveTx.wait();
+    log("Approve done");
+    await new Promise(r => setTimeout(r, 1000)); // пауза
 
-    const tx = await contract.donate(amount);
+    // 2. donate
+    const tx = await contract.connect(signer).donate(amount);
     await tx.wait();
+    log("Donate done");
 
     alert("✅ Donation sent to contract!");
   } catch (e) {
-    console.error(e);
-    alert("❌ Donation failed, check console");
+    log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
+    alert("❌ Donation failed, see Debug log");
   }
 };
 
