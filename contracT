@@ -154,6 +154,7 @@ contract BTCForecastSubscriptions {
     }
 
     function setNextEndTime(uint256 _endTime) external onlyOwner {
+    require(_endTime > block.timestamp, "Next endTime must be in future");
     require(_endTime > nextEndTime, "Next endTime already set or in past");
     nextEndTime = _endTime;
     emit NextEndTimeUpdated(_endTime, msg.sender);
