@@ -11,6 +11,7 @@ contract BTCForecastSubscriptions {
     IERC20 public immutable usdc;
     address public owner;
 
+    uint256 public nextEndTime; // для подписки
     uint256 public price = 99e6; // 99 USDC (6 decimals)
     uint256 public whitelistPrice = 99e6; // 99 USDC по умолчанию
     uint256 public referralDiscount = 20; // 20%
@@ -25,6 +26,7 @@ contract BTCForecastSubscriptions {
     mapping(address => User) private users;
     mapping(address => bool) public whitelistedReferrers;
 
+    event NextEndTimeUpdated(uint256 newEndTime, address indexed owner);
     event Subscribed(address indexed user, uint256 endTime, address indexed referrer, uint256 paidAmount, uint256 rewardPaid);
     event Donated(address indexed user, uint256 amount);
     event Withdraw(address indexed to, uint256 amount);
@@ -60,7 +62,8 @@ contract BTCForecastSubscriptions {
     // =========================
     //          ПОДПИСКА
     // =========================
-    function subscribe(uint256 endTime, address refAddr) external {
+    function subscribe(address refAddr) external {
+        uint256 endTime = nextEndTime; // берём из контракта, игнорируем данные пользователя
         require(endTime > block.timestamp, "endTime in past");
 
         User storage user = users[msg.sender];
@@ -148,6 +151,12 @@ contract BTCForecastSubscriptions {
         require(newOwner != address(0), "Zero owner");
         emit OwnerChanged(owner, newOwner);
         owner = newOwner;
+    }
+
+    function setNextEndTime(uint256 _endTime) external onlyOwner {
+    require(_endTime > nextEndTime, "Next endTime already set or in past");
+    nextEndTime = _endTime;
+    emit NextEndTimeUpdated(_endTime, msg.sender);
     }
 
     function setWhitelistPrice(uint256 newPrice) external onlyOwner {
