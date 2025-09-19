@@ -22,6 +22,7 @@ const RAW_URL = 'https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/da
 const COLORS = ['#ff8000','#00ff80','#ffff00','#00ff00','#00ffff','#0080ff','#8000ff','#ff00ff','#0080ff','#ff0080'];
 
 // === Contract Config ===
+const OWNER_ADDRESS = "0x..."; // адрес владельца контракта 
 const CONTRACT_ADDRESS = "0x94E0c3Df28322A10670837f886F9ccc256b73BCA"; // contract address
 
 const CONTRACT_ABI = [
@@ -180,6 +181,25 @@ const connectWallet = async () => {
   const wlPrice = await cont.whitelistPrice();
   setWhitelistPrice(Number(wlPrice));
 
+  const fetchNextEndTime = async () => {
+  try {
+    const end = await cont.nextEndTime();
+    setNextEndTimeState(Number(end));
+  } catch (e) {
+    console.log("Error fetching nextEndTime:", e);
+  }
+
+  cont.on("NextEndTimeUpdated", (newEndTime, owner) => {
+    setNextEndTimeState(Number(newEndTime));
+    log(`STEP: nextEndTime updated to ${Number(newEndTime)} by owner`);
+  });
+};
+
+fetchNextEndTime();
+
+// Очищаем слушатели при размонтировании
+return () => cont.removeAllListeners("NextEndTimeUpdated");
+
   checkSubscription(cont, acc);
 };
   
@@ -199,6 +219,22 @@ const connectWallet = async () => {
   }
 };
 
+const setNextEndTime = async () => {
+  if (!contract || !provider) return;
+
+  const signer = await provider.getSigner();
+  const acc = await signer.getAddress();
+
+  if (acc.toLowerCase() === OWNER_ADDRESS.toLowerCase()) {
+    const endTime = BigInt(Math.floor(dayjs().add(1, "month").endOf("month").valueOf() / 1000));
+    const tx = await contract.connect(signer).setNextEndTime(endTime);
+    await tx.wait();
+    log("STEP: nextEndTime set by owner ✅");
+  } else {
+    log("Only owner can set nextEndTime");
+  }
+};
+ 
 // === Subscribe ===
 const handleSubscribe = async () => {
   if (!contract || !provider) return alert("Connect wallet first!");
@@ -227,9 +263,6 @@ const handleSubscribe = async () => {
     log("USDC balance = " + bal.toString());
     if (bal < priceToPay) return alert("Insufficient USDC balance");
 
-    const endTime = BigInt(Math.floor(dayjs().add(1, "month").endOf("month").valueOf() / 1000));
-    log("STEP3: endTime = " + endTime.toString());
-
     let refAddr = ZeroAddress;
     if (referrer && referrer.trim() !== "") {
       try {
@@ -242,7 +275,7 @@ const handleSubscribe = async () => {
     }
 
     // ВАЖНО: вызываем напрямую метод контракта, без populateTransaction
-    const tx = await contract.connect(signer).subscribe(endTime.toString(), refAddr);
+    const tx = await contract.connect(signer).subscribe(refAddr);
     await tx.wait();
     log("STEP4: subscribe confirmed ✅");
 
@@ -363,6 +396,11 @@ return (
             >
               See next month (Subscribe)
             </Button>
+
+  {nextEndTime && (
+  <p>Следующая подписка закончится: {new Date(nextEndTime * 1000).toLocaleDateString()}</p>
+)}
+            
             <Button
   variant="contained"
   color="secondary"
