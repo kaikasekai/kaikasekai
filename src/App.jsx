@@ -47,8 +47,8 @@ const COLORS = [
 ];
 
 // === Contract Config ===
-const OWNER_ADDRESS = "0x..."; // owner address
-const CONTRACT_ADDRESS = "0x94E0c3Df28322A10670837f886F9ccc256b73BCA";
+const OWNER_ADDRESS = "0x31Ec7C6bba0b83f51731C704c5Cdf41d85FE68E8"; // owner address
+const CONTRACT_ADDRESS = "0x06ff011209a57da3d774aaaf7c99e19251e1dee5";
 
 const CONTRACT_ABI = [
   "function setNextEndTime(uint256 _endTime) external",
