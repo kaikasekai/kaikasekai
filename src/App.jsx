@@ -206,11 +206,6 @@ function App() {
       console.log("Error fetching nextEndTime:", e);
     }
 
-    cont.on("NextEndTimeUpdated", (newEndTime) => {
-      setNextEndTimeState(Number(newEndTime));
-      log(`STEP: nextEndTime updated to ${Number(newEndTime)} by owner`);
-    });
-
     checkSubscription(cont, acc);
   };
 
