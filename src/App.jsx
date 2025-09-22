@@ -86,6 +86,7 @@ function App() {
   const [price, setPrice] = useState(null);
   const [whitelistPrice, setWhitelistPrice] = useState(null);
   const [subscriptionActive, setSubscriptionActive] = useState(false);
+  const [hasWhitelist, setHasWhitelist] = useState(false);
   const [showTwoMonths, setShowTwoMonths] = useState(false);
   const [referrer, setReferrer] = useState("");
   const [donateAmount, setDonateAmount] = useState("");
@@ -198,6 +199,12 @@ function App() {
     setPrice(Number(await cont.price()));
     setWhitelistPrice(Number(await cont.whitelistPrice()));
 
+    if (cont) {
+  const whitelisted = await cont.whitelistedReferrers(acc);
+  setHasWhitelist(whitelisted);
+}
+
+
     // === Fetch nextEndTime and listen for updates ===
     try {
       const end = await cont.nextEndTime();
@@ -226,23 +233,26 @@ function App() {
   };
 
   // === Buy Whitelist ===
-  const handleBuyWhitelist = async () => {
+const handleBuyWhitelist = async () => {
   if (!contract || !provider) return alert("Connect wallet first!");
 
   try {
     const signer = await provider.getSigner();
     const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-    const wlPrice = await contract.whitelistPrice();
+    const wlPrice = await contract.whitelistPrice(); // BigInt
+    const allowance = await usdc.allowance(account, CONTRACT_ADDRESS); // BigInt
 
-    const allowance = await usdc.allowance(account, CONTRACT_ADDRESS);
     if (allowance < wlPrice) {
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, wlPrice);
+      alert("✅ Approve submitted. Confirm in your wallet.");
       await approveTx.wait();
     }
 
     const tx = await contract.connect(signer).buyWhitelist();
+    alert("✅ BuyWhitelist tx submitted. Confirm in your wallet.");
     await tx.wait();
+
     alert("✅ You are now whitelisted!");
   } catch (e) {
     log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
@@ -250,91 +260,77 @@ function App() {
   }
 };
 
-  // === Set nextEndTime (only owner) ===
-  const setNextEndTime = async () => {
-    if (!contract || !provider) return;
-    const signer = await provider.getSigner();
-    const acc = await signer.getAddress();
-
-    if (acc.toLowerCase() === OWNER_ADDRESS.toLowerCase()) {
-      const endTime = BigInt(
-        Math.floor(dayjs().add(1, "month").endOf("month").valueOf() / 1000)
-      );
-      const tx = await contract.connect(signer).setNextEndTime(endTime);
-      await tx.wait();
-      log("STEP: nextEndTime set by owner ✅");
-    } else {
-      log("Only owner can set nextEndTime");
-    }
-  };
-
   // === Subscribe ===
-  const handleSubscribe = async () => {
-    if (!contract || !provider) return alert("Connect wallet first!");
-    try {
-      const signer = await provider.getSigner();
-      const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
+const handleSubscribe = async () => {
+  if (!contract || !provider) return alert("Connect wallet first!");
+  try {
+    const signer = await provider.getSigner();
+    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-      const priceToPay = await contract.price();
-      log("STEP1: priceToPay = " + priceToPay.toString());
+    const priceToPay = await contract.price(); // BigInt
+    const allowance = await usdc.allowance(account, CONTRACT_ADDRESS); // BigInt
 
-      const allowance = await usdc.allowance(account, CONTRACT_ADDRESS);
-      log("STEP2: allowance = " + allowance.toString());
-
-      if (allowance < priceToPay) {
-        log("Sending approve tx...");
-        const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay);
-        await approveTx.wait();
-      }
-
-      const bal = await usdc.balanceOf(account);
-      if (bal < priceToPay) return alert("Insufficient USDC balance");
-
-      let refAddr = ZeroAddress;
-      if (referrer && referrer.trim() !== "") {
-        try {
-          const candidate = getAddress(referrer.trim());
-          if (candidate.toLowerCase() !== account.toLowerCase())
-            refAddr = candidate;
-        } catch {
-          alert("Invalid referrer address");
-          return;
-        }
-      }
-
-      const tx = await contract.connect(signer).subscribe(refAddr);
-      await tx.wait();
-      log("Subscription confirmed ✅");
-
-      await checkSubscription(contract, account);
-      alert("✅ Subscription successful!");
-    } catch (e) {
-      log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
-      alert("❌ Subscription failed, see Debug log");
+    if (allowance < priceToPay) {
+      const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay);
+      alert("✅ Approve submitted. Confirm in your wallet.");
+      await approveTx.wait();
     }
-  };
+
+    const bal = await usdc.balanceOf(account);
+    if (bal < priceToPay) return alert("Insufficient USDC balance");
+
+    let refAddr = ZeroAddress;
+    if (referrer && referrer.trim() !== "") {
+      try {
+        const candidate = getAddress(referrer.trim());
+        if (candidate.toLowerCase() !== account.toLowerCase()) refAddr = candidate;
+      } catch {
+        return alert("Invalid referrer address");
+      }
+    }
+
+    const tx = await contract.connect(signer).subscribe(refAddr);
+    alert("✅ Subscribe tx submitted. Confirm in your wallet.");
+    await tx.wait();
+
+    await checkSubscription(contract, account);
+    alert("✅ Subscription successful!");
+  } catch (e) {
+    log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
+    alert("❌ Subscription failed, see Debug log");
+  }
+};
 
   // === Donate ===
-  const handleDonate = async () => {
-    if (!contract || !provider) return;
-    if (!donateAmount) return alert("Enter amount");
+const handleDonate = async () => {
+  if (!contract || !provider) return alert("Connect wallet first!");
+  if (!donateAmount) return alert("Enter amount");
 
-    try {
-      const signer = await provider.getSigner();
-      const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
+  try {
+    const signer = await provider.getSigner();
+    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-      const amount = parseUnits(donateAmount, 6);
+    const amount = parseUnits(donateAmount, 6); // BigInt
+    const allowance = await usdc.allowance(account, CONTRACT_ADDRESS); // BigInt
+
+    // Проверка allowance
+    if (allowance < amount) {
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, amount);
-      await approveTx.wait();
-
-      const tx = await contract.connect(signer).donate(amount);
-      await tx.wait();
-      alert("✅ Donation sent to contract!");
-    } catch (e) {
-      log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
-      alert("❌ Donation failed, see Debug log");
+      alert("✅ Approve submitted. Confirm in your wallet.");
+      await approveTx.wait(); // ждём завершения approve
     }
-  };
+
+    // Сама транзакция donate
+    const tx = await contract.connect(signer).donate(amount);
+    alert("✅ Donation tx submitted. Confirm in your wallet.");
+    await tx.wait();
+
+    alert("✅ Donation sent to contract!");
+  } catch (e) {
+    log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
+    alert("❌ Donation failed, see Debug log");
+  }
+};
 
   if (!data.length) return <div>Loading...</div>;
 
@@ -388,15 +384,17 @@ function App() {
                 </p>
               )}
 
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={handleBuyWhitelist}
-                style={{ marginTop: 10 }}
-              >
-                Buy Whitelist (
-                {whitelistPrice ? (whitelistPrice / 1e6).toFixed(2) : "..."} USDC)
-              </Button>
+              {!hasWhitelist && (
+  <Button
+    variant="contained"
+    color="secondary"
+    onClick={handleBuyWhitelist}
+    style={{ marginTop: 10 }}
+  >
+    Buy Whitelist ({whitelistPrice ? (whitelistPrice / 1e6).toFixed(2) : "..." } USDC)
+  </Button>
+)}
+
             </div>
           )}
         </div>
