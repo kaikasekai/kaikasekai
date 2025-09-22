@@ -383,6 +383,8 @@ const handleDonate = async () => {
                   {new Date(nextEndTime * 1000).toLocaleDateString()}
                 </p>
               )}
+              </div>
+      )}
 
               {!hasWhitelist && (
   <Button
@@ -397,8 +399,7 @@ const handleDonate = async () => {
 
             </div>
           )}
-        </div>
-      )}
+        
 
       {/* === Chart (вынесен из блока кошелька, теперь всегда виден) === */}
       <div style={{ marginTop: 20 }}>
