@@ -245,13 +245,13 @@ const handleBuyWhitelist = async () => {
 
     if (allowance < wlPrice) {
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, wlPrice);
-      alert("✅ Approve submitted. Confirm in your wallet.");
       await approveTx.wait();
+      alert("✅ Approve submitted. Confirm in your wallet."); 
     }
 
     const tx = await contract.connect(signer).buyWhitelist();
-    alert("✅ BuyWhitelist tx submitted. Confirm in your wallet.");
     await tx.wait();
+    alert("✅ BuyWhitelist tx submitted.");
 
     alert("✅ You are now whitelisted!");
   } catch (e) {
@@ -272,8 +272,8 @@ const handleSubscribe = async () => {
 
     if (allowance < priceToPay) {
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay);
-      alert("✅ Approve submitted. Confirm in your wallet.");
       await approveTx.wait();
+      alert("✅ Approve submitted. Confirm in your wallet.");
     }
 
     const bal = await usdc.balanceOf(account);
@@ -290,8 +290,8 @@ const handleSubscribe = async () => {
     }
 
     const tx = await contract.connect(signer).subscribe(refAddr);
-    alert("✅ Subscribe tx submitted. Confirm in your wallet.");
     await tx.wait();
+    alert("✅ Subscribe tx submitted.");
 
     await checkSubscription(contract, account);
     alert("✅ Subscription successful!");
@@ -316,14 +316,14 @@ const handleDonate = async () => {
     // Проверка allowance
     if (allowance < amount) {
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, amount);
-      alert("✅ Approve submitted. Confirm in your wallet.");
       await approveTx.wait(); // ждём завершения approve
+      alert("✅ Approve submitted. Confirm in your wallet.");
     }
 
     // Сама транзакция donate
     const tx = await contract.connect(signer).donate(amount);
-    alert("✅ Donation tx submitted. Confirm in your wallet.");
     await tx.wait();
+    alert("✅ Donation tx submitted.");
 
     alert("✅ Donation sent to contract!");
   } catch (e) {
@@ -393,7 +393,7 @@ const handleDonate = async () => {
     onClick={handleBuyWhitelist}
     style={{ marginTop: 10 }}
   >
-    Buy Whitelist ({whitelistPrice ? (whitelistPrice / 1e6).toFixed(2) : "..." } USDC)
+    Buy Whitelist ({whitelistPrice ? (whitelistPrice / 1e6).toFixed(0) : "..." } USDC)
   </Button>
 )}
 
