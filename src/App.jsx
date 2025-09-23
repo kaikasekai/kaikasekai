@@ -27,7 +27,6 @@ import {
   Typography,
   Button,
   TextField,
-  CircularProgress,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
@@ -92,10 +91,6 @@ function App() {
   const [referrer, setReferrer] = useState("");
   const [donateAmount, setDonateAmount] = useState("");
   const [hasSubscribed, setHasSubscribed] = useState(false);
-  const [isApproving, setIsApproving] = useState(false);
-  const [isSubscribing, setIsSubscribing] = useState(false);
-  const [isDonating, setIsDonating] = useState(false);
-  const [isBuyingWhitelist, setIsBuyingWhitelist] = useState(false);
   const [debug, setDebug] = useState([]);
 
   const log = (msg) => {
@@ -242,8 +237,6 @@ const handleBuyWhitelist = async () => {
   if (!contract || !provider) return alert("Connect wallet first!");
 
   try {
-    setIsBuyingWhitelist(true);
-
     const signer = await provider.getSigner();
     const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
@@ -251,24 +244,19 @@ const handleBuyWhitelist = async () => {
     const allowance = await usdc.allowance(account, CONTRACT_ADDRESS); // BigInt
 
     if (allowance < wlPrice) {
-      setIsApproving(true);
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, wlPrice);
       await approveTx.wait();
-      setIsApproving(false);
-      alert("✅ Approve confirmed in wallet");
+      alert("✅ Approve submitted. Confirm buy whitelist in your wallet."); 
     }
 
     const tx = await contract.connect(signer).buyWhitelist();
     await tx.wait();
+    //alert("✅ BuyWhitelist tx submitted.");
 
-    setHasWhitelist(true); // обновляем состояние
     alert("✅ You are now whitelisted!");
   } catch (e) {
     log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
     alert("❌ Whitelist purchase failed, see Debug log");
-  } finally {
-    setIsBuyingWhitelist(false);
-    setIsApproving(false);
   }
 };
 
@@ -276,20 +264,16 @@ const handleBuyWhitelist = async () => {
 const handleSubscribe = async () => {
   if (!contract || !provider) return alert("Connect wallet first!");
   try {
-    setIsSubscribing(true);
-
     const signer = await provider.getSigner();
     const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-    const priceToPay = await contract.price();
-    const allowance = await usdc.allowance(account, CONTRACT_ADDRESS);
+    const priceToPay = await contract.price(); // BigInt
+    const allowance = await usdc.allowance(account, CONTRACT_ADDRESS); // BigInt
 
     if (allowance < priceToPay) {
-      setIsApproving(true);
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay);
       await approveTx.wait();
-      setIsApproving(false);
-      alert("✅ Approve confirmed in wallet");
+      alert("✅ Approve submitted. Confirm subscription in your wallet.");
     }
 
     const bal = await usdc.balanceOf(account);
@@ -307,15 +291,13 @@ const handleSubscribe = async () => {
 
     const tx = await contract.connect(signer).subscribe(refAddr);
     await tx.wait();
+    //alert("✅ Subscribe tx submitted.");
 
     await checkSubscription(contract, account);
     alert("✅ Subscription successful!");
   } catch (e) {
     log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
     alert("❌ Subscription failed, see Debug log");
-  } finally {
-    setIsSubscribing(false);
-    setIsApproving(false);
   }
 };
 
@@ -325,32 +307,28 @@ const handleDonate = async () => {
   if (!donateAmount) return alert("Enter amount");
 
   try {
-    setIsDonating(true);
-
     const signer = await provider.getSigner();
     const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-    const amount = parseUnits(donateAmount, 6); // USDC → BigInt
+    const amount = parseUnits(donateAmount, 6); // BigInt
     const allowance = await usdc.allowance(account, CONTRACT_ADDRESS); // BigInt
 
+    // Проверка allowance
     if (allowance < amount) {
-      setIsApproving(true);
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, amount);
-      await approveTx.wait();
-      setIsApproving(false);
-      alert("✅ Approve confirmed in wallet");
+      await approveTx.wait(); // ждём завершения approve
+      alert("✅ Approve submitted. Confirm donation in your wallet.");
     }
 
+    // Сама транзакция donate
     const tx = await contract.connect(signer).donate(amount);
     await tx.wait();
+    //alert("✅ Donation tx submitted.");
 
-    alert("✅ Donation successful!");
+    alert("✅ Donation sent to contract!");
   } catch (e) {
     log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
     alert("❌ Donation failed, see Debug log");
-  } finally {
-    setIsDonating(false);
-    setIsApproving(false);
   }
 };
 
@@ -395,19 +373,9 @@ const handleDonate = async () => {
                 />
               )}
 
-<Button
-  variant="contained"
-  color="primary"
-  onClick={handleSubscribe}
-  disabled={isSubscribing || isApproving}
->
-  {isSubscribing || isApproving ? (
-    <CircularProgress size={24} color="inherit" />
-  ) : (
-    "Subscribe"
-  )}
-</Button>
-
+              <Button variant="contained" color="primary" onClick={handleSubscribe}>
+                Subscribe
+              </Button>
 
               {nextEndTime && (
                 <p>
@@ -420,19 +388,13 @@ const handleDonate = async () => {
 
               {!hasWhitelist && (
   <Button
-  variant="contained"
-  color="secondary"
-  onClick={handleBuyWhitelist}
-  disabled={isBuyingWhitelist || isApproving}
-  style={{ marginTop: 10 }}
->
-  {isBuyingWhitelist || isApproving ? (
-    <CircularProgress size={24} color="inherit" />
-  ) : (
-    `Buy Whitelist (${whitelistPrice ? (whitelistPrice / 1e6).toFixed(0) : "..."} USDC)`
-  )}
-</Button>
-
+    variant="contained"
+    color="secondary"
+    onClick={handleBuyWhitelist}
+    style={{ marginTop: 10 }}
+  >
+    Buy Whitelist ({whitelistPrice ? (whitelistPrice / 1e6).toFixed(0) : "..." } USDC)
+  </Button>
 )}
 
             </div>
@@ -507,19 +469,9 @@ const handleDonate = async () => {
             fullWidth
             margin="dense"
           />
-          <Button
-  variant="contained"
-  color="secondary"
-  onClick={handleDonate}
-  disabled={isDonating || isApproving}
->
-  {isDonating || isApproving ? (
-    <CircularProgress size={24} color="inherit" />
-  ) : (
-    "Donate"
-  )}
-</Button>
-
+          <Button variant="contained" color="secondary" onClick={handleDonate}>
+            Donate
+          </Button>
         </div>
       )}
 
