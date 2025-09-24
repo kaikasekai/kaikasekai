@@ -29,6 +29,7 @@ import {
   TextField,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import emailjs from "@emailjs/browser";
 
 // === CSV Data ===
 const RAW_URL =
@@ -48,7 +49,7 @@ const COLORS = [
 
 // === Contract Config ===
 const OWNER_ADDRESS = "0x31Ec7C6bba0b83f51731C704c5Cdf41d85FE68E8"; // owner address
-const CONTRACT_ADDRESS = "0x06ff011209a57da3d774aaaf7c99e19251e1dee5";
+const CONTRACT_ADDRESS = "0x651e2c5824985Cf1a551C249b1bfba2aBe34fB49";
 
 const CONTRACT_ABI = [
   "function setNextEndTime(uint256 _endTime) external",
@@ -57,13 +58,19 @@ const CONTRACT_ABI = [
   "function isActive(address) view returns (bool)",
   "function subscribe(address refAddr) external",
   "function donate(uint256 amount) external",
+  "function payFeedback() external",
   "function price() view returns (uint256)",
   "function whitelistPrice() view returns (uint256)",
+  "function feedbackPrice() view returns (uint256)",
   "function hasEverSubscribed(address) view returns (bool)",
   "function whitelistedReferrers(address) view returns (bool)",
   "function buyWhitelist() external",
+  "function setFeedbackPrice(uint256 newPrice) external",
   "event NextEndTimeUpdated(uint256 newEndTime, address indexed owner)",
+  "event FeedbackPaid(address indexed user, uint256 amount)",
+  "event FeedbackPriceChanged(uint256 oldPrice, uint256 newPrice)"
 ];
+
 
 // === USDC Config (Polygon Amoy) ===
 const USDC_ADDRESS = "0x41E94Eb019C0762f9Bfcf9Fb1E58725BfB0e7582";
@@ -91,6 +98,9 @@ function App() {
   const [referrer, setReferrer] = useState("");
   const [donateAmount, setDonateAmount] = useState("");
   const [hasSubscribed, setHasSubscribed] = useState(false);
+  const [showFeedbackForm, setShowFeedbackForm] = useState(false);
+  const [feedbackEmail, setFeedbackEmail] = useState("");
+  const [feedbackMessage, setFeedbackMessage] = useState("");
   const [debug, setDebug] = useState([]);
 
   const log = (msg) => {
@@ -332,6 +342,55 @@ const handleDonate = async () => {
   }
 };
 
+// === FeedBack ===
+const handlePayFeedback = async () => {
+  if (!contract || !provider) return alert("Connect wallet first!");
+  try {
+    const signer = await provider.getSigner();
+    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
+    const price = await contract.feedbackPrice();
+
+    const allowance = await usdc.allowance(account, CONTRACT_ADDRESS);
+    if (allowance < price) {
+      const approveTx = await usdc.approve(CONTRACT_ADDRESS, price);
+      await approveTx.wait();
+    }
+
+    const tx = await contract.connect(signer).payFeedback();
+    await tx.wait();
+
+    setShowFeedbackForm(true); // показать форму после успешной оплаты
+  } catch (e) {
+    log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
+    alert("❌ Payment for feedback failed");
+  }
+};
+
+// === Send FeedBack ===
+const handleSendFeedback = async () => {
+  if (!feedbackEmail || !feedbackMessage) return alert("Fill all fields");
+
+  try {
+    await emailjs.send(
+      "service_2eczu4z",
+      "template_0v8qzjh",
+      {
+        user_email: feedbackEmail,
+        message: feedbackMessage,
+      },
+      "oC-ls-BvdR82IZ6b4"
+    );
+
+    alert("✅ Message has been send!");
+    setFeedbackEmail("");
+    setFeedbackMessage("");
+    setShowFeedbackForm(false);
+  } catch (e) {
+    alert("❌ Error, message hasn't send");
+    console.error(e);
+  }
+};
+
   if (!data.length) return <div>Loading...</div>;
 
   const today = new Date();
@@ -395,6 +454,46 @@ const handleDonate = async () => {
   >
     Buy Whitelist ({whitelistPrice ? (whitelistPrice / 1e6).toFixed(0) : "..." } USDC)
   </Button>
+)}
+
+
+<Button
+  variant="contained"
+  color="info"
+  onClick={handlePayFeedback}
+  style={{ marginTop: 10 }}
+>
+  Contact us ({contract ? (await contract.feedbackPrice() / 1e6) : "1"} USDC)
+</Button>
+
+{showFeedbackForm && (
+  <div style={{ marginTop: 20, border: "1px solid #ccc", padding: 10, borderRadius: 8 }}>
+    <h4>Обратная связь</h4>
+    <TextField
+      label="Ваш email"
+      value={feedbackEmail}
+      onChange={(e) => setFeedbackEmail(e.target.value)}
+      fullWidth
+      margin="dense"
+    />
+    <TextField
+      label="Сообщение"
+      value={feedbackMessage}
+      onChange={(e) => setFeedbackMessage(e.target.value)}
+      fullWidth
+      multiline
+      rows={4}
+      margin="dense"
+    />
+    <Button
+      variant="contained"
+      color="success"
+      style={{ marginTop: 10 }}
+      onClick={handleSendFeedback}
+    >
+      Отправить
+    </Button>
+  </div>
 )}
 
             </div>
