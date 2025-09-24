@@ -1,0 +1,181 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+interface IERC20 {
+    function transfer(address to, uint256 amount) external returns (bool);
+    function transferFrom(address from, address to, uint256 amount) external returns (bool);
+    function balanceOf(address account) external view returns (uint256);
+}
+
+contract BTCForecastSubscriptions {
+    IERC20 public immutable usdc;
+    address public owner;
+
+    uint256 public nextEndTime; // next subscription end timestamp
+    uint256 public price = 99e6; // 99 USDC (6 decimals)
+    uint256 public whitelistPrice = 99e6; // default whitelist price (99 USDC)
+    uint256 public feedbackPrice = 99e6; // 99 USDC (6 decimals)
+    uint256 public referralDiscount = 20; // percent
+    uint256 public referralReward = 10;   // percent
+
+    struct User {
+        uint256 subscriptionEnd;
+        bool    hasSubscribed;
+        address referrer;
+    }
+
+    mapping(address => User) private users;
+    mapping(address => bool) public whitelistedReferrers;
+
+    event NextEndTimeUpdated(uint256 newEndTime, address indexed owner);
+    event Subscribed(address indexed user, uint256 endTime, address indexed referrer, uint256 paidAmount, uint256 rewardPaid);
+    event Donated(address indexed user, uint256 amount);
+    event Withdraw(address indexed to, uint256 amount);
+    event OwnerChanged(address indexed oldOwner, address indexed newOwner);
+    event PriceChanged(uint256 oldPrice, uint256 newPrice);
+    event WhitelistPriceChanged(uint256 oldPrice, uint256 newPrice);
+    event FeedbackPriceChanged(uint256 oldPrice, uint256 newPrice);
+    event ReferralParamsChanged(uint256 discountPercent, uint256 rewardPercent);
+    event ReferrerWhitelisted(address indexed referrer, bool status);
+    event FeedbackPaid(address indexed user, uint256 amount);
+    
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Not owner");
+        _;
+    }
+
+    constructor(address _usdc) {
+        require(_usdc != address(0), "USDC zero");
+        usdc = IERC20(_usdc);
+        owner = msg.sender;
+    }
+
+    // BUY WHITELIST
+    function buyWhitelist() external {
+        require(!whitelistedReferrers[msg.sender], "Already whitelisted");
+        require(usdc.transferFrom(msg.sender, address(this), whitelistPrice), "Payment failed");
+
+        whitelistedReferrers[msg.sender] = true;
+        emit ReferrerWhitelisted(msg.sender, true);
+    }
+
+    // SUBSCRIBE
+    function subscribe(address refAddr) external {
+        uint256 endTime = nextEndTime; // use value set by owner, ignore user input
+        require(endTime > block.timestamp, "endTime in past");
+
+        User storage user = users[msg.sender];
+        require(block.timestamp > user.subscriptionEnd, "Subscription active");
+
+        // bind referrer only on first subscription
+        if (!user.hasSubscribed && refAddr != address(0) && refAddr != msg.sender) {
+            require(whitelistedReferrers[refAddr], "Referrer not whitelisted");
+            user.referrer = refAddr;
+        }
+
+        uint256 finalPrice = price;
+
+        // apply referral discount if referrer is whitelisted
+        if (user.referrer != address(0) && whitelistedReferrers[user.referrer]) {
+            uint256 discount = (price * referralDiscount) / 100;
+            finalPrice = price - discount;
+        }
+
+        // payment to contract
+        require(usdc.transferFrom(msg.sender, address(this), finalPrice), "Payment failed");
+
+        // referral reward payout
+        uint256 rewardPaid = 0;
+        if (user.referrer != address(0) && whitelistedReferrers[user.referrer] && referralReward > 0) {
+            rewardPaid = (finalPrice * referralReward) / 100;
+            if (rewardPaid > 0) {
+                require(usdc.transfer(user.referrer, rewardPaid), "Referral payout failed");
+            }
+        }
+
+        // finalize subscription
+        user.subscriptionEnd = endTime;
+        user.hasSubscribed = true;
+
+        emit Subscribed(msg.sender, endTime, user.referrer, finalPrice, rewardPaid);
+    }
+
+    // DONATE
+    function donate(uint256 amount) external {
+        require(amount > 0, "Zero amount");
+        require(usdc.transferFrom(msg.sender, address(this), amount), "Donate failed");
+        emit Donated(msg.sender, amount);
+    }
+
+    //FEEDBACK
+    function payFeedback() external {
+        require(usdc.transferFrom(msg.sender, address(this), feedbackPrice), "Payment failed");
+        emit FeedbackPaid(msg.sender, feedbackPrice);
+    }
+
+    // WITHDRAW
+    function withdraw(address to, uint256 amount) external onlyOwner {
+        require(to != address(0), "Zero to");
+        require(amount > 0, "Zero amount");
+        require(usdc.transfer(to, amount), "Withdraw failed");
+        emit Withdraw(to, amount);
+    }
+
+    // VIEWERS / HELPERS
+    function subscriptionEnd(address userAddr) external view returns (uint256) {
+        return users[userAddr].subscriptionEnd;
+    }
+
+    function isActive(address userAddr) external view returns (bool) {
+        return users[userAddr].subscriptionEnd > block.timestamp;
+    }
+
+    function referrerOf(address userAddr) external view returns (address) {
+        return users[userAddr].referrer;
+    }
+
+    function hasEverSubscribed(address userAddr) external view returns (bool) {
+        return users[userAddr].hasSubscribed;
+    }
+
+    function contractUSDCBalance() external view returns (uint256) {
+        return usdc.balanceOf(address(this));
+    }
+
+    // ADMIN
+
+    function setOwner(address newOwner) external onlyOwner {
+        require(newOwner != address(0), "Zero owner");
+        emit OwnerChanged(owner, newOwner);
+        owner = newOwner;
+    }
+
+    function setNextEndTime(uint256 _endTime) external onlyOwner {
+        require(_endTime > block.timestamp, "Next endTime must be in future");
+        require(_endTime > nextEndTime, "Next endTime already set or in past");
+        nextEndTime = _endTime;
+        emit NextEndTimeUpdated(_endTime, msg.sender);
+    }
+
+    function setPrice(uint256 newPrice) external onlyOwner {
+        emit PriceChanged(price, newPrice);
+        price = newPrice;
+    }
+
+    function setWhitelistPrice(uint256 newPrice) external onlyOwner {
+        emit WhitelistPriceChanged(whitelistPrice, newPrice);
+        whitelistPrice = newPrice;
+    }
+
+    function setFeedbackPrice(uint256 newPrice) external onlyOwner {
+        emit FeedbackPriceChanged(feedbackPrice, newPrice);
+        feedbackPrice = newPrice;
+    }
+
+    function setReferralParams(uint256 discountPercent, uint256 rewardPercent) external onlyOwner {
+        referralDiscount = discountPercent;
+        referralReward   = rewardPercent;
+        emit ReferralParamsChanged(discountPercent, rewardPercent);
+    }
+}
