@@ -58,13 +58,19 @@ const CONTRACT_ABI = [
   "function isActive(address) view returns (bool)",
   "function subscribe(address refAddr) external",
   "function donate(uint256 amount) external",
+  "function payFeedback() external",
   "function price() view returns (uint256)",
   "function whitelistPrice() view returns (uint256)",
+  "function feedbackPrice() view returns (uint256)",
   "function hasEverSubscribed(address) view returns (bool)",
   "function whitelistedReferrers(address) view returns (bool)",
   "function buyWhitelist() external",
+  "function setFeedbackPrice(uint256 newPrice) external",
   "event NextEndTimeUpdated(uint256 newEndTime, address indexed owner)",
+  "event FeedbackPaid(address indexed user, uint256 amount)",
+  "event FeedbackPriceChanged(uint256 oldPrice, uint256 newPrice)"
 ];
+
 
 // === USDC Config (Polygon Amoy) ===
 const USDC_ADDRESS = "0x41E94Eb019C0762f9Bfcf9Fb1E58725BfB0e7582";
