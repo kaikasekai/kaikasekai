@@ -366,13 +366,13 @@ const handleSendFeedback = async () => {
 
   try {
     await emailjs.send(
-      "YOUR_SERVICE_ID",
-      "YOUR_TEMPLATE_ID",
+      "service_2eczu4z",
+      "template_0v8qzjh",
       {
         user_email: feedbackEmail,
         message: feedbackMessage,
       },
-      "YOUR_PUBLIC_KEY"
+      "oC-ls-BvdR82IZ6b4"
     );
 
     alert("✅ Message has been send!");
