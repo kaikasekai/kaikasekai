@@ -101,6 +101,7 @@ function App() {
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
   const [feedbackEmail, setFeedbackEmail] = useState("");
   const [feedbackMessage, setFeedbackMessage] = useState("");
+  const [processing, setProcessing] = useState(false); // блокировка повторных кликов
   const [debug, setDebug] = useState([]);
 
   const log = (msg) => {
@@ -243,10 +244,11 @@ function App() {
     }
   };
 
-  // === Buy Whitelist ===
+// === Buy Whitelist ===
 const handleBuyWhitelist = async () => {
   if (!contract || !provider) return alert("Connect wallet first!");
-
+  if (processing) return; // защита от повторных вызовов
+  setProcessing(true);
   try {
     const signer = await provider.getSigner();
     const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
@@ -255,25 +257,35 @@ const handleBuyWhitelist = async () => {
     const allowance = await usdc.allowance(account, CONTRACT_ADDRESS); // BigInt
 
     if (allowance < wlPrice) {
+      log("⏳ Approving USDC for whitelist...");
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, wlPrice);
       await approveTx.wait();
-      alert("✅ Approve submitted. Confirm buy whitelist in your wallet."); 
+      alert("✅ Approve confirmed");
     }
 
-    const tx = await contract.connect(signer).buyWhitelist();
+    log("⏳ Buying whitelist...");
+    const tx = await contract.buyWhitelist(); // contract уже создан с signer
     await tx.wait();
-    //alert("✅ BuyWhitelist tx submitted.");
+    log("✅ BuyWhitelist confirmed");
+
+    // Обновим стейт whitelisted
+    const whitelisted = await contract.whitelistedReferrers(account);
+    setHasWhitelist(Boolean(whitelisted));
 
     alert("✅ You are now whitelisted!");
   } catch (e) {
     log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
     alert("❌ Whitelist purchase failed, see Debug log");
+  } finally {
+    setProcessing(false);
   }
 };
 
-  // === Subscribe ===
+// === Subscribe ===
 const handleSubscribe = async () => {
   if (!contract || !provider) return alert("Connect wallet first!");
+  if (processing) return;
+  setProcessing(true);
   try {
     const signer = await provider.getSigner();
     const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
@@ -282,13 +294,17 @@ const handleSubscribe = async () => {
     const allowance = await usdc.allowance(account, CONTRACT_ADDRESS); // BigInt
 
     if (allowance < priceToPay) {
+      log("⏳ Approving USDC for subscription...");
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay);
       await approveTx.wait();
-      alert("✅ Approve submitted. Confirm subscription in your wallet.");
+      alert("✅ Approve confirmed");
     }
 
     const bal = await usdc.balanceOf(account);
-    if (bal < priceToPay) return alert("Insufficient USDC balance");
+    if (bal < priceToPay) {
+      alert("Insufficient USDC balance");
+      return;
+    }
 
     let refAddr = ZeroAddress;
     if (referrer && referrer.trim() !== "") {
@@ -300,23 +316,27 @@ const handleSubscribe = async () => {
       }
     }
 
-    const tx = await contract.connect(signer).subscribe(refAddr);
+    log("⏳ Subscribing...");
+    const tx = await contract.subscribe(refAddr);
     await tx.wait();
-    //alert("✅ Subscribe tx submitted.");
+    log("✅ Subscription confirmed");
 
     await checkSubscription(contract, account);
     alert("✅ Subscription successful!");
   } catch (e) {
     log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
     alert("❌ Subscription failed, see Debug log");
+  } finally {
+    setProcessing(false);
   }
 };
 
-  // === Donate ===
+// === Donate ===
 const handleDonate = async () => {
   if (!contract || !provider) return alert("Connect wallet first!");
   if (!donateAmount) return alert("Enter amount");
-
+  if (processing) return;
+  setProcessing(true);
   try {
     const signer = await provider.getSigner();
     const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
@@ -324,46 +344,57 @@ const handleDonate = async () => {
     const amount = parseUnits(donateAmount, 6); // BigInt
     const allowance = await usdc.allowance(account, CONTRACT_ADDRESS); // BigInt
 
-    // Проверка allowance
     if (allowance < amount) {
+      log("⏳ Approving USDC for donation...");
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, amount);
-      await approveTx.wait(); // ждём завершения approve
-      alert("✅ Approve submitted. Confirm donation in your wallet.");
+      await approveTx.wait();
+      alert("✅ Approve confirmed");
     }
 
-    // Сама транзакция donate
-    const tx = await contract.connect(signer).donate(amount);
+    log("⏳ Sending donation...");
+    const tx = await contract.donate(amount);
     await tx.wait();
-    //alert("✅ Donation tx submitted.");
+    log("✅ Donation confirmed");
 
     alert("✅ Donation sent to contract!");
   } catch (e) {
     log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
     alert("❌ Donation failed, see Debug log");
+  } finally {
+    setProcessing(false);
   }
 };
 
 // === FeedBack ===
 const handlePayFeedback = async () => {
   if (!contract || !provider) return alert("Connect wallet first!");
+  if (processing) return;
+  setProcessing(true);
   try {
     const signer = await provider.getSigner();
     const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
-    const price = await contract.feedbackPrice();
 
+    const price = await contract.feedbackPrice(); // BigInt
     const allowance = await usdc.allowance(account, CONTRACT_ADDRESS);
+
     if (allowance < price) {
+      log("⏳ Approving USDC for feedback...");
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, price);
       await approveTx.wait();
+      alert("✅ Approve confirmed");
     }
 
-    const tx = await contract.connect(signer).payFeedback();
+    log("⏳ Paying for feedback...");
+    const tx = await contract.payFeedback(); // contract already has signer
     await tx.wait();
+    log("✅ Feedback payment confirmed");
 
     setShowFeedbackForm(true); // показать форму после успешной оплаты
   } catch (e) {
     log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
     alert("❌ Payment for feedback failed");
+  } finally {
+    setProcessing(false);
   }
 };
 
