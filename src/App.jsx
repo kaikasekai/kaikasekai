@@ -71,7 +71,6 @@ const CONTRACT_ABI = [
   "event FeedbackPriceChanged(uint256 oldPrice, uint256 newPrice)"
 ];
 
-
 // === USDC Config (Polygon Amoy) ===
 const USDC_ADDRESS = "0x41E94Eb019C0762f9Bfcf9Fb1E58725BfB0e7582";
 const USDC_ABI = [
