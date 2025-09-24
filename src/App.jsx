@@ -97,6 +97,7 @@ function App() {
   const [referrer, setReferrer] = useState("");
   const [donateAmount, setDonateAmount] = useState("");
   const [hasSubscribed, setHasSubscribed] = useState(false);
+  const [feedbackPrice, setFeedbackPrice] = useState(null);
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
   const [feedbackEmail, setFeedbackEmail] = useState("");
   const [feedbackMessage, setFeedbackMessage] = useState("");
@@ -207,6 +208,7 @@ function App() {
 
     setPrice(Number(await cont.price()));
     setWhitelistPrice(Number(await cont.whitelistPrice()));
+    setFeedbackPrice(Number(await cont.feedbackPrice()));
 
     if (cont) {
   const whitelisted = await cont.whitelistedReferrers(acc);
