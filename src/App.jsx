@@ -463,7 +463,7 @@ const handleSendFeedback = async () => {
   onClick={handlePayFeedback}
   style={{ marginTop: 10 }}
 >
-  Contact us ({contract ? (await contract.feedbackPrice() / 1e6) : "1"} USDC)
+  Contact us ({feedbackPrice ? (feedbackPrice / 1e6).toFixed(0) : "..."} USDC)
 </Button>
 
 {showFeedbackForm && (
