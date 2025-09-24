@@ -29,6 +29,7 @@ import {
   TextField,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import emailjs from "@emailjs/browser";
 
 // === CSV Data ===
 const RAW_URL =
@@ -86,10 +87,14 @@ function App() {
   const [price, setPrice] = useState(null);
   const [whitelistPrice, setWhitelistPrice] = useState(null);
   const [subscriptionActive, setSubscriptionActive] = useState(false);
+  const [hasWhitelist, setHasWhitelist] = useState(false);
   const [showTwoMonths, setShowTwoMonths] = useState(false);
   const [referrer, setReferrer] = useState("");
   const [donateAmount, setDonateAmount] = useState("");
   const [hasSubscribed, setHasSubscribed] = useState(false);
+  const [showFeedbackForm, setShowFeedbackForm] = useState(false);
+  const [feedbackEmail, setFeedbackEmail] = useState("");
+  const [feedbackMessage, setFeedbackMessage] = useState("");
   const [debug, setDebug] = useState([]);
 
   const log = (msg) => {
@@ -198,6 +203,12 @@ function App() {
     setPrice(Number(await cont.price()));
     setWhitelistPrice(Number(await cont.whitelistPrice()));
 
+    if (cont) {
+  const whitelisted = await cont.whitelistedReferrers(acc);
+  setHasWhitelist(whitelisted);
+}
+
+
     // === Fetch nextEndTime and listen for updates ===
     try {
       const end = await cont.nextEndTime();
@@ -205,11 +216,6 @@ function App() {
     } catch (e) {
       console.log("Error fetching nextEndTime:", e);
     }
-
-    cont.on("NextEndTimeUpdated", (newEndTime) => {
-      setNextEndTimeState(Number(newEndTime));
-      log(`STEP: nextEndTime updated to ${Number(newEndTime)} by owner`);
-    });
 
     checkSubscription(cont, acc);
   };
@@ -231,23 +237,26 @@ function App() {
   };
 
   // === Buy Whitelist ===
-  const handleBuyWhitelist = async () => {
+const handleBuyWhitelist = async () => {
   if (!contract || !provider) return alert("Connect wallet first!");
 
   try {
     const signer = await provider.getSigner();
     const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-    const wlPrice = await contract.whitelistPrice();
+    const wlPrice = await contract.whitelistPrice(); // BigInt
+    const allowance = await usdc.allowance(account, CONTRACT_ADDRESS); // BigInt
 
-    const allowance = await usdc.allowance(account, CONTRACT_ADDRESS);
     if (allowance < wlPrice) {
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, wlPrice);
       await approveTx.wait();
+      alert("✅ Approve submitted. Confirm buy whitelist in your wallet."); 
     }
 
     const tx = await contract.connect(signer).buyWhitelist();
     await tx.wait();
+    //alert("✅ BuyWhitelist tx submitted.");
+
     alert("✅ You are now whitelisted!");
   } catch (e) {
     log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
@@ -255,91 +264,126 @@ function App() {
   }
 };
 
-  // === Set nextEndTime (only owner) ===
-  const setNextEndTime = async () => {
-    if (!contract || !provider) return;
-    const signer = await provider.getSigner();
-    const acc = await signer.getAddress();
-
-    if (acc.toLowerCase() === OWNER_ADDRESS.toLowerCase()) {
-      const endTime = BigInt(
-        Math.floor(dayjs().add(1, "month").endOf("month").valueOf() / 1000)
-      );
-      const tx = await contract.connect(signer).setNextEndTime(endTime);
-      await tx.wait();
-      log("STEP: nextEndTime set by owner ✅");
-    } else {
-      log("Only owner can set nextEndTime");
-    }
-  };
-
   // === Subscribe ===
-  const handleSubscribe = async () => {
-    if (!contract || !provider) return alert("Connect wallet first!");
-    try {
-      const signer = await provider.getSigner();
-      const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
+const handleSubscribe = async () => {
+  if (!contract || !provider) return alert("Connect wallet first!");
+  try {
+    const signer = await provider.getSigner();
+    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-      const priceToPay = await contract.price();
-      log("STEP1: priceToPay = " + priceToPay.toString());
+    const priceToPay = await contract.price(); // BigInt
+    const allowance = await usdc.allowance(account, CONTRACT_ADDRESS); // BigInt
 
-      const allowance = await usdc.allowance(account, CONTRACT_ADDRESS);
-      log("STEP2: allowance = " + allowance.toString());
-
-      if (allowance < priceToPay) {
-        log("Sending approve tx...");
-        const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay);
-        await approveTx.wait();
-      }
-
-      const bal = await usdc.balanceOf(account);
-      if (bal < priceToPay) return alert("Insufficient USDC balance");
-
-      let refAddr = ZeroAddress;
-      if (referrer && referrer.trim() !== "") {
-        try {
-          const candidate = getAddress(referrer.trim());
-          if (candidate.toLowerCase() !== account.toLowerCase())
-            refAddr = candidate;
-        } catch {
-          alert("Invalid referrer address");
-          return;
-        }
-      }
-
-      const tx = await contract.connect(signer).subscribe(refAddr);
-      await tx.wait();
-      log("Subscription confirmed ✅");
-
-      await checkSubscription(contract, account);
-      alert("✅ Subscription successful!");
-    } catch (e) {
-      log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
-      alert("❌ Subscription failed, see Debug log");
+    if (allowance < priceToPay) {
+      const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay);
+      await approveTx.wait();
+      alert("✅ Approve submitted. Confirm subscription in your wallet.");
     }
-  };
+
+    const bal = await usdc.balanceOf(account);
+    if (bal < priceToPay) return alert("Insufficient USDC balance");
+
+    let refAddr = ZeroAddress;
+    if (referrer && referrer.trim() !== "") {
+      try {
+        const candidate = getAddress(referrer.trim());
+        if (candidate.toLowerCase() !== account.toLowerCase()) refAddr = candidate;
+      } catch {
+        return alert("Invalid referrer address");
+      }
+    }
+
+    const tx = await contract.connect(signer).subscribe(refAddr);
+    await tx.wait();
+    //alert("✅ Subscribe tx submitted.");
+
+    await checkSubscription(contract, account);
+    alert("✅ Subscription successful!");
+  } catch (e) {
+    log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
+    alert("❌ Subscription failed, see Debug log");
+  }
+};
 
   // === Donate ===
-  const handleDonate = async () => {
-    if (!contract || !provider) return;
-    if (!donateAmount) return alert("Enter amount");
+const handleDonate = async () => {
+  if (!contract || !provider) return alert("Connect wallet first!");
+  if (!donateAmount) return alert("Enter amount");
 
-    try {
-      const signer = await provider.getSigner();
-      const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
+  try {
+    const signer = await provider.getSigner();
+    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-      const amount = parseUnits(donateAmount, 6);
+    const amount = parseUnits(donateAmount, 6); // BigInt
+    const allowance = await usdc.allowance(account, CONTRACT_ADDRESS); // BigInt
+
+    // Проверка allowance
+    if (allowance < amount) {
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, amount);
-      await approveTx.wait();
-
-      const tx = await contract.connect(signer).donate(amount);
-      await tx.wait();
-      alert("✅ Donation sent to contract!");
-    } catch (e) {
-      log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
-      alert("❌ Donation failed, see Debug log");
+      await approveTx.wait(); // ждём завершения approve
+      alert("✅ Approve submitted. Confirm donation in your wallet.");
     }
-  };
+
+    // Сама транзакция donate
+    const tx = await contract.connect(signer).donate(amount);
+    await tx.wait();
+    //alert("✅ Donation tx submitted.");
+
+    alert("✅ Donation sent to contract!");
+  } catch (e) {
+    log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
+    alert("❌ Donation failed, see Debug log");
+  }
+};
+
+// === FeedBack ===
+const handlePayFeedback = async () => {
+  if (!contract || !provider) return alert("Connect wallet first!");
+  try {
+    const signer = await provider.getSigner();
+    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
+    const price = await contract.feedbackPrice();
+
+    const allowance = await usdc.allowance(account, CONTRACT_ADDRESS);
+    if (allowance < price) {
+      const approveTx = await usdc.approve(CONTRACT_ADDRESS, price);
+      await approveTx.wait();
+    }
+
+    const tx = await contract.connect(signer).payFeedback();
+    await tx.wait();
+
+    setShowFeedbackForm(true); // показать форму после успешной оплаты
+  } catch (e) {
+    log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
+    alert("❌ Payment for feedback failed");
+  }
+};
+
+// === Send FeedBack ===
+const handleSendFeedback = async () => {
+  if (!feedbackEmail || !feedbackMessage) return alert("Fill all fields");
+
+  try {
+    await emailjs.send(
+      "YOUR_SERVICE_ID",
+      "YOUR_TEMPLATE_ID",
+      {
+        user_email: feedbackEmail,
+        message: feedbackMessage,
+      },
+      "YOUR_PUBLIC_KEY"
+    );
+
+    alert("✅ Message has been send!");
+    setFeedbackEmail("");
+    setFeedbackMessage("");
+    setShowFeedbackForm(false);
+  } catch (e) {
+    alert("❌ Error, message hasn't send");
+    console.error(e);
+  }
+};
 
   if (!data.length) return <div>Loading...</div>;
 
@@ -356,6 +400,8 @@ function App() {
   return (
     <div style={{ padding: 20 }}>
       <h2>BTC Forecast Chart</h2>
+
+      {/* === Wallet section === */}
       {!account ? (
         <Button variant="contained" onClick={connectWallet}>
           Connect Wallet
@@ -390,108 +436,162 @@ function App() {
                   {new Date(nextEndTime * 1000).toLocaleDateString()}
                 </p>
               )}
+              </div>
+      )}
 
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={handleBuyWhitelist}
-                style={{ marginTop: 10 }}
-              >
-                Buy Whitelist (
-                {whitelistPrice ? (whitelistPrice / 1e6).toFixed(2) : "..."} USDC)
-              </Button>
+              {!hasWhitelist && (
+  <Button
+    variant="contained"
+    color="secondary"
+    onClick={handleBuyWhitelist}
+    style={{ marginTop: 10 }}
+  >
+    Buy Whitelist ({whitelistPrice ? (whitelistPrice / 1e6).toFixed(0) : "..." } USDC)
+  </Button>
+)}
+
+
+<Button
+  variant="contained"
+  color="info"
+  onClick={handlePayFeedback}
+  style={{ marginTop: 10 }}
+>
+  Contact us ({contract ? (await contract.feedbackPrice() / 1e6) : "1"} USDC)
+</Button>
+
+{showFeedbackForm && (
+  <div style={{ marginTop: 20, border: "1px solid #ccc", padding: 10, borderRadius: 8 }}>
+    <h4>Обратная связь</h4>
+    <TextField
+      label="Ваш email"
+      value={feedbackEmail}
+      onChange={(e) => setFeedbackEmail(e.target.value)}
+      fullWidth
+      margin="dense"
+    />
+    <TextField
+      label="Сообщение"
+      value={feedbackMessage}
+      onChange={(e) => setFeedbackMessage(e.target.value)}
+      fullWidth
+      multiline
+      rows={4}
+      margin="dense"
+    />
+    <Button
+      variant="contained"
+      color="success"
+      style={{ marginTop: 10 }}
+      onClick={handleSendFeedback}
+    >
+      Отправить
+    </Button>
+  </div>
+)}
+
             </div>
           )}
+        
 
-          <ResponsiveContainer width="100%" height={500}>
-            <LineChart data={filteredData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis
-                dataKey="date"
-                tickFormatter={(d) => dayjs(d).format("MMM D")}
-              />
-              <YAxis domain={[100000, 160000]} />
-              <Tooltip />
-              <Legend />
-              <Line
-                type="monotone"
-                dataKey="BTC"
-                stroke="#f7931a"
-                dot={false}
-                strokeWidth={3}
-              />
-              <Line
-                type="monotone"
-                dataKey="moving_average"
-                stroke="#00c69e"
-                dot={false}
-                strokeDasharray="5 5"
-                strokeWidth={2}
-              />
-              <Line
-                type="monotone"
-                dataKey="predict"
-                stroke="#0000ff"
-                dot={false}
-                strokeWidth={3}
-              />
-              {Object.keys(data[0])
-                .filter((k) => k.startsWith("p_"))
-                .map((key, idx) => (
-                  <Line
-                    key={key}
-                    type="monotone"
-                    dataKey={key}
-                    stroke={COLORS[idx % COLORS.length]}
-                    dot={false}
-                  />
-                ))}
-            </LineChart>
-          </ResponsiveContainer>
-
-          <div style={{ marginTop: 10 }}>
-            <strong>Accuracy last 30 days:</strong> {mape}%
-          </div>
-
-          <div style={{ marginTop: 20 }}>
-            <h3>Donate</h3>
-            <TextField
-              label="Amount (USDC)"
-              value={donateAmount}
-              onChange={(e) => setDonateAmount(e.target.value)}
-              fullWidth
-              margin="dense"
+      {/* === Chart (вынесен из блока кошелька, теперь всегда виден) === */}
+      <div style={{ marginTop: 20 }}>
+        <small>
+          {subscriptionActive
+            ? "Range: Current + Next month"
+            : "Range: Current month"}
+        </small>
+        <ResponsiveContainer width="100%" height={500}>
+          <LineChart data={filteredData}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis
+              dataKey="date"
+              tickFormatter={(d) => dayjs(d).format("MMM D")}
             />
-            <Button variant="contained" color="secondary" onClick={handleDonate}>
-              Donate
-            </Button>
-          </div>
+            <YAxis domain={[100000, 160000]} />
+            <Tooltip />
+            <Legend />
+            <Line
+              type="monotone"
+              dataKey="BTC"
+              stroke="#f7931a"
+              dot={false}
+              strokeWidth={3}
+            />
+            <Line
+              type="monotone"
+              dataKey="moving_average"
+              stroke="#00c69e"
+              dot={false}
+              strokeDasharray="5 5"
+              strokeWidth={2}
+            />
+            <Line
+              type="monotone"
+              dataKey="predict"
+              stroke="#0000ff"
+              dot={false}
+              strokeWidth={3}
+            />
+            {Object.keys(data[0])
+              .filter((k) => k.startsWith("p_"))
+              .map((key, idx) => (
+                <Line
+                  key={key}
+                  type="monotone"
+                  dataKey={key}
+                  stroke={COLORS[idx % COLORS.length]}
+                  dot={false}
+                />
+              ))}
+          </LineChart>
+        </ResponsiveContainer>
+        <div style={{ marginTop: 10 }}>
+          <strong>Accuracy last 30 days:</strong> {mape}%
+        </div>
+      </div>
 
-          <Accordion style={{ marginTop: 20 }}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography>About</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                The project predicts BTC values with an ensemble of AI models.
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-
-          <Accordion style={{ marginTop: 10 }}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography>How it works</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                Shows BTC, moving average, predictions, and error metrics
-                (MAE/MAPE).
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
+      {/* === Donate (оставляем только для подключённого кошелька) === */}
+      {account && (
+        <div style={{ marginTop: 20 }}>
+          <h3>Donate</h3>
+          <TextField
+            label="Amount (USDC)"
+            value={donateAmount}
+            onChange={(e) => setDonateAmount(e.target.value)}
+            fullWidth
+            margin="dense"
+          />
+          <Button variant="contained" color="secondary" onClick={handleDonate}>
+            Donate
+          </Button>
         </div>
       )}
 
+      {/* === Accordions (тоже вынесены, теперь видны всегда) === */}
+      <Accordion style={{ marginTop: 20 }}>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography>About</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            The project predicts BTC values with an ensemble of AI models.
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion style={{ marginTop: 10 }}>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography>How it works</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            Shows BTC, moving average, predictions, and error metrics (MAE/MAPE).
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+
+      {/* === Debug log (всегда виден) === */}
       <div
         style={{
           marginTop: 20,
