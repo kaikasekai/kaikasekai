@@ -81,6 +81,14 @@ const USDC_ABI = [
   "function transferFrom(address sender, address recipient, uint256 amount) returns (bool)",
 ];
 
+// === NFT Config ===
+const NFT_ADDRESS = "0xYourNFTContractAddress";
+const NFT_ABI = [
+  "function tokenURI(uint256 tokenId) view returns (string)",
+  "function totalSupply() view returns (uint256)" // если контракт поддерживает
+];
+
+
 function App() {
   const [data, setData] = useState([]);
   const [mae, setMae] = useState(null);
@@ -102,6 +110,8 @@ function App() {
   const [feedbackEmail, setFeedbackEmail] = useState("");
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const [processing, setProcessing] = useState(false); // блокировка повторных кликов
+  const [nftContract, setNftContract] = useState(null);
+  const [proofs, setProofs] = useState([]); // массив NFT-шек
   const [debug, setDebug] = useState([]);
 
   const log = (msg) => {
@@ -206,6 +216,11 @@ function App() {
 
     const cont = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
     setContract(cont);
+
+    const nftCont = new Contract(NFT_ADDRESS, NFT_ABI, signer);
+    setNftContract(nftCont);
+
+    await loadProofs();
 
     setPrice(Number(await cont.price()));
     setWhitelistPrice(Number(await cont.whitelistPrice()));
@@ -423,6 +438,50 @@ const handleSendFeedback = async () => {
   }
 };
 
+  // === Proofs as NFT ===
+  const loadProofs = async () => {
+  if (!nftContract || !provider) return;
+
+  try {
+    let total = 5; // по умолчанию
+    try {
+      total = Number(await nftContract.totalSupply());
+    } catch (e) {
+      log("⚠️ totalSupply не поддерживается, грузим 5 штук");
+    }
+
+    const items = [];
+
+    for (let i = 0; i < total; i++) {
+      let uri = await nftContract.tokenURI(i);
+      if (uri.startsWith("ipfs://")) uri = "https://ipfs.io/ipfs/" + uri.slice(7);
+
+      const res = await fetch(uri);
+      const metadata = await res.json();
+
+      let imgUrl = metadata.image;
+      if (imgUrl.startsWith("ipfs://")) imgUrl = "https://ipfs.io/ipfs/" + imgUrl.slice(7);
+
+      // Получаем Transfer событие для этого tokenId
+      const filter = nftContract.filters.Transfer(ZeroAddress, null, i);
+      const events = await nftContract.queryFilter(filter, 0, "latest");
+      const mintTxHash = events.length ? events[0].transactionHash : null;
+
+      items.push({
+        id: i,
+        name: metadata.name,
+        description: metadata.description,
+        image: imgUrl,
+        mintTxHash,
+      });
+    }
+
+    setProofs(items);
+  } catch (e) {
+    log("❌ Ошибка загрузки Proofs: " + (e.message || e));
+  }
+};
+
   if (!data.length) return <div>Loading...</div>;
 
   const today = new Date();
@@ -500,16 +559,16 @@ const handleSendFeedback = async () => {
 
 {showFeedbackForm && (
   <div style={{ marginTop: 20, border: "1px solid #ccc", padding: 10, borderRadius: 8 }}>
-    <h4>Обратная связь</h4>
+    <h4>FeedBack</h4>
     <TextField
-      label="Ваш email"
+      label="Your email"
       value={feedbackEmail}
       onChange={(e) => setFeedbackEmail(e.target.value)}
       fullWidth
       margin="dense"
     />
     <TextField
-      label="Сообщение"
+      label="Message"
       value={feedbackMessage}
       onChange={(e) => setFeedbackMessage(e.target.value)}
       fullWidth
@@ -523,7 +582,7 @@ const handleSendFeedback = async () => {
       style={{ marginTop: 10 }}
       onClick={handleSendFeedback}
     >
-      Отправить
+      Send
     </Button>
   </div>
 )}
@@ -628,6 +687,51 @@ const handleSendFeedback = async () => {
           </Typography>
         </AccordionDetails>
       </Accordion>
+
+      <Accordion style={{ marginTop: 10 }}>
+  <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+    <Typography>Proofs</Typography>
+  </AccordionSummary>
+  <AccordionDetails>
+    {proofs.length === 0 ? (
+      <Typography>No proofs yet.</Typography>
+    ) : (
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 20 }}>
+        {proofs.map((nft) => (
+          <div
+  key={nft.id}
+  style={{
+    width: 200,
+    border: "1px solid #444",
+    borderRadius: 8,
+    padding: 10,
+    background: "#222",
+  }}
+>
+  <img
+    src={nft.image}
+    alt={nft.name}
+    style={{ width: "100%", borderRadius: 6 }}
+  />
+  <h4 style={{ margin: "10px 0 5px" }}>{nft.name}</h4>
+  <p style={{ fontSize: 12, color: "#aaa" }}>{nft.description}</p>
+
+  {nft.mintTxHash && (
+    <a
+      href={`https://polygonscan.com/tx/${nft.mintTxHash}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{ fontSize: 12, color: "#0af", display: "block", marginTop: 5 }}
+    >
+      🔍 View on Polygonscan
+    </a>
+  )}
+</div>
+        ))}
+      </div>
+    )}
+  </AccordionDetails>
+</Accordion>
 
       {/* === Debug log (всегда виден) === */}
       <div
