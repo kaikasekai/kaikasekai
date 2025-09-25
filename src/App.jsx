@@ -466,10 +466,22 @@ const handleSendFeedback = async () => {
       let imgUrl = metadata.image;
       if (imgUrl.startsWith("ipfs://")) imgUrl = "https://ipfs.io/ipfs/" + imgUrl.slice(7);
 
-      // Получаем Transfer событие для этого tokenId
-      const filter = nftContract.filters.Transfer(ZeroAddress, null, i);
-      const events = await nftContract.queryFilter(filter, 0, "latest");
-      const mintTxHash = events.length ? events[0].transactionHash : null;
+      // ✅ правильная обработка событий в ethers v6
+      let mintTxHash = null;
+      try {
+        const transferEvent = nftContract.getEvent("Transfer");
+        const events = await nftContract.queryFilter(transferEvent, 0, "latest");
+
+        const mintEvent = events.find(
+          (e) =>
+            e.args.from === ZeroAddress &&
+            e.args.tokenId.toString() === i.toString()
+        );
+
+        mintTxHash = mintEvent ? mintEvent.transactionHash : null;
+      } catch (err) {
+        log("⚠️ Error event Transfer: " + (err.message || err));
+      }
 
       items.push({
         id: i,
@@ -482,7 +494,7 @@ const handleSendFeedback = async () => {
 
     setProofs(items);
   } catch (e) {
-    log("❌ Ошибка загрузки Proofs: " + (e.message || e));
+    log("❌ Error loading Proofs: " + (e.message || e));
   }
 };
 
