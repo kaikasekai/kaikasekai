@@ -8,6 +8,7 @@ import {
   getAddress,
   parseUnits,
   Interface,
+  zeroPad,
 } from "ethers";
 import EthereumProvider from "@walletconnect/ethereum-provider";
 import {
@@ -451,10 +452,11 @@ const loadProofs = async () => {
     const total = Number(await nftContract.totalSupply());
     const items = [];
 
-    // создаём интерфейс вручную из ABI
+    // Создаем интерфейс вручную
     const iface = new Interface(NFT_ABI);
-    const transferEvent = iface.getEvent("Transfer");
-    const topic = iface.getEventTopic(transferEvent);
+
+    // В ethers v6: topic = id события
+    const topic = iface.getEvent("Transfer").id;
 
     for (let i = 1; i <= total; i++) {
       let uri = await nftContract.tokenURI(i);
@@ -466,15 +468,15 @@ const loadProofs = async () => {
       let imgUrl = metadata.image;
       if (imgUrl.startsWith("ipfs://")) imgUrl = "https://ipfs.io/ipfs/" + imgUrl.slice(7);
 
-      // ищем Mint событие Transfer(from=0x0)
+      // Ищем Mint событие Transfer (from = ZeroAddress)
       const logs = await provider.getLogs({
-        address: nftContract.target, // адрес контракта
+        address: nftContract.target,
         fromBlock: 0,
         toBlock: "latest",
         topics: [
-          topic,
-          "0x" + "0".repeat(64), // from = ZeroAddress
-          null,                  // любой to
+          topic,                       // событие Transfer
+          "0x" + "0".repeat(64),       // from = zero address
+          null,                        // to = любой
           "0x" + i.toString(16).padStart(64, "0"), // tokenId
         ],
       });
