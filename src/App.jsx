@@ -158,6 +158,12 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+  if (nftContract) {
+    loadProofs(); // без аргумента, потому что внутри уже используешь nftContract
+  }
+}, [nftContract]);
+
   // === Wallet connection ===
   const connectWallet = async () => {
     let prov;
@@ -219,8 +225,6 @@ function App() {
 
     const nftCont = new Contract(NFT_ADDRESS, NFT_ABI, signer);
     setNftContract(nftCont);
-
-    await loadProofs();
 
     setPrice(Number(await cont.price()));
     setWhitelistPrice(Number(await cont.whitelistPrice()));
@@ -452,7 +456,7 @@ const handleSendFeedback = async () => {
 
     const items = [];
 
-    for (let i = 0; i < total; i++) {
+    for (let i = 1; i < total; i++) {
       let uri = await nftContract.tokenURI(i);
       if (uri.startsWith("ipfs://")) uri = "https://ipfs.io/ipfs/" + uri.slice(7);
 
