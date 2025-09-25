@@ -87,7 +87,8 @@ const USDC_ABI = [
 const NFT_ADDRESS = "0x0c11C503EDEa18e57a5Ce67a2D8eE421d61dB41d";
 const NFT_ABI = [
   "function tokenURI(uint256 tokenId) view returns (string)",
-  "function totalSupply() view returns (uint256)"
+  "function totalSupply() view returns (uint256)",
+  "event Transfer(address indexed from, address indexed to, uint256 indexed tokenId)"
 ];
 
 
