@@ -7,8 +7,6 @@ import {
   ZeroAddress,
   getAddress,
   parseUnits,
-  Interface,
-  zeroPad,
 } from "ethers";
 import EthereumProvider from "@walletconnect/ethereum-provider";
 import {
@@ -87,8 +85,7 @@ const USDC_ABI = [
 const NFT_ADDRESS = "0x0c11C503EDEa18e57a5Ce67a2D8eE421d61dB41d";
 const NFT_ABI = [
   "function tokenURI(uint256 tokenId) view returns (string)",
-  "function totalSupply() view returns (uint256)",
-  "event Transfer(address indexed from, address indexed to, uint256 indexed tokenId)"
+  "function totalSupply() view returns (uint256)"
 ];
 
 
@@ -447,49 +444,34 @@ const handleSendFeedback = async () => {
 
   // === Proofs as NFT ===// === Proofs as NFT ===
 const loadProofs = async () => {
-  if (!nftContract || !provider) return;
+  if (!nftContract) return;
 
   try {
     const total = Number(await nftContract.totalSupply());
     const items = [];
 
-    // Создаем интерфейс вручную
-    const iface = new Interface(NFT_ABI);
+    // Берём только первые 6 NFT, если их больше
+    const count = Math.min(total, 6);
 
-    // В ethers v6: topic = id события
-    const topic = iface.getEvent("Transfer").id;
-
-    for (let i = 1; i <= total; i++) {
+    for (let i = 1; i <= count; i++) {
       let uri = await nftContract.tokenURI(i);
-      if (uri.startsWith("ipfs://")) uri = "https://ipfs.io/ipfs/" + uri.slice(7);
+      if (uri.startsWith("ipfs://")) {
+        uri = "https://ipfs.io/ipfs/" + uri.slice(7);
+      }
 
       const res = await fetch(uri);
       const metadata = await res.json();
 
       let imgUrl = metadata.image;
-      if (imgUrl.startsWith("ipfs://")) imgUrl = "https://ipfs.io/ipfs/" + imgUrl.slice(7);
-
-      // Ищем Mint событие Transfer (from = ZeroAddress)
-      const logs = await provider.getLogs({
-        address: nftContract.target,
-        fromBlock: 0,
-        toBlock: "latest",
-        topics: [
-          topic,                       // событие Transfer
-          "0x" + "0".repeat(64),       // from = zero address
-          null,                        // to = любой
-          "0x" + i.toString(16).padStart(64, "0"), // tokenId
-        ],
-      });
-
-      const mintTxHash = logs.length ? logs[0].transactionHash : null;
+      if (imgUrl.startsWith("ipfs://")) {
+        imgUrl = "https://ipfs.io/ipfs/" + imgUrl.slice(7);
+      }
 
       items.push({
         id: i,
         name: metadata.name,
         description: metadata.description,
         image: imgUrl,
-        mintTxHash,
       });
     }
 
