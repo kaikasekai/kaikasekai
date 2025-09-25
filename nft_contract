@@ -1,0 +1,286 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+// ==========================================================
+// =============== OpenZeppelin: Context ====================
+// ==========================================================
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+    function _msgData() internal view virtual returns (bytes calldata) {
+        return msg.data;
+    }
+}
+
+// ==========================================================
+// =============== OpenZeppelin: Ownable ====================
+// ==========================================================
+abstract contract Ownable is Context {
+    address private _owner;
+
+    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+
+    constructor(address initialOwner) {
+        require(initialOwner != address(0), "Ownable: new owner is zero");
+        _transferOwnership(initialOwner);
+    }
+
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+
+    function transferOwnership(address newOwner) public virtual onlyOwner {
+        require(newOwner != address(0), "Ownable: new owner is zero");
+        _transferOwnership(newOwner);
+    }
+
+    function _transferOwnership(address newOwner) internal virtual {
+        address oldOwner = _owner;
+        _owner = newOwner;
+        emit OwnershipTransferred(oldOwner, newOwner);
+    }
+}
+
+// ==========================================================
+// =============== OpenZeppelin: ERC165 =====================
+// ==========================================================
+interface IERC165 {
+    function supportsInterface(bytes4 interfaceId) external view returns (bool);
+}
+abstract contract ERC165 is IERC165 {
+    function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
+        return interfaceId == type(IERC165).interfaceId;
+    }
+}
+
+// ==========================================================
+// =============== OpenZeppelin: IERC721 ====================
+// ==========================================================
+interface IERC721 is IERC165 {
+    event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
+    event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);
+    event ApprovalForAll(address indexed owner, address indexed operator, bool approved);
+
+    function balanceOf(address owner) external view returns (uint256 balance);
+    function ownerOf(uint256 tokenId) external view returns (address owner);
+
+    function safeTransferFrom(address from, address to, uint256 tokenId) external;
+    function transferFrom(address from, address to, uint256 tokenId) external;
+
+    function approve(address to, uint256 tokenId) external;
+    function getApproved(uint256 tokenId) external view returns (address operator);
+
+    function setApprovalForAll(address operator, bool _approved) external;
+    function isApprovedForAll(address owner, address operator) external view returns (bool);
+
+    function safeTransferFrom(address from, address to, uint256 tokenId, bytes calldata data) external;
+}
+
+// ==========================================================
+// =============== OpenZeppelin: IERC721Metadata ============
+// ==========================================================
+interface IERC721Metadata is IERC721 {
+    function name() external view returns (string memory);
+    function symbol() external view returns (string memory);
+    function tokenURI(uint256 tokenId) external view returns (string memory);
+}
+
+// ==========================================================
+// =============== OpenZeppelin: IERC721Receiver ============
+// ==========================================================
+interface IERC721Receiver {
+    function onERC721Received(address operator, address from, uint256 tokenId, bytes calldata data) external returns (bytes4);
+}
+
+// ==========================================================
+// =============== OpenZeppelin: Strings ====================
+// ==========================================================
+library Strings {
+    bytes16 private constant _HEX_SYMBOLS = "0123456789abcdef";
+
+    function toString(uint256 value) internal pure returns (string memory) {
+        if (value == 0) return "0";
+        uint256 temp = value;
+        uint256 digits;
+        while (temp != 0) {
+            digits++;
+            temp /= 10;
+        }
+        bytes memory buffer = new bytes(digits);
+        while (value != 0) {
+            digits -= 1;
+            buffer[digits] = bytes1(uint8(48 + uint256(value % 10)));
+            value /= 10;
+        }
+        return string(buffer);
+    }
+}
+
+// ==========================================================
+// =============== OpenZeppelin: Address ====================
+// ==========================================================
+library Address {
+    function isContract(address account) internal view returns (bool) {
+        return account.code.length > 0;
+    }
+}
+
+// ==========================================================
+// =============== OpenZeppelin: ERC721 =====================
+// ==========================================================
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+    using Address for address;
+    using Strings for uint256;
+
+    string private _name;
+    string private _symbol;
+
+    mapping(uint256 => address) private _owners;
+    mapping(address => uint256) private _balances;
+    mapping(uint256 => address) private _tokenApprovals;
+    mapping(address => mapping(address => bool)) private _operatorApprovals;
+
+    constructor(string memory name_, string memory symbol_) {
+        _name = name_;
+        _symbol = symbol_;
+    }
+
+    function supportsInterface(bytes4 interfaceId) public view virtual override(ERC165, IERC165) returns (bool) {
+        return interfaceId == type(IERC721).interfaceId
+            || interfaceId == type(IERC721Metadata).interfaceId
+            || super.supportsInterface(interfaceId);
+    }
+
+    function balanceOf(address owner_) public view override returns (uint256) {
+        require(owner_ != address(0), "ERC721: zero address");
+        return _balances[owner_];
+    }
+
+    function ownerOf(uint256 tokenId) public view override returns (address) {
+        address owner_ = _owners[tokenId];
+        require(owner_ != address(0), "ERC721: nonexistent token");
+        return owner_;
+    }
+
+    function name() public view override returns (string memory) {
+        return _name;
+    }
+
+    function symbol() public view override returns (string memory) {
+        return _symbol;
+    }
+
+    function tokenURI(uint256) public view virtual override returns (string memory) {
+        return "";
+    }
+
+    function approve(address to, uint256 tokenId) public override {
+        address owner_ = ownerOf(tokenId);
+        require(to != owner_, "ERC721: approval to current owner");
+        require(msg.sender == owner_ || isApprovedForAll(owner_, msg.sender), "ERC721: not authorized");
+        _approve(to, tokenId);
+    }
+
+    function getApproved(uint256 tokenId) public view override returns (address) {
+        require(_owners[tokenId] != address(0), "ERC721: nonexistent token");
+        return _tokenApprovals[tokenId];
+    }
+
+    function setApprovalForAll(address operator, bool approved) public override {
+        require(operator != msg.sender, "ERC721: self approval");
+        _operatorApprovals[msg.sender][operator] = approved;
+        emit ApprovalForAll(msg.sender, operator, approved);
+    }
+
+    function isApprovedForAll(address owner_, address operator) public view override returns (bool) {
+        return _operatorApprovals[owner_][operator];
+    }
+
+    function transferFrom(address from, address to, uint256 tokenId) public override {
+        require(ownerOf(tokenId) == from, "ERC721: wrong owner");
+        require(to != address(0), "ERC721: zero address");
+        require(msg.sender == from || msg.sender == getApproved(tokenId) || isApprovedForAll(from, msg.sender), "ERC721: not authorized");
+
+        _approve(address(0), tokenId);
+
+        _balances[from] -= 1;
+        _balances[to] += 1;
+        _owners[tokenId] = to;
+
+        emit Transfer(from, to, tokenId);
+    }
+
+    function safeTransferFrom(address from, address to, uint256 tokenId) external override {
+        transferFrom(from, to, tokenId);
+        require(!to.isContract(), "ERC721: transfer to contract not supported");
+    }
+
+    function safeTransferFrom(address from, address to, uint256 tokenId, bytes calldata) external override {
+        transferFrom(from, to, tokenId);
+        require(!to.isContract(), "ERC721: transfer to contract not supported");
+    }
+
+    function _safeMint(address to, uint256 tokenId) internal virtual {
+        _mint(to, tokenId);
+    }
+
+    function _mint(address to, uint256 tokenId) internal virtual {
+        require(to != address(0), "ERC721: mint to zero");
+        require(_owners[tokenId] == address(0), "ERC721: already minted");
+
+        _balances[to] += 1;
+        _owners[tokenId] = to;
+        emit Transfer(address(0), to, tokenId);
+    }
+
+    function _approve(address to, uint256 tokenId) internal {
+        _tokenApprovals[tokenId] = to;
+        emit Approval(ownerOf(tokenId), to, tokenId);
+    }
+}
+
+// ==========================================================
+// =============== OpenZeppelin: ERC721URIStorage ===========
+// ==========================================================
+abstract contract ERC721URIStorage is ERC721 {
+    mapping(uint256 => string) private _tokenURIs;
+
+    constructor(string memory name_, string memory symbol_) ERC721(name_, symbol_) {}
+
+    function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
+        require(ownerOf(tokenId) != address(0), "ERC721URIStorage: nonexistent token");
+        return _tokenURIs[tokenId];
+    }
+
+    function _setTokenURI(uint256 tokenId, string memory _tokenURI) internal virtual {
+        require(ownerOf(tokenId) != address(0), "ERC721URIStorage: nonexistent token");
+        _tokenURIs[tokenId] = _tokenURI;
+    }
+}
+
+// ==========================================================
+// =============== ТВОЙ КОНТРАКТ ============================
+// ==========================================================
+contract ProofNFT is ERC721URIStorage, Ownable {
+    uint256 private _tokenIds;
+
+    constructor() ERC721URIStorage("ProofNFT", "PROOF") Ownable(msg.sender) {}
+
+    function mintProof(string memory tokenURI) external onlyOwner returns (uint256) {
+        _tokenIds += 1;
+        uint256 newId = _tokenIds;
+        _safeMint(owner(), newId);
+        _setTokenURI(newId, tokenURI);
+        return newId;
+    }
+
+    function totalSupply() external view returns (uint256) {
+        return _tokenIds;
+    }
+}
