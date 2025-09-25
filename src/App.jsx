@@ -7,6 +7,7 @@ import {
   ZeroAddress,
   getAddress,
   parseUnits,
+  JsonRpcProvider,
 } from "ethers";
 import EthereumProvider from "@walletconnect/ethereum-provider";
 import {
@@ -158,11 +159,43 @@ function App() {
     });
   }, []);
 
-  useEffect(() => {
-  if (nftContract) {
-    loadProofs(); // без аргумента, потому что внутри уже используешь nftContract
-  }
-}, [nftContract]);
+    // === Proofs as NFT ===// === Proofs as NFT ===
+useEffect(() => {
+  const loadProofsWithoutWallet = async () => {
+    try {
+      const provider = new JsonRpcProvider("https://rpc-amoy.polygon.technology");
+      const nftContract = new Contract(NFT_ADDRESS, NFT_ABI, provider);
+
+      const total = Number(await nftContract.totalSupply());
+      const items = [];
+
+      const count = Math.min(total, 6);
+      for (let i = 1; i <= count; i++) {
+        let uri = await nftContract.tokenURI(i);
+        if (uri.startsWith("ipfs://")) uri = "https://ipfs.io/ipfs/" + uri.slice(7);
+        const res = await fetch(uri);
+        const metadata = await res.json();
+        let imgUrl = metadata.image.startsWith("ipfs://")
+          ? "https://ipfs.io/ipfs/" + metadata.image.slice(7)
+          : metadata.image;
+
+        items.push({
+          id: i,
+          name: metadata.name,
+          description: metadata.description,
+          image: imgUrl,
+          polygonscan: `https://amoy.polygonscan.com/token/${NFT_ADDRESS}?a=${i}`,
+        });
+      }
+
+      setProofs(items);
+    } catch (e) {
+      log("❌ Error loading Proofs: " + (e.message || e));
+    }
+  };
+
+  loadProofsWithoutWallet();
+}, []);
 
   // === Wallet connection ===
   const connectWallet = async () => {
@@ -439,46 +472,6 @@ const handleSendFeedback = async () => {
   } catch (e) {
     alert("❌ Error, message hasn't send");
     console.error(e);
-  }
-};
-
-  // === Proofs as NFT ===// === Proofs as NFT ===
-const loadProofs = async () => {
-  if (!nftContract) return;
-
-  try {
-    const total = Number(await nftContract.totalSupply());
-    const items = [];
-
-    // Берём только первые 6 NFT, если их больше
-    const count = Math.min(total, 6);
-
-    for (let i = 1; i <= count; i++) {
-      let uri = await nftContract.tokenURI(i);
-      if (uri.startsWith("ipfs://")) {
-        uri = "https://ipfs.io/ipfs/" + uri.slice(7);
-      }
-
-      const res = await fetch(uri);
-      const metadata = await res.json();
-
-      let imgUrl = metadata.image;
-      if (imgUrl.startsWith("ipfs://")) {
-        imgUrl = "https://ipfs.io/ipfs/" + imgUrl.slice(7);
-      }
-
-      items.push({
-        id: i,
-        name: metadata.name,
-        description: metadata.description,
-        image: imgUrl,
-        polygonscan: `https://amoy.polygonscan.com/token/${NFT_ADDRESS}?a=${i}`,
-      });
-    }
-
-    setProofs(items);
-  } catch (e) {
-    log("❌ Error loading Proofs: " + (e.message || e));
   }
 };
 
