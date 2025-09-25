@@ -442,8 +442,7 @@ const handleSendFeedback = async () => {
   }
 };
 
-  // === Proofs as NFT ===
-  // === Proofs as NFT ===
+  // === Proofs as NFT ===// === Proofs as NFT ===
 const loadProofs = async () => {
   if (!nftContract || !provider) return;
 
@@ -461,12 +460,12 @@ const loadProofs = async () => {
       let imgUrl = metadata.image;
       if (imgUrl.startsWith("ipfs://")) imgUrl = "https://ipfs.io/ipfs/" + imgUrl.slice(7);
 
-      // ✅ Новый способ искать Transfer в ethers v6
+      // ✅ Новый способ в ethers v6
       const transferEvent = nftContract.interface.getEvent("Transfer");
-      const topic = nftContract.interface.getEventTopic(transferEvent);
+      const topic = transferEvent.topicHash;
 
       const logs = await provider.getLogs({
-        address: nftContract.target,
+        address: nftContract.target, // в v6 адрес контракта лежит в .target
         fromBlock: 0,
         toBlock: "latest",
         topics: [
