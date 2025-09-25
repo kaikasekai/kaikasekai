@@ -447,13 +447,7 @@ const handleSendFeedback = async () => {
   if (!nftContract || !provider) return;
 
   try {
-    let total = 5; // по умолчанию
-    try {
-      total = Number(await nftContract.totalSupply());
-    } catch (e) {
-      log("⚠️ totalSupply не поддерживается, грузим 5 штук");
-    }
-
+    const total = Number(await nftContract.totalSupply());
     const items = [];
 
     for (let i = 1; i < total; i++) {
@@ -466,22 +460,13 @@ const handleSendFeedback = async () => {
       let imgUrl = metadata.image;
       if (imgUrl.startsWith("ipfs://")) imgUrl = "https://ipfs.io/ipfs/" + imgUrl.slice(7);
 
-      // ✅ правильная обработка событий в ethers v6
-      let mintTxHash = null;
-      try {
-        const transferEvent = nftContract.getEvent("Transfer");
-        const events = await nftContract.queryFilter(transferEvent, 0, "latest");
-
-        const mintEvent = events.find(
-          (e) =>
-            e.args.from === ZeroAddress &&
-            e.args.tokenId.toString() === i.toString()
-        );
-
-        mintTxHash = mintEvent ? mintEvent.transactionHash : null;
-      } catch (err) {
-        log("⚠️ Error event Transfer: " + (err.message || err));
-      }
+      // 📌 Ищем событие Transfer для этого токена (от 0x0, то есть mint)
+      const eventLogs = await nftContract.queryFilter(
+        nftContract.filters["Transfer(address,address,uint256)"](ZeroAddress, null, i),
+        0,
+        "latest"
+      );
+      const mintTxHash = eventLogs.length ? eventLogs[0].transactionHash : null;
 
       items.push({
         id: i,
