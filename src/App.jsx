@@ -472,6 +472,7 @@ const loadProofs = async () => {
         name: metadata.name,
         description: metadata.description,
         image: imgUrl,
+        polygonscan: `https://amoy.polygonscan.com/token/${NFT_ADDRESS}?a=${i}`,
       });
     }
 
@@ -715,16 +716,16 @@ const loadProofs = async () => {
   <h4 style={{ margin: "10px 0 5px" }}>{nft.name}</h4>
   <p style={{ fontSize: 12, color: "#aaa" }}>{nft.description}</p>
 
-  {nft.mintTxHash && (
     <a
-      href={`https://amoy.polygonscan.com/tx/${nft.mintTxHash}`}
-      target="_blank"
-      rel="noopener noreferrer"
-      style={{ fontSize: 12, color: "#0af", display: "block", marginTop: 5 }}
-    >
-      🔍 View on Polygonscan
-    </a>
-  )}
+  href={nft.polygonscan}
+  target="_blank"
+  rel="noopener noreferrer"
+  style={{ fontSize: 12, color: "#0af", display: "block", marginTop: 5 }}
+>
+  🔍 View on Polygonscan
+</a>
+
+  
 </div>
         ))}
       </div>
