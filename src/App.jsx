@@ -443,14 +443,15 @@ const handleSendFeedback = async () => {
 };
 
   // === Proofs as NFT ===
-  const loadProofs = async () => {
+  // === Proofs as NFT ===
+const loadProofs = async () => {
   if (!nftContract || !provider) return;
 
   try {
     const total = Number(await nftContract.totalSupply());
     const items = [];
 
-    for (let i = 1; i < total; i++) {
+    for (let i = 1; i <= total; i++) {
       let uri = await nftContract.tokenURI(i);
       if (uri.startsWith("ipfs://")) uri = "https://ipfs.io/ipfs/" + uri.slice(7);
 
@@ -460,13 +461,23 @@ const handleSendFeedback = async () => {
       let imgUrl = metadata.image;
       if (imgUrl.startsWith("ipfs://")) imgUrl = "https://ipfs.io/ipfs/" + imgUrl.slice(7);
 
-      // 📌 Ищем событие Transfer для этого токена (от 0x0, то есть mint)
-      const eventLogs = await nftContract.queryFilter(
-        nftContract.filters["Transfer(address,address,uint256)"](ZeroAddress, null, i),
-        0,
-        "latest"
-      );
-      const mintTxHash = eventLogs.length ? eventLogs[0].transactionHash : null;
+      // ✅ Новый способ искать Transfer в ethers v6
+      const transferEvent = nftContract.interface.getEvent("Transfer");
+      const topic = nftContract.interface.getEventTopic(transferEvent);
+
+      const logs = await provider.getLogs({
+        address: nftContract.target,
+        fromBlock: 0,
+        toBlock: "latest",
+        topics: [
+          topic,
+          "0x" + "0".repeat(64), // ZeroAddress (from)
+          null,                  // any "to"
+          "0x" + i.toString(16).padStart(64, "0"), // tokenId
+        ],
+      });
+
+      const mintTxHash = logs.length ? logs[0].transactionHash : null;
 
       items.push({
         id: i,
