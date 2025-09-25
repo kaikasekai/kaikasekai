@@ -337,7 +337,7 @@ const handleSubscribe = async () => {
     log("✅ Subscription confirmed");
 
     await checkSubscription(contract, account);
-    alert("✅ Subscription successful!");
+    alert("✅ Subscription successfull!");
   } catch (e) {
     log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
     alert("❌ Subscription failed, see Debug log");
@@ -718,7 +718,7 @@ const handleSendFeedback = async () => {
 
   {nft.mintTxHash && (
     <a
-      href={`https://polygonscan.com/tx/${nft.mintTxHash}`}
+      href={`https://amoy.polygonscan.com/tx/${nft.mintTxHash}`}
       target="_blank"
       rel="noopener noreferrer"
       style={{ fontSize: 12, color: "#0af", display: "block", marginTop: 5 }}
