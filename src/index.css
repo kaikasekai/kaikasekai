@@ -1,11 +1,11 @@
 /* index.css */
 
 body {
-  background: #3e3e3e !important;
+  background: #66ff33 !important;
   font-size: 10px;
   margin: 0;
   padding: 0;
-  color: #ccc;
+  color: #cc3300;
   font-family: 'Menlo';
 }
 
@@ -14,10 +14,10 @@ h2 {
 }
 
 .MuiAccordion-root {
-  background-color: #2e2e2e !important;
+  background-color: #cc33ff !important;
   color: #fff !important;
 }
 
 .MuiAccordionSummary-expandIconWrapper {
-  color: #fff;
+  color: #6600cc;
 }
