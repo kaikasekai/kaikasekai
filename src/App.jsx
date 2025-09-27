@@ -593,8 +593,7 @@ const handleSendFeedback = async () => {
         </small>
         <ResponsiveContainer width="100%" height={500}>
           
-          <div style={{ background: "#101010", borderRadius: 6 }}>
-  <LineChart data={filteredData}>
+          <LineChart data={filteredData} style={{ background: "#101010", borderRadius: 6 }}>
 
             <CartesianGrid strokeDasharray="3 3" vertical={true} horizontal={true} />
             <XAxis
@@ -645,7 +644,6 @@ const handleSendFeedback = async () => {
                   dot={false}
                 />
               ))}
-           </div>
           </LineChart>
         </ResponsiveContainer>
         <div style={{ marginTop: 10 }}>
