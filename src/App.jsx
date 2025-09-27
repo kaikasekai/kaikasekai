@@ -591,10 +591,9 @@ const handleSendFeedback = async () => {
             ? "Range: Current + Next month"
             : "Range: Current month"}
         </small>
+        <div style={{ background: "#101010", borderRadius: 6, height: 500 }}>
         <ResponsiveContainer width="100%" height={500}>
-          
-          <LineChart data={filteredData} style={{ background: "#101010", borderRadius: 6 }}>
-
+          <LineChart data={filteredData}>
             <CartesianGrid strokeDasharray="3 3" vertical={true} horizontal={true} />
             <XAxis
   dataKey="date"
@@ -646,6 +645,7 @@ const handleSendFeedback = async () => {
               ))}
           </LineChart>
         </ResponsiveContainer>
+        </div>
         <div style={{ marginTop: 10 }}>
           <strong>Accuracy last 30 days:</strong> {mape}%
         </div>
