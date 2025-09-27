@@ -21,3 +21,26 @@ h2 {
 .MuiAccordionSummary-expandIconWrapper {
   color: #fff;
 }
+
+/* Контейнер для графика */
+.chart-wrapper {
+  background: #101010;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+/* Сам график (svg внутри LineChart) */
+.chart {
+  overflow: visible;
+}
+
+/* Сетка */
+.recharts-cartesian-grid line {
+  stroke: rgba(255, 255, 255, 0.1);
+}
+
+/* Оси */
+.recharts-cartesian-axis-tick text {
+  fill: #bbb;
+  font-size: 12px;
+}
