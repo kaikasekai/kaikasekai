@@ -689,38 +689,67 @@ const handleSendFeedback = async () => {
     {proofs.length === 0 ? (
       <Typography>No proofs yet.</Typography>
     ) : (
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 20 }}>
-        {proofs.map((nft) => (
-          <div
-  key={nft.id}
-  style={{
-    width: 200,
-    border: "1px solid #444",
-    borderRadius: 8,
-    padding: 10,
-    background: "#222",
-  }}
->
-  <img
-    src={nft.image}
-    alt={nft.name}
-    style={{ width: "100%", borderRadius: 6 }}
-  />
-  <h4 style={{ margin: "10px 0 5px" }}>{nft.name}</h4>
-  <p style={{ fontSize: 12, color: "#aaa" }}>{nft.description}</p>
+      <div>
+        {Array.from({ length: proofs.length }, (_, i) => {
+          const tokenId = i + 1;
+          const nft = proofs.find((p) => p.id === tokenId);
+          const resultUrl = `https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${tokenId}.png`; 
+          // заменишь USERNAME/REPO на свой GitHub путь
 
-    <a
-  href={nft.polygonscan}
-  target="_blank"
-  rel="noopener noreferrer"
-  style={{ fontSize: 12, color: "#0af", display: "block", marginTop: 5 }}
->
-  🔍 View on Polygonscan
-</a>
+          return (
+            <div
+              key={tokenId}
+              style={{
+                display: "flex",
+                gap: 20,
+                marginBottom: 20,
+                alignItems: "flex-start",
+              }}
+            >
+              {/* NFT слева */}
+              <div style={{ flex: 1 }}>
+                {nft ? (
+                  <>
+                    <img
+                      src={nft.image}
+                      alt={nft.name}
+                      style={{ width: "100%", borderRadius: 6 }}
+                    />
+                    <h4 style={{ margin: "10px 0 5px" }}>{nft.name}</h4>
+                    <p style={{ fontSize: 12, color: "#aaa" }}>
+                      {nft.description}
+                    </p>
+                    <a
+                      href={nft.polygonscan}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        fontSize: 12,
+                        color: "#0af",
+                        display: "block",
+                        marginTop: 5,
+                      }}
+                    >
+                      🔍 View on Polygonscan
+                    </a>
+                  </>
+                ) : (
+                  <Typography>Loading NFT {tokenId}…</Typography>
+                )}
+              </div>
 
-  
-</div>
-        ))}
+              {/* Результат справа */}
+              <div style={{ flex: 1 }}>
+                <img
+                  src={resultUrl}
+                  alt={`Result ${tokenId}`}
+                  style={{ width: "100%", borderRadius: 6 }}
+                  onError={(e) => (e.target.style.display = "none")} // если картинки нет на GitHub — скрыть
+                />
+              </div>
+            </div>
+          );
+        })}
       </div>
     )}
   </AccordionDetails>
