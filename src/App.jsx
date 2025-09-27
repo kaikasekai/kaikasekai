@@ -593,20 +593,12 @@ const handleSendFeedback = async () => {
         </small>
         <ResponsiveContainer width="100%" height={500}>
           <LineChart data={filteredData}>
-            <CartesianGrid strokeDasharray="3 3" vertical={true} horizontal={true} />
+            <CartesianGrid strokeDasharray="3 3" />
             <XAxis
-  dataKey="date"
-  tickFormatter={(d, idx, arr) => {
-    if (idx === Math.floor(arr.length / 2)) return dayjs(d).format("MMMM");
-    return "";
-  }}
-/>
-
-            <YAxis
-  domain={[100000, 160000]}
-  ticks={[100000,105000,110000,115000,120000,125000,130000,135000,140000,145000,150000,155000,160000]}
-  tickFormatter={(v) => v.toLocaleString()}
-/>
+              dataKey="date"
+              tickFormatter={(d) => dayjs(d).format("MMM D")}
+            />
+            <YAxis domain={[100000, 160000]} />
             <Tooltip />
             <Legend />
             <Line
