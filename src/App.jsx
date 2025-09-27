@@ -591,7 +591,7 @@ const handleSendFeedback = async () => {
             ? "Range: Current + Next month"
             : "Range: Current month"}
         </small>
-        <<ResponsiveContainer width="100%" height="61.8%">
+        <ResponsiveContainer width="100%" height="61.8%">
           <LineChart data={filteredData} style={{ background: "#101010", padding: 0, borderRadius: 0 }}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="date" interval={0} tickFormatter={() => ""} />
