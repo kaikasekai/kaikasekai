@@ -591,11 +591,25 @@ const handleSendFeedback = async () => {
             ? "Range: Current + Next month"
             : "Range: Current month"}
         </small>
-        <ResponsiveContainer width="100%" height="61.8%">
-          <LineChart data={filteredData} style={{ background: "#101010", padding: 0, borderRadius: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" interval={0} tickFormatter={() => ""} />
-            <YAxis domain={[100000, 160000]} tickCount={13} interval={0} tickFormatter={(v) => v.toLocaleString()} />
+        <ResponsiveContainer width="100%" height={500}>
+          
+          <div style={{ background: "#101010", borderRadius: 6 }}>
+  <LineChart data={filteredData}>
+
+            <CartesianGrid strokeDasharray="3 3" vertical={true} horizontal={true} />
+            <XAxis
+  dataKey="date"
+  tickFormatter={(d, idx, arr) => {
+    if (idx === Math.floor(arr.length / 2)) return dayjs(d).format("MMMM");
+    return "";
+  }}
+/>
+
+            <YAxis
+  domain={[100000, 160000]}
+  ticks={[100000,105000,110000,115000,120000,125000,130000,135000,140000,145000,150000,155000,160000]}
+  tickFormatter={(v) => v.toLocaleString()}
+/>
             <Tooltip />
             <Legend />
             <Line
@@ -631,6 +645,7 @@ const handleSendFeedback = async () => {
                   dot={false}
                 />
               ))}
+           </div>
           </LineChart>
         </ResponsiveContainer>
         <div style={{ marginTop: 10 }}>
