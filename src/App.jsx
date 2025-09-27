@@ -598,7 +598,11 @@ const handleSendFeedback = async () => {
               dataKey="date"
               tickFormatter={(d) => dayjs(d).format("MMM D")}
             />
-            <YAxis domain={[100000, 160000]} />
+            <YAxis
+  domain={[100000, 160000]}
+  ticks={[100000,105000,110000,115000,120000,125000,130000,135000,140000,145000,150000,155000,160000]}
+  tickFormatter={(v) => v.toLocaleString()}
+/>
             <Tooltip />
             <Legend />
             <Line
