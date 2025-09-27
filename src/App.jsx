@@ -591,14 +591,11 @@ const handleSendFeedback = async () => {
             ? "Range: Current + Next month"
             : "Range: Current month"}
         </small>
-        <ResponsiveContainer width="100%" height={500}>
-          <LineChart data={filteredData}>
+        <<ResponsiveContainer width="100%" height="61.8%">
+          <LineChart data={filteredData} style={{ background: "#101010", padding: 0, borderRadius: 0 }}>
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis
-              dataKey="date"
-              tickFormatter={(d) => dayjs(d).format("MMM D")}
-            />
-            <YAxis domain={[100000, 160000]} />
+            <XAxis dataKey="date" interval={0} tickFormatter={() => ""} />
+            <YAxis domain={[100000, 160000]} tickCount={13} interval={0} tickFormatter={(v) => v.toLocaleString()} />
             <Tooltip />
             <Legend />
             <Line
@@ -659,8 +656,8 @@ const handleSendFeedback = async () => {
       )}
 
       {/* === Accordions (тоже вынесены, теперь видны всегда) === */}
-      <Accordion style={{ marginTop: 20 }}>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+      <Accordion style={{ marginTop: 20, boxShadow: "none", border: "none", padding: 0 }}>
+  <AccordionSummary expandIcon={<span style={{ fontSize: 20 }}>+</span>} style={{ padding: 0 }}>
           <Typography>About</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -670,8 +667,8 @@ const handleSendFeedback = async () => {
         </AccordionDetails>
       </Accordion>
 
-      <Accordion style={{ marginTop: 10 }}>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+      <Accordion style={{ marginTop: 20, boxShadow: "none", border: "none", padding: 0 }}>
+  <AccordionSummary expandIcon={<span style={{ fontSize: 20 }}>+</span>} style={{ padding: 0 }}>
           <Typography>How it works</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -681,8 +678,8 @@ const handleSendFeedback = async () => {
         </AccordionDetails>
       </Accordion>
 
-      <Accordion style={{ marginTop: 10 }}>
-  <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+      <Accordion style={{ marginTop: 20, boxShadow: "none", border: "none", padding: 0 }}>
+  <AccordionSummary expandIcon={<span style={{ fontSize: 20 }}>+</span>} style={{ padding: 0 }}>
     <Typography>Proofs</Typography>
   </AccordionSummary>
   <AccordionDetails>
