@@ -1,4 +1,4 @@
-import requests, csv, datetime
+from datetime import datetime, timedelta
 
 FILENAME = 'data.csv'
 
@@ -21,7 +21,7 @@ def update_csv():
     idx_btc = header.index('BTC')
     idx_ma = header.index('moving_average')
 
-    today = datetime.datetime.utcnow().strftime('%Y-%m-%d')
+    today = (datetime.utcnow().date() - timedelta(days=1)).strftime('%Y-%m-%d')
     btc_price = fetch_btc_price()
 
     i = next((i for i, row in enumerate(data) if row[idx_date]==today), None)
