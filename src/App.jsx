@@ -693,7 +693,7 @@ const handleSendFeedback = async () => {
         {Array.from({ length: proofs.length }, (_, i) => {
           const tokenId = i + 1;
           const nft = proofs.find((p) => p.id === tokenId);
-          const resultUrl = `https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${tokenId}.png`; 
+          const resultUrl = `https://github.com/kaikasekai/kaikasekai/blob/6abc8a8c1f00708d70f1b6495431b88d110f2953/results/${tokenId}.png`; 
           // заменишь USERNAME/REPO на свой GitHub путь
 
           return (
