@@ -1,4 +1,4 @@
-#-----------------------------BTC-XGBoost-MDMD------#
+#-----------------------------BTC-XGBoost-MAAD------#
 import xgboost as xgb
 import pandas as pd
 import numpy as np
@@ -14,26 +14,26 @@ warnings.filterwarnings("ignore", message="X does not have valid feature names*"
 learning_rates = np.arange(0.1, 0.33, 0.001)
 max_depths = range(5, 11)
 min_child_weights = range(3, 11)
-n_estimators = 100
-steps = 1
+n_estimators = 150
+steps = 3
 
 # Пороги отклонения
 max_allowed_deviation_pct = 15       # среднее отклонение (в %)
 max_single_deviation_pct = 30        # максимальное одиночное отклонение (в %)
 Q
 # Загрузка обучающих данных
-train_file_path = '/content/drive/MyDrive/cadu/BTC/btc_train_301124.csv'
+train_file_path = '/content/drive/MyDrive/cadu/BTC/btc_train_311024_3.csv'
 train_data = pd.read_csv(train_file_path, header=None)
 X_train = train_data.iloc[:, :-1]
 y_train = train_data.iloc[:, -1]
 
 # Загрузка данных для предсказания
-predict_file_path = '/content/drive/MyDrive/cadu/BTC/btc_val_011224-301125.csv'
+predict_file_path = '/content/drive/MyDrive/cadu/BTC/btc_val_011124-301125_3.csv'
 predict_data = pd.read_csv(predict_file_path, header=None)
 X_predict = predict_data.iloc[:, :-1]
 
 # Загрузка эталонных данных
-values_df = pd.read_csv('/content/drive/MyDrive/cadu/BTC/btc_011224-270925.csv')
+values_df = pd.read_csv('/content/drive/MyDrive/cadu/BTC/btc_011124-270725.csv')
 indices = np.arange(len(values_df))
 
 # Линейный тренд
@@ -50,10 +50,10 @@ moving_avg_indices = np.arange(window - 1, len(values_df))
 quantile_transformer = joblib.load('/content/drive/MyDrive/cadu/BTC/QT_BTC_130710-250425.pkl')
 
 # Начальное значение
-Y0 = 97279.79
+Y0 = 69482.5
 
 # Каталог для графиков
-output_dir = '/content/drive/MyDrive/cadu/BTC/100_1/'
+output_dir = '/content/drive/MyDrive/cadu/BTC/150_3/'
 os.makedirs(output_dir, exist_ok=True)
 
 # Перебор гиперпараметров
@@ -87,12 +87,15 @@ for learning_rate, max_depth, min_child_weight in product(learning_rates, max_de
     # Усечение длины Y
     Y_trimmed = Y[:len(values_df)]
 
-   # Среднее абсолютное и максимальное процентное отклонение
-    reference_values = values_df.iloc[:, 0].values
-    absolute_pct_diff = np.abs((np.array(Y_trimmed) - reference_values) / reference_values) * 100
-    mean_pct_diff = np.mean(absolute_pct_diff)
-    max_deviation = np.max(absolute_pct_diff)
-
+    # Проверка достаточной длины
+    if len(Y_trimmed) >= len(moving_avg) + window - 1:
+        Y_ma_aligned = np.array(Y_trimmed)[window - 1 : len(moving_avg) + window - 1]
+        absolute_pct_diff = np.abs((Y_ma_aligned - moving_avg) / moving_avg) * 100
+        mean_pct_diff = np.mean(absolute_pct_diff)
+        max_deviation = np.max(absolute_pct_diff)
+    else:
+        print(f'Skipped: Not enough predictions for MA comparison (len={len(Y_trimmed)})')
+        continue
 
     # Сохраняем график, если обе ошибки в пределах нормы
     if mean_pct_diff <= max_allowed_deviation_pct and max_deviation <= max_single_deviation_pct:
