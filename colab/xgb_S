@@ -87,15 +87,11 @@ for learning_rate, max_depth, min_child_weight in product(learning_rates, max_de
     # Усечение длины Y
     Y_trimmed = Y[:len(values_df)]
 
-    # Проверка достаточной длины
-    if len(Y_trimmed) >= len(moving_avg) + window - 1:
-        Y_ma_aligned = np.array(Y_trimmed)[window - 1 : len(moving_avg) + window - 1]
-        absolute_pct_diff = np.abs((Y_ma_aligned - moving_avg) / moving_avg) * 100
-        mean_pct_diff = np.mean(absolute_pct_diff)
-        max_deviation = np.max(absolute_pct_diff)
-    else:
-        print(f'Skipped: Not enough predictions for MA comparison (len={len(Y_trimmed)})')
-        continue
+    # Среднее абсолютное и максимальное процентное отклонение
+    reference_values = values_df.iloc[:, 0].values
+    absolute_pct_diff = np.abs((np.array(Y_trimmed) - reference_values) / reference_values) * 100
+    mean_pct_diff = np.mean(absolute_pct_diff)
+    max_deviation = np.max(absolute_pct_diff)
 
     # Сохраняем график, если обе ошибки в пределах нормы
     if mean_pct_diff <= max_allowed_deviation_pct and max_deviation <= max_single_deviation_pct:
