@@ -20,7 +20,7 @@ steps = 3
 # Пороги отклонения
 max_allowed_deviation_pct = 15       # среднее отклонение (в %)
 max_single_deviation_pct = 30        # максимальное одиночное отклонение (в %)
-Q
+
 # Загрузка обучающих данных
 train_file_path = '/content/drive/MyDrive/cadu/BTC/btc_train_311024_3.csv'
 train_data = pd.read_csv(train_file_path, header=None)
