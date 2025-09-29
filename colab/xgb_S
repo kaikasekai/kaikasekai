@@ -1,4 +1,4 @@
-#-----------------------------SPX-XGBoost-MAAD------#
+#-----------------------------SPX-XGBoost-MDMD------#
 import xgboost as xgb
 import pandas as pd
 import numpy as np
@@ -14,7 +14,7 @@ warnings.filterwarnings("ignore", message="X does not have valid feature names*"
 learning_rates = np.arange(0.1, 0.33, 0.001)
 max_depths = range(5, 11)
 min_child_weights = range(3, 11)
-n_estimators = 150
+n_estimators = 100
 steps = 1
 
 # Пороги отклонения
@@ -22,18 +22,18 @@ max_allowed_deviation_pct = 3       # среднее отклонение (в %)
 max_single_deviation_pct = 10        # максимальное одиночное отклонение (в %)
 
 # Загрузка обучающих данных
-train_file_path = '/content/drive/MyDrive/cadu/SPX/spx_train_311024.csv'
+train_file_path = '/content/drive/MyDrive/cadu/SPX/spx_train_291124.csv'
 train_data = pd.read_csv(train_file_path, header=None)
 X_train = train_data.iloc[:, :-1]
 y_train = train_data.iloc[:, -1]
 
 # Загрузка данных для предсказания
-predict_file_path = '/content/drive/MyDrive/cadu/SPX/spx_val_011124-281125.csv'
+predict_file_path = '/content/drive/MyDrive/cadu/SPX/spx_val_021224-281125.csv'
 predict_data = pd.read_csv(predict_file_path, header=None)
 X_predict = predict_data.iloc[:, :-1]
 
 # Загрузка эталонных данных
-values_df = pd.read_csv('/content/drive/MyDrive/cadu/SPX/spx_011124-250725.csv')
+values_df = pd.read_csv('/content/drive/MyDrive/cadu/SPX/spx_021224-260925.csv')
 indices = np.arange(len(values_df))
 
 # Линейный тренд
@@ -53,7 +53,7 @@ quantile_transformer = joblib.load('/content/drive/MyDrive/cadu/SPX/QT_SPX_62-24
 Y0 = 5728.8
 
 # Каталог для графиков
-output_dir = '/content/drive/MyDrive/cadu/SPX/150_1/'
+output_dir = '/content/drive/MyDrive/cadu/SPX/100_1/'
 os.makedirs(output_dir, exist_ok=True)
 
 # Перебор гиперпараметров
