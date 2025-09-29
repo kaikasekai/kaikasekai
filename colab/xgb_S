@@ -50,7 +50,7 @@ moving_avg_indices = np.arange(window - 1, len(values_df))
 quantile_transformer = joblib.load('/content/drive/MyDrive/cadu/SPX/QT_SPX_62-240425.pkl')
 
 # Начальное значение
-Y0 = 5728.8
+Y0 = 6047.15
 
 # Каталог для графиков
 output_dir = '/content/drive/MyDrive/cadu/SPX/100_1/'
