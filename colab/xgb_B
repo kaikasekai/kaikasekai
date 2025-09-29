@@ -33,7 +33,7 @@ predict_data = pd.read_csv(predict_file_path, header=None)
 X_predict = predict_data.iloc[:, :-1]
 
 # Загрузка эталонных данных
-values_df = pd.read_csv('/content/drive/MyDrive/cadu/BTC/btc_011224-270725.csv')
+values_df = pd.read_csv('/content/drive/MyDrive/cadu/BTC/btc_011224-270925.csv')
 indices = np.arange(len(values_df))
 
 # Линейный тренд
