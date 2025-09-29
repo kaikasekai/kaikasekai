@@ -1,0 +1,118 @@
+#-----------------------------BTC-XGBoost-RFAD------#
+import xgboost as xgb
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import joblib
+from itertools import product
+import os
+from sklearn.preprocessing import QuantileTransformer
+import warnings
+warnings.filterwarnings("ignore", message="X does not have valid feature names*")
+
+# Гиперпараметры
+learning_rates = np.arange(0.1, 0.33, 0.001)
+max_depths = range(5, 11)
+min_child_weights = range(3, 11)
+n_estimators = 100
+steps = 1
+
+# Пороги отклонения
+max_allowed_deviation_pct = 15       # среднее отклонение (в %)
+max_single_deviation_pct = 30        # максимальное одиночное отклонение (в %)
+Q
+# Загрузка обучающих данных
+train_file_path = '/content/drive/MyDrive/cadu/BTC/btc_train_311024_3.csv'
+train_data = pd.read_csv(train_file_path, header=None)
+X_train = train_data.iloc[:, :-1]
+y_train = train_data.iloc[:, -1]
+
+# Загрузка данных для предсказания
+predict_file_path = '/content/drive/MyDrive/cadu/BTC/btc_val_011124-301125_3.csv'
+predict_data = pd.read_csv(predict_file_path, header=None)
+X_predict = predict_data.iloc[:, :-1]
+
+# Загрузка эталонных данных
+values_df = pd.read_csv('/content/drive/MyDrive/cadu/BTC/btc_011124-270725.csv')
+indices = np.arange(len(values_df))
+
+# Линейный тренд
+trend_coeffs = np.polyfit(indices, values_df.iloc[:, 0], 1)
+trend_line = np.polyval(trend_coeffs, indices)
+
+# Скользящее среднее
+values_ma = values_df.iloc[:, 0]
+window = 15
+moving_avg = np.convolve(values_ma, np.ones(window)/window, mode='valid')
+moving_avg_indices = np.arange(window - 1, len(values_df))
+
+# Загрузка QuantileTransformer
+quantile_transformer = joblib.load('/content/drive/MyDrive/cadu/BTC/QT_BTC_130710-250425.pkl')
+
+# Начальное значение
+Y0 = 69482.5
+
+# Каталог для графиков
+output_dir = '/content/drive/MyDrive/cadu/BTC/150_3/'
+os.makedirs(output_dir, exist_ok=True)
+
+# Перебор гиперпараметров
+for learning_rate, max_depth, min_child_weight in product(learning_rates, max_depths, min_child_weights):
+    xgb_regressor = xgb.XGBRegressor(
+        n_estimators=n_estimators,
+        learning_rate=learning_rate,
+        max_depth=max_depth,
+        min_child_weight=min_child_weight,
+        subsample=1,
+        colsample_bytree=1,
+        reg_alpha=0,
+        reg_lambda=0,
+        gamma=0,
+        objective='reg:squarederror'
+    )
+
+    xgb_regressor.fit(X_train, y_train)
+
+    # Предсказание
+    y_pred = xgb_regressor.predict(X_predict)
+
+    # Обратное преобразование
+    y_pred_inverse = quantile_transformer.inverse_transform(y_pred.reshape(-1, 1)).flatten()
+
+    # Преобразование к абсолютным значениям
+    Y = [Y0]
+    for x in y_pred_inverse:
+        Y.append(Y[-1] + Y[-1]*x)
+
+    # Усечение длины Y
+    Y_trimmed = Y[:len(values_df)]
+
+   # Среднее абсолютное и максимальное процентное отклонение
+    reference_values = values_df.iloc[:, 0].values
+    absolute_pct_diff = np.abs((np.array(Y_trimmed) - reference_values) / reference_values) * 100
+    mean_pct_diff = np.mean(absolute_pct_diff)
+    max_deviation = np.max(absolute_pct_diff)
+
+
+    # Сохраняем график, если обе ошибки в пределах нормы
+    if mean_pct_diff <= max_allowed_deviation_pct and max_deviation <= max_single_deviation_pct:
+        plt.figure(figsize=(10, 6))
+        plt.plot(Y, label='Predicted X', color='blue')
+        plt.plot(values_df.iloc[:, 0], label='Reference Data', color='orange')
+        plt.plot(indices, trend_line, label='Reference Trend', linestyle='dashed', color='c')
+        plt.plot(moving_avg_indices, moving_avg, label=f'{window}-day Moving Avg', linestyle='dashed', color='m')
+
+        plt.xlabel('Index')
+        plt.ylabel('Value')
+        plt.title(f'{n_estimators}_{steps}, LR={learning_rate}, MD={max_depth}, MCW={min_child_weight}\n'
+                  f'Mean Δ={mean_pct_diff:.2f}%, Max Δ={max_deviation:.2f}%')
+        plt.legend()
+
+        plot_filename = f'{n_estimators}_{steps}_plot_{mean_pct_diff:.2f}_{max_deviation:.2f}_lr{learning_rate}_md{max_depth}_mcw{min_child_weight}.png'
+        plt.savefig(os.path.join(output_dir, plot_filename))
+        plt.close()
+
+        print(f'Plot saved: {plot_filename} (mean Δ: {mean_pct_diff:.2f}%, max Δ: {max_deviation:.2f}%)')
+    else:
+        print(f'Skipped: LR={learning_rate}, MD={max_depth}, MCW={min_child_weight} '
+              f'(mean Δ: {mean_pct_diff:.2f}%, max Δ: {max_deviation:.2f}%)')
