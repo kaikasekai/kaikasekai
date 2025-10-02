@@ -18,22 +18,22 @@ n_estimators = 100
 steps = 1
 
 # Пороги отклонения
-max_allowed_deviation_pct = 3       # среднее отклонение (в %)
+max_allowed_deviation_pct = 3        # среднее отклонение (в %)
 max_single_deviation_pct = 10        # максимальное одиночное отклонение (в %)
 
 # Загрузка обучающих данных
-train_file_path = '/content/drive/MyDrive/cadu/SPX/spx_train_291124.csv'
+train_file_path = '/content/drive/MyDrive/cadu/SPX/spx_train_310325.csv'
 train_data = pd.read_csv(train_file_path, header=None)
 X_train = train_data.iloc[:, :-1]
 y_train = train_data.iloc[:, -1]
 
 # Загрузка данных для предсказания
-predict_file_path = '/content/drive/MyDrive/cadu/SPX/spx_val_021224-281125.csv'
+predict_file_path = '/content/drive/MyDrive/cadu/SPX/spx_val_010425-281125.csv'
 predict_data = pd.read_csv(predict_file_path, header=None)
 X_predict = predict_data.iloc[:, :-1]
 
 # Загрузка эталонных данных
-values_df = pd.read_csv('/content/drive/MyDrive/cadu/SPX/spx_021224-260925.csv')
+values_df = pd.read_csv('/content/drive/MyDrive/cadu/SPX/spx_010425-011025.csv')
 indices = np.arange(len(values_df))
 
 # Линейный тренд
@@ -50,10 +50,10 @@ moving_avg_indices = np.arange(window - 1, len(values_df))
 quantile_transformer = joblib.load('/content/drive/MyDrive/cadu/SPX/QT_SPX_62-240425.pkl')
 
 # Начальное значение
-Y0 = 6047.15
+Y0 = 5633.07
 
 # Каталог для графиков
-output_dir = '/content/drive/MyDrive/cadu/SPX/T100_1/'
+output_dir = '/content/drive/MyDrive/cadu/SPX/N100_1/'
 os.makedirs(output_dir, exist_ok=True)
 
 # Перебор гиперпараметров
