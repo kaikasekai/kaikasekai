@@ -14,26 +14,26 @@ warnings.filterwarnings("ignore", message="X does not have valid feature names*"
 learning_rates = np.arange(0.1, 0.33, 0.001)
 max_depths = range(5, 11)
 min_child_weights = range(3, 11)
-n_estimators = 150
-steps = 3
+n_estimators = 100
+steps = 1
 
 # Пороги отклонения
 max_allowed_deviation_pct = 15       # среднее отклонение (в %)
 max_single_deviation_pct = 30        # максимальное одиночное отклонение (в %)
 
 # Загрузка обучающих данных
-train_file_path = '/content/drive/MyDrive/cadu/BTC/btc_train_311024_3.csv'
+train_file_path = '/content/drive/MyDrive/cadu/BTC/btc_train_310325.csv'
 train_data = pd.read_csv(train_file_path, header=None)
 X_train = train_data.iloc[:, :-1]
 y_train = train_data.iloc[:, -1]
 
 # Загрузка данных для предсказания
-predict_file_path = '/content/drive/MyDrive/cadu/BTC/btc_val_011124-301125_3.csv'
+predict_file_path = '/content/drive/MyDrive/cadu/BTC/btc_val_010425-301125.csv'
 predict_data = pd.read_csv(predict_file_path, header=None)
 X_predict = predict_data.iloc[:, :-1]
 
 # Загрузка эталонных данных
-values_df = pd.read_csv('/content/drive/MyDrive/cadu/BTC/btc_011124-270725.csv')
+values_df = pd.read_csv('/content/drive/MyDrive/cadu/BTC/btc_010425-011025.csv')
 indices = np.arange(len(values_df))
 
 # Линейный тренд
@@ -50,10 +50,10 @@ moving_avg_indices = np.arange(window - 1, len(values_df))
 quantile_transformer = joblib.load('/content/drive/MyDrive/cadu/BTC/QT_BTC_130710-250425.pkl')
 
 # Начальное значение
-Y0 = 69482.5
+Y0 = 85169.169
 
 # Каталог для графиков
-output_dir = '/content/drive/MyDrive/cadu/BTC/150_3/'
+output_dir = '/content/drive/MyDrive/cadu/BTC/N100_1/'
 os.makedirs(output_dir, exist_ok=True)
 
 # Перебор гиперпараметров
