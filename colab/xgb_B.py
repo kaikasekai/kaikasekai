@@ -49,8 +49,8 @@ moving_avg_indices = np.arange(window - 1, len(values_df))
 # Загрузка QuantileTransformer
 quantile_transformer = joblib.load('/content/drive/MyDrive/cadu/BTC/QT_BTC_130710-250425.pkl')
 
-# Начальное значение
-Y0 = 85169.169
+# Начальное значение берем из реальных данных
+Y0 = values_df.iloc[0, 0]
 
 # Каталог для графиков
 output_dir = '/content/drive/MyDrive/cadu/BTC/N100_1/'
