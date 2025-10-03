@@ -5,7 +5,7 @@ permissions:
 
 on:
   schedule:
-    - cron: '59 23 * * *'  # 23:59 UTC ежедневно
+    - cron: '19 23 * * *'  # 23:19 UTC ежедневно
   workflow_dispatch:
 
 jobs:
