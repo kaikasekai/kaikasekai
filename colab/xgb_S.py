@@ -42,7 +42,7 @@ trend_line = np.polyval(trend_coeffs, indices)
 
 # Скользящее среднее
 values_ma = values_df.iloc[:, 0]
-window = 15
+window = 7
 moving_avg = np.convolve(values_ma, np.ones(window)/window, mode='valid')
 moving_avg_indices = np.arange(window - 1, len(values_df))
 
@@ -53,7 +53,7 @@ quantile_transformer = joblib.load('/content/drive/MyDrive/cadu/SPX/QT_SPX_62-24
 Y0 = values_df.iloc[0, 0]
 
 # Каталог для графиков
-output_dir = '/content/drive/MyDrive/cadu/SPX/N100_1/'
+output_dir = '/content/drive/MyDrive/cadu/SPX/100_1/'
 os.makedirs(output_dir, exist_ok=True)
 
 # Перебор гиперпараметров
