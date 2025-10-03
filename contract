@@ -7,7 +7,7 @@ interface IERC20 {
     function balanceOf(address account) external view returns (uint256);
 }
 
-contract BTCForecastSubscriptions {
+contract KaikasekaiTrends {
     IERC20 public immutable usdc;
     address public owner;
 
@@ -108,7 +108,7 @@ contract BTCForecastSubscriptions {
         emit Donated(msg.sender, amount);
     }
 
-    //FEEDBACK
+    // FEEDBACK
     function payFeedback() external {
         require(usdc.transferFrom(msg.sender, address(this), feedbackPrice), "Payment failed");
         emit FeedbackPaid(msg.sender, feedbackPrice);
