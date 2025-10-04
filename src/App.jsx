@@ -49,8 +49,8 @@ const COLORS = [
 ];
 
 // === Contract Config ===
-const OWNER_ADDRESS = "0x31Ec7C6bba0b83f51731C704c5Cdf41d85FE68E8"; // owner address
-const CONTRACT_ADDRESS = "0x651e2c5824985Cf1a551C249b1bfba2aBe34fB49";
+const OWNER_ADDRESS = "0xb57ec96FC3E9cF588c5E6fEfCad14F21F65e4Dff"; // owner address
+const CONTRACT_ADDRESS = "0x0E8304ac6711742b9c632D00006062c45db383F5";
 
 const CONTRACT_ABI = [
   "function setNextEndTime(uint256 _endTime) external",
@@ -72,8 +72,8 @@ const CONTRACT_ABI = [
   "event FeedbackPriceChanged(uint256 oldPrice, uint256 newPrice)"
 ];
 
-// === USDC Config (Polygon Amoy) ===
-const USDC_ADDRESS = "0x41E94Eb019C0762f9Bfcf9Fb1E58725BfB0e7582";
+// === USDC Config (Polygon) ===
+const USDC_ADDRESS = "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359";
 const USDC_ABI = [
   "function balanceOf(address account) view returns (uint256)",
   "function transfer(address recipient, uint256 amount) returns (bool)",
@@ -83,7 +83,7 @@ const USDC_ABI = [
 ];
 
 // === NFT Config ===
-const NFT_ADDRESS = "0x0c11C503EDEa18e57a5Ce67a2D8eE421d61dB41d";
+const NFT_ADDRESS = "0x0878C09FFE2e702c1A7987B38C63C42E2062b803";
 const NFT_ABI = [
   "function tokenURI(uint256 tokenId) view returns (string)",
   "function totalSupply() view returns (uint256)"
@@ -214,15 +214,15 @@ useEffect(() => {
             params: [
               {
                 chainId: "0x13882",
-                chainName: "Polygon Amoy",
-                nativeCurrency: { name: "MATIC", symbol: "MATIC", decimals: 18 },
+                chainName: "Polygon",
+                nativeCurrency: { name: "POL", symbol: "POL", decimals: 18 },
                 rpcUrls: ["https://rpc-amoy.polygon.technology"],
-                blockExplorerUrls: ["https://www.oklink.com/amoy"],
+                blockExplorerUrls: ["https://www.polygonscan.com"],
               },
             ],
           });
         } else {
-          alert("⚠️ Please switch to Amoy (80002) in your wallet");
+          alert("⚠️ Please switch to Polygon (137) in your wallet");
           return;
         }
       }
@@ -230,7 +230,7 @@ useEffect(() => {
     } else {
       const wcProvider = await EthereumProvider.init({
         projectId: "88a4618bff0d86aab28197d3b42e7845",
-        chains: [80002],
+        chains: [137],
         showQrModal: true,
         methods: ["eth_sendTransaction", "personal_sign", "eth_signTypedData"],
         events: ["chainChanged", "accountsChanged"],
