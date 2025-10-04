@@ -163,7 +163,7 @@ function App() {
 useEffect(() => {
   const loadProofsWithoutWallet = async () => {
     try {
-      const provider = new JsonRpcProvider("https://rpc-amoy.polygon.technology");
+      const provider = new JsonRpcProvider("https://polygon-mainnet.infura.io");
       const nftContract = new Contract(NFT_ADDRESS, NFT_ABI, provider);
 
       const total = Number(await nftContract.totalSupply());
@@ -184,7 +184,7 @@ useEffect(() => {
           name: metadata.name,
           description: metadata.description,
           image: imgUrl,
-          polygonscan: `https://amoy.polygonscan.com/token/${NFT_ADDRESS}?a=${i}`,
+          polygonscan: `https://polygonscan.com/token/${NFT_ADDRESS}?a=${i}`,
         });
       }
 
@@ -213,11 +213,11 @@ useEffect(() => {
             method: "wallet_addEthereumChain",
             params: [
               {
-                chainId: "0x13882",
-                chainName: "Polygon",
+                chainId: "0x89",
+                chainName: "Polygon Mainnet",
                 nativeCurrency: { name: "POL", symbol: "POL", decimals: 18 },
-                rpcUrls: ["https://rpc-amoy.polygon.technology"],
-                blockExplorerUrls: ["https://www.polygonscan.com"],
+                rpcUrls: ["https://polygon-mainnet.infura.io"],
+                blockExplorerUrls: ["https://polygonscan.com"],
               },
             ],
           });
