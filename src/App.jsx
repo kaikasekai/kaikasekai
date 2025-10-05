@@ -477,15 +477,20 @@ const handleSendFeedback = async () => {
 
   if (!data.length) return <div>Loading...</div>;
 
-  const today = new Date();
-  const firstDayOfMonth = dayjs(today).startOf("month");
-  const nextMonth = dayjs(today).add(1, "month").endOf("month");
-
   const filteredData = data.filter((r) => {
-    const d = dayjs(r.date);
-    if (showTwoMonths) return d.isAfter(firstDayOfMonth) && d.isBefore(nextMonth);
-    return d.isAfter(firstDayOfMonth) && d.isBefore(dayjs(today));
-  });
+  const d = dayjs(r.date);
+  const startOfMonth = dayjs().startOf("month");
+  const endOfThisMonth = dayjs().endOf("month");
+  const endOfNextMonth = dayjs().add(1, "month").endOf("month");
+
+  if (showTwoMonths) {
+    // Показываем текущий + следующий месяц
+    return d.isAfter(startOfMonth.subtract(1, "day")) && d.isBefore(endOfNextMonth.add(1, "day"));
+  } else {
+    // Показываем только текущий месяц
+    return d.isAfter(startOfMonth.subtract(1, "day")) && d.isBefore(endOfThisMonth.add(1, "day"));
+  }
+});
 
   return (
     <div style={{ padding: 20 }}>
