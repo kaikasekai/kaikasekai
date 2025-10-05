@@ -481,14 +481,15 @@ const handleSendFeedback = async () => {
   const d = dayjs(r.date);
   const startOfMonth = dayjs().startOf("month");
   const endOfThisMonth = dayjs().endOf("month");
+  const startOfNextMonth = dayjs().add(1, "month").startOf("month");
   const endOfNextMonth = dayjs().add(1, "month").endOf("month");
 
   if (showTwoMonths) {
-    // Показываем текущий + следующий месяц
-    return d.isAfter(startOfMonth.subtract(1, "day")) && d.isBefore(endOfNextMonth.add(1, "day"));
+    // Показываем текущий + следующий месяц (включительно, до 30 ноября)
+    return d.isSameOrAfter(startOfMonth) && d.isSameOrBefore(endOfNextMonth);
   } else {
-    // Показываем только текущий месяц
-    return d.isAfter(startOfMonth.subtract(1, "day")) && d.isBefore(endOfThisMonth.add(1, "day"));
+    // Показываем только текущий месяц (1–31 октября)
+    return d.isSameOrAfter(startOfMonth) && d.isSameOrBefore(endOfThisMonth);
   }
 });
 
