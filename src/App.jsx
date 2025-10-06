@@ -319,7 +319,7 @@ const handleBuyWhitelist = async () => {
   setProcessing(true);
   try {
     const signer = await provider.getSigner();
-    //const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
+    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
 const contractRead = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, readProvider);
 const usdcRead = new Contract(USDC_ADDRESS, USDC_ABI, readProvider);
@@ -364,7 +364,7 @@ const handleSubscribe = async () => {
   setProcessing(true);
   try {
     const signer = await provider.getSigner();
-    //const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
+    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
     //const priceToPay = await contract.price(); // BigInt
     //const allowance = await usdc.allowance(account, CONTRACT_ADDRESS); // BigInt
@@ -424,7 +424,7 @@ const handleDonate = async () => {
   setProcessing(true);
   try {
     const signer = await provider.getSigner();
-    //const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
+    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
     const usdcRead = new Contract(USDC_ADDRESS, USDC_ABI, readProvider);
 
@@ -459,7 +459,7 @@ const handlePayFeedback = async () => {
   setProcessing(true);
   try {
     const signer = await provider.getSigner();
-    //const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
+    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
     //const price = await contract.feedbackPrice(); // BigInt
     //const allowance = await usdc.allowance(account, CONTRACT_ADDRESS);
