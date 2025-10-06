@@ -546,7 +546,7 @@ const handleSendFeedback = async () => {
     onClick={handleBuyWhitelist}
     style={{ marginTop: 10 }}
   >
-    Buy Whitelist ({whitelistPrice ? (whitelistPrice / 1e6).toFixed(0) : "..." } USDC)
+    Buy Whitelist ({whitelistPrice ? (whitelistPrice / 1e6).toFixed(3) : "..." } USDC)
   </Button>
 )}
 
@@ -557,7 +557,7 @@ const handleSendFeedback = async () => {
   onClick={handlePayFeedback}
   style={{ marginTop: 10 }}
 >
-  Contact us ({feedbackPrice ? (feedbackPrice / 1e6).toFixed(0) : "..."} USDC)
+  Contact us ({feedbackPrice ? (feedbackPrice / 1e6).toFixed(3) : "..."} USDC)
 </Button>
 
 {showFeedbackForm && (
