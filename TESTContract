@@ -7,7 +7,7 @@ interface IERC20 {
     function balanceOf(address account) external view returns (uint256);
 }
 
-contract KaikasekaiTrends {
+contract Contract {
     IERC20 public immutable usdc;
     address public owner;
 
