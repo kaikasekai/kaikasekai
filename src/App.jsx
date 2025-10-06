@@ -8,6 +8,8 @@ import {
   getAddress,
   parseUnits,
   JsonRpcProvider,
+  formatUnits,
+  BigNumber,
 } from "ethers";
 import EthereumProvider from "@walletconnect/ethereum-provider";
 import {
@@ -128,6 +130,10 @@ function App() {
   const [nftContract, setNftContract] = useState(null);
   const [proofs, setProofs] = useState([]); // массив NFT-шек
   const [debug, setDebug] = useState([]);
+  const [priceDisplay, setPriceDisplay] = useState(null);
+  const [whitelistPriceDisplay, setWhitelistPriceDisplay] = useState(null);
+  const [feedbackPriceDisplay, setFeedbackPriceDisplay] = useState(null);
+
 
   const readProvider = new JsonRpcProvider("https://polygon-rpc.com"); // read-only
   
@@ -275,9 +281,18 @@ useEffect(() => {
     const nftCont = new Contract(NFT_ADDRESS, NFT_ABI, signer);
     setNftContract(nftCont);
 
-    setPrice(Number(await cont.price()));
-    setWhitelistPrice(Number(await cont.whitelistPrice()));
-    setFeedbackPrice(Number(await cont.feedbackPrice()));
+    const priceBN = await cont.price();
+const wlPriceBN = await cont.whitelistPrice();
+const feedbackPriceBN = await cont.feedbackPrice();
+
+setPrice(priceBN);  // оставляем BigNumber для approve/subscribe
+setWhitelistPrice(wlPriceBN);
+setFeedbackPrice(feedbackPriceBN);
+
+setPriceDisplay(formatUnits(priceBN, 6));       // для UI
+setWhitelistPriceDisplay(formatUnits(wlPriceBN, 6));
+setFeedbackPriceDisplay(formatUnits(feedbackPriceBN, 6));
+
 
     if (cont) {
   const whitelisted = await cont.whitelistedReferrers(acc);
@@ -315,31 +330,31 @@ useEffect(() => {
 // === Buy Whitelist ===
 const handleBuyWhitelist = async () => {
   if (!contract || !provider) return alert("Connect wallet first!");
-  if (processing) return; // защита от повторных вызовов
+  if (processing) return;
   setProcessing(true);
+
   try {
     const signer = await provider.getSigner();
-const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
+    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-const contractRead = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, readProvider);
-const usdcRead = new Contract(USDC_ADDRESS, USDC_ABI, readProvider);
+    const contractRead = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, readProvider);
+    const usdcRead = new Contract(USDC_ADDRESS, USDC_ABI, readProvider);
 
-const wlPrice = await contractRead.whitelistPrice();
-const allowance = await usdcRead.allowance(account, CONTRACT_ADDRESS);
+    const wlPrice = await contractRead.whitelistPrice();
+    const allowance = await usdcRead.allowance(account, CONTRACT_ADDRESS);
 
-if (allowance < wlPrice) {
-  log("⏳ Approving USDC for whitelist...");
-  const approveTx = await usdc.approve(CONTRACT_ADDRESS, wlPrice);
-  await approveTx.wait();
-  alert("✅ Approve confirmed");
-}
+    if (allowance.lt(wlPrice)) {
+      log("⏳ Approving USDC for whitelist...");
+      const approveTx = await usdc.approve(CONTRACT_ADDRESS, wlPrice);
+      await approveTx.wait();
+      alert("✅ Approve confirmed");
+    }
 
     log("⏳ Buying whitelist...");
-    const tx = await contract.buyWhitelist(); // contract уже создан с signer
+    const tx = await contract.buyWhitelist();
     await tx.wait();
     log("✅ BuyWhitelist confirmed");
 
-    // Обновим стейт whitelisted
     const whitelisted = await contract.whitelistedReferrers(account);
     setHasWhitelist(Boolean(whitelisted));
 
@@ -357,26 +372,26 @@ const handleSubscribe = async () => {
   if (!contract || !provider) return alert("Connect wallet first!");
   if (processing) return;
   setProcessing(true);
+
   try {
     const signer = await provider.getSigner();
-const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
+    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-const contractRead = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, readProvider);
-const usdcRead = new Contract(USDC_ADDRESS, USDC_ABI, readProvider);
+    const contractRead = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, readProvider);
+    const usdcRead = new Contract(USDC_ADDRESS, USDC_ABI, readProvider);
 
-const priceToPay = await contractRead.price();
-const allowance = await usdcRead.allowance(account, CONTRACT_ADDRESS);
+    const priceToPay = await contractRead.price();
+    const allowance = await usdcRead.allowance(account, CONTRACT_ADDRESS);
 
-if (allowance < priceToPay) {
-  log("⏳ Approving USDC for subscription...");
-  const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay);
-  await approveTx.wait();
-  alert("✅ Approve confirmed");
-}
+    if (allowance.lt(priceToPay)) {
+      log("⏳ Approving USDC for subscription...");
+      const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay);
+      await approveTx.wait();
+      alert("✅ Approve confirmed");
+    }
 
-    //const bal = await usdc.balanceOf(account);
     const bal = await usdcRead.balanceOf(account);
-    if (bal < priceToPay) {
+    if (bal.lt(priceToPay)) {
       alert("Insufficient USDC balance");
       return;
     }
@@ -412,19 +427,27 @@ const handleDonate = async () => {
   if (!donateAmount) return alert("Enter amount");
   if (processing) return;
   setProcessing(true);
+
   try {
     const signer = await provider.getSigner();
-const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
+    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
+    const usdcRead = new Contract(USDC_ADDRESS, USDC_ABI, readProvider);
 
-const usdcRead = new Contract(USDC_ADDRESS, USDC_ABI, readProvider);
-const amount = parseUnits(donateAmount, 6); // BigInt
-const allowance = await usdcRead.allowance(account, CONTRACT_ADDRESS);
-if (allowance < amount) {
-  log("⏳ Approving USDC for donation...");
-  const approveTx = await usdc.approve(CONTRACT_ADDRESS, amount);
-  await approveTx.wait();
-  alert("✅ Approve confirmed");
-}
+    const amount = parseUnits(donateAmount, 6); // BigNumber
+    const allowance = await usdcRead.allowance(account, CONTRACT_ADDRESS);
+
+    if (allowance.lt(amount)) {
+      log("⏳ Approving USDC for donation...");
+      const approveTx = await usdc.approve(CONTRACT_ADDRESS, amount);
+      await approveTx.wait();
+      alert("✅ Approve confirmed");
+    }
+
+    const bal = await usdcRead.balanceOf(account);
+    if (bal.lt(amount)) {
+      alert("Insufficient USDC balance");
+      return;
+    }
 
     log("⏳ Sending donation...");
     const tx = await contract.donate(amount);
@@ -445,29 +468,30 @@ const handlePayFeedback = async () => {
   if (!contract || !provider) return alert("Connect wallet first!");
   if (processing) return;
   setProcessing(true);
+
   try {
     const signer = await provider.getSigner();
-const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
+    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-const contractRead = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, readProvider);
-const usdcRead = new Contract(USDC_ADDRESS, USDC_ABI, readProvider);
+    const contractRead = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, readProvider);
+    const usdcRead = new Contract(USDC_ADDRESS, USDC_ABI, readProvider);
 
-const price = await contractRead.feedbackPrice();
-const allowance = await usdcRead.allowance(account, CONTRACT_ADDRESS);
+    const price = await contractRead.feedbackPrice();
+    const allowance = await usdcRead.allowance(account, CONTRACT_ADDRESS);
 
-if (allowance < price) {
-  log("⏳ Approving USDC for feedback...");
-  const approveTx = await usdc.approve(CONTRACT_ADDRESS, price);
-  await approveTx.wait();
-  alert("✅ Approve confirmed");
-}
+    if (allowance.lt(price)) {
+      log("⏳ Approving USDC for feedback...");
+      const approveTx = await usdc.approve(CONTRACT_ADDRESS, price);
+      await approveTx.wait();
+      alert("✅ Approve confirmed");
+    }
 
     log("⏳ Paying for feedback...");
-    const tx = await contract.payFeedback(); // contract already has signer
+    const tx = await contract.payFeedback();
     await tx.wait();
     log("✅ Feedback payment confirmed");
 
-    setShowFeedbackForm(true); // показать форму после успешной оплаты
+    setShowFeedbackForm(true);
   } catch (e) {
     log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
     alert("❌ Payment for feedback failed");
@@ -568,7 +592,7 @@ const handleSendFeedback = async () => {
     onClick={handleBuyWhitelist}
     style={{ marginTop: 10 }}
   >
-    Buy Whitelist ({whitelistPrice ? (whitelistPrice / 1e6).toFixed(3) : "..." } USDC)
+    Buy Whitelist ({whitelistPriceDisplay ?? "..."} USDC)
   </Button>
 )}
 
@@ -579,7 +603,7 @@ const handleSendFeedback = async () => {
   onClick={handlePayFeedback}
   style={{ marginTop: 10 }}
 >
-  Contact us ({feedbackPrice ? (feedbackPrice / 1e6).toFixed(3) : "..."} USDC)
+  Contact us ({feedbackPriceDisplay ?? "..."} USDC)
 </Button>
 
 {showFeedbackForm && (
