@@ -674,9 +674,6 @@ const handleSendFeedback = async () => {
 
       {/* === Accordions (тоже вынесены, теперь видны всегда) === */}
       <Accordion style={{ marginTop: 20, boxShadow: "none", border: "none", padding: 0 }}>
-        <style>{`
-    .MuiAccordion-root:before { display: none !important; }
-  `}</style>
   <AccordionSummary expandIcon={<span style={{ fontSize: 20 }}>+</span>} style={{ padding: 0 }}>
           <Typography>About</Typography>
         </AccordionSummary>
@@ -688,9 +685,6 @@ const handleSendFeedback = async () => {
       </Accordion>
 
       <Accordion style={{ marginTop: 20, boxShadow: "none", border: "none", padding: 0 }}>
-        <style>{`
-    .MuiAccordion-root:before { display: none !important; }
-  `}</style>
   <AccordionSummary expandIcon={<span style={{ fontSize: 20 }}>+</span>} style={{ padding: 0 }}>
           <Typography>How it works</Typography>
         </AccordionSummary>
@@ -702,9 +696,6 @@ const handleSendFeedback = async () => {
       </Accordion>
 
       <Accordion style={{ marginTop: 20, boxShadow: "none", border: "none", padding: 0 }}>
-        <style>{`
-    .MuiAccordion-root:before { display: none !important; }
-  `}</style>
   <AccordionSummary expandIcon={<span style={{ fontSize: 20 }}>+</span>} style={{ padding: 0 }}>
     <Typography>Proofs</Typography>
   </AccordionSummary>
