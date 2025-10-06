@@ -53,8 +53,8 @@ const COLORS = [
 ];
 
 // === Contract Config ===
-const OWNER_ADDRESS = "0xb57ec96FC3E9cF588c5E6fEfCad14F21F65e4Dff"; // owner address
-const CONTRACT_ADDRESS = "0x0E8304ac6711742b9c632D00006062c45db383F5";
+const OWNER_ADDRESS = "0xd801cA2291a797e377533D134e129eA258810673"; // owner address
+const CONTRACT_ADDRESS = "0x1b453Ed4252Ea0e64CaB49E918fbcfC62d7fAf20";
 
 const CONTRACT_ABI = [
   "function usdc() view returns (address)",
