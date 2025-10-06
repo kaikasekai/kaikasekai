@@ -319,7 +319,7 @@ const handleBuyWhitelist = async () => {
   setProcessing(true);
   try {
     const signer = await provider.getSigner();
-    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
+const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
 const contractRead = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, readProvider);
 const usdcRead = new Contract(USDC_ADDRESS, USDC_ABI, readProvider);
@@ -327,17 +327,12 @@ const usdcRead = new Contract(USDC_ADDRESS, USDC_ABI, readProvider);
 const wlPrice = await contractRead.whitelistPrice();
 const allowance = await usdcRead.allowance(account, CONTRACT_ADDRESS);
 
-
-    
-    //const wlPrice = await contract.whitelistPrice(); // BigInt
-    //const allowance = await usdc.allowance(account, CONTRACT_ADDRESS); // BigInt
-
-    if (allowance < wlPrice) {
-      log("⏳ Approving USDC for whitelist...");
-      const approveTx = await usdc.approve(CONTRACT_ADDRESS, wlPrice);
-      await approveTx.wait();
-      alert("✅ Approve confirmed");
-    }
+if (allowance < wlPrice) {
+  log("⏳ Approving USDC for whitelist...");
+  const approveTx = await usdc.approve(CONTRACT_ADDRESS, wlPrice);
+  await approveTx.wait();
+  alert("✅ Approve confirmed");
+}
 
     log("⏳ Buying whitelist...");
     const tx = await contract.buyWhitelist(); // contract уже создан с signer
@@ -364,25 +359,20 @@ const handleSubscribe = async () => {
   setProcessing(true);
   try {
     const signer = await provider.getSigner();
-    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
-
-    //const priceToPay = await contract.price(); // BigInt
-    //const allowance = await usdc.allowance(account, CONTRACT_ADDRESS); // BigInt
-
+const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
 const contractRead = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, readProvider);
 const usdcRead = new Contract(USDC_ADDRESS, USDC_ABI, readProvider);
 
-const priceToPay = await contractRead.price(); // read-only
+const priceToPay = await contractRead.price();
 const allowance = await usdcRead.allowance(account, CONTRACT_ADDRESS);
 
-    
-    if (allowance < priceToPay) {
-      log("⏳ Approving USDC for subscription...");
-      const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay);
-      await approveTx.wait();
-      alert("✅ Approve confirmed");
-    }
+if (allowance < priceToPay) {
+  log("⏳ Approving USDC for subscription...");
+  const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay);
+  await approveTx.wait();
+  alert("✅ Approve confirmed");
+}
 
     //const bal = await usdc.balanceOf(account);
     const bal = await usdcRead.balanceOf(account);
@@ -424,19 +414,17 @@ const handleDonate = async () => {
   setProcessing(true);
   try {
     const signer = await provider.getSigner();
-    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
+const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-    const usdcRead = new Contract(USDC_ADDRESS, USDC_ABI, readProvider);
-
-    const amount = parseUnits(donateAmount, 6); // BigInt
-  //const allowance = await usdc.allowance(account, CONTRACT_ADDRESS); // BigInt
-    const allowance = await usdcRead.allowance(account, CONTRACT_ADDRESS);
-    if (allowance < amount) {
-      log("⏳ Approving USDC for donation...");
-      const approveTx = await usdc.approve(CONTRACT_ADDRESS, amount);
-      await approveTx.wait();
-      alert("✅ Approve confirmed");
-    }
+const usdcRead = new Contract(USDC_ADDRESS, USDC_ABI, readProvider);
+const amount = parseUnits(donateAmount, 6); // BigInt
+const allowance = await usdcRead.allowance(account, CONTRACT_ADDRESS);
+if (allowance < amount) {
+  log("⏳ Approving USDC for donation...");
+  const approveTx = await usdc.approve(CONTRACT_ADDRESS, amount);
+  await approveTx.wait();
+  alert("✅ Approve confirmed");
+}
 
     log("⏳ Sending donation...");
     const tx = await contract.donate(amount);
@@ -459,10 +447,7 @@ const handlePayFeedback = async () => {
   setProcessing(true);
   try {
     const signer = await provider.getSigner();
-    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
-
-    //const price = await contract.feedbackPrice(); // BigInt
-    //const allowance = await usdc.allowance(account, CONTRACT_ADDRESS);
+const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
 const contractRead = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, readProvider);
 const usdcRead = new Contract(USDC_ADDRESS, USDC_ABI, readProvider);
@@ -470,13 +455,12 @@ const usdcRead = new Contract(USDC_ADDRESS, USDC_ABI, readProvider);
 const price = await contractRead.feedbackPrice();
 const allowance = await usdcRead.allowance(account, CONTRACT_ADDRESS);
 
-    
-    if (allowance < price) {
-      log("⏳ Approving USDC for feedback...");
-      const approveTx = await usdc.approve(CONTRACT_ADDRESS, price);
-      await approveTx.wait();
-      alert("✅ Approve confirmed");
-    }
+if (allowance < price) {
+  log("⏳ Approving USDC for feedback...");
+  const approveTx = await usdc.approve(CONTRACT_ADDRESS, price);
+  await approveTx.wait();
+  alert("✅ Approve confirmed");
+}
 
     log("⏳ Paying for feedback...");
     const tx = await contract.payFeedback(); // contract already has signer
