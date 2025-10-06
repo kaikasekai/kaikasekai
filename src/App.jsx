@@ -129,6 +129,8 @@ function App() {
   const [proofs, setProofs] = useState([]); // массив NFT-шек
   const [debug, setDebug] = useState([]);
 
+  const readProvider = new JsonRpcProvider("https://polygon-rpc.com"); // read-only
+  
   const log = (msg) => {
     setDebug((d) => [...d, `[${new Date().toLocaleTimeString()}] ${msg}`]);
   };
@@ -317,10 +319,18 @@ const handleBuyWhitelist = async () => {
   setProcessing(true);
   try {
     const signer = await provider.getSigner();
-    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
+    //const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-    const wlPrice = await contract.whitelistPrice(); // BigInt
-    const allowance = await usdc.allowance(account, CONTRACT_ADDRESS); // BigInt
+const contractRead = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, readProvider);
+const usdcRead = new Contract(USDC_ADDRESS, USDC_ABI, readProvider);
+
+const wlPrice = await contractRead.whitelistPrice();
+const allowance = await usdcRead.allowance(account, CONTRACT_ADDRESS);
+
+
+    
+    //const wlPrice = await contract.whitelistPrice(); // BigInt
+    //const allowance = await usdc.allowance(account, CONTRACT_ADDRESS); // BigInt
 
     if (allowance < wlPrice) {
       log("⏳ Approving USDC for whitelist...");
@@ -354,11 +364,19 @@ const handleSubscribe = async () => {
   setProcessing(true);
   try {
     const signer = await provider.getSigner();
-    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
+    //const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-    const priceToPay = await contract.price(); // BigInt
-    const allowance = await usdc.allowance(account, CONTRACT_ADDRESS); // BigInt
+    //const priceToPay = await contract.price(); // BigInt
+    //const allowance = await usdc.allowance(account, CONTRACT_ADDRESS); // BigInt
 
+
+const contractRead = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, readProvider);
+const usdcRead = new Contract(USDC_ADDRESS, USDC_ABI, readProvider);
+
+const priceToPay = await contractRead.price(); // read-only
+const allowance = await usdcRead.allowance(account, CONTRACT_ADDRESS);
+
+    
     if (allowance < priceToPay) {
       log("⏳ Approving USDC for subscription...");
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay);
@@ -366,7 +384,8 @@ const handleSubscribe = async () => {
       alert("✅ Approve confirmed");
     }
 
-    const bal = await usdc.balanceOf(account);
+    //const bal = await usdc.balanceOf(account);
+    const bal = await usdcRead.balanceOf(account);
     if (bal < priceToPay) {
       alert("Insufficient USDC balance");
       return;
@@ -405,11 +424,13 @@ const handleDonate = async () => {
   setProcessing(true);
   try {
     const signer = await provider.getSigner();
-    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
+    //const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
+
+    const usdcRead = new Contract(USDC_ADDRESS, USDC_ABI, readProvider);
 
     const amount = parseUnits(donateAmount, 6); // BigInt
-    const allowance = await usdc.allowance(account, CONTRACT_ADDRESS); // BigInt
-
+  //const allowance = await usdc.allowance(account, CONTRACT_ADDRESS); // BigInt
+    const allowance = await usdcRead.allowance(account, CONTRACT_ADDRESS);
     if (allowance < amount) {
       log("⏳ Approving USDC for donation...");
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, amount);
@@ -438,11 +459,18 @@ const handlePayFeedback = async () => {
   setProcessing(true);
   try {
     const signer = await provider.getSigner();
-    const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
+    //const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
-    const price = await contract.feedbackPrice(); // BigInt
-    const allowance = await usdc.allowance(account, CONTRACT_ADDRESS);
+    //const price = await contract.feedbackPrice(); // BigInt
+    //const allowance = await usdc.allowance(account, CONTRACT_ADDRESS);
 
+const contractRead = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, readProvider);
+const usdcRead = new Contract(USDC_ADDRESS, USDC_ABI, readProvider);
+
+const price = await contractRead.feedbackPrice();
+const allowance = await usdcRead.allowance(account, CONTRACT_ADDRESS);
+
+    
     if (allowance < price) {
       log("⏳ Approving USDC for feedback...");
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, price);
