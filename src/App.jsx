@@ -174,7 +174,7 @@ useEffect(() => {
       const items = [];
 
       const count = Math.min(total, 6);
-      for (let i = 1; i <= count; i++) {
+      for (let i = 2; i <= count; i++) {
         let uri = await nftContract.tokenURI(i);
         if (uri.startsWith("ipfs://")) uri = "https://ipfs.io/ipfs/" + uri.slice(7);
         const res = await fetch(uri);
