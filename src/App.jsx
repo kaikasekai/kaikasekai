@@ -87,7 +87,7 @@ const USDC_ABI = [
 ];
 
 // === NFT Config ===
-const NFT_ADDRESS = "0x0c11C503EDEa18e57a5Ce67a2D8eE421d61dB41d";
+const NFT_ADDRESS = "0x0878C09FFE2e702c1A7987B38C63C42E2062b803";
 const NFT_ABI = [
   "function tokenURI(uint256 tokenId) view returns (string)",
   "function totalSupply() view returns (uint256)"
@@ -167,7 +167,7 @@ function App() {
 useEffect(() => {
   const loadProofsWithoutWallet = async () => {
     try {
-      const provider = new JsonRpcProvider("https://rpc-amoy.polygon.technology");
+      const provider = new JsonRpcProvider("https://polygon-rpc.com");
       const nftContract = new Contract(NFT_ADDRESS, NFT_ABI, provider);
 
       const total = Number(await nftContract.totalSupply());
@@ -188,7 +188,7 @@ useEffect(() => {
           name: metadata.name,
           description: metadata.description,
           image: imgUrl,
-          polygonscan: `https://amoy.polygonscan.com/token/${NFT_ADDRESS}?a=${i}`,
+          polygonscan: `https://polygonscan.com/token/${NFT_ADDRESS}?a=${i}`,
         });
       }
 
@@ -208,25 +208,25 @@ useEffect(() => {
     if (window.ethereum) {
       try {
         await window.ethereum.request({
-          method: "wallet_switchEthereumChain",
-          params: [{ chainId: "0x13882" }],
-        });
+  method: "wallet_switchEthereumChain",
+  params: [{ chainId: "0x89" }], // Polygon Mainnet
+});
       } catch (err) {
         if (err.code === 4902) {
           await window.ethereum.request({
-            method: "wallet_addEthereumChain",
-            params: [
-              {
-                chainId: "0x13882",
-                chainName: "Polygon Amoy",
-                nativeCurrency: { name: "MATIC", symbol: "MATIC", decimals: 18 },
-                rpcUrls: ["https://rpc-amoy.polygon.technology"],
-                blockExplorerUrls: ["https://www.oklink.com/amoy"],
-              },
-            ],
-          });
+  method: "wallet_addEthereumChain",
+  params: [
+    {
+      chainId: "0x89",
+      chainName: "Polygon Mainnet",
+      nativeCurrency: { name: "MATIC", symbol: "MATIC", decimals: 18 },
+      rpcUrls: ["https://polygon-rpc.com"],
+      blockExplorerUrls: ["https://polygonscan.com"],
+    },
+  ],
+});
         } else {
-          alert("⚠️ Please switch to Amoy (80002) in your wallet");
+          alert("⚠️ Please switch to Polygon Mainnet (137) in your wallet");
           return;
         }
       }
@@ -609,8 +609,8 @@ const handleSendFeedback = async () => {
               tickFormatter={(d) => dayjs(d).format("MMM D")}
             />
             <YAxis
-  domain={[100000, 160000]}
-  ticks={[100000,105000,110000,115000,120000,125000,130000,135000,140000,145000,150000,155000,160000]}
+  domain={[100000, 150000]}
+  ticks={[100000,105000,110000,115000,120000,125000,130000,135000,140000,145000,150000]}
   tickFormatter={(v) => v.toLocaleString()}
 />
             <Tooltip />
