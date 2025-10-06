@@ -13,6 +13,10 @@ h2 {
   font-weight: 400;
 }
 
+.MuiAccordion-root:before {
+  display: none !important;
+}
+
 .MuiAccordion-root {
   background-color: #fff !important;
   color: #000 !important;
