@@ -701,71 +701,68 @@ const handleSendFeedback = async () => {
   </AccordionSummary>
   <AccordionDetails>
     {proofs.length === 0 ? (
-      <Typography>No proofs yet.</Typography>
-    ) : (
-      <div>
-        {Array.from({ length: proofs.length }, (_, i) => {
-          const tokenId = i + 1;
-          const nft = proofs.find((p) => p.id === tokenId);
-          const resultUrl = `https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${tokenId}.PNG`; 
-          // заменишь USERNAME/REPO на свой GitHub путь
+  <Typography>No proofs yet.</Typography>
+) : (
+  <div>
+    {proofs.map((nft) => {
+      const resultUrl = `https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.id}.PNG`;
 
-          return (
-            <div
-              key={tokenId}
-              style={{
-                display: "flex",
-                gap: 20,
-                marginBottom: 20,
-                alignItems: "flex-start",
-              }}
-            >
-              {/* NFT слева */}
-              <div style={{ flex: 1 }}>
-                {nft ? (
-                  <>
-                    <img
-                      src={nft.image}
-                      alt={nft.name}
-                      style={{ width: "100%", borderRadius: 6 }}
-                    />
-                    <h4 style={{ margin: "10px 0 5px" }}>{nft.name}</h4>
-                    <p style={{ fontSize: 12, color: "#aaa" }}>
-                      {nft.description}
-                    </p>
-                    <a
-                      href={nft.polygonscan}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        fontSize: 12,
-                        color: "#0af",
-                        display: "block",
-                        marginTop: 5,
-                      }}
-                    >
-                      🔍 View on Polygonscan
-                    </a>
-                  </>
-                ) : (
-                  <Typography>Loading NFT {tokenId}…</Typography>
-                )}
-              </div>
-
-              {/* Результат справа */}
-              <div style={{ flex: 1 }}>
+      return (
+        <div
+          key={nft.id}
+          style={{
+            display: "flex",
+            gap: 20,
+            marginBottom: 20,
+            alignItems: "flex-start",
+          }}
+        >
+          {/* NFT слева */}
+          <div style={{ flex: 1 }}>
+            {nft.image ? (
+              <>
                 <img
-                  src={resultUrl}
-                  alt={`Result ${tokenId}`}
+                  src={nft.image}
+                  alt={nft.name}
                   style={{ width: "100%", borderRadius: 6 }}
-                  onError={(e) => (e.target.style.display = "none")} // если картинки нет на GitHub — скрыть
                 />
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    )}
+                <h4 style={{ margin: "10px 0 5px" }}>{nft.name}</h4>
+                <p style={{ fontSize: 12, color: "#aaa" }}>
+                  {nft.description}
+                </p>
+                <a
+                  href={nft.polygonscan}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    fontSize: 12,
+                    color: "#0af",
+                    display: "block",
+                    marginTop: 5,
+                  }}
+                >
+                  🔍 View on Polygonscan
+                </a>
+              </>
+            ) : (
+              <Typography>Loading NFT {nft.id}…</Typography>
+            )}
+          </div>
+
+          {/* Результат справа */}
+          <div style={{ flex: 1 }}>
+            <img
+              src={resultUrl}
+              alt={`Result ${nft.id}`}
+              style={{ width: "100%", borderRadius: 6 }}
+              onError={(e) => (e.target.style.display = "none")}
+            />
+          </div>
+        </div>
+      );
+    })}
+  </div>
+)}
   </AccordionDetails>
 </Accordion>
 
