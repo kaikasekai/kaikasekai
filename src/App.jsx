@@ -57,23 +57,33 @@ const OWNER_ADDRESS = "0xd801cA2291a797e377533D134e129eA258810673"; // owner add
 const CONTRACT_ADDRESS = "0x1b453Ed4252Ea0e64CaB49E918fbcfC62d7fAf20";
 
 const CONTRACT_ABI = [
-  "function setNextEndTime(uint256 _endTime) external",
+  "function usdc() view returns (address)",
+  "function owner() view returns (address)",
   "function nextEndTime() view returns (uint256)",
-  "function subscriptionEnd(address) view returns (uint256)",
-  "function isActive(address) view returns (bool)",
-  "function subscribe(address refAddr) external",
-  "function donate(uint256 amount) external",
-  "function payFeedback() external",
   "function price() view returns (uint256)",
   "function whitelistPrice() view returns (uint256)",
   "function feedbackPrice() view returns (uint256)",
-  "function hasEverSubscribed(address) view returns (bool)",
+  "function referralDiscount() view returns (uint256)",
+  "function referralReward() view returns (uint256)",
   "function whitelistedReferrers(address) view returns (bool)",
+  "function subscriptionEnd(address) view returns (uint256)",
+  "function isActive(address) view returns (bool)",
+  "function referrerOf(address) view returns (address)",
+  "function hasEverSubscribed(address) view returns (bool)",
+  "function contractUSDCBalance() view returns (uint256)",
   "function buyWhitelist() external",
+  "function subscribe(address refAddr) external",
+  "function donate(uint256 amount) external",
+  "function payFeedback() external",
+  "function withdraw(address to, uint256 amount) external",
+  "function setOwner(address newOwner) external",
+  "function setNextEndTime(uint256 _endTime) external",
+  "function setPrice(uint256 newPrice) external",
+  "function setWhitelistPrice(uint256 newPrice) external",
   "function setFeedbackPrice(uint256 newPrice) external",
+  "function setReferralParams(uint256 discountAmount, uint256 rewardAmount) external",
   "event NextEndTimeUpdated(uint256 newEndTime, address indexed owner)",
-  "event FeedbackPaid(address indexed user, uint256 amount)",
-  "event FeedbackPriceChanged(uint256 oldPrice, uint256 newPrice)"
+  "event FeedbackPaid(address indexed user, uint256 amount)"
 ];
 
 // === USDC Config (Polygon) ===
