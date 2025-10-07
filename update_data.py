@@ -7,7 +7,9 @@ FILENAME = 'data.csv'
 def fetch_btc_price_closed(date_str):
     """
     Получает цену закрытия BTC на указанную дату (по UTC),
-    используя CoinGecko /coins/bitcoin/history
+    используя CoinGecko /coins/bitcoin/history.
+    ⚠️ CoinGecko возвращает цену на начало дня UTC, 
+       поэтому нужно вызывать для (дата + 1 день), чтобы получить close предыдущего дня.
     :param date_str: 'YYYY-MM-DD'
     :return: float | None
     """
@@ -41,10 +43,13 @@ def update_csv():
     idx_btc = header.index('BTC')
     idx_ma = header.index('moving_average')
 
-    # Берём вчерашнюю дату по UTC (в момент запуска в 3:00 UTC+3 = 00:00 UTC)
+    # Берём вчерашнюю дату по UTC — в эту строку будем записывать close
     target_date = (datetime.utcnow().date() - timedelta(days=1)).strftime('%Y-%m-%d')
 
-    btc_close = fetch_btc_price_closed(target_date)
+    # CoinGecko возвращает цену на начало дня, поэтому запрашиваем день +1 (т.е. сегодняшний)
+    api_date = datetime.utcnow().date().strftime('%Y-%m-%d')
+    btc_close = fetch_btc_price_closed(api_date)
+
     if btc_close is None:
         print(f"❌ Не удалось получить цену закрытия за {target_date}")
         return
