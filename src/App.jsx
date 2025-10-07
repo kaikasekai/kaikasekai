@@ -219,7 +219,7 @@ useEffect(() => {
               {
                 chainId: "0x89",
                 chainName: "Polygon Mainnet",
-                nativeCurrency: { name: "MATIC", symbol: "MATIC", decimals: 18 },
+                nativeCurrency: { name: "POL", symbol: "POL", decimals: 18 },
                 rpcUrls: ["https://polygon-rpc.com"],
                 blockExplorerUrls: ["https://polygonscan.com"],
               },
@@ -316,9 +316,12 @@ const handleBuyWhitelist = async () => {
       log("⏳ Approving USDC for whitelist...");
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, wlPrice);
       await approveTx.wait();
-      alert("✅ Approve confirmed");
+      alert("✅ Approve confirmed. Now confirm Buy Whitelist in your wallet!");
     }
 
+    // задержка, чтобы MetaMask успел обработать approve
+    await new Promise(r => setTimeout(r, 1000));
+    
     log("⏳ Buying whitelist...");
     const tx = await contract.buyWhitelist(); // contract уже создан с signer
     await tx.wait();
@@ -353,7 +356,7 @@ const handleSubscribe = async () => {
       log("⏳ Approving USDC for subscription...");
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay);
       await approveTx.wait();
-      alert("✅ Approve confirmed");
+      alert("✅ Approve confirmed. Now confirm Subscription in your wallet!");
     }
 
     const bal = await usdc.balanceOf(account);
@@ -363,15 +366,24 @@ const handleSubscribe = async () => {
     }
 
     let refAddr = ZeroAddress;
-    if (referrer && referrer.trim() !== "") {
-      try {
-        const candidate = getAddress(referrer.trim());
-        if (candidate.toLowerCase() !== account.toLowerCase()) refAddr = candidate;
-      } catch {
-        return alert("Invalid referrer address");
-      }
+if (referrer && referrer.trim() !== "") {
+  try {
+    const candidate = getAddress(referrer.trim());
+    if (candidate.toLowerCase() === account.toLowerCase()) {
+      alert("⚠️ You cannot use your own address as referrer");
+      return;
     }
+    refAddr = candidate;
+    log("✅ Valid referrer: " + candidate);
+  } catch {
+    alert("❌ Invalid referrer address");
+    return;
+  }
+}
 
+    // задержка, чтобы MetaMask успел обработать approve
+    await new Promise(r => setTimeout(r, 1000));
+    
     log("⏳ Subscribing...");
     const tx = await contract.subscribe(refAddr);
     await tx.wait();
@@ -404,9 +416,12 @@ const handleDonate = async () => {
       log("⏳ Approving USDC for donation...");
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, amount);
       await approveTx.wait();
-      alert("✅ Approve confirmed");
+      alert("✅ Approve confirmed. Now confirm Donate in your wallet!");
     }
 
+    // задержка, чтобы MetaMask успел обработать approve
+    await new Promise(r => setTimeout(r, 1000));
+    
     log("⏳ Sending donation...");
     const tx = await contract.donate(amount);
     await tx.wait();
@@ -437,9 +452,12 @@ const handlePayFeedback = async () => {
       log("⏳ Approving USDC for feedback...");
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, price);
       await approveTx.wait();
-      alert("✅ Approve confirmed");
+      alert("✅ Approve confirmed. Now confirm Feedback in your wallet!");
     }
 
+    // задержка, чтобы MetaMask успел обработать approve
+    await new Promise(r => setTimeout(r, 1000));
+    
     log("⏳ Paying for feedback...");
     const tx = await contract.payFeedback(); // contract already has signer
     await tx.wait();
@@ -469,12 +487,12 @@ const handleSendFeedback = async () => {
       "oC-ls-BvdR82IZ6b4"
     );
 
-    alert("✅ Message has been send!");
+    alert("✅ Your message sent to the developers!");
     setFeedbackEmail("");
     setFeedbackMessage("");
     setShowFeedbackForm(false);
   } catch (e) {
-    alert("❌ Error, message hasn't send");
+    alert("❌ Error, Your message not sent..");
     console.error(e);
   }
 };
@@ -527,7 +545,7 @@ const handleSendFeedback = async () => {
               )}
 
               <Button variant="contained" color="primary" onClick={handleSubscribe}>
-                Subscribe
+                Subscribe ({price ? (price / 1e6).toFixed(4) : "..." } USDC)
               </Button>
 
               {nextEndTime && (
@@ -546,7 +564,7 @@ const handleSendFeedback = async () => {
     onClick={handleBuyWhitelist}
     style={{ marginTop: 10 }}
   >
-    Buy Whitelist ({whitelistPrice ? (whitelistPrice / 1e6).toFixed(0) : "..." } USDC)
+    Buy Whitelist ({whitelistPrice ? (whitelistPrice / 1e6).toFixed(4) : "..." } USDC)
   </Button>
 )}
 
@@ -557,7 +575,7 @@ const handleSendFeedback = async () => {
   onClick={handlePayFeedback}
   style={{ marginTop: 10 }}
 >
-  Contact us ({feedbackPrice ? (feedbackPrice / 1e6).toFixed(0) : "..."} USDC)
+  Contact us ({feedbackPrice ? (feedbackPrice / 1e6).toFixed(4) : "..."} USDC)
 </Button>
 
 {showFeedbackForm && (
@@ -620,7 +638,7 @@ const handleSendFeedback = async () => {
               dataKey="BTC"
               stroke="#f7931a"
               dot={false}
-              strokeWidth={3}
+              strokeWidth={6}
             />
             <Line
               type="monotone"
@@ -628,14 +646,14 @@ const handleSendFeedback = async () => {
               stroke="#00c69e"
               dot={false}
               strokeDasharray="5 5"
-              strokeWidth={2}
+              strokeWidth={3}
             />
             <Line
               type="monotone"
               dataKey="predict"
               stroke="#0000ff"
               dot={false}
-              strokeWidth={3}
+              strokeWidth={6}
             />
             {Object.keys(data[0])
               .filter((k) => k.startsWith("p_"))
@@ -741,7 +759,7 @@ const handleSendFeedback = async () => {
                     marginTop: 5,
                   }}
                 >
-                  🔍 View on Polygonscan
+                  View on Polygonscan
                 </a>
               </>
             ) : (
