@@ -703,11 +703,11 @@ const handleSendFeedback = async () => {
   <AccordionSummary
     expandIcon={<span style={{ fontSize: 20 }}>{expanded === "about" ? "−" : "+"}</span>}
     onClick={() => setExpanded(expanded === "about" ? false : "about")}
-    style={{ padding: "8px 0" }}
+    style={{ padding: "1px 0" }}
   >
     <Typography>About</Typography>
   </AccordionSummary>
-  <AccordionDetails style={{ padding: "10px 0" }}>
+  <AccordionDetails style={{ padding: "1px 0" }}>
     <Typography>
       The project predicts BTC values with an ensemble of AI models.
     </Typography>
@@ -718,26 +718,26 @@ const handleSendFeedback = async () => {
   <AccordionSummary
     expandIcon={<span style={{ fontSize: 20 }}>{expanded === "how" ? "−" : "+"}</span>}
     onClick={() => setExpanded(expanded === "how" ? false : "how")}
-    style={{ padding: "8px 0" }}
+    style={{ padding: "1px 0" }}
   >
     <Typography>How it works</Typography>
   </AccordionSummary>
-  <AccordionDetails style={{ padding: "10px 0" }}>
+  <AccordionDetails style={{ padding: "1px 0" }}>
     <Typography>
       Shows BTC, moving average, predictions, and error metrics (MAE/MAPE).
     </Typography>
   </AccordionDetails>
 </Accordion>
 
-<Accordion style={{ marginTop: 20, boxShadow: "none", border: "none" }}>
+<Accordion style={{ marginTop: 1, boxShadow: "none", border: "none" }}>
   <AccordionSummary
     expandIcon={<span style={{ fontSize: 20 }}>{expanded === "proofs" ? "−" : "+"}</span>}
     onClick={() => setExpanded(expanded === "proofs" ? false : "proofs")}
-    style={{ padding: "8px 0" }}
+    style={{ padding: "1px 0" }}
   >
     <Typography>Proofs</Typography>
   </AccordionSummary>
-  <AccordionDetails style={{ padding: "10px 0" }}>
+  <AccordionDetails style={{ padding: "1px 0" }}>
     {proofs.length === 0 ? (
       <Typography>No proofs yet.</Typography>
     ) : (
@@ -802,23 +802,23 @@ const handleSendFeedback = async () => {
 </Accordion>
 
 {/* === Debug Log (в аккордеоне) === */}
-<Accordion style={{ marginTop: 20, boxShadow: "none", border: "none" }}>
+<Accordion style={{ marginTop: 1, boxShadow: "none", border: "none" }}>
   <AccordionSummary
     expandIcon={<span style={{ fontSize: 20 }}>{expanded === "debug" ? "−" : "+"}</span>}
     onClick={() => setExpanded(expanded === "debug" ? false : "debug")}
-    style={{ padding: "8px 0" }}
+    style={{ padding: "1px 0" }}
   >
     <Typography>Debug Log</Typography>
   </AccordionSummary>
-  <AccordionDetails style={{ padding: "10px 0" }}>
+  <AccordionDetails style={{ padding: "1px 0" }}>
     <div
       style={{
         background: "#111",
         color: "#0f0",
         fontSize: 12,
         whiteSpace: "pre-wrap",
-        borderRadius: 8,
-        padding: 10,
+        borderRadius: 0,
+        padding: 0,
       }}
     >
       {debug.length ? debug.join("\n") : "No logs yet."}
