@@ -345,52 +345,58 @@ const handleSubscribe = async () => {
   if (!contract || !provider) return alert("Connect wallet first!");
   if (processing) return;
   setProcessing(true);
+
   try {
     const signer = await provider.getSigner();
     const usdc = new Contract(USDC_ADDRESS, USDC_ABI, signer);
 
+    // --- 1️⃣ Проверяем корректность реферера ДО approve ---
+    let refAddr = ZeroAddress;
+    if (referrer && referrer.trim() !== "") {
+      try {
+        const candidate = getAddress(referrer.trim());
+        if (candidate.toLowerCase() === account.toLowerCase()) {
+          alert("⚠️ You cannot use your own address as referrer. Subscription will proceed without discount.");
+          refAddr = ZeroAddress;
+        } else {
+          refAddr = candidate;
+          log("✅ Valid referrer: " + candidate);
+        }
+      } catch {
+        alert("⚠️ Invalid referrer address. Subscription will proceed without discount.");
+        refAddr = ZeroAddress; // просто подписываем без скидки
+      }
+    }
+
+    // --- 2️⃣ Проверяем баланс и allowance ---
     const priceToPay = await contract.price(); // BigInt
     const allowance = await usdc.allowance(account, CONTRACT_ADDRESS); // BigInt
 
+    const bal = await usdc.balanceOf(account);
+    if (bal < priceToPay) {
+      alert("❌ Insufficient USDC balance");
+      setProcessing(false);
+      return;
+    }
+
+    // --- 3️⃣ Если нужно — делаем approve ---
     if (allowance < priceToPay) {
       log("⏳ Approving USDC for subscription...");
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay);
       await approveTx.wait();
       alert("✅ Approve confirmed. Now confirm Subscription in your wallet!");
+      // Небольшая задержка, чтобы MetaMask всё обработал
+      await new Promise((r) => setTimeout(r, 1000));
     }
 
-    const bal = await usdc.balanceOf(account);
-    if (bal < priceToPay) {
-      alert("Insufficient USDC balance");
-      return;
-    }
-
-    let refAddr = ZeroAddress;
-if (referrer && referrer.trim() !== "") {
-  try {
-    const candidate = getAddress(referrer.trim());
-    if (candidate.toLowerCase() === account.toLowerCase()) {
-      alert("⚠️ You cannot use your own address as referrer");
-      return;
-    }
-    refAddr = candidate;
-    log("✅ Valid referrer: " + candidate);
-  } catch {
-    alert("❌ Invalid referrer address");
-    return;
-  }
-}
-
-    // задержка, чтобы MetaMask успел обработать approve
-    await new Promise(r => setTimeout(r, 1000));
-    
+    // --- 4️⃣ Подписка ---
     log("⏳ Subscribing...");
     const tx = await contract.subscribe(refAddr);
     await tx.wait();
     log("✅ Subscription confirmed");
 
     await checkSubscription(contract, account);
-    alert("✅ Subscription successfull!");
+    alert("✅ Subscription successful!");
   } catch (e) {
     log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
     alert("❌ Subscription failed, see Debug log");
