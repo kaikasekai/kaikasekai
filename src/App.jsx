@@ -118,6 +118,7 @@ function App() {
   const [nftContract, setNftContract] = useState(null);
   const [proofs, setProofs] = useState([]); // массив NFT-шек
   const [debug, setDebug] = useState([]);
+  const [expanded, setExpanded] = useState(false);
 
   const log = (msg) => {
     setDebug((d) => [...d, `[${new Date().toLocaleTimeString()}] ${msg}`]);
@@ -697,115 +698,133 @@ const handleSendFeedback = async () => {
       )}
 
       {/* === Accordions (тоже вынесены, теперь видны всегда) === */}
-      <Accordion style={{ marginTop: 20, boxShadow: "none", border: "none", padding: 0 }}>
-  <AccordionSummary expandIcon={<span style={{ fontSize: 20 }}>+</span>} style={{ padding: 0 }}>
-          <Typography>About</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            The project predicts BTC values with an ensemble of AI models.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion style={{ marginTop: 20, boxShadow: "none", border: "none", padding: 0 }}>
-  <AccordionSummary expandIcon={<span style={{ fontSize: 20 }}>+</span>} style={{ padding: 0 }}>
-          <Typography>How it works</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Shows BTC, moving average, predictions, and error metrics (MAE/MAPE).
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion style={{ marginTop: 20, boxShadow: "none", border: "none", padding: 0 }}>
-  <AccordionSummary expandIcon={<span style={{ fontSize: 20 }}>+</span>} style={{ padding: 0 }}>
-    <Typography>Proofs</Typography>
+      {/* === Accordions === */}
+<Accordion style={{ marginTop: 20, boxShadow: "none", border: "none" }}>
+  <AccordionSummary
+    expandIcon={<span style={{ fontSize: 20 }}>{expanded === "about" ? "−" : "+"}</span>}
+    onClick={() => setExpanded(expanded === "about" ? false : "about")}
+    style={{ padding: "8px 0" }}
+  >
+    <Typography>About</Typography>
   </AccordionSummary>
-  <AccordionDetails>
-    {proofs.length === 0 ? (
-  <Typography>No proofs yet.</Typography>
-) : (
-  <div>
-    {proofs.map((nft) => {
-      const resultUrl = `https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.id}.PNG`;
-
-      return (
-        <div
-          key={nft.id}
-          style={{
-            display: "flex",
-            gap: 20,
-            marginBottom: 20,
-            alignItems: "flex-start",
-          }}
-        >
-          {/* NFT слева */}
-          <div style={{ flex: 1 }}>
-            {nft.image ? (
-              <>
-                <img
-                  src={nft.image}
-                  alt={nft.name}
-                  style={{ width: "100%", borderRadius: 6 }}
-                />
-                <h4 style={{ margin: "10px 0 5px" }}>{nft.name}</h4>
-                <p style={{ fontSize: 12, color: "#aaa" }}>
-                  {nft.description}
-                </p>
-                <a
-                  href={nft.polygonscan}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    fontSize: 12,
-                    color: "#0af",
-                    display: "block",
-                    marginTop: 5,
-                  }}
-                >
-                  View on Polygonscan
-                </a>
-              </>
-            ) : (
-              <Typography>Loading NFT {nft.id}…</Typography>
-            )}
-          </div>
-
-          {/* Результат справа */}
-          <div style={{ flex: 1 }}>
-            <img
-              src={resultUrl}
-              alt={`Result ${nft.id}`}
-              style={{ width: "100%", borderRadius: 6 }}
-              onError={(e) => (e.target.style.display = "none")}
-            />
-          </div>
-        </div>
-      );
-    })}
-  </div>
-)}
+  <AccordionDetails style={{ padding: "10px 0" }}>
+    <Typography>
+      The project predicts BTC values with an ensemble of AI models.
+    </Typography>
   </AccordionDetails>
 </Accordion>
 
-      {/* === Debug log (всегда виден) === */}
-      <div
-        style={{
-          marginTop: 20,
-          padding: 10,
-          background: "#111",
-          color: "#0f0",
-          fontSize: 12,
-          whiteSpace: "pre-wrap",
-          borderRadius: 8,
-        }}
-      >
-        <strong>Debug log:</strong>
-        {"\n"}
-        {debug.join("\n")}
+<Accordion style={{ marginTop: 20, boxShadow: "none", border: "none" }}>
+  <AccordionSummary
+    expandIcon={<span style={{ fontSize: 20 }}>{expanded === "how" ? "−" : "+"}</span>}
+    onClick={() => setExpanded(expanded === "how" ? false : "how")}
+    style={{ padding: "8px 0" }}
+  >
+    <Typography>How it works</Typography>
+  </AccordionSummary>
+  <AccordionDetails style={{ padding: "10px 0" }}>
+    <Typography>
+      Shows BTC, moving average, predictions, and error metrics (MAE/MAPE).
+    </Typography>
+  </AccordionDetails>
+</Accordion>
+
+<Accordion style={{ marginTop: 20, boxShadow: "none", border: "none" }}>
+  <AccordionSummary
+    expandIcon={<span style={{ fontSize: 20 }}>{expanded === "proofs" ? "−" : "+"}</span>}
+    onClick={() => setExpanded(expanded === "proofs" ? false : "proofs")}
+    style={{ padding: "8px 0" }}
+  >
+    <Typography>Proofs</Typography>
+  </AccordionSummary>
+  <AccordionDetails style={{ padding: "10px 0" }}>
+    {proofs.length === 0 ? (
+      <Typography>No proofs yet.</Typography>
+    ) : (
+      <div>
+        {proofs.map((nft) => {
+          const resultUrl = `https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.id}.PNG`;
+          return (
+            <div
+              key={nft.id}
+              style={{
+                display: "flex",
+                gap: 20,
+                marginBottom: 20,
+                alignItems: "flex-start",
+              }}
+            >
+              <div style={{ flex: 1 }}>
+                {nft.image ? (
+                  <>
+                    <img
+                      src={nft.image}
+                      alt={nft.name}
+                      style={{ width: "100%", borderRadius: 6 }}
+                    />
+                    <h4 style={{ margin: "10px 0 5px" }}>{nft.name}</h4>
+                    <p style={{ fontSize: 12, color: "#aaa" }}>
+                      {nft.description}
+                    </p>
+                    <a
+                      href={nft.polygonscan}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        fontSize: 12,
+                        color: "#0af",
+                        display: "block",
+                        marginTop: 5,
+                      }}
+                    >
+                      View on Polygonscan
+                    </a>
+                  </>
+                ) : (
+                  <Typography>Loading NFT {nft.id}…</Typography>
+                )}
+              </div>
+
+              <div style={{ flex: 1 }}>
+                <img
+                  src={resultUrl}
+                  alt={`Result ${nft.id}`}
+                  style={{ width: "100%", borderRadius: 6 }}
+                  onError={(e) => (e.target.style.display = "none")}
+                />
+              </div>
+            </div>
+          );
+        })}
       </div>
+    )}
+  </AccordionDetails>
+</Accordion>
+
+{/* === Debug Log (в аккордеоне) === */}
+<Accordion style={{ marginTop: 20, boxShadow: "none", border: "none" }}>
+  <AccordionSummary
+    expandIcon={<span style={{ fontSize: 20 }}>{expanded === "debug" ? "−" : "+"}</span>}
+    onClick={() => setExpanded(expanded === "debug" ? false : "debug")}
+    style={{ padding: "8px 0" }}
+  >
+    <Typography>Debug Log</Typography>
+  </AccordionSummary>
+  <AccordionDetails style={{ padding: "10px 0" }}>
+    <div
+      style={{
+        background: "#111",
+        color: "#0f0",
+        fontSize: 12,
+        whiteSpace: "pre-wrap",
+        borderRadius: 8,
+        padding: 10,
+      }}
+    >
+      {debug.length ? debug.join("\n") : "No logs yet."}
+    </div>
+  </AccordionDetails>
+</Accordion>
     </div>
   );
 }
