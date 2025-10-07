@@ -703,41 +703,41 @@ const handleSendFeedback = async () => {
   <AccordionSummary
     expandIcon={<span style={{ fontSize: 20 }}>{expanded === "about" ? "−" : "+"}</span>}
     onClick={() => setExpanded(expanded === "about" ? false : "about")}
-    style={{ padding: "1px 0" }}
+    style={{ padding: "0px 0" }}
   >
     <Typography>About</Typography>
   </AccordionSummary>
-  <AccordionDetails style={{ padding: "1px 0" }}>
+  <AccordionDetails style={{ padding: "0px 0" }}>
     <Typography>
       The project predicts BTC values with an ensemble of AI models.
     </Typography>
   </AccordionDetails>
 </Accordion>
 
-<Accordion style={{ marginTop: 20, boxShadow: "none", border: "none" }}>
+<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none" }}>
   <AccordionSummary
     expandIcon={<span style={{ fontSize: 20 }}>{expanded === "how" ? "−" : "+"}</span>}
     onClick={() => setExpanded(expanded === "how" ? false : "how")}
-    style={{ padding: "1px 0" }}
+    style={{ padding: "0px 0" }}
   >
     <Typography>How it works</Typography>
   </AccordionSummary>
-  <AccordionDetails style={{ padding: "1px 0" }}>
+  <AccordionDetails style={{ padding: "0px 0" }}>
     <Typography>
       Shows BTC, moving average, predictions, and error metrics (MAE/MAPE).
     </Typography>
   </AccordionDetails>
 </Accordion>
 
-<Accordion style={{ marginTop: 1, boxShadow: "none", border: "none" }}>
+<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none" }}>
   <AccordionSummary
     expandIcon={<span style={{ fontSize: 20 }}>{expanded === "proofs" ? "−" : "+"}</span>}
     onClick={() => setExpanded(expanded === "proofs" ? false : "proofs")}
-    style={{ padding: "1px 0" }}
+    style={{ padding: "0px 0" }}
   >
     <Typography>Proofs</Typography>
   </AccordionSummary>
-  <AccordionDetails style={{ padding: "1px 0" }}>
+  <AccordionDetails style={{ padding: "0px 0" }}>
     {proofs.length === 0 ? (
       <Typography>No proofs yet.</Typography>
     ) : (
@@ -760,7 +760,7 @@ const handleSendFeedback = async () => {
                     <img
                       src={nft.image}
                       alt={nft.name}
-                      style={{ width: "100%", borderRadius: 6 }}
+                      style={{ width: "100%", borderRadius: 0 }}
                     />
                     <h4 style={{ margin: "10px 0 5px" }}>{nft.name}</h4>
                     <p style={{ fontSize: 12, color: "#aaa" }}>
@@ -789,7 +789,7 @@ const handleSendFeedback = async () => {
                 <img
                   src={resultUrl}
                   alt={`Result ${nft.id}`}
-                  style={{ width: "100%", borderRadius: 6 }}
+                  style={{ width: "100%", borderRadius: 0 }}
                   onError={(e) => (e.target.style.display = "none")}
                 />
               </div>
@@ -806,11 +806,11 @@ const handleSendFeedback = async () => {
   <AccordionSummary
     expandIcon={<span style={{ fontSize: 20 }}>{expanded === "debug" ? "−" : "+"}</span>}
     onClick={() => setExpanded(expanded === "debug" ? false : "debug")}
-    style={{ padding: "1px 0" }}
+    style={{ padding: "0px 0" }}
   >
     <Typography>Debug Log</Typography>
   </AccordionSummary>
-  <AccordionDetails style={{ padding: "1px 0" }}>
+  <AccordionDetails style={{ padding: "0px 0" }}>
     <div
       style={{
         background: "#111",
@@ -819,6 +819,7 @@ const handleSendFeedback = async () => {
         whiteSpace: "pre-wrap",
         borderRadius: 0,
         padding: 0,
+        margin: 20,
       }}
     >
       {debug.length ? debug.join("\n") : "No logs yet."}
