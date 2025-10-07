@@ -48,3 +48,25 @@ h2 {
   fill: #bbb;
   font-size: 12px;
 }
+
+/* === Accordion stable paddings (чтобы содержимое не сдвигалось) === */
+
+.MuiAccordionSummary-root {
+  padding: 8px 0 !important;
+  min-height: unset !important;
+}
+
+.MuiAccordionSummary-root.Mui-expanded {
+  min-height: unset !important;
+  margin: 0 !important;
+  padding: 8px 0 !important;
+}
+
+.MuiAccordionDetails-root {
+  padding: 10px 0 !important;
+}
+
+.MuiAccordion-root.Mui-expanded {
+  margin: 0 !important;
+}
+
