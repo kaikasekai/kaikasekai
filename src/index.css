@@ -1,4 +1,4 @@
-/* index.css */
+/* === Base Styles === */
 
 body {
   background: #fff !important;
@@ -13,47 +13,28 @@ h2 {
   font-weight: 400;
 }
 
-.MuiAccordion-root:before {
-  display: none !important;
-}
+/* === Accordion Global Reset === */
 
 .MuiAccordion-root {
   background-color: #fff !important;
   color: #000 !important;
+  box-shadow: none !important;
+  border: none !important;
+  margin: 0 !important;
+  transition: none !important; /* убираем резкие анимации MUI */
 }
 
-.MuiAccordionSummary-expandIconWrapper {
-  color: #fff;
+.MuiAccordion-root:before {
+  display: none !important;
 }
 
-/* Контейнер для графика */
-.chart-wrapper {
-  background: #101010;
-  border-radius: 0px;
-  padding: 10px;
-}
-
-/* Сам график (svg внутри LineChart) */
-.chart {
-  overflow: visible;
-}
-
-/* Сетка */
-.recharts-cartesian-grid line {
-  stroke: rgba(255, 255, 255, 0.1);
-}
-
-/* Оси */
-.recharts-cartesian-axis-tick text {
-  fill: #bbb;
-  font-size: 12px;
-}
-
-/* === Accordion stabilization fix === */
+/* === Accordion Summary (заголовок) === */
 
 .MuiAccordionSummary-root {
-  padding: 0px 0 !important;
+  padding: 6px 0 !important;
   min-height: unset !important;
+  align-items: flex-start !important;
+  transition: none !important;
 }
 
 .MuiAccordionSummary-root.Mui-expanded {
@@ -62,20 +43,61 @@ h2 {
 
 .MuiAccordionSummary-content {
   margin: 0 !important;
+  align-items: center !important;
+  transition: none !important;
 }
 
 .MuiAccordionSummary-content.Mui-expanded {
-  margin: 0 !important; /* ← убирает тот самый сдвиг */
+  margin: 0 !important;
+  align-items: center !important;
 }
+
+/* === Accordion Details (контент) === */
 
 .MuiAccordionDetails-root {
-  padding: 0px 0 !important;
-}
-
-.MuiAccordion-root:before {
-  display: none !important;
-}
-
-.MuiAccordion-root.Mui-expanded {
+  padding: 10px 0 !important;
   margin: 0 !important;
+  transition: none !important;
+}
+
+/* Убираем любые отступы у первого и последнего аккордеона */
+.MuiAccordion-root:first-of-type {
+  margin-top: 0 !important;
+}
+
+.MuiAccordion-root:last-of-type {
+  margin-bottom: 0 !important;
+}
+
+/* === Контейнер для графика === */
+
+.chart-wrapper {
+  background: #101010;
+  border-radius: 0px;
+  padding: 10px;
+}
+
+/* === Сам график (svg внутри LineChart) === */
+
+.chart {
+  overflow: visible;
+}
+
+/* === Сетка === */
+
+.recharts-cartesian-grid line {
+  stroke: rgba(255, 255, 255, 0.1);
+}
+
+/* === Оси === */
+
+.recharts-cartesian-axis-tick text {
+  fill: #bbb;
+  font-size: 12px;
+}
+
+/* === Expand Icon === */
+
+.MuiAccordionSummary-expandIconWrapper {
+  color: #fff;
 }
