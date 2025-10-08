@@ -523,12 +523,7 @@ const handleSendFeedback = async () => {
           <>
             {/* === Chart === */}
             <div style={{ marginTop: 20 }}>
-              <small>
-                {subscriptionActive
-                  ? "Range: Current + Next month"
-                  : "Range: Current month"}
-              </small>
-              <ResponsiveContainer width="100%" height={500}>
+              <ResponsiveContainer width="100%" height={500} className="chart-wrapper">
                 <LineChart data={filteredData}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis
@@ -580,6 +575,11 @@ const handleSendFeedback = async () => {
                     ))}
                 </LineChart>
               </ResponsiveContainer>
+              <small>
+                {subscriptionActive
+                  ? "Range: Current + Next month"
+                  : "Range: Current month"}
+              </small>
               <div style={{ marginTop: 10 }}>
                 <strong>Accuracy last 30 days:</strong> {mape}%
               </div>
@@ -588,7 +588,7 @@ const handleSendFeedback = async () => {
       
       {/* === Wallet section === */}
       {!account ? (
-        <Button variant="contained" onClick={connectWallet} style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none' }}>
+        <Button variant="contained" onClick={connectWallet} style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none', margin: 10 }}>
           Connect Wallet
         </Button>
       ) : (
@@ -611,7 +611,7 @@ const handleSendFeedback = async () => {
                 />
               )}
 
-              <Button variant="contained" onClick={handleSubscribe} style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none' }}>
+              <Button variant="contained" onClick={handleSubscribe} style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none', margin: 10 }}>
                 Subscribe ({price ? (price / 1e6).toFixed(4) : "..." } USDC)
               </Button>
 
@@ -628,7 +628,7 @@ const handleSendFeedback = async () => {
   <Button
     variant="contained"
     onClick={handleBuyWhitelist}
-    style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none' }}
+    style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none', margin: 10 }}
   >
     Buy Whitelist ({whitelistPrice ? (whitelistPrice / 1e6).toFixed(4) : "..." } USDC)
   </Button>
@@ -638,7 +638,7 @@ const handleSendFeedback = async () => {
 <Button
   variant="contained"
   onClick={handlePayFeedback}
-  style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none' }}
+  style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none', margin: 10 }}
 >
   Contact us ({feedbackPrice ? (feedbackPrice / 1e6).toFixed(4) : "..."} USDC)
 </Button>
@@ -664,7 +664,7 @@ const handleSendFeedback = async () => {
     />
     <Button
       variant="contained"
-      style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none' }}
+      style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none', margin: 10 }}
       onClick={handleSendFeedback}
     >
       Send
@@ -687,7 +687,7 @@ const handleSendFeedback = async () => {
             fullWidth
             margin="dense"
           />
-          <Button variant="contained" onClick={handleDonate} style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none' }}>
+          <Button variant="contained" onClick={handleDonate} style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none', margin: 10 }}>
             Donate
           </Button>
         </div>
@@ -893,7 +893,7 @@ const handleSendFeedback = async () => {
               <rect x="100" y="50" width="50" height="50" fill="#0080FF" />
               <rect x="50" y="100" width="50" height="50" fill="#FF0080" />
             </svg>
-            <span className="footer-copy">© 2025 kaikasekai</span>
+            <span className="footer-copy"> Copyright © 2025 kaikasekai</span>
           </div>
         </div>
       </footer>
