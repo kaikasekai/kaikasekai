@@ -589,7 +589,7 @@ const handleSendFeedback = async () => {
       
       {/* === Wallet section === */}
       {!account ? (
-        <Button variant="contained" onClick={connectWallet}>
+        <Button variant="contained" color="#ffb60d" onClick={connectWallet}>
           Connect Wallet
         </Button>
       ) : (
@@ -612,7 +612,7 @@ const handleSendFeedback = async () => {
                 />
               )}
 
-              <Button variant="contained" color="primary" onClick={handleSubscribe}>
+              <Button variant="contained" color="#ffb60d" onClick={handleSubscribe}>
                 Subscribe ({price ? (price / 1e6).toFixed(4) : "..." } USDC)
               </Button>
 
@@ -628,7 +628,7 @@ const handleSendFeedback = async () => {
               {!hasWhitelist && (
   <Button
     variant="contained"
-    color="secondary"
+    color="#ffb60d"
     onClick={handleBuyWhitelist}
     style={{ marginTop: 10 }}
   >
@@ -639,7 +639,7 @@ const handleSendFeedback = async () => {
 
 <Button
   variant="contained"
-  color="info"
+  color="#ffb60d"
   onClick={handlePayFeedback}
   style={{ marginTop: 10 }}
 >
@@ -667,7 +667,7 @@ const handleSendFeedback = async () => {
     />
     <Button
       variant="contained"
-      color="success"
+      color="#ffb60d"
       style={{ marginTop: 10 }}
       onClick={handleSendFeedback}
     >
@@ -691,7 +691,7 @@ const handleSendFeedback = async () => {
             fullWidth
             margin="dense"
           />
-          <Button variant="contained" color="secondary" onClick={handleDonate}>
+          <Button variant="contained" color="#ffb60d" onClick={handleDonate}>
             Donate
           </Button>
         </div>
