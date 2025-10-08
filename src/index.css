@@ -1,16 +1,37 @@
 /* === Base Styles === */
 
-body {
-  background: #fff !important;
-  font-size: 12px;
-  margin: 0;
-  padding: 0;
-  color: #000;
-  font-family: 'Menlo';
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('./assets/fonts/JetBrainsMono-Regular.woff2') format('truetype');
+  font-weight: 400;
+  font-style: normal;
 }
 
-h2 {
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('./assets/fonts/JetBrainsMono-Bold.woff2') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Применим шрифт ко всему телу */
+body {
+  font-family: 'JetBrains Mono', monospace;
   font-weight: 400;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  color: #000;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700; /* Bold */
+}
+
+p, span, button, div {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 400; /* Regular */
 }
 
 /* === Accordion Global Reset === */
