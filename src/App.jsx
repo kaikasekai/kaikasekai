@@ -588,7 +588,7 @@ const handleSendFeedback = async () => {
       
       {/* === Wallet section === */}
       {!account ? (
-        <Button variant="contained" onClick={connectWallet} style={{ backgroundColor: '#ffb60d', color: '#000' }}>
+        <Button variant="contained" onClick={connectWallet} style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none' }}>
           Connect Wallet
         </Button>
       ) : (
@@ -611,7 +611,7 @@ const handleSendFeedback = async () => {
                 />
               )}
 
-              <Button variant="contained" onClick={handleSubscribe} style={{ backgroundColor: '#ffb60d', color: '#000' }}>
+              <Button variant="contained" onClick={handleSubscribe} style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none' }}>
                 Subscribe ({price ? (price / 1e6).toFixed(4) : "..." } USDC)
               </Button>
 
@@ -628,7 +628,7 @@ const handleSendFeedback = async () => {
   <Button
     variant="contained"
     onClick={handleBuyWhitelist}
-    style={{ backgroundColor: '#ffb60d', color: '#000' }}
+    style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none' }}
   >
     Buy Whitelist ({whitelistPrice ? (whitelistPrice / 1e6).toFixed(4) : "..." } USDC)
   </Button>
@@ -638,7 +638,7 @@ const handleSendFeedback = async () => {
 <Button
   variant="contained"
   onClick={handlePayFeedback}
-  style={{ backgroundColor: '#ffb60d', color: '#000' }}
+  style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none' }}
 >
   Contact us ({feedbackPrice ? (feedbackPrice / 1e6).toFixed(4) : "..."} USDC)
 </Button>
@@ -664,7 +664,7 @@ const handleSendFeedback = async () => {
     />
     <Button
       variant="contained"
-      style={{ backgroundColor: '#ffb60d', color: '#000' }}
+      style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none' }}
       onClick={handleSendFeedback}
     >
       Send
@@ -687,7 +687,7 @@ const handleSendFeedback = async () => {
             fullWidth
             margin="dense"
           />
-          <Button variant="contained" onClick={handleDonate} style={{ backgroundColor: '#ffb60d', color: '#000' }}>
+          <Button variant="contained" onClick={handleDonate} style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none' }}>
             Donate
           </Button>
         </div>
@@ -703,7 +703,7 @@ const handleSendFeedback = async () => {
               variant="outlined"
               size="small"
               onClick={() => setPage("main")}
-              style={{ marginBottom: 20 }}
+              style={{ marginBottom: 20, textTransform: 'none' }}
             >
               ← Back
             </Button>
@@ -724,7 +724,7 @@ const handleSendFeedback = async () => {
               variant="outlined"
               size="small"
               onClick={() => setPage("main")}
-              style={{ marginBottom: 20 }}
+              style={{ marginBottom: 20, textTransform: 'none' }}
             >
               ← Back
             </Button>
