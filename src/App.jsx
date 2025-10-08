@@ -589,7 +589,7 @@ const handleSendFeedback = async () => {
       
       {/* === Wallet section === */}
       {!account ? (
-        <Button variant="contained" color="#ffb60d" onClick={connectWallet}>
+        <Button variant="contained" onClick={connectWallet} style={{ backgroundColor: '#ffb60d', color: '#000' }}>
           Connect Wallet
         </Button>
       ) : (
@@ -612,7 +612,7 @@ const handleSendFeedback = async () => {
                 />
               )}
 
-              <Button variant="contained" color="#ffb60d" onClick={handleSubscribe}>
+              <Button variant="contained" onClick={handleSubscribe} style={{ backgroundColor: '#ffb60d', color: '#000' }}>
                 Subscribe ({price ? (price / 1e6).toFixed(4) : "..." } USDC)
               </Button>
 
@@ -628,9 +628,8 @@ const handleSendFeedback = async () => {
               {!hasWhitelist && (
   <Button
     variant="contained"
-    color="#ffb60d"
     onClick={handleBuyWhitelist}
-    style={{ marginTop: 10 }}
+    style={{ backgroundColor: '#ffb60d', color: '#000' }}
   >
     Buy Whitelist ({whitelistPrice ? (whitelistPrice / 1e6).toFixed(4) : "..." } USDC)
   </Button>
@@ -639,9 +638,8 @@ const handleSendFeedback = async () => {
 
 <Button
   variant="contained"
-  color="#ffb60d"
   onClick={handlePayFeedback}
-  style={{ marginTop: 10 }}
+  style={{ backgroundColor: '#ffb60d', color: '#000' }}
 >
   Contact us ({feedbackPrice ? (feedbackPrice / 1e6).toFixed(4) : "..."} USDC)
 </Button>
@@ -667,8 +665,7 @@ const handleSendFeedback = async () => {
     />
     <Button
       variant="contained"
-      color="#ffb60d"
-      style={{ marginTop: 10 }}
+      style={{ backgroundColor: '#ffb60d', color: '#000' }}
       onClick={handleSendFeedback}
     >
       Send
@@ -691,7 +688,7 @@ const handleSendFeedback = async () => {
             fullWidth
             margin="dense"
           />
-          <Button variant="contained" color="#ffb60d" onClick={handleDonate}>
+          <Button variant="contained" onClick={handleDonate} style={{ backgroundColor: '#ffb60d', color: '#000' }}>
             Donate
           </Button>
         </div>
