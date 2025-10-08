@@ -74,7 +74,8 @@ h2 {
 .chart-wrapper {
   background: #101010;
   border-radius: 0px;
-  padding: 10px;
+  padding: 10px 20px; /* добавляем больше воздуха справа и слева */
+  box-sizing: border-box; /* предотвращает переполнение */
 }
 
 /* === Сам график (svg внутри LineChart) === */
