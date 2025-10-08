@@ -533,8 +533,8 @@ const handleSendFeedback = async () => {
                   <YAxis
                     domain={[100000, 150000]}
                     ticks={[
-                      100000, 105000, 110000, 115000, 120000, 125000, 130000,
-                      135000, 140000, 145000, 150000,
+                      105000, 110000, 115000, 120000, 125000, 130000,
+                      135000, 140000, 145000, 150000, 155000,
                     ]}
                     tickFormatter={(v) => v.toLocaleString()}
                   />
@@ -575,6 +575,7 @@ const handleSendFeedback = async () => {
                     ))}
                 </LineChart>
               </ResponsiveContainer>
+              <p></p>
               <small>
                 {subscriptionActive
                   ? "Range: Current + Next month"
