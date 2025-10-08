@@ -314,7 +314,7 @@ const handleBuyWhitelist = async () => {
     const allowance = await usdc.allowance(account, CONTRACT_ADDRESS); // BigInt
 
     if (allowance < wlPrice) {
-      log("⏳ Approving USDC for whitelist...");
+      log("Approving USDC for whitelist...");
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, wlPrice);
       await approveTx.wait();
       alert("✅ Approve confirmed. Now confirm Buy Whitelist in your wallet!");
@@ -323,7 +323,7 @@ const handleBuyWhitelist = async () => {
     // задержка, чтобы MetaMask успел обработать approve
     await new Promise(r => setTimeout(r, 1000));
     
-    log("⏳ Buying whitelist...");
+    log("Buying whitelist...");
     const tx = await contract.buyWhitelist(); // contract уже создан с signer
     await tx.wait();
     log("✅ BuyWhitelist confirmed");
@@ -382,7 +382,7 @@ const handleSubscribe = async () => {
 
     // --- 3️⃣ Если нужно — делаем approve ---
     if (allowance < priceToPay) {
-      log("⏳ Approving USDC for subscription...");
+      log("Approving USDC for subscription...");
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, priceToPay);
       await approveTx.wait();
       alert("✅ Approve confirmed. Now confirm Subscription in your wallet!");
@@ -391,7 +391,7 @@ const handleSubscribe = async () => {
     }
 
     // --- 4️⃣ Подписка ---
-    log("⏳ Subscribing...");
+    log("Subscribing...");
     const tx = await contract.subscribe(refAddr);
     await tx.wait();
     log("✅ Subscription confirmed");
@@ -420,7 +420,7 @@ const handleDonate = async () => {
     const allowance = await usdc.allowance(account, CONTRACT_ADDRESS); // BigInt
 
     if (allowance < amount) {
-      log("⏳ Approving USDC for donation...");
+      log("Approving USDC for donation...");
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, amount);
       await approveTx.wait();
       alert("✅ Approve confirmed. Now confirm Donate in your wallet!");
@@ -429,7 +429,7 @@ const handleDonate = async () => {
     // задержка, чтобы MetaMask успел обработать approve
     await new Promise(r => setTimeout(r, 1000));
     
-    log("⏳ Sending donation...");
+    log("Sending donation...");
     const tx = await contract.donate(amount);
     await tx.wait();
     log("✅ Donation confirmed");
@@ -456,7 +456,7 @@ const handlePayFeedback = async () => {
     const allowance = await usdc.allowance(account, CONTRACT_ADDRESS);
 
     if (allowance < price) {
-      log("⏳ Approving USDC for feedback...");
+      log("Approving USDC for feedback...");
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, price);
       await approveTx.wait();
       alert("✅ Approve confirmed. Now confirm Feedback in your wallet!");
@@ -465,7 +465,7 @@ const handlePayFeedback = async () => {
     // задержка, чтобы MetaMask успел обработать approve
     await new Promise(r => setTimeout(r, 1000));
     
-    log("⏳ Paying for feedback...");
+    log("Paying for feedback...");
     const tx = await contract.payFeedback(); // contract already has signer
     await tx.wait();
     log("✅ Feedback payment confirmed");
