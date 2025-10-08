@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <titl>SVG</titl></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <!-- Сохраните это как file.svg или вставьте прямо в HTML -->
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="300" height="300"
+     viewBox="0 0 200 200"
+     preserveAspectRatio="xMidYMid meet">
+
+  <!-- Параметры:
+       s = размер квадрата = 60
+       gap = промежуток между квадратиками = 10
+       общая ширина = 3*s + 2*gap = 200
+  -->
+
+  <!-- Верхний (центральный) -->
+  <rect x="70" y="0"   width="60" height="60" fill="#FF6B6B" rx="4" />
+
+  <!-- Средний ряд: три квадрата (левый, средний, правый) -->
+  <rect x="0"  y="70"  width="60" height="60" fill="#FFD93D" rx="4" />
+  <rect x="70" y="70"  width="60" height="60" fill="#6BCB77" rx="4" />
+  <rect x="140" y="70" width="60" height="60" fill="#4D96FF" rx="4" />
+
+  <!-- Нижний (центральный) -->
+  <rect x="70" y="140" width="60" height="60" fill="#A56CC1" rx="4" />
+
+</svg>
+
+  </body>
+</html>
