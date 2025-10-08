@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>BTC Forecast</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      /* Стили шапки */
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1rem;
+        padding: 0.5rem 1rem;
+        border-bottom: 2px solid #ccc; /* горизонтальная линия */
+      }
+
+      /* Контейнер логотипа */
+      .logo {
+        width: 60px; /* базовый размер */
+        height: auto;
+        flex-shrink: 0;
+      }
+
+      /* Текст справа от логотипа */
+      .title {
+        font-family: "Segoe UI", sans-serif;
+        font-size: clamp(1rem, 2vw, 1.5rem);
+        font-weight: 600;
+        color: #333;
+      }
+
+      /* Для адаптивности */
+      @media (max-width: 600px) {
+        header {
+          gap: 0.5rem;
+          padding: 0.5rem;
+        }
+        .logo {
+          width: 45px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Шапка -->
+    <header>
+      <!-- SVG логотип -->
+      <svg
+        class="logo"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 150 150"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <rect x="50" y="0" width="50" height="50" fill="#FFFF00" />
+        <rect x="0" y="50" width="50" height="50" fill="#00FF00" />
+        <rect x="50" y="50" width="50" height="50" fill="#FFD700" />
+        <rect x="100" y="50" width="50" height="50" fill="#0080FF" />
+        <rect x="50" y="100" width="50" height="50" fill="#FF0080" />
+      </svg>
+
+      <!-- Текст -->
+      <span class="title">trends</span>
+    </header>
+
+    <!-- React-контейнер -->
+    <div id="root"></div>
+
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
