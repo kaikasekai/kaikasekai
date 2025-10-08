@@ -434,7 +434,7 @@ const handleDonate = async () => {
     await tx.wait();
     log("✅ Donation confirmed");
 
-    alert("✅ Donation sent to contract!");
+    alert("✅ Donation sent to contract. Thank you!");
   } catch (e) {
     log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
     alert("❌ Donation failed, see Debug log");
@@ -524,8 +524,69 @@ const handleSendFeedback = async () => {
 
   return (
     <div style={{ padding: 20 }}>
-      <h2>BTC Forecast Chart</h2>
+      <h2></h2>
 
+{/* === Chart (вынесен из блока кошелька, теперь всегда виден) === */}
+      <div style={{ marginTop: 20 }}>
+        <small>
+          {subscriptionActive
+            ? "Range: Current + Next month"
+            : "Range: Current month"}
+        </small>
+        <ResponsiveContainer width="100%" height={500} className="chart-wrapper">
+          <LineChart data={filteredData} className="chart">
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis
+              dataKey="date"
+              tickFormatter={(d) => dayjs(d).format("MMM D")}
+            />
+            <YAxis
+  domain={[100000, 150000]}
+  ticks={[100000,105000,110000,115000,120000,125000,130000,135000,140000,145000,150000]}
+  tickFormatter={(v) => v.toLocaleString()}
+/>
+            <Tooltip />
+            <Legend />
+            <Line
+              type="monotone"
+              dataKey="BTC"
+              stroke="#f7931a"
+              dot={false}
+              strokeWidth={6}
+            />
+            <Line
+              type="monotone"
+              dataKey="moving_average"
+              stroke="#00c69e"
+              dot={false}
+              strokeDasharray="5 5"
+              strokeWidth={3}
+            />
+            <Line
+              type="monotone"
+              dataKey="predict"
+              stroke="#0000ff"
+              dot={false}
+              strokeWidth={6}
+            />
+            {Object.keys(data[0])
+              .filter((k) => k.startsWith("p_"))
+              .map((key, idx) => (
+                <Line
+                  key={key}
+                  type="monotone"
+                  dataKey={key}
+                  stroke={COLORS[idx % COLORS.length]}
+                  dot={false}
+                />
+              ))}
+          </LineChart>
+        </ResponsiveContainer>
+        <div style={{ marginTop: 10 }}>
+          <strong>Accuracy last 30 days:</strong> {mape}%
+        </div>
+      </div>
+      
       {/* === Wallet section === */}
       {!account ? (
         <Button variant="contained" onClick={connectWallet}>
@@ -586,7 +647,7 @@ const handleSendFeedback = async () => {
 </Button>
 
 {showFeedbackForm && (
-  <div style={{ marginTop: 20, border: "1px solid #ccc", padding: 10, borderRadius: 8 }}>
+  <div style={{ marginTop: 20, border: "1px solid #ccc", padding: 10, borderRadius: 0 }}>
     <h4>FeedBack</h4>
     <TextField
       label="Your email"
@@ -618,67 +679,6 @@ const handleSendFeedback = async () => {
             </div>
           )}
         
-
-      {/* === Chart (вынесен из блока кошелька, теперь всегда виден) === */}
-      <div style={{ marginTop: 20 }}>
-        <small>
-          {subscriptionActive
-            ? "Range: Current + Next month"
-            : "Range: Current month"}
-        </small>
-        <ResponsiveContainer width="100%" height={500} className="chart-wrapper">
-          <LineChart data={filteredData} className="chart">
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis
-              dataKey="date"
-              tickFormatter={(d) => dayjs(d).format("MMM D")}
-            />
-            <YAxis
-  domain={[100000, 150000]}
-  ticks={[100000,105000,110000,115000,120000,125000,130000,135000,140000,145000,150000]}
-  tickFormatter={(v) => v.toLocaleString()}
-/>
-            <Tooltip />
-            <Legend />
-            <Line
-              type="monotone"
-              dataKey="BTC"
-              stroke="#f7931a"
-              dot={false}
-              strokeWidth={6}
-            />
-            <Line
-              type="monotone"
-              dataKey="moving_average"
-              stroke="#00c69e"
-              dot={false}
-              strokeDasharray="5 5"
-              strokeWidth={3}
-            />
-            <Line
-              type="monotone"
-              dataKey="predict"
-              stroke="#0000ff"
-              dot={false}
-              strokeWidth={6}
-            />
-            {Object.keys(data[0])
-              .filter((k) => k.startsWith("p_"))
-              .map((key, idx) => (
-                <Line
-                  key={key}
-                  type="monotone"
-                  dataKey={key}
-                  stroke={COLORS[idx % COLORS.length]}
-                  dot={false}
-                />
-              ))}
-          </LineChart>
-        </ResponsiveContainer>
-        <div style={{ marginTop: 10 }}>
-          <strong>Accuracy last 30 days:</strong> {mape}%
-        </div>
-      </div>
 
       {/* === Donate (оставляем только для подключённого кошелька) === */}
       {account && (
