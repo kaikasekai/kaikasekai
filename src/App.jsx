@@ -590,7 +590,7 @@ const handleSendFeedback = async () => {
                   : "Range: Current month"}
               </p>
               <div style={{ marginTop: 10 }}>
-                <strong>Accuracy last 30 days:</strong> {mape}%
+                <p>Accuracy last 30 days:</p> {mape}%
               </div>
             </div>
 
@@ -603,16 +603,14 @@ const handleSendFeedback = async () => {
       ) : (
         <div>
           <p>Connected: {account}</p>
-
-
-          
+       
 {subscriptionActive ? (
   <div>
     <p>✅ Subscription active</p>
     {subscriptionEnd && (
       <p>
         Your subscription ends on:{" "}
-        {new Date(subscriptionEnd * 1000).toLocaleString()}
+        {new Date(subscriptionEnd * 1000).toLocaleDateString()}
       </p>
     )}
   </div>
