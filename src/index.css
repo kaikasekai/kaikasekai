@@ -62,7 +62,7 @@ strong, b {
 
 .MuiTypography-root,
 .MuiButton-root,
-.MuiAccordionSummary-root,
+/*.MuiAccordionSummary-root,*/
 .MuiAccordionDetails-root,
 .MuiTooltip-tooltip,
 .MuiTab-root,
@@ -151,7 +151,7 @@ strong, b {
 .chart-wrapper {
   background: #101010;
   border-radius: 0px;
-  padding: 10px 20px; /* добавляем больше воздуха справа и слева */
+  padding: 10px 10px; /* добавляем больше воздуха справа и слева */
   box-sizing: border-box; /* предотвращает переполнение */
 }
 
@@ -171,7 +171,9 @@ strong, b {
 
 .recharts-cartesian-axis-tick text {
   fill: #bbb;
-  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.9rem !important;
+  font-weight: 400;
 }
 
 
