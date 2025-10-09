@@ -73,6 +73,66 @@ strong, b {
   text-transform: none !important; /* сохраняем регистр */
 }
 
+.MuiAccordion-root {
+  background-color: #fff !important;
+  color: #000 !important;
+  box-shadow: none !important;
+  border: none !important;
+  margin: 0 !important;
+  transition: none !important; /* убираем резкие анимации MUI */
+}
+
+.MuiAccordion-root:before {
+  display: none !important;
+}
+
+/* === Accordion Summary (заголовок) === */
+
+.MuiAccordionSummary-root {
+  padding: 6px 0 !important;
+  min-height: unset !important;
+  align-items: flex-start !important;
+  transition: none !important;
+}
+
+.MuiAccordionSummary-root.Mui-expanded {
+  min-height: unset !important;
+}
+
+.MuiAccordionSummary-content {
+  margin: 0 !important;
+  align-items: center !important;
+  transition: none !important;
+}
+
+.MuiAccordionSummary-content.Mui-expanded {
+  margin: 0 !important;
+  align-items: center !important;
+}
+
+/* === Accordion Details (контент) === */
+
+.MuiAccordionDetails-root {
+  padding: 10px 0 !important;
+  margin: 0 !important;
+  transition: none !important;
+}
+
+/* Убираем любые отступы у первого и последнего аккордеона */
+.MuiAccordion-root:first-of-type {
+  margin-top: 0 !important;
+}
+
+.MuiAccordion-root:last-of-type {
+  margin-bottom: 0 !important;
+}
+
+/* === Expand Icon === */
+
+.MuiAccordionSummary-expandIconWrapper {
+  color: #fff;
+}
+
 /* --------------------------------------------------------
    📊 RECHARTS (Axes, Tooltip, Legend)
 --------------------------------------------------------- */
@@ -85,6 +145,35 @@ strong, b {
   font-size: 0.9rem !important;
   font-weight: 400;
 }
+
+/* === Контейнер для графика === */
+
+.chart-wrapper {
+  background: #101010;
+  border-radius: 0px;
+  padding: 10px 20px; /* добавляем больше воздуха справа и слева */
+  box-sizing: border-box; /* предотвращает переполнение */
+}
+
+/* === Сам график (svg внутри LineChart) === */
+
+.chart {
+  overflow: visible;
+}
+
+/* === Сетка === */
+
+.recharts-cartesian-grid line {
+  stroke: rgba(255, 255, 255, 0.1);
+}
+
+/* === Оси === */
+
+.recharts-cartesian-axis-tick text {
+  fill: #bbb;
+  font-size: 12px;
+}
+
 
 /* --------------------------------------------------------
    ⚙️ FOOTER
