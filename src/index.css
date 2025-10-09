@@ -65,6 +65,7 @@ strong, b {
 --------------------------------------------------------- */
 /* Accordion заголовки */
 .MuiAccordionSummary-root {
+  font-family: 'JetBrains Mono', monospace !important;
   min-height: unset !important;
   align-items: flex-start !important;
   transition: none !important;
@@ -73,12 +74,14 @@ strong, b {
 
 /* Typography внутри заголовка */
 .MuiAccordionSummary-root .MuiTypography-root {
+  font-family: 'JetBrains Mono', monospace !important;
   font-weight: 400 !important;
   font-size: 1.6rem !important;
 }
 
 /* Контент внутри заголовка */
 .MuiAccordionSummary-content {
+  font-family: 'JetBrains Mono', monospace !important;
   margin: 0 !important;
   align-items: center !important;
   transition: none !important;
@@ -87,6 +90,7 @@ strong, b {
 /* AccordionDetails (контент) */
 .MuiAccordionDetails-root {
   padding-top: 12px !important; /* отступ между заголовком и контентом */
+  font-family: 'JetBrains Mono', monospace !important;
   padding-bottom: 6px !important;
   font-weight: 400 !important;
   font-size: 1rem !important;
@@ -104,6 +108,7 @@ strong, b {
 
 .MuiAccordion-root {
   background-color: #fff !important;
+  font-family: 'JetBrains Mono', monospace !important;
   color: #000 !important;
   box-shadow: none !important;
   border: none !important;
@@ -117,10 +122,12 @@ strong, b {
 
 /* === Accordion Summary (заголовок) === */
 .MuiAccordionSummary-root.Mui-expanded {
+  font-family: 'JetBrains Mono', monospace !important;
   min-height: unset !important;
 }
 
 .MuiAccordionSummary-content.Mui-expanded {
+  font-family: 'JetBrains Mono', monospace !important;
   margin: 0 !important;
   align-items: center !important;
 }
