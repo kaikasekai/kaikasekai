@@ -36,8 +36,6 @@ body {
   padding: 0;
   background-color: #fff;
   color: #000;
-}
-
 /* фиксируем футер внизу, если контента мало */
   display: flex;
   flex-direction: column;
