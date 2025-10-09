@@ -89,7 +89,7 @@ strong, b {
 
 /* AccordionDetails (контент) */
 .MuiAccordionDetails-root {
-  padding-top: 12px !important; /* отступ между заголовком и контентом */
+  padding-top: 8px !important; /* отступ между заголовком и контентом */
   font-family: 'JetBrains Mono', monospace !important;
   padding-bottom: 6px !important;
   font-weight: 400 !important;
