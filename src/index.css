@@ -1,8 +1,12 @@
-/* === Base Styles === */
-
+/* ========================================================
+   🧠 FONT IMPORTS
+   — локальные шрифты JetBrains Mono Regular / Bold
+   — если используешь Google Fonts, эти блоки можно удалить
+     и подключить через <link> в index.html
+========================================================= */
 @font-face {
   font-family: 'JetBrains Mono';
-  src: url('./assets/fonts/JetBrainsMono-Regular.woff2') format('truetype');
+  src: url('./assets/fonts/JetBrainsMono-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -10,59 +14,69 @@
 
 @font-face {
   font-family: 'JetBrains Mono';
-  src: url('./assets/fonts/JetBrainsMono-Bold.woff2') format('truetype');
+  src: url('./assets/fonts/JetBrainsMono-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
-/* --------------------------------------------------------
+/* ========================================================
    🔤 GLOBAL TYPOGRAPHY SETTINGS
---------------------------------------------------------- */
+   — базовые размеры и типографика для всего сайта
+========================================================= */
 
-/* Базовый размер — 10px, но адаптивный через clamp()
-   (минимум 9px, максимум 12px, плавное масштабирование) */
+/* Размер шрифта адаптивный:
+   при ширине окна < 500px — 10px,
+   при ширине > 1200px — 12px.
+   Всё, что в rem, будет масштабироваться пропорционально. */
 html {
   font-size: clamp(10px, 1vw, 12px);
 }
 
-/* Основной текст */
+/* Основные настройки текста и страницы */
 body {
   font-family: 'JetBrains Mono', monospace;
   font-weight: 400;
-  font-size: 1rem; /* = 10px базово */
+  font-size: 1rem; /* базовый = 10px */
   line-height: 1.5;
   margin: 0;
   padding: 0;
   background-color: #fff;
   color: #000;
+
+  /* фиксируем футер внизу, если контента мало */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-/* --------------------------------------------------------
+/* ========================================================
    🔠 HEADINGS & TEXT EMPHASIS
---------------------------------------------------------- */
+   — заголовки и выделенные участки (strong)
+========================================================= */
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'JetBrains Mono', monospace;
   font-weight: 700;
-  font-size: 1.6rem; /* 1.6 × базового (≈16px) */
+  font-size: 1.6rem; /* = 1.6 × базового размера (≈16px) */
   line-height: 1.3;
   margin: 0.8em 0 0.4em;
 }
 
 strong, b {
   font-weight: 700;
-  font-size: 1.6em; /* 1.6 × относительно родительского размера */
+  font-size: 1.6em; /* увеличиваем относительно контекста */
   line-height: inherit;
 }
 
-/* --------------------------------------------------------
+/* ========================================================
    🧩 MATERIAL UI COMPONENTS (Buttons, Accordions, Tooltips)
---------------------------------------------------------- */
+========================================================= */
 
+/* Общие параметры для всех текстовых MUI-компонентов */
 .MuiTypography-root,
 .MuiButton-root,
-/*.MuiAccordionSummary-root,*/
+.MuiAccordionSummary-root,
 .MuiAccordionDetails-root,
 .MuiTooltip-tooltip,
 .MuiTab-root,
@@ -70,72 +84,49 @@ strong, b {
   font-family: 'JetBrains Mono', monospace !important;
   font-weight: 400 !important;
   font-size: 1rem !important;
-  text-transform: none !important; /* сохраняем регистр */
+  text-transform: none !important; /* не делаем CAPS */
 }
 
+/* === Секция аккордеона (весь блок) === */
 .MuiAccordion-root {
   background-color: #fff !important;
   color: #000 !important;
   box-shadow: none !important;
   border: none !important;
   margin: 0 !important;
-  transition: none !important; /* убираем резкие анимации MUI */
+  transition: none !important; /* отключаем стандартную анимацию MUI */
 }
-
 .MuiAccordion-root:before {
-  display: none !important;
+  display: none !important; /* убирает разделительную линию MUI */
 }
 
-/* === Accordion Summary (заголовок) === */
-
+/* === Заголовок аккордеона === */
 .MuiAccordionSummary-root {
-  padding: 6px 0 !important;
+  padding: 20px 0 !important; /* чуть меньше отступ сверху/снизу */
   min-height: unset !important;
   align-items: flex-start !important;
   transition: none !important;
+  font-weight: 700 !important; /* делаем жирным, как <strong> */
+  font-size: 1.6rem !important; /* делаем 1.6× базового размера */
 }
 
-.MuiAccordionSummary-root.Mui-expanded {
-  min-height: unset !important;
-}
-
-.MuiAccordionSummary-content {
-  margin: 0 !important;
-  align-items: center !important;
-  transition: none !important;
-}
-
-.MuiAccordionSummary-content.Mui-expanded {
-  margin: 0 !important;
-  align-items: center !important;
-}
-
-/* === Accordion Details (контент) === */
-
+/* === Контент аккордеона === */
 .MuiAccordionDetails-root {
-  padding: 10px 0 !important;
+  padding: 6px 0 !important; /* уменьшили отступ */
   margin: 0 !important;
   transition: none !important;
+  font-size: 1rem !important;
 }
 
-/* Убираем любые отступы у первого и последнего аккордеона */
-.MuiAccordion-root:first-of-type {
-  margin-top: 0 !important;
-}
-
-.MuiAccordion-root:last-of-type {
-  margin-bottom: 0 !important;
-}
-
-/* === Expand Icon === */
-
+/* === Иконка раскрытия === */
 .MuiAccordionSummary-expandIconWrapper {
-  color: #fff;
+  color: #000; /* можно поменять на #fff для тёмной темы */
 }
 
-/* --------------------------------------------------------
+/* ========================================================
    📊 RECHARTS (Axes, Tooltip, Legend)
---------------------------------------------------------- */
+   — настройки шрифта и цвета подписей графика
+========================================================= */
 
 .recharts-cartesian-axis-tick-value,
 .recharts-legend-item-text,
@@ -146,29 +137,25 @@ strong, b {
   font-weight: 400;
 }
 
-/* === Контейнер для графика === */
-
+/* Контейнер LineChart */
 .chart-wrapper {
   background: #101010;
   border-radius: 0px;
-  padding: 10px 10px; /* добавляем больше воздуха справа и слева */
+  padding: 10px;
   box-sizing: border-box; /* предотвращает переполнение */
 }
 
-/* === Сам график (svg внутри LineChart) === */
-
+/* SVG-график внутри */
 .chart {
   overflow: visible;
 }
 
-/* === Сетка === */
-
+/* Сетка графика */
 .recharts-cartesian-grid line {
   stroke: rgba(255, 255, 255, 0.1);
 }
 
-/* === Оси === */
-
+/* Подписи на осях */
 .recharts-cartesian-axis-tick text {
   fill: #bbb;
   font-family: 'JetBrains Mono', monospace !important;
@@ -176,15 +163,16 @@ strong, b {
   font-weight: 400;
 }
 
+/* ========================================================
+   ⚙️ FOOTER (прижат к низу страницы)
+========================================================= */
 
-/* --------------------------------------------------------
-   ⚙️ FOOTER
---------------------------------------------------------- */
+/* Футер всегда внизу страницы */
 footer {
   border-top: 1px solid #ccc;
   padding: 20px;
-  margin-top: 20px;
   background: #fff;
+  margin-top: auto; /* <-- прижимает футер вниз */
 }
 
 .footer-content {
@@ -201,15 +189,14 @@ footer {
 }
 
 .footer-link {
-  color: #777;
+  font-family: 'JetBrains Mono', monospace;
+  color: #555;
   font-size: 0.8rem;
   font-weight: 400;
-  color: #555;
   cursor: pointer;
   text-decoration: underline;
   transition: color 0.2s;
 }
-
 .footer-link:hover {
   color: #000;
 }
@@ -235,9 +222,10 @@ footer {
   padding: 1em 0;
 }
 
-/* --------------------------------------------------------
+/* ========================================================
    🧭 GENERAL ELEMENTS
---------------------------------------------------------- */
+   — ссылки, кнопки, кодовые блоки
+========================================================= */
 
 a {
   color: inherit;
