@@ -791,7 +791,7 @@ const handleSendFeedback = async () => {
 <Accordion style={{ marginTop: 0, boxShadow: "none", border: "none" }}>
   <AccordionSummary
     expandIcon={<span style={{ fontSize: 20 }}>{expandedItems.includes("proofs") ? "−" : "+"}</span>}
-    onClick={() => toggleAccordion(proofs")}
+    onClick={() => toggleAccordion("proofs")}
     style={{ padding: "0px 0" }}
   >
     <Typography>Proofs</Typography>
