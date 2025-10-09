@@ -576,11 +576,11 @@ const handleSendFeedback = async () => {
                 </LineChart>
               </ResponsiveContainer>
               <p></p>
-              <small>
+              <p>
                 {subscriptionActive
                   ? "Range: Current + Next month"
                   : "Range: Current month"}
-              </small>
+              </p>
               <div style={{ marginTop: 10 }}>
                 <strong>Accuracy last 30 days:</strong> {mape}%
               </div>
@@ -589,7 +589,7 @@ const handleSendFeedback = async () => {
       
       {/* === Wallet section === */}
       {!account ? (
-        <Button variant="contained" onClick={connectWallet} style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none', margin: 10 }}>
+        <Button variant="contained" onClick={connectWallet} style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none', marginTop: 10 }}>
           Connect Wallet
         </Button>
       ) : (
@@ -612,7 +612,7 @@ const handleSendFeedback = async () => {
                 />
               )}
 
-              <Button variant="contained" onClick={handleSubscribe} style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none', margin: 10 }}>
+              <Button variant="contained" onClick={handleSubscribe} style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none', marginRight: 10 }}>
                 Subscribe ({price ? (price / 1e6).toFixed(4) : "..." } USDC)
               </Button>
 
@@ -629,7 +629,7 @@ const handleSendFeedback = async () => {
   <Button
     variant="contained"
     onClick={handleBuyWhitelist}
-    style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none', margin: 10 }}
+    style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none', marginRight: 10 }}
   >
     Buy Whitelist ({whitelistPrice ? (whitelistPrice / 1e6).toFixed(4) : "..." } USDC)
   </Button>
@@ -639,7 +639,7 @@ const handleSendFeedback = async () => {
 <Button
   variant="contained"
   onClick={handlePayFeedback}
-  style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none', margin: 10 }}
+  style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none', margin: 0 }}
 >
   Contact us ({feedbackPrice ? (feedbackPrice / 1e6).toFixed(4) : "..."} USDC)
 </Button>
@@ -680,7 +680,7 @@ const handleSendFeedback = async () => {
       {/* === Donate (оставляем только для подключённого кошелька) === */}
       {account && (
         <div style={{ marginTop: 20 }}>
-          <h3>Donate</h3>
+          <h1>Donate</h1>
           <TextField
             label="Amount (USDC)"
             value={donateAmount}
@@ -688,7 +688,7 @@ const handleSendFeedback = async () => {
             fullWidth
             margin="dense"
           />
-          <Button variant="contained" onClick={handleDonate} style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none', margin: 10 }}>
+          <Button variant="contained" onClick={handleDonate} style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none', margin: 0 }}>
             Donate
           </Button>
         </div>
@@ -742,7 +742,7 @@ const handleSendFeedback = async () => {
       {/* === Accordions === */}
 <Accordion style={{ marginTop: 20, boxShadow: "none", border: "none" }}>
   <AccordionSummary
-    expandIcon={<span style={{ fontSize: 20 }}>{expanded === "about" ? "−" : "+"}</span>}
+    expandIcon={<span style={{ fontSize: 1.6rem, fontWeight: 700 }}>{expanded === "about" ? "−" : "+"}</span>}
     onClick={() => setExpanded(expanded === "about" ? false : "about")}
     style={{ padding: "0px 0" }}
   >
@@ -757,7 +757,7 @@ const handleSendFeedback = async () => {
 
 <Accordion style={{ marginTop: 0, boxShadow: "none", border: "none" }}>
   <AccordionSummary
-    expandIcon={<span style={{ fontSize: 20 }}>{expanded === "how" ? "−" : "+"}</span>}
+    expandIcon={<span style={{ fontSize: 1.6rem, fontWeight: 700 }}>{expanded === "how" ? "−" : "+"}</span>}
     onClick={() => setExpanded(expanded === "how" ? false : "how")}
     style={{ padding: "0px 0" }}
   >
@@ -772,7 +772,7 @@ const handleSendFeedback = async () => {
 
 <Accordion style={{ marginTop: 0, boxShadow: "none", border: "none" }}>
   <AccordionSummary
-    expandIcon={<span style={{ fontSize: 20 }}>{expanded === "proofs" ? "−" : "+"}</span>}
+    expandIcon={<span style={{ fontSize: 1.6rem, fontWeight: 700 }}>{expanded === "proofs" ? "−" : "+"}</span>}
     onClick={() => setExpanded(expanded === "proofs" ? false : "proofs")}
     style={{ padding: "0px 0" }}
   >
@@ -804,7 +804,7 @@ const handleSendFeedback = async () => {
                       style={{ width: "100%", borderRadius: 0 }}
                     />
                     <h4 style={{ margin: "10px 0 5px" }}>{nft.name}</h4>
-                    <p style={{ fontSize: 12, color: "#aaa" }}>
+                    <p>
                       {nft.description}
                     </p>
                     <a
@@ -812,8 +812,6 @@ const handleSendFeedback = async () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{
-                        fontSize: 12,
-                        color: "#0af",
                         display: "block",
                         marginTop: 5,
                       }}
@@ -845,7 +843,7 @@ const handleSendFeedback = async () => {
 {/* === Debug Log (в аккордеоне) === */}
 <Accordion style={{ marginTop: 1, boxShadow: "none", border: "none" }}>
   <AccordionSummary
-    expandIcon={<span style={{ fontSize: 20 }}>{expanded === "debug" ? "−" : "+"}</span>}
+    expandIcon={<span style={{ fontSize: 1.6rem, fontWeight: 700 }}>{expanded === "debug" ? "−" : "+"}</span>}
     onClick={() => setExpanded(expanded === "debug" ? false : "debug")}
     style={{ padding: "0px 0" }}
   >
@@ -856,10 +854,9 @@ const handleSendFeedback = async () => {
       style={{
         background: "#111",
         color: "#0f0",
-        fontSize: 12,
         whiteSpace: "pre-wrap",
         borderRadius: 0,
-        padding: 0,
+        padding: 10,
         margin: 20,
       }}
     >
