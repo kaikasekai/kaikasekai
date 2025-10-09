@@ -187,7 +187,7 @@ strong, b {
 /* === Контейнер для графика === */
 
 .chart-wrapper {
-  background: #101010;
+  background: radial-gradient(circle at 50% 40%, #0e111a, #0b0c10 80%);
   border-radius: 0px;
   padding: 10px; /* добавляем больше воздуха справа и слева */
   box-sizing: border-box; /* предотвращает переполнение */
