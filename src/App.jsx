@@ -104,6 +104,7 @@ function App() {
   const [price, setPrice] = useState(null);
   const [whitelistPrice, setWhitelistPrice] = useState(null);
   const [subscriptionActive, setSubscriptionActive] = useState(false);
+  const [subscriptionEnd, setSubscriptionEnd] = useState(null);
   const [hasWhitelist, setHasWhitelist] = useState(false);
   const [showTwoMonths, setShowTwoMonths] = useState(false);
   const [referrer, setReferrer] = useState("");
@@ -281,6 +282,7 @@ function App() {
     const end = await cont.subscriptionEnd(acc);
     const subscribed = await cont.hasEverSubscribed(acc);
     setHasSubscribed(subscribed);
+    setSubscriptionEnd(Number(end));
 
     const now = Math.floor(Date.now() / 1000);
     if (Number(end) > now) {
@@ -596,11 +598,21 @@ const handleSendFeedback = async () => {
         <div>
           <p>Connected: {account}</p>
 
-          {subscriptionActive ? (
-            <p>✅ Subscription active</p>
-          ) : (
-            <div>
-              <p>⚠️ Subscription inactive</p>
+
+          
+{subscriptionActive ? (
+  <div>
+    <p>✅ Subscription active</p>
+    {subscriptionEnd && (
+      <p>
+        Your subscription ends on:{" "}
+        <strong>{new Date(subscriptionEnd * 1000).toLocaleString()}</strong>
+      </p>
+    )}
+  </div>
+) : (
+  <div>
+    <p>⚠️ Subscription inactive</p>
 
               {!hasSubscribed && (
                 <TextField
@@ -709,7 +721,7 @@ const handleSendFeedback = async () => {
               ← Back
             </Button>
             <h3>Disclaimer</h3>
-            <p style={{ color: "#555", fontSize: "13px", lineHeight: "1.5" }}>
+            <p>
               The information provided on this website does not constitute
               investment advice, financial guidance, or a trading
               recommendation. Cryptocurrency investments involve risk, and past
@@ -730,7 +742,7 @@ const handleSendFeedback = async () => {
               ← Back
             </Button>
             <h3>Cookies Policy</h3>
-            <p style={{ color: "#555", fontSize: "13px", lineHeight: "1.5" }}>
+            <p>
               This site uses cookies to enhance the browsing experience. By
               continuing to use this website, you agree to our use of cookies in
               accordance with applicable laws.
@@ -742,7 +754,7 @@ const handleSendFeedback = async () => {
       {/* === Accordions === */}
 <Accordion style={{ marginTop: 20, boxShadow: "none", border: "none" }}>
   <AccordionSummary
-    expandIcon={<span style={{ fontSize: 1.6rem, fontWeight: 700 }}>{expanded === "about" ? "−" : "+"}</span>}
+    expandIcon={<span>{expanded === "about" ? "−" : "+"}</span>}
     onClick={() => setExpanded(expanded === "about" ? false : "about")}
     style={{ padding: "0px 0" }}
   >
@@ -757,7 +769,7 @@ const handleSendFeedback = async () => {
 
 <Accordion style={{ marginTop: 0, boxShadow: "none", border: "none" }}>
   <AccordionSummary
-    expandIcon={<span style={{ fontSize: 1.6rem, fontWeight: 700 }}>{expanded === "how" ? "−" : "+"}</span>}
+    expandIcon={<span>{expanded === "how" ? "−" : "+"}</span>}
     onClick={() => setExpanded(expanded === "how" ? false : "how")}
     style={{ padding: "0px 0" }}
   >
@@ -772,7 +784,7 @@ const handleSendFeedback = async () => {
 
 <Accordion style={{ marginTop: 0, boxShadow: "none", border: "none" }}>
   <AccordionSummary
-    expandIcon={<span style={{ fontSize: 1.6rem, fontWeight: 700 }}>{expanded === "proofs" ? "−" : "+"}</span>}
+    expandIcon={<span>{expanded === "proofs" ? "−" : "+"}</span>}
     onClick={() => setExpanded(expanded === "proofs" ? false : "proofs")}
     style={{ padding: "0px 0" }}
   >
@@ -843,7 +855,7 @@ const handleSendFeedback = async () => {
 {/* === Debug Log (в аккордеоне) === */}
 <Accordion style={{ marginTop: 1, boxShadow: "none", border: "none" }}>
   <AccordionSummary
-    expandIcon={<span style={{ fontSize: 1.6rem, fontWeight: 700 }}>{expanded === "debug" ? "−" : "+"}</span>}
+    expandIcon={<span>{expanded === "debug" ? "−" : "+"}</span>}
     onClick={() => setExpanded(expanded === "debug" ? false : "debug")}
     style={{ padding: "0px 0" }}
   >
