@@ -73,7 +73,7 @@ strong, b {
 
 /* Typography внутри заголовка */
 .MuiAccordionSummary-root .MuiTypography-root {
-  font-weight: 700 !important;
+  font-weight: 400 !important;
   font-size: 1.6rem !important;
 }
 
