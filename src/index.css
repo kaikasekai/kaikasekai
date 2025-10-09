@@ -147,6 +147,15 @@ strong, b {
   color: #fff;
 }
 
+/* 🔧 Глобально заставляем Typography использовать JetBrains Mono */
+.MuiTypography-root {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-weight: 400 !important;
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+  color: #000 !important;
+}
+
 /* --------------------------------------------------------
    📊 RECHARTS (Axes, Tooltip, Legend)
 --------------------------------------------------------- */
@@ -268,3 +277,13 @@ code {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.9rem;
 }
+
+/* === FIX: Футер всегда внизу === */
+main {
+  flex: 1 0 auto;
+}
+
+footer {
+  flex-shrink: 0;
+}
+
