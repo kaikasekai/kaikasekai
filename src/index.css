@@ -63,11 +63,36 @@ strong, b {
 /* --------------------------------------------------------
    🧩 MATERIAL UI COMPONENTS (Buttons, Accordions, Tooltips)
 --------------------------------------------------------- */
+/* Accordion заголовки */
+.MuiAccordionSummary-root {
+  min-height: unset !important;
+  align-items: flex-start !important;
+  transition: none !important;
+  padding: 6px 0 !important;
+}
 
-.MuiTypography-root,
+/* Typography внутри заголовка */
+.MuiAccordionSummary-root .MuiTypography-root {
+  font-weight: 700 !important;
+  font-size: 1.6rem !important;
+}
+
+/* Контент внутри заголовка */
+.MuiAccordionSummary-content {
+  margin: 0 !important;
+  align-items: center !important;
+  transition: none !important;
+}
+
+/* AccordionDetails (контент) */
+.MuiAccordionDetails-root {
+  padding-top: 12px !important; /* отступ между заголовком и контентом */
+  padding-bottom: 6px !important;
+  font-weight: 400 !important;
+  font-size: 1rem !important;
+}
+
 .MuiButton-root,
-/*.MuiAccordionSummary-root,*/
-.MuiAccordionDetails-root,
 .MuiTooltip-tooltip,
 .MuiTab-root,
 .MuiMenuItem-root {
@@ -91,39 +116,13 @@ strong, b {
 }
 
 /* === Accordion Summary (заголовок) === */
-
-.MuiAccordionSummary-root {
-  padding: 6px 0 !important;
-  min-height: unset !important;
-  align-items: flex-start !important;
-  transition: none !important;
-  font-weight: 700 !important; /* делаем жирным, как <strong> */
-  font-size: 1.6rem !important; /* делаем 1.6× базового размера */
-}
-
 .MuiAccordionSummary-root.Mui-expanded {
   min-height: unset !important;
-}
-
-.MuiAccordionSummary-content {
-  margin: 0 !important;
-  align-items: center !important;
-  transition: none !important;
 }
 
 .MuiAccordionSummary-content.Mui-expanded {
   margin: 0 !important;
   align-items: center !important;
-}
-
-/* === Accordion Details (контент) === */
-
-.MuiAccordionDetails-root {
-  padding: 6px 0 !important;
-  margin: 0 !important;
-  transition: none !important;
-  font-weight: 700 !important; /* делаем жирным, как <strong> */
-  font-size: 1.6rem !important; /* делаем 1.6× базового размера */
 }
 
 /* Убираем любые отступы у первого и последнего аккордеона */
