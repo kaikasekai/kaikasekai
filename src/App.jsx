@@ -118,9 +118,15 @@ function App() {
   const [nftContract, setNftContract] = useState(null);
   const [proofs, setProofs] = useState([]);
   const [debug, setDebug] = useState([]);
-  const [expanded, setExpanded] = useState(false);
+  const [expandedItems, setExpandedItems] = useState([]);
   const [page, setPage] = useState("main"); // <— новая логика страниц
 
+  const toggleAccordion = (id) => {
+  setExpandedItems(prev =>
+    prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
+  );
+};
+  
   const log = (msg) =>
     setDebug((d) => [...d, `[${new Date().toLocaleTimeString()}] ${msg}`]);
 
@@ -606,7 +612,7 @@ const handleSendFeedback = async () => {
     {subscriptionEnd && (
       <p>
         Your subscription ends on:{" "}
-        <strong>{new Date(subscriptionEnd * 1000).toLocaleString()}</strong>
+        {new Date(subscriptionEnd * 1000).toLocaleString()}
       </p>
     )}
   </div>
@@ -754,8 +760,8 @@ const handleSendFeedback = async () => {
       {/* === Accordions === */}
 <Accordion style={{ marginTop: 20, boxShadow: "none", border: "none" }}>
   <AccordionSummary
-    expandIcon={<span>{expanded === "about" ? "−" : "+"}</span>}
-    onClick={() => setExpanded(expanded === "about" ? false : "about")}
+    expandIcon={<span style={{ fontSize: 20 }}>{expandedItems.includes("about") ? "−" : "+"}</span>}
+    onClick={() => toggleAccordion("about")}
     style={{ padding: "0px 0" }}
   >
     <Typography>About</Typography>
@@ -769,8 +775,8 @@ const handleSendFeedback = async () => {
 
 <Accordion style={{ marginTop: 0, boxShadow: "none", border: "none" }}>
   <AccordionSummary
-    expandIcon={<span>{expanded === "how" ? "−" : "+"}</span>}
-    onClick={() => setExpanded(expanded === "how" ? false : "how")}
+    expandIcon={<span style={{ fontSize: 20 }}>{expandedItems.includes("how") ? "−" : "+"}</span>}
+    onClick={() => toggleAccordion("how")}
     style={{ padding: "0px 0" }}
   >
     <Typography>How it works</Typography>
@@ -784,8 +790,8 @@ const handleSendFeedback = async () => {
 
 <Accordion style={{ marginTop: 0, boxShadow: "none", border: "none" }}>
   <AccordionSummary
-    expandIcon={<span>{expanded === "proofs" ? "−" : "+"}</span>}
-    onClick={() => setExpanded(expanded === "proofs" ? false : "proofs")}
+    expandIcon={<span style={{ fontSize: 20 }}>{expandedItems.includes("proofs") ? "−" : "+"}</span>}
+    onClick={() => toggleAccordion(proofs")}
     style={{ padding: "0px 0" }}
   >
     <Typography>Proofs</Typography>
@@ -855,8 +861,8 @@ const handleSendFeedback = async () => {
 {/* === Debug Log (в аккордеоне) === */}
 <Accordion style={{ marginTop: 1, boxShadow: "none", border: "none" }}>
   <AccordionSummary
-    expandIcon={<span>{expanded === "debug" ? "−" : "+"}</span>}
-    onClick={() => setExpanded(expanded === "debug" ? false : "debug")}
+    expandIcon={<span style={{ fontSize: 20 }}>{expandedItems.includes("debug") ? "−" : "+"}</span>}
+    onClick={() => toggleAccordion("debug")}
     style={{ padding: "0px 0" }}
   >
     <Typography>Debug Log</Typography>
