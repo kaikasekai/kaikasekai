@@ -600,11 +600,10 @@ const handleSendFeedback = async () => {
 </small>
 
             </div>
-<p></p>
       
       {/* === Wallet section === */}
       {!account ? (
-        <div style={{ display: "inline-block", margin: 0 }}>
+        <div style={{ display: "inline-block", marginTop: 10 }}>
             <Button variant="contained" onClick={connectWallet} style={{ width: "auto" }}>
           Connect Wallet
         </Button>
@@ -640,7 +639,7 @@ const handleSendFeedback = async () => {
               <Button variant="contained" onClick={handleSubscribe}>
                 Subscribe<sup>*</sup> ({price ? (price / 1e6).toFixed(4) : "..." } USDC)
               </Button>
-              <p><sup>*</sup>49.9 USDC to unlock next month’s forecast.</p>
+              <small><sup>*</sup>49.9 USDC to unlock next month’s forecast.</small>
               {nextEndTime && (
                 <p>
                   Next subscription will end on:{" "}
@@ -761,10 +760,9 @@ const handleSendFeedback = async () => {
         )}
 <p></p>
 <p></p>
-<p></p>
         {/* === Accordions (тоже вынесены, теперь видны всегда) === */}
       {/* === Accordions === */}
-<Accordion style={{ marginTop: 60, boxShadow: "none", border: "none" }}>
+<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none" }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("how") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("how")}
