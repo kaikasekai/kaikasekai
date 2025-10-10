@@ -40,16 +40,20 @@ import emailjs from "@emailjs/browser";
 const RAW_URL =
   "https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/data.csv";
 const COLORS = [
+  "#ff0000",
   "#ff8000",
-  "#00ff80",
   "#ffff00",
   "#00ff00",
   "#00ffff",
   "#0080ff",
   "#8000ff",
-  "#ff00ff",
-  "#0080ff",
   "#ff0080",
+  "#ff00ff",
+  "#bfff00",
+  "#00ffbf",
+  "#00bfff",
+  "#bf00ff",
+  "#4000ff",
 ];
 
 // === Contract Config ===
@@ -530,7 +534,7 @@ const handleSendFeedback = async () => {
         {page === "main" && (
           <>
             {/* === Chart === */}
-            <div style={{ marginTop: 20 }}>
+            <div style={{ marginTop: 10 }}>
               <ResponsiveContainer width="100%" height={500} className="chart-wrapper">
                 <LineChart data={filteredData}>
                   <CartesianGrid strokeDasharray="3 3" />
@@ -590,7 +594,7 @@ const handleSendFeedback = async () => {
                   : "Range: Current month"}
               </p>
               <div style={{ marginTop: 10 }}>
-                <p>Accuracy last 30 days:</p> {mape}%
+                <p>Accuracy last 30 days: {mape}%</p>
               </div>
             </div>
 
@@ -645,7 +649,7 @@ const handleSendFeedback = async () => {
   <Button
     variant="contained"
     onClick={handleBuyWhitelist}
-    style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none', marginRight: 10 }}
+    style={{ backgroundColor: '#ffd700', color: '#000', textTransform: 'none', marginRight: 10 }}
   >
     Buy Whitelist ({whitelistPrice ? (whitelistPrice / 1e6).toFixed(4) : "..." } USDC)
   </Button>
@@ -655,7 +659,7 @@ const handleSendFeedback = async () => {
 <Button
   variant="contained"
   onClick={handlePayFeedback}
-  style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none', margin: 0 }}
+  style={{ backgroundColor: '#ffd700', color: '#000', textTransform: 'none', margin: 0 }}
 >
   Contact us ({feedbackPrice ? (feedbackPrice / 1e6).toFixed(4) : "..."} USDC)
 </Button>
@@ -681,7 +685,7 @@ const handleSendFeedback = async () => {
     />
     <Button
       variant="contained"
-      style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none', margin: 10 }}
+      style={{ backgroundColor: '#ffd700', color: '#000', textTransform: 'none', margin: 10 }}
       onClick={handleSendFeedback}
     >
       Send
@@ -704,7 +708,7 @@ const handleSendFeedback = async () => {
             fullWidth
             margin="dense"
           />
-          <Button variant="contained" onClick={handleDonate} style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none', margin: 0 }}>
+          <Button variant="contained" onClick={handleDonate} style={{ backgroundColor: '#ffd700', color: '#000', textTransform: 'none', margin: 0 }}>
             Donate
           </Button>
         </div>
@@ -758,7 +762,7 @@ const handleSendFeedback = async () => {
       {/* === Accordions === */}
 <Accordion style={{ marginTop: 20, boxShadow: "none", border: "none" }}>
   <AccordionSummary
-    expandIcon={<span style={{ fontSize: 20 }}>{expandedItems.includes("about") ? "−" : "+"}</span>}
+    expandIcon={<span className="accordion-icon">{expandedItems.includes("about") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("about")}
     style={{ padding: "0px 0" }}
   >
@@ -773,7 +777,7 @@ const handleSendFeedback = async () => {
 
 <Accordion style={{ marginTop: 0, boxShadow: "none", border: "none" }}>
   <AccordionSummary
-    expandIcon={<span style={{ fontSize: 20 }}>{expandedItems.includes("how") ? "−" : "+"}</span>}
+    expandIcon={<span className="accordion-icon">{expandedItems.includes("how") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("how")}
     style={{ padding: "0px 0" }}
   >
@@ -788,7 +792,7 @@ const handleSendFeedback = async () => {
 
 <Accordion style={{ marginTop: 0, boxShadow: "none", border: "none" }}>
   <AccordionSummary
-    expandIcon={<span style={{ fontSize: 20 }}>{expandedItems.includes("proofs") ? "−" : "+"}</span>}
+    expandIcon={<span className="accordion-icon">{expandedItems.includes("proofs") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("proofs")}
     style={{ padding: "0px 0" }}
   >
@@ -859,7 +863,7 @@ const handleSendFeedback = async () => {
 {/* === Debug Log (в аккордеоне) === */}
 <Accordion style={{ marginTop: 1, boxShadow: "none", border: "none" }}>
   <AccordionSummary
-    expandIcon={<span style={{ fontSize: 20 }}>{expandedItems.includes("debug") ? "−" : "+"}</span>}
+    expandIcon={<span className="accordion-icon">{expandedItems.includes("debug") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("debug")}
     style={{ padding: "0px 0" }}
   >
