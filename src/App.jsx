@@ -905,7 +905,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
       </main>
 
 
-{/* === Floating Donate Button === */}
+{/* === Floating Donate Button (red heart, transparent, pulsing) === */}
 <div
   style={{
     position: "fixed",
@@ -919,7 +919,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
       style={{
         background: "white",
         border: "1px solid #ccc",
-        borderRadius: "12px",
+        borderRadius: "0px",
         padding: "15px",
         boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
         width: "260px",
@@ -951,24 +951,35 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
       </Button>
     </div>
   ) : (
-    <Button
-      variant="contained"
-      color="primary"
+    <button
       onClick={() => setShowDonatePopup(true)}
       style={{
-        borderRadius: "50%",
-        width: "56px",
-        height: "56px",
-        minWidth: "56px",
-        backgroundColor: "#1976d2",
+        background: "transparent",
+        border: "none",
+        cursor: "pointer",
+        fontSize: "36px",
+        color: "#e53935",
+        animation: "pulse 1.6s infinite",
+        transformOrigin: "center",
       }}
     >
-      💖
-    </Button>
+      ❤️
+    </button>
   )}
+
+  {/* === Inline keyframes === */}
+  <style>
+    {`
+      @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.25); }
+        100% { transform: scale(1); }
+      }
+    `}
+  </style>
 </div>
 
-      
+    
       {/* === Footer === */}
       <footer>
         <div className="footer-content">
