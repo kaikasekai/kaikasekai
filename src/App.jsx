@@ -717,10 +717,10 @@ const handleSendFeedback = async () => {
           </Button>
         </div>
       )}
-        */}    
+            
           </>
         )}
-
+*/}
         {/* === Disclaimer Page === */}
         {page === "disclaimer" && (
           <div style={{ marginTop: 20 }}>
