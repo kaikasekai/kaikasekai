@@ -600,7 +600,7 @@ const handleSendFeedback = async () => {
 </small>
 
             </div>
-
+<p></p>
       
       {/* === Wallet section === */}
       {!account ? (
@@ -658,7 +658,7 @@ const handleSendFeedback = async () => {
     Buy Whitelist ({whitelistPrice ? (whitelistPrice / 1e6).toFixed(4) : "..." } USDC)
   </Button>
 )}
-
+<p></p>
 
 <Button
   variant="contained"
@@ -702,7 +702,7 @@ const handleSendFeedback = async () => {
       {/* === Donate (оставляем только для подключённого кошелька) === */}
       {account && (
         <div style={{ marginTop: 20 }}>
-          <h1>Donate</h1>
+          <h3>Donate</h3>
           <TextField
             label="Amount (USDC)"
             value={donateAmount}
@@ -759,8 +759,6 @@ const handleSendFeedback = async () => {
             </p>
           </div>
         )}
-<p></p>
-<p></p>
 <p></p>
 <p></p>
 <p></p>
