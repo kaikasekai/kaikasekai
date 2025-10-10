@@ -40,6 +40,9 @@
 html {
   font-size: clamp(14px, 1vw, 18px);
   height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Основной текст */
@@ -220,6 +223,8 @@ strong, b {
 
 main {
   flex: 1; /* растягивает основной контент */
+  display: flex;
+  flex-direction: column;
 }
 
 footer {
