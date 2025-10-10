@@ -37,13 +37,13 @@
 
 /* Базовый размер — 10px, но адаптивный через clamp()
    (минимум 9px, максимум 12px, плавное масштабирование) */
-html, #root {
+html {
   font-size: clamp(14px, 1vw, 18px);
   height: 100%;
 }
 
 /* Основной текст */
-body {
+body, #root {
   font-family: 'Satoshi', sans-serif;
   font-weight: 400;
   font-size: 1rem;
@@ -228,6 +228,7 @@ footer {
   padding: 20px;
   background: #fff;
   width: 100%;
+  margin-top: auto;
 }
 
 .footer-content {
