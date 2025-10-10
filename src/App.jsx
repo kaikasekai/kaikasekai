@@ -918,13 +918,13 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
       style={{
         background: "white",
         border: "1px solid #ccc",
-        borderRadius: "12px",
+        borderRadius: "0px",
         padding: "15px",
         boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
         width: "260px",
       }}
     >
-      <h4 style={{ margin: "0 0 10px 0" }}>Donate 🍩</h4>
+      <h4 style={{ margin: "0 0 10px 0" }}>Donute</h4>
       <TextField
         label="Amount (USDC)"
         value={donateAmount}
@@ -961,43 +961,18 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
       title="Donate donut"
       aria-label="Donate donut"
     >
-      <svg
-        width="48"
-        height="48"
-        viewBox="354.125 439.438 170.094 170.094"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <g>
-          <path
-            d="M439.156 439.438C392.184 439.438 354.125 477.497 354.125 524.469C354.125 571.441 392.184 609.531 439.156 609.531C486.128 609.531 524.219 571.441 524.219 524.469C524.219 477.497 486.128 439.438 439.156 439.438ZM439.156 489.031C458.728 489.031 474.594 504.897 474.594 524.469C474.594 544.04 458.728 559.906 439.156 559.906C419.585 559.906 403.719 544.04 403.719 524.469C403.719 504.897 419.585 489.031 439.156 489.031Z"
-            fill="#f2b935"
-          />
-          <path
-            d="M438.54 467.965L419.207 456.107L411.795 468.19L431.129 480.048L438.54 467.965Z"
-            fill="#ffff00"
-          />
-          <path
-            d="M454.852 598.34L474.401 586.841L467.215 574.623L447.666 586.122L454.852 598.34Z"
-            fill="#ff0080"
-          />
-          <path
-            d="M510.918 546.897L503.192 525.574L489.865 530.403L497.591 551.726L510.918 546.897Z"
-            fill="#0080ff"
-          />
-          <path
-            d="M477.671 496.762L498.291 487.319L492.389 474.431L471.769 483.874L477.671 496.762Z"
-            fill="#8000ff"
-          />
-          <path
-            d="M387.596 576.162L409.854 571.809L407.134 557.898L384.875 562.251L387.596 576.162Z"
-            fill="#ff8000"
-          />
-          <path
-            d="M387.627 494.595L372.051 511.08L382.354 520.815L397.93 504.33L387.627 494.595Z"
-            fill="#00ff00"
-          />
-        </g>
-      </svg>
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="354.121 439.465 170.096 170.096" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+<defs/>
+<g id="Layer">
+<path d="M379.032 464.386C345.818 497.6 345.818 551.425 379.032 584.639C412.246 617.853 466.092 617.875 499.306 584.661C532.52 551.447 532.52 497.578 499.306 464.364C466.092 431.15 412.246 431.172 379.032 464.386ZM414.1 499.454C427.939 485.615 450.377 485.615 464.216 499.454C478.055 513.294 478.055 535.731 464.216 549.571C450.377 563.41 427.939 563.41 414.1 549.571C400.261 535.731 400.261 513.294 414.1 499.454Z" fill="#f2b935" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M479.323 573.952L491.108 567.148L486.856 559.782L475.071 566.586L479.323 573.952Z" fill="#0080ff" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M392.491 488.384L404.275 481.58L400.023 474.215L388.238 481.019L392.491 488.384Z" fill="#00ff00" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M447.138 465.927L458.922 472.731L463.175 465.365L451.39 458.561L447.138 465.927Z" fill="#ffff00" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M415.845 583.747L427.63 590.551L431.883 583.186L420.098 576.382L415.845 583.747Z" fill="#ff0080" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M502.352 515.531L502.352 501.923L493.847 501.923L493.847 515.531L502.352 515.531Z" fill="#ff8000" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M384.601 547.083L384.601 533.475L376.096 533.475L376.096 547.083L384.601 547.083Z" fill="#8000ff" fill-rule="nonzero" opacity="1" stroke="none"/>
+</g>
+</svg>
     </button>
   )}
 </div>
