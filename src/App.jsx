@@ -878,7 +878,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
   </AccordionDetails>
 </Accordion>
 
-{/* === Debug Log (в аккордеоне) === */}
+{/* === Debug Log (в аккордеоне) === 
 <Accordion style={{ marginTop: 1, boxShadow: "none", border: "none" }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("debug") ? "−" : "+"}</span>}
@@ -902,6 +902,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
     </div>
   </AccordionDetails>
 </Accordion>
+*/}
       </main>
 
 {/* === Floating Donate Donut Button (inline SVG version) === */}
