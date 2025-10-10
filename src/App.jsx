@@ -700,7 +700,7 @@ const handleSendFeedback = async () => {
             </div>
           )}
         
-      {/* === Donate (оставляем только для подключённого кошелька) === */}
+      {/* === Donate (оставляем только для подключённого кошелька) === 
       {account && (
         <div style={{ marginTop: 20 }}>
           <h3>Donate</h3>
@@ -716,7 +716,7 @@ const handleSendFeedback = async () => {
           </Button>
         </div>
       )}
-            
+        */}    
           </>
         )}
         
@@ -976,6 +976,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
         20% { transform: scale(1); }
         30% { transform: scale(1.25); }
         40% { transform: scale(1); }
+        60% { transform: scale(1); }
         100% { transform: scale(1); }
       }
     `}
