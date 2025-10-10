@@ -592,16 +592,23 @@ const handleSendFeedback = async () => {
                   : "Range: Current month"}
               </p>
 
-<p>Advanced AI algorithm predicts the global BTC trend with {mape}%<sup>*</sup> accuracy.</p>
-              <small><sup>*</sup> Based on rolling 30-day metrics.</small>
+<div style={{ margin: 0 }}>
+  Advanced AI algorithm predicts the global BTC trend with {mape}%<sup>*</sup> accuracy.
+</div>
+<small style={{ display: "block", marginTop: 2 }}>
+  <sup>*</sup> Based on rolling 30-day metrics.
+</small>
+
             </div>
 
       
       {/* === Wallet section === */}
       {!account ? (
-        <Button variant="contained" onClick={connectWallet} style={{ width: "auto" }}>
+        <div style={{ display: "inline-block", margin: "10px 0 10px 10px" }}>
+            <Button variant="contained" onClick={connectWallet} style={{ width: "auto" }}>
           Connect Wallet
         </Button>
+           </div> 
       ) : (
         <div>
           <p>Connected: {account}</p>
@@ -752,7 +759,11 @@ const handleSendFeedback = async () => {
             </p>
           </div>
         )}
-
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
         {/* === Accordions (тоже вынесены, теперь видны всегда) === */}
       {/* === Accordions === */}
 <Accordion style={{ marginTop: 60, boxShadow: "none", border: "none" }}>
@@ -766,12 +777,12 @@ const handleSendFeedback = async () => {
   <AccordionDetails style={{ padding: "0px 0" }}>
     <Typography>
 Each thin, colorful line on the chart represents a unique AI model predicting the most probable scenario for Bitcoin’s next move. The thick dark-blue line shows the averaged outcome of these AI model cluster scenarios — the core BTC trend forecast — while the thick orange line displays historical BTC data.
-
+<br></br>
 The forecast reflects both mid-term and global BTC trends.
 It may follow one of the cluster models more closely and show slight time elasticity — occurring a bit earlier or later — but it maintains overall consistency even during high volatility and market manipulations, making them easier to spot.
-
+<br></br>
 AI models from the cluster perform advanced technical analysis and research nearly every other factor that could influence crypto’s next moves — from stock market indicators to even rarely used metaphysical aspects.
-
+<br></br>
 Models are renewed monthly with additional training data to stay accurate and up to date.
 At the beginning of each month, the forecast for the new month is released, while the current month’s forecast receives updates.
   </Typography>
