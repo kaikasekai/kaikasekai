@@ -905,7 +905,116 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
       </main>
 
 
-{/* === Floating Donate Donut Button === */}
+{/* === Floating Donate Donut Button (inline SVG, no pulse) === */}
+<div
+  style={{
+    position: "fixed",
+    bottom: "20px",
+    left: "20px",
+    zIndex: 9999,
+  }}
+>
+  {showDonatePopup ? (
+    <div
+      style={{
+        background: "white",
+        border: "1px solid #ccc",
+        borderRadius: "12px",
+        padding: "15px",
+        boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+        width: "260px",
+      }}
+    >
+      <h4 style={{ margin: "0 0 10px 0" }}>Donate 🍩</h4>
+      <TextField
+        label="Amount (USDC)"
+        value={donateAmount}
+        onChange={(e) => setDonateAmount(e.target.value)}
+        fullWidth
+        margin="dense"
+      />
+      <Button
+        variant="contained"
+        fullWidth
+        onClick={handleDonate}
+        style={{ marginTop: "10px" }}
+      >
+        Send
+      </Button>
+      <Button
+        variant="text"
+        fullWidth
+        onClick={() => setShowDonatePopup(false)}
+        style={{ marginTop: "4px" }}
+      >
+        Close
+      </Button>
+    </div>
+  ) : (
+    <button
+      onClick={() => setShowDonatePopup(true)}
+      style={{
+        background: "transparent",
+        border: "none",
+        padding: 6,
+        cursor: "pointer",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+      title="Donate — buy us a donut"
+      aria-label="Donate donut"
+    >
+      {/* inline SVG donut (48x48) */}
+      <svg
+        width="44"
+        height="44"
+        viewBox="0 0 64 64"
+        xmlns="http://www.w3.org/2000/svg"
+        role="img"
+        aria-hidden="false"
+      >
+        <title>Donut</title>
+        <defs>
+          {/* mask to make hole transparent */}
+          <mask id="hole">
+            <rect x="0" y="0" width="64" height="64" fill="white" />
+            <circle cx="32" cy="32" r="10" fill="black" />
+          </mask>
+        </defs>
+
+        {/* base dough */}
+        <circle cx="32" cy="32" r="20" fill="#D9996A" />
+
+        {/* icing (top-left arc) */}
+        <path
+          d="M16 30c2-8 12-12 16-12s14 3 18 9c0 0-2 11-8 12s-22-1-26-9z"
+          fill="#FF7BAC"
+        />
+
+        {/* apply mask to create hole */}
+        <g mask="url(#hole)">
+          {/* slightly darker ring for depth */}
+          <circle cx="32" cy="32" r="20" fill="rgba(0,0,0,0.03)" />
+        </g>
+
+        {/* hole outline (thin stroke to read as hole on any background) */}
+        <circle cx="32" cy="32" r="10" fill="transparent" stroke="rgba(0,0,0,0.08)" />
+
+        {/* sprinkles (simple colored small rectangles/circles) */}
+        <rect x="22" y="24" width="2.5" height="6" rx="1" transform="rotate(-25 23.25 27)" fill="#fff59d" />
+        <rect x="28" y="20" width="2.8" height="6" rx="1" transform="rotate(15 29.4 23)" fill="#90caf9" />
+        <rect x="36" y="22" width="2.6" height="6" rx="1" transform="rotate(-10 37.3 25)" fill="#c5e1a5" />
+        <rect x="40" y="28" width="2.6" height="6" rx="1" transform="rotate(30 41.3 31)" fill="#ffcc80" />
+        <rect x="30" y="30" width="2.2" height="6" rx="1" transform="rotate(-40 31.1 33)" fill="#f8bbd0" />
+      </svg>
+    </button>
+  )}
+</div>
+
+      
+
+{/* === Floating Donate Donut Button === 
 <div
   style={{
     position: "fixed",
@@ -966,7 +1075,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
     </button>
   )}
 </div>
-    
+    */}
       {/* === Footer === */}
       <footer>
         <div className="footer-content">
