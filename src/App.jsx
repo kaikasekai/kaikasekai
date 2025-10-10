@@ -1010,6 +1010,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
           </div>
         </div>
       </footer>
+      <p></p>
     </>
   );
 }
