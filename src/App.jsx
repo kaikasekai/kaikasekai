@@ -905,7 +905,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
       </main>
 
 
-{/* === Floating Donate Button (heart pulse version) === */}
+{/* === Floating Donate Donut Button === */}
 <div
   style={{
     position: "fixed",
@@ -919,13 +919,13 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
       style={{
         background: "white",
         border: "1px solid #ccc",
-        borderRadius: "12px",
+        borderRadius: "0px",
         padding: "15px",
         boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
         width: "260px",
       }}
     >
-      <h4 style={{ margin: "0 0 10px 0" }}>Donate</h4>
+      <h4 style={{ margin: "0 0 10px 0" }}>Donate 🍩</h4>
       <TextField
         label="Amount (USDC)"
         value={donateAmount}
@@ -957,30 +957,14 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
         background: "transparent",
         border: "none",
         cursor: "pointer",
-        fontSize: "30px", // чуть меньше, чем 36px
-        color: "#e53935",
-        animation: "heartBeat 1.6s infinite",
+        fontSize: "28px",
         transformOrigin: "center",
       }}
+      title="Donate 🍩"
     >
-      ❤️
+      🍩
     </button>
   )}
-
-  {/* === Keyframes for heart beat animation === */}
-  <style>
-    {`
-      @keyframes heartBeat {
-        0% { transform: scale(1); }
-        10% { transform: scale(1.25); }
-        20% { transform: scale(1); }
-        30% { transform: scale(1.25); }
-        40% { transform: scale(1); }
-        60% { transform: scale(1); }
-        100% { transform: scale(1); }
-      }
-    `}
-  </style>
 </div>
     
       {/* === Footer === */}
