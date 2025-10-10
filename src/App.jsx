@@ -700,8 +700,7 @@ const handleSendFeedback = async () => {
             </div>
           )}
         
-   {/*
-      {/* === Donate (оставляем только для подключённого кошелька) === */}
+      {/* === Donate (оставляем только для подключённого кошелька) === 
       {account && (
         <div style={{ marginTop: 20 }}>
           <h3>Donate</h3>
@@ -720,7 +719,8 @@ const handleSendFeedback = async () => {
             
           </>
         )}
-*/}
+        */}
+            
         {/* === Disclaimer Page === */}
         {page === "disclaimer" && (
           <div style={{ marginTop: 20 }}>
