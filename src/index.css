@@ -185,6 +185,23 @@ strong, b {
   color: #000 !important;
 }
 
+/*==========BUTTONS===========*/
+.MuiButton-root {
+  box-shadow: none !important; /* убираем тень */
+  border-radius: 6px !important; /* лёгкое скругление */
+  text-transform: none !important; /* чтобы текст не был капсом */
+}
+
+.MuiButton-contained {
+  background-color: #1976d2 !important; /* основной цвет, если нужно */
+  color: #fff !important; /* цвет текста */
+}
+
+.MuiButton-contained:hover {
+  background-color: #1565c0 !important; /* цвет при наведении */
+  box-shadow: none !important; /* чтобы тень не появлялась на hover */
+}
+
 /* --------------------------------------------------------
    📊 RECHARTS (Axes, Tooltip, Legend)
 --------------------------------------------------------- */
