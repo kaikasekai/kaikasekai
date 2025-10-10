@@ -904,7 +904,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
 </Accordion>
       </main>
 
-{/* === Floating Donate Donut Button === */}
+{/* === Floating Donate Donut Button (inline SVG version) === */}
 <div
   style={{
     position: "fixed",
@@ -918,7 +918,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
       style={{
         background: "white",
         border: "1px solid #ccc",
-        borderRadius: "0px",
+        borderRadius: "12px",
         padding: "15px",
         boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
         width: "260px",
@@ -955,17 +955,53 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
       style={{
         background: "transparent",
         border: "none",
+        padding: 0,
         cursor: "pointer",
-        fontSize: "28px",
-        transformOrigin: "center",
       }}
-      title="Donate 🍩"
+      title="Donate donut"
+      aria-label="Donate donut"
     >
-      🍩
+      <svg
+        width="48"
+        height="48"
+        viewBox="354.125 439.438 170.094 170.094"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g>
+          <path
+            d="M439.156 439.438C392.184 439.438 354.125 477.497 354.125 524.469C354.125 571.441 392.184 609.531 439.156 609.531C486.128 609.531 524.219 571.441 524.219 524.469C524.219 477.497 486.128 439.438 439.156 439.438ZM439.156 489.031C458.728 489.031 474.594 504.897 474.594 524.469C474.594 544.04 458.728 559.906 439.156 559.906C419.585 559.906 403.719 544.04 403.719 524.469C403.719 504.897 419.585 489.031 439.156 489.031Z"
+            fill="#f2b935"
+          />
+          <path
+            d="M438.54 467.965L419.207 456.107L411.795 468.19L431.129 480.048L438.54 467.965Z"
+            fill="#ffff00"
+          />
+          <path
+            d="M454.852 598.34L474.401 586.841L467.215 574.623L447.666 586.122L454.852 598.34Z"
+            fill="#ff0080"
+          />
+          <path
+            d="M510.918 546.897L503.192 525.574L489.865 530.403L497.591 551.726L510.918 546.897Z"
+            fill="#0080ff"
+          />
+          <path
+            d="M477.671 496.762L498.291 487.319L492.389 474.431L471.769 483.874L477.671 496.762Z"
+            fill="#8000ff"
+          />
+          <path
+            d="M387.596 576.162L409.854 571.809L407.134 557.898L384.875 562.251L387.596 576.162Z"
+            fill="#ff8000"
+          />
+          <path
+            d="M387.627 494.595L372.051 511.08L382.354 520.815L397.93 504.33L387.627 494.595Z"
+            fill="#00ff00"
+          />
+        </g>
+      </svg>
     </button>
   )}
 </div>
-    
+ 
       {/* === Footer === */}
       <footer>
         <div className="footer-content">
