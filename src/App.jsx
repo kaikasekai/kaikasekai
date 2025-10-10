@@ -586,11 +586,11 @@ const handleSendFeedback = async () => {
                 </LineChart>
               </ResponsiveContainer>
               <p></p>
-              <p>
+              <div style={{ margin: 0 }}>
                 {subscriptionActive
                   ? "Range: Current + Next month"
                   : "Range: Current month"}
-              </p>
+              </div>
 
 <div style={{ margin: 0 }}>
   Advanced AI algorithm predicts the global BTC trend with {mape}%<sup>*</sup> accuracy.
@@ -604,7 +604,7 @@ const handleSendFeedback = async () => {
       
       {/* === Wallet section === */}
       {!account ? (
-        <div style={{ display: "inline-block", margin: "10px 0 10px 10px" }}>
+        <div style={{ display: "inline-block", margin: 0 }}>
             <Button variant="contained" onClick={connectWallet} style={{ width: "auto" }}>
           Connect Wallet
         </Button>
@@ -774,15 +774,15 @@ const handleSendFeedback = async () => {
   >
     <Typography>How it works</Typography>
   </AccordionSummary>
-  <AccordionDetails style={{ padding: "0px 0" }}>
+  <AccordionDetails style={{ padding: "0px 0", textAlign: "justify" }}>
     <Typography>
 Each thin, colorful line on the chart represents a unique AI model predicting the most probable scenario for Bitcoin’s next move. The thick dark-blue line shows the averaged outcome of these AI model cluster scenarios — the core BTC trend forecast — while the thick orange line displays historical BTC data.
-<br></br>
+<br></br><br></br>
 The forecast reflects both mid-term and global BTC trends.
 It may follow one of the cluster models more closely and show slight time elasticity — occurring a bit earlier or later — but it maintains overall consistency even during high volatility and market manipulations, making them easier to spot.
-<br></br>
+<br></br><br></br>
 AI models from the cluster perform advanced technical analysis and research nearly every other factor that could influence crypto’s next moves — from stock market indicators to even rarely used metaphysical aspects.
-<br></br>
+<br></br><br></br>
 Models are renewed monthly with additional training data to stay accurate and up to date.
 At the beginning of each month, the forecast for the new month is released, while the current month’s forecast receives updates.
   </Typography>
@@ -799,12 +799,10 @@ At the beginning of each month, the forecast for the new month is released, whil
   </AccordionSummary>
   <AccordionDetails style={{ padding: "0px 0" }}>
     <Typography>
-      Referral program
-
-Kaikasekai means “Flourishing World.”
+Kaikasekai means “Flourishing World.<br></br>
 This insider-level, on-chain verified product empowers traders worldwide with the full potential of AI, open to everyone — whale or not — and price-friendly.
-
-Join the program:
+<br></br><br></br>
+Join the program:<br></br>
 Your wallet will be linked to the smart contract.
 Use your wallet number as your referral code — your subscribers get 50% off, and you earn 10% on every purchase.
     </Typography>
