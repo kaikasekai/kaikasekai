@@ -700,7 +700,7 @@ const handleSendFeedback = async () => {
             </div>
           )}
         
-
+   {/*
       {/* === Donate (оставляем только для подключённого кошелька) === */}
       {account && (
         <div style={{ marginTop: 20 }}>
@@ -717,7 +717,7 @@ const handleSendFeedback = async () => {
           </Button>
         </div>
       )}
-            
+        */}    
           </>
         )}
 
@@ -905,7 +905,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
       </main>
 
 
-{/* === Floating Donate Button (red heart, transparent, pulsing) === */}
+{/* === Floating Donate Button (heart pulse version) === */}
 <div
   style={{
     position: "fixed",
@@ -919,7 +919,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
       style={{
         background: "white",
         border: "1px solid #ccc",
-        borderRadius: "0px",
+        borderRadius: "12px",
         padding: "15px",
         boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
         width: "260px",
@@ -957,9 +957,9 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
         background: "transparent",
         border: "none",
         cursor: "pointer",
-        fontSize: "36px",
+        fontSize: "30px", // чуть меньше, чем 36px
         color: "#e53935",
-        animation: "pulse 1.6s infinite",
+        animation: "heartBeat 1.6s infinite",
         transformOrigin: "center",
       }}
     >
@@ -967,18 +967,20 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
     </button>
   )}
 
-  {/* === Inline keyframes === */}
+  {/* === Keyframes for heart beat animation === */}
   <style>
     {`
-      @keyframes pulse {
+      @keyframes heartBeat {
         0% { transform: scale(1); }
-        50% { transform: scale(1.25); }
+        10% { transform: scale(1.25); }
+        20% { transform: scale(1); }
+        30% { transform: scale(1.25); }
+        40% { transform: scale(1); }
         100% { transform: scale(1); }
       }
     `}
   </style>
 </div>
-
     
       {/* === Footer === */}
       <footer>
