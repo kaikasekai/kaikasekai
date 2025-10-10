@@ -190,6 +190,7 @@ strong, b {
   box-shadow: none !important; /* убираем тень */
   border-radius: 6px !important; /* лёгкое скругление */
   text-transform: none !important; /* чтобы текст не был капсом */
+  margin: 8px 0 8px 8px;
 }
 
 .MuiButton-contained {
