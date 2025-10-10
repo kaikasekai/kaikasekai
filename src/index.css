@@ -38,7 +38,7 @@
 /* Базовый размер — 10px, но адаптивный через clamp()
    (минимум 9px, максимум 12px, плавное масштабирование) */
 html {
-  font-size: clamp(12px, 1vw, 14px);
+  font-size: clamp(14px, 1vw, 18px);
 }
 
 /* Основной текст */
@@ -214,16 +214,20 @@ strong, b {
   font-weight: 400;
 }
 
-
 /* --------------------------------------------------------
-   ⚙️ FOOTER
+   ⚙️ FOOTER (всегда прижат к низу страницы)
 --------------------------------------------------------- */
+
+main {
+  flex: 1 0 auto; /* растягивает основной контент */
+}
+
 footer {
+  flex-shrink: 0;
   border-top: 1px solid #ccc;
   padding: 20px;
-  margin-top: 20px;
   background: #fff;
-  margin-top: auto; /* <-- прижимает футер вниз */
+  width: 100%;
 }
 
 .footer-content {
@@ -292,13 +296,3 @@ code {
   font-family: 'Satoshi', sans-serif;
   font-size: 0.9rem;
 }
-
-/* === FIX: Футер всегда внизу === */
-main {
-  flex: 1 0 auto;
-}
-
-footer {
-  flex-shrink: 0;
-}
-
