@@ -123,7 +123,8 @@ function App() {
   const [proofs, setProofs] = useState([]);
   const [debug, setDebug] = useState([]);
   const [expandedItems, setExpandedItems] = useState([]);
-  const [page, setPage] = useState("main"); // <— новая логика страниц
+  const [page, setPage] = useState("main"); // 
+  const [showDonatePopup, setShowDonatePopup] = useState(false);
 
   const toggleAccordion = (id) => {
   setExpandedItems(prev =>
@@ -903,6 +904,71 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
 </Accordion>
       </main>
 
+
+{/* === Floating Donate Button === */}
+<div
+  style={{
+    position: "fixed",
+    bottom: "20px",
+    left: "20px",
+    zIndex: 9999,
+  }}
+>
+  {showDonatePopup ? (
+    <div
+      style={{
+        background: "white",
+        border: "1px solid #ccc",
+        borderRadius: "12px",
+        padding: "15px",
+        boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+        width: "260px",
+      }}
+    >
+      <h4 style={{ margin: "0 0 10px 0" }}>Donate</h4>
+      <TextField
+        label="Amount (USDC)"
+        value={donateAmount}
+        onChange={(e) => setDonateAmount(e.target.value)}
+        fullWidth
+        margin="dense"
+      />
+      <Button
+        variant="contained"
+        fullWidth
+        onClick={handleDonate}
+        style={{ marginTop: "10px" }}
+      >
+        Send
+      </Button>
+      <Button
+        variant="text"
+        fullWidth
+        onClick={() => setShowDonatePopup(false)}
+        style={{ marginTop: "4px" }}
+      >
+        Close
+      </Button>
+    </div>
+  ) : (
+    <Button
+      variant="contained"
+      color="primary"
+      onClick={() => setShowDonatePopup(true)}
+      style={{
+        borderRadius: "50%",
+        width: "56px",
+        height: "56px",
+        minWidth: "56px",
+        backgroundColor: "#1976d2",
+      }}
+    >
+      💖
+    </Button>
+  )}
+</div>
+
+      
       {/* === Footer === */}
       <footer>
         <div className="footer-content">
