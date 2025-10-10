@@ -593,7 +593,7 @@ const handleSendFeedback = async () => {
               </div>
 
 <div style={{ margin: 0 }}>
-  Advanced AI algorithm predicts the global BTC trend with {mape}%<sup>*</sup> accuracy.
+  Advanced AI powered algorithm predicts the global BTC trend with {mape}%<sup>*</sup> accuracy.
 </div>
 <small style={{ display: "block", marginTop: 2 }}>
   <sup>*</sup> Based on rolling 30-day metrics.
@@ -636,9 +636,11 @@ const handleSendFeedback = async () => {
                 />
               )}
 
+            <div style={{ margin: 0 }}>
               <Button variant="contained" onClick={handleSubscribe}>
                 Subscribe<sup>*</sup> ({price ? (price / 1e6).toFixed(4) : "..." } USDC)
               </Button>
+            </div>
               <small><sup>*</sup>49.9 USDC to unlock next month’s forecast.</small>
               {nextEndTime && (
                 <p>
