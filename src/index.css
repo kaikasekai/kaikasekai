@@ -193,12 +193,12 @@ strong, b {
 }
 
 .MuiButton-contained {
-  background-color: #1976d2 !important; /* основной цвет, если нужно */
+  background-color: #FEBF00 !important; /* основной цвет, если нужно */
   color: #fff !important; /* цвет текста */
 }
 
 .MuiButton-contained:hover {
-  background-color: #1565c0 !important; /* цвет при наведении */
+  background-color: #fecb00 !important; /* цвет при наведении */
   box-shadow: none !important; /* чтобы тень не появлялась на hover */
 }
 
