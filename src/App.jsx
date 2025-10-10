@@ -143,8 +143,7 @@ function App() {
         dynamicTyping: true,
         complete: (res) => {
           const rows = res.data.filter((_, i) => i >= 30);
-const rowsWithIndex = rows.map((r, idx) => ({ ...r, dateIndex: idx }));
-setData(rowsWithIndex);
+          setData(rows);
           const today = new Date().toISOString().slice(0, 10);
           const validRows = rows.filter(
             (r) =>
@@ -539,14 +538,9 @@ const handleSendFeedback = async () => {
                 <LineChart data={filteredData}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis
-  type="number"
-  dataKey="dateIndex"
-  domain={['dataMin', 'dataMax']}
-  tickFormatter={(i) => {
-    const row = filteredData[i];
-    return row ? dayjs(row.date).format("MMM D") : '';
-  }}
-/>
+                    dataKey="date"
+                    tickFormatter={(d) => dayjs(d).format("MMM D")}
+                  />
                   <YAxis
                     domain={[100000, 150000]}
                     ticks={[
@@ -768,7 +762,6 @@ const handleSendFeedback = async () => {
           </div>
         )}
 <p></p>
-<p></p>
         {/* === Accordions (тоже вынесены, теперь видны всегда) === */}
       {/* === Accordions === */}
 <Accordion style={{ marginTop: 0, boxShadow: "none", border: "none" }}>
@@ -802,7 +795,7 @@ At the beginning of each month, the forecast for the new month is released, whil
   >
     <Typography>Referral programm</Typography>
   </AccordionSummary>
-  <AccordionDetails style={{ padding: "0px 0" }}>
+  <AccordionDetails style={{ padding: "0px 0", textAlign: "justify" }}>
     <Typography>
 Kaikasekai means “Flourishing World.<br></br>
 This insider-level, on-chain verified product empowers traders worldwide with the full potential of AI, open to everyone — whale or not — and price-friendly.
