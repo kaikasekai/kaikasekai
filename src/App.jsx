@@ -592,11 +592,8 @@ const handleSendFeedback = async () => {
                   : "Range: Current month"}
               </p>
 
-<p>Advanced AI algorithm predicts the global BTC trend with {mape}% accuracy. *Based on rolling 30-day metrics.</p>
-              
-              <div style={{ marginTop: 10 }}>
-                <p>Accuracy last 30 days: {mape}%</p>
-              </div>
+<p>Advanced AI algorithm predicts the global BTC trend with {mape}%<sup>*</sup> accuracy.</p>
+              <small><sup>*</sup> Based on rolling 30-day metrics.</small>
             </div>
 
       
@@ -634,7 +631,7 @@ const handleSendFeedback = async () => {
               )}
 
               <Button variant="contained" onClick={handleSubscribe}>
-                Subscribe ({price ? (price / 1e6).toFixed(4) : "..." } USDC)
+                Subscribe<sup>*</sup> ({price ? (price / 1e6).toFixed(4) : "..." } USDC)
               </Button>
               <p><sup>*</sup>49.9 USDC to unlock next month’s forecast.</p>
               {nextEndTime && (
@@ -761,7 +758,7 @@ const handleSendFeedback = async () => {
 <Accordion style={{ marginTop: 60, boxShadow: "none", border: "none" }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("how") ? "−" : "+"}</span>}
-    onClick={() => toggleAccordion(how")}
+    onClick={() => toggleAccordion("how")}
     style={{ padding: "0px 0" }}
   >
     <Typography>How it works</Typography>
