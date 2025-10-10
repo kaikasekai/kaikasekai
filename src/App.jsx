@@ -528,13 +528,11 @@ const handleSendFeedback = async () => {
   return (
     <>
       <main style={{ padding: "20px", maxWidth: "1000px", margin: "0 auto" }}>
-        <h2></h2>
-
         {/* === Страница MAIN === */}
         {page === "main" && (
           <>
             {/* === Chart === */}
-            <div style={{ marginTop: 10 }}>
+            <div style={{ marginTop: 0 }}>
               <ResponsiveContainer width="100%" height={500} className="chart-wrapper">
                 <LineChart data={filteredData}>
                   <CartesianGrid strokeDasharray="3 3" />
@@ -601,7 +599,7 @@ const handleSendFeedback = async () => {
       
       {/* === Wallet section === */}
       {!account ? (
-        <Button variant="contained" onClick={connectWallet} style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none', marginTop: 10 }}>
+        <Button variant="contained" onClick={connectWallet}>
           Connect Wallet
         </Button>
       ) : (
@@ -632,7 +630,7 @@ const handleSendFeedback = async () => {
                 />
               )}
 
-              <Button variant="contained" onClick={handleSubscribe} style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none', marginRight: 10 }}>
+              <Button variant="contained" onClick={handleSubscribe}>
                 Subscribe ({price ? (price / 1e6).toFixed(4) : "..." } USDC)
               </Button>
 
@@ -649,7 +647,6 @@ const handleSendFeedback = async () => {
   <Button
     variant="contained"
     onClick={handleBuyWhitelist}
-    style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none', marginRight: 10 }}
   >
     Buy Whitelist ({whitelistPrice ? (whitelistPrice / 1e6).toFixed(4) : "..." } USDC)
   </Button>
@@ -659,7 +656,6 @@ const handleSendFeedback = async () => {
 <Button
   variant="contained"
   onClick={handlePayFeedback}
-  style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none', margin: 0 }}
 >
   Contact us ({feedbackPrice ? (feedbackPrice / 1e6).toFixed(4) : "..."} USDC)
 </Button>
@@ -685,7 +681,6 @@ const handleSendFeedback = async () => {
     />
     <Button
       variant="contained"
-      style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none', margin: 10 }}
       onClick={handleSendFeedback}
     >
       Send
@@ -708,7 +703,7 @@ const handleSendFeedback = async () => {
             fullWidth
             margin="dense"
           />
-          <Button variant="contained" onClick={handleDonate} style={{ backgroundColor: '#ffb60d', color: '#000', textTransform: 'none', margin: 0 }}>
+          <Button variant="contained" onClick={handleDonate}>
             Donate
           </Button>
         </div>
@@ -760,7 +755,7 @@ const handleSendFeedback = async () => {
 
         {/* === Accordions (тоже вынесены, теперь видны всегда) === */}
       {/* === Accordions === */}
-<Accordion style={{ marginTop: 20, boxShadow: "none", border: "none" }}>
+<Accordion style={{ marginTop: 60, boxShadow: "none", border: "none" }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("about") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("about")}
