@@ -143,7 +143,8 @@ function App() {
         dynamicTyping: true,
         complete: (res) => {
           const rows = res.data.filter((_, i) => i >= 30);
-          setData(rows);
+const rowsWithIndex = rows.map((r, idx) => ({ ...r, dateIndex: idx }));
+setData(rowsWithIndex);
           const today = new Date().toISOString().slice(0, 10);
           const validRows = rows.filter(
             (r) =>
@@ -538,9 +539,14 @@ const handleSendFeedback = async () => {
                 <LineChart data={filteredData}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis
-                    dataKey="date"
-                    tickFormatter={(d) => dayjs(d).format("MMM D")}
-                  />
+  type="number"
+  dataKey="dateIndex"
+  domain={['dataMin', 'dataMax']}
+  tickFormatter={(i) => {
+    const row = filteredData[i];
+    return row ? dayjs(row.date).format("MMM D") : '';
+  }}
+/>
                   <YAxis
                     domain={[100000, 150000]}
                     ticks={[
