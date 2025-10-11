@@ -283,7 +283,7 @@ footer {
   font-size: 0.9rem;
   font-weight: 300;
   cursor: pointer;
-  text-decoration: underline;
+  text-decoration: none;
   transition: color 0.2s;
 }
 
