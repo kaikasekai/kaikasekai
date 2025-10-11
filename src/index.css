@@ -54,7 +54,7 @@ body, #root {
   margin: 0;
   padding: 0;
   background-color: #fff;
-  color: #000;
+  color: #1c1c1c;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -170,7 +170,7 @@ strong, b {
   font-size: 1.6rem;
   font-weight: 500;
   line-height: 1;
-  color: #000;
+  color: #1c1c1c;
   width: 24px;
   display: inline-block;
   text-align: center;
@@ -181,7 +181,7 @@ strong, b {
   font-weight: 400 !important;
   font-size: 1rem !important;
   line-height: 1.5 !important;
-  color: #000 !important;
+  color: #1c1c1c !important;
 }
 
 /*==========BUTTONS===========*/
@@ -193,7 +193,7 @@ strong, b {
 }
 
 .MuiButton-contained {
-  background-color: #febf00 !important; /* основной цвет, если нужно */
+  background-color: #ffd700 !important; /* основной цвет, если нужно */
   color: #1c1c1c !important; /* цвет текста */
 }
 
@@ -288,7 +288,7 @@ footer {
 }
 
 .footer-link:hover {
-  color: #000;
+  color: #1c1c1c;
 }
 
 .footer-logo-block {
@@ -299,7 +299,7 @@ footer {
 }
 
 .footer-logo {
-  width: 36px;
+  width: 24px;
   height: auto;
 }
 
