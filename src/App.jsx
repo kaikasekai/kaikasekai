@@ -980,7 +980,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
       title="Donate donut"
       aria-label="Donate donut"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36">
+      <svg xmlns="http://www.w3.org/2000/svg" width="105" height="105">
   <g>
     <rect x="2" y="5" width="1" height="1" fill="#ffd700"/>
     <rect x="1" y="5" width="1" height="1" fill="#ffd700"/>
