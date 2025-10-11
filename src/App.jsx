@@ -980,56 +980,56 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
       title="Donate donut"
       aria-label="Donate donut"
     >
-      <svg width="36" height="36" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" shape-rendering="crispEdges">
   <g>
-    <path d="M8.99 22.47h3.59v3.59H8.99z" fill="#ffd700"/>
-    <path d="M5.8 22.47h3.59v3.59H5.8z" fill="#ffd700"/>
-    <path d="M8.99 26.06h3.59v3.59H8.99z" fill="#ffd700"/>
-    <path d="M12.57 22.47h3.59v3.59h-3.59z" fill="#ffd700"/>
-    <path d="M16.16 22.47h3.59v3.59h-3.59z" fill="#ffd700"/>
-    <path d="M19.75 22.47h3.59v3.59h-3.59z" fill="#ffd700"/>
-    <path d="M19.75 26.06h3.59v3.59h-3.59z" fill="#ffd700"/>
-    <path d="M23.34 22.47h3.59v3.59h-3.59z" fill="#ffd700"/>
-    <path d="M12.57 26.06h3.59v3.59h-3.59z" fill="#ffd700"/>
-    <path d="M5.82 26.06h3.59v3.59H5.82z" fill="#ddba00"/>
-    <path d="M2.23 22.47h3.59v3.59H2.23z" fill="#ddba00"/>
-    <path d="M2.23 18.88h3.59v3.59H2.23z" fill="#ffff00"/>
-    <path d="M5.8 18.88h3.59v3.59H5.8z" fill="#ff0080"/>
-    <path d="M2.23 15.29h3.59v3.59H2.23z" fill="#ff0080"/>
-    <path d="M5.8 15.29h3.59v3.59H5.8z" fill="#ff0080"/>
-    <path d="M2.23 11.7h3.59v3.59H2.23z" fill="#ff0080"/>
-    <path d="M5.8 11.7h3.59v3.59H5.8z" fill="#ff0080"/>
-    <path d="M8.99 11.7h3.59v3.59H8.99z" fill="#00ffff"/>
-    <path d="M8.99 15.29h3.59v3.59H8.99z" fill="#de006f"/>
-    <path d="M8.99 18.88h3.59v3.59H8.99z" fill="#de006f"/>
-    <path d="M12.57 11.7h3.59v3.59h-3.59z" fill="#de006f"/>
-    <path d="M16.14 11.7h3.59v3.59h-3.59z" fill="#de006f"/>
-    <path d="M26.87 11.7h3.59v3.59h-3.59z" fill="#de006f"/>
-    <path d="M26.87 15.29h3.59v3.59h-3.59z" fill="#de006f"/>
-    <path d="M26.87 18.88h3.59v3.59h-3.59z" fill="#de006f"/>
-    <path d="M5.8 8.11h3.59v3.59H5.8z" fill="#ff0080"/>
-    <path d="M8.99 4.52h3.59v3.59H8.99z" fill="#ff0080"/>
-    <path d="M12.57 4.52h3.59v3.59h-3.59z" fill="#ff0080"/>
-    <path d="M16.16 4.52h3.59v3.59h-3.59z" fill="#ff0080"/>
-    <path d="M19.75 4.52h3.59v3.59h-3.59z" fill="#ff0080"/>
-    <path d="M8.99 8.11h3.59v3.59H8.99z" fill="#ff0080"/>
-    <path d="M12.57 8.11h3.59v3.59h-3.59z" fill="#ff0080"/>
-    <path d="M16.16 8.11h3.59v3.59h-3.59z" fill="#ff0080"/>
-    <path d="M19.75 8.11h3.59v3.59h-3.59z" fill="#ffff00"/>
-    <path d="M23.34 8.11h3.59v3.59h-3.59z" fill="#ff0080"/>
-    <path d="M23.34 11.7h3.59v3.59h-3.59z" fill="#ff0080"/>
-    <path d="M23.34 15.29h3.59v3.59h-3.59z" fill="#ff0080"/>
-    <path d="M23.34 18.88h3.59v3.59h-3.59z" fill="#00ffff"/>
-    <path d="M19.75 11.7h3.59v3.59h-3.59z" fill="#ff0080"/>
-    <path d="M19.77 15.29h3.59v3.59h-3.59z" fill="#ff0080"/>
-    <path d="M19.75 18.88h3.59v3.59h-3.59z" fill="#ff0080"/>
-    <path d="M8.99 29.65h3.59v3.59H8.99z" fill="#ddba00"/>
-    <path d="M12.57 29.65h3.59v3.59h-3.59z" fill="#ddba00"/>
-    <path d="M16.16 29.65h3.59v3.59h-3.59z" fill="#ddba00"/>
-    <path d="M19.75 29.65h3.59v3.59h-3.59z" fill="#ddba00"/>
-    <path d="M23.34 26.06h3.59v3.59h-3.59z" fill="#ddba00"/>
-    <path d="M26.91 22.47h3.59v3.59h-3.59z" fill="#ddba00"/>
-    <path d="M16.16 26.06h3.59v3.59h-3.59z" fill="#ffd700"/>
+    <path d="M708.75 283.5h28.461v28.35H708.75z" fill="#ffd700"/>
+    <path d="M680.4 283.5h28.461v28.35H680.4z" fill="#ffd700"/>
+    <path d="M708.75 311.85h28.461v28.35H708.75z" fill="#ffd700"/>
+    <path d="M737.1 283.5h28.461v28.35H737.1z" fill="#ffd700"/>
+    <path d="M765.45 283.5h28.461v28.35H765.45z" fill="#ffd700"/>
+    <path d="M793.8 283.5h28.461v28.35H793.8z" fill="#ffd700"/>
+    <path d="M793.8 311.85h28.461v28.35H793.8z" fill="#ffd700"/>
+    <path d="M822.15 283.5h28.461v28.35H822.15z" fill="#ffd700"/>
+    <path d="M737.1 311.85h28.461v28.35H737.1z" fill="#ffd700"/>
+    <path d="M680.511 311.85h28.46v28.35h-28.46z" fill="#ddba00"/>
+    <path d="M652.05 283.5h28.461v28.35H652.05z" fill="#ddba00"/>
+    <path d="M652.05 255.15h28.461v28.35H652.05z" fill="#ff8000"/>
+    <path d="M680.4 255.15h28.461v28.35H680.4z" fill="#ff8000"/>
+    <path d="M652.05 226.8h28.461v28.35H652.05z" fill="#ff8000"/>
+    <path d="M680.4 226.8h28.461v28.35H680.4z" fill="#ff8000"/>
+    <path d="M652.05 198.45h28.461v28.35H652.05z" fill="#ff8000"/>
+    <path d="M680.4 198.45h28.461v28.35H680.4z" fill="#ff8000"/>
+    <path d="M708.75 198.45h28.461v28.35H708.75z" fill="#de6f00"/>
+    <path d="M708.75 226.8h28.461v28.35H708.75z" fill="#de6f00"/>
+    <path d="M708.75 255.15h28.461v28.35H708.75z" fill="#de6f00"/>
+    <path d="M737.1 198.45h28.461v28.35H737.1z" fill="#de6f00"/>
+    <path d="M765.339 198.45h28.461v28.35H765.339z" fill="#de6f00"/>
+    <path d="M850.5 198.45h28.461v28.35H850.5z" fill="#de6f00"/>
+    <path d="M850.5 226.8h28.461v28.35H850.5z" fill="#de6f00"/>
+    <path d="M850.5 255.15h28.461v28.35H850.5z" fill="#de6f00"/>
+    <path d="M680.4 170.1h28.461v28.35H680.4z" fill="#ff8000"/>
+    <path d="M708.75 141.75h28.461v28.35H708.75z" fill="#ff8000"/>
+    <path d="M737.1 141.75h28.461v28.35H737.1z" fill="#ff8000"/>
+    <path d="M765.45 141.75h28.461v28.35H765.45z" fill="#ff8000"/>
+    <path d="M793.8 141.75h28.461v28.35H793.8z" fill="#ff8000"/>
+    <path d="M708.75 170.1h28.461v28.35H708.75z" fill="#ff8000"/>
+    <path d="M737.1 170.1h28.461v28.35H737.1z" fill="#ff8000"/>
+    <path d="M765.45 170.1h28.461v28.35H765.45z" fill="#ff8000"/>
+    <path d="M793.8 170.1h28.461v28.35H793.8z" fill="#ff8000"/>
+    <path d="M822.15 170.1h28.461v28.35H822.15z" fill="#ff8000"/>
+    <path d="M822.15 198.45h28.461v28.35H822.15z" fill="#ff8000"/>
+    <path d="M822.15 226.8h28.461v28.35H822.15z" fill="#ff8000"/>
+    <path d="M822.15 255.15h28.461v28.35H822.15z" fill="#ff8000"/>
+    <path d="M793.8 198.45h28.461v28.35H793.8z" fill="#ff8000"/>
+    <path d="M793.911 226.8h28.46v28.35h-28.46z" fill="#ff8000"/>
+    <path d="M793.8 255.15h28.461v28.35H793.8z" fill="#ff8000"/>
+    <path d="M708.75 340.2h28.461v28.35H708.75z" fill="#ddba00"/>
+    <path d="M737.1 340.2h28.461v28.35H737.1z" fill="#ddba00"/>
+    <path d="M765.45 340.2h28.461v28.35H765.45z" fill="#ddba00"/>
+    <path d="M793.8 340.2h28.461v28.35H793.8z" fill="#ddba00"/>
+    <path d="M822.15 311.85h28.461v28.35H822.15z" fill="#ddba00"/>
+    <path d="M850.5 283.5h28.461v28.35H850.5z" fill="#ddba00"/>
+    <path d="M765.45 311.85h28.461v28.35H765.45z" fill="#ffd700"/>
   </g>
 </svg>    
     </button>
