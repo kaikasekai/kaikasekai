@@ -980,62 +980,56 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
       title="Donate donut"
       aria-label="Donate donut"
     >
-      <svg
-  xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 226.911 226.8"
-  width="36"
-  height="36"
-  shape-rendering="crispEdges"
->
+      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36">
   <g>
-    <path d="M56.7 141.75h28.46v28.35H56.7z" fill="#ffd700"/>
-    <path d="M28.35 141.75h28.46v28.35H28.35z" fill="#ffd700"/>
-    <path d="M56.7 170.1h28.46v28.35H56.7z" fill="#ffd700"/>
-    <path d="M85.05 141.75h28.46v28.35H85.05z" fill="#ffd700"/>
-    <path d="M113.4 141.75h28.46v28.35H113.4z" fill="#ffd700"/>
-    <path d="M141.75 141.75h28.46v28.35H141.75z" fill="#ffd700"/>
-    <path d="M141.75 170.1h28.46v28.35H141.75z" fill="#ffd700"/>
-    <path d="M170.1 141.75h28.46v28.35H170.1z" fill="#ffd700"/>
-    <path d="M85.05 170.1h28.46v28.35H85.05z" fill="#ffd700"/>
-    <path d="M28.46 170.1h28.46v28.35H28.46z" fill="#ddba00"/>
-    <path d="M0 141.75h28.46v28.35H0z" fill="#ddba00"/>
-    <path d="M0 113.4h28.46v28.35H0z" fill="#ff8000"/>
-    <path d="M28.35 113.4h28.46v28.35H28.35z" fill="#ff8000"/>
-    <path d="M0 85.05h28.46v28.35H0z" fill="#ff8000"/>
-    <path d="M28.35 85.05h28.46v28.35H28.35z" fill="#ff8000"/>
-    <path d="M0 56.7h28.46v28.35H0z" fill="#ff8000"/>
-    <path d="M28.35 56.7h28.46v28.35H28.35z" fill="#ff8000"/>
-    <path d="M56.7 56.7h28.46v28.35H56.7z" fill="#de6f00"/>
-    <path d="M56.7 85.05h28.46v28.35H56.7z" fill="#de6f00"/>
-    <path d="M56.7 113.4h28.46v28.35H56.7z" fill="#de6f00"/>
-    <path d="M85.05 56.7h28.46v28.35H85.05z" fill="#de6f00"/>
-    <path d="M113.29 56.7h28.46v28.35H113.29z" fill="#de6f00"/>
-    <path d="M198.45 56.7h28.46v28.35H198.45z" fill="#de6f00"/>
-    <path d="M198.45 85.05h28.46v28.35H198.45z" fill="#de6f00"/>
-    <path d="M198.45 113.4h28.46v28.35H198.45z" fill="#de6f00"/>
-    <path d="M28.35 28.35h28.46v28.35H28.35z" fill="#ff8000"/>
-    <path d="M56.7 0h28.46v28.35H56.7z" fill="#ff8000"/>
-    <path d="M85.05 0h28.46v28.35H85.05z" fill="#ff8000"/>
-    <path d="M113.4 0h28.46v28.35H113.4z" fill="#ff8000"/>
-    <path d="M141.75 0h28.46v28.35H141.75z" fill="#ff8000"/>
-    <path d="M56.7 28.35h28.46v28.35H56.7z" fill="#ff8000"/>
-    <path d="M85.05 28.35h28.46v28.35H85.05z" fill="#ff8000"/>
-    <path d="M113.4 28.35h28.46v28.35H113.4z" fill="#ff8000"/>
-    <path d="M141.75 28.35h28.46v28.35H141.75z" fill="#ff8000"/>
-    <path d="M170.1 28.35h28.46v28.35H170.1z" fill="#ff8000"/>
-    <path d="M170.1 56.7h28.46v28.35H170.1z" fill="#ff8000"/>
-    <path d="M170.1 85.05h28.46v28.35H170.1z" fill="#ff8000"/>
-    <path d="M170.1 113.4h28.46v28.35H170.1z" fill="#ff8000"/>
-    <path d="M141.75 56.7h28.46v28.35H141.75z" fill="#ff8000"/>
-    <path d="M141.86 85.05h28.46v28.35H141.86z" fill="#ff8000"/>
-    <path d="M141.75 113.4h28.46v28.35H141.75z" fill="#ff8000"/>
-    <path d="M56.7 198.45h28.46v28.35H56.7z" fill="#ddba00"/>
-    <path d="M85.05 198.45h28.46v28.35H85.05z" fill="#ddba00"/>
-    <path d="M113.4 198.45h28.46v28.35H113.4z" fill="#ddba00"/>
-    <path d="M141.75 198.45h28.46v28.35H141.75z" fill="#ddba00"/>
-    <path d="M170.1 170.1h28.46v28.35H170.1z" fill="#ddba00"/>
-    <path d="M198.45 141.75h28.46v28.35H198.45z" fill="#ddba00"/>
-    <path d="M113.4 170.1h28.46v28.35H113.4z" fill="#ffd700"/>
+    <rect x="2" y="5" width="1" height="1" fill="#ffd700"/>
+    <rect x="1" y="5" width="1" height="1" fill="#ffd700"/>
+    <rect x="2" y="6" width="1" height="1" fill="#ffd700"/>
+    <rect x="3" y="5" width="1" height="1" fill="#ffd700"/>
+    <rect x="4" y="5" width="1" height="1" fill="#ffd700"/>
+    <rect x="5" y="5" width="1" height="1" fill="#ffd700"/>
+    <rect x="5" y="6" width="1" height="1" fill="#ffd700"/>
+    <rect x="6" y="5" width="1" height="1" fill="#ffd700"/>
+    <rect x="3" y="6" width="1" height="1" fill="#ffd700"/>
+    <rect x="1" y="6" width="1" height="1" fill="#ddba00"/>
+    <rect x="0" y="5" width="1" height="1" fill="#ddba00"/>
+    <rect x="0" y="4" width="1" height="1" fill="#ff8000"/>
+    <rect x="1" y="4" width="1" height="1" fill="#ff8000"/>
+    <rect x="0" y="3" width="1" height="1" fill="#ff8000"/>
+    <rect x="1" y="3" width="1" height="1" fill="#ff8000"/>
+    <rect x="0" y="2" width="1" height="1" fill="#ff8000"/>
+    <rect x="1" y="2" width="1" height="1" fill="#ff8000"/>
+    <rect x="2" y="2" width="1" height="1" fill="#de6f00"/>
+    <rect x="2" y="3" width="1" height="1" fill="#de6f00"/>
+    <rect x="2" y="4" width="1" height="1" fill="#de6f00"/>
+    <rect x="3" y="2" width="1" height="1" fill="#de6f00"/>
+    <rect x="4" y="2" width="1" height="1" fill="#de6f00"/>
+    <rect x="7" y="2" width="1" height="1" fill="#de6f00"/>
+    <rect x="7" y="3" width="1" height="1" fill="#de6f00"/>
+    <rect x="7" y="4" width="1" height="1" fill="#de6f00"/>
+    <rect x="1" y="1" width="1" height="1" fill="#ff8000"/>
+    <rect x="2" y="0" width="1" height="1" fill="#ff8000"/>
+    <rect x="3" y="0" width="1" height="1" fill="#ff8000"/>
+    <rect x="4" y="0" width="1" height="1" fill="#ff8000"/>
+    <rect x="5" y="0" width="1" height="1" fill="#ff8000"/>
+    <rect x="2" y="1" width="1" height="1" fill="#ff8000"/>
+    <rect x="3" y="1" width="1" height="1" fill="#ff8000"/>
+    <rect x="4" y="1" width="1" height="1" fill="#ff8000"/>
+    <rect x="5" y="1" width="1" height="1" fill="#ff8000"/>
+    <rect x="6" y="1" width="1" height="1" fill="#ff8000"/>
+    <rect x="6" y="2" width="1" height="1" fill="#ff8000"/>
+    <rect x="6" y="3" width="1" height="1" fill="#ff8000"/>
+    <rect x="6" y="4" width="1" height="1" fill="#ff8000"/>
+    <rect x="5" y="2" width="1" height="1" fill="#ff8000"/>
+    <rect x="5" y="3" width="1" height="1" fill="#ff8000"/>
+    <rect x="5" y="4" width="1" height="1" fill="#ff8000"/>
+    <rect x="2" y="7" width="1" height="1" fill="#ddba00"/>
+    <rect x="3" y="7" width="1" height="1" fill="#ddba00"/>
+    <rect x="4" y="7" width="1" height="1" fill="#ddba00"/>
+    <rect x="5" y="7" width="1" height="1" fill="#ddba00"/>
+    <rect x="6" y="6" width="1" height="1" fill="#ddba00"/>
+    <rect x="7" y="5" width="1" height="1" fill="#ddba00"/>
+    <rect x="4" y="6" width="1" height="1" fill="#ffd700"/>
   </g>
 </svg>    
     </button>
