@@ -587,14 +587,20 @@ const handleSendFeedback = async () => {
                 </LineChart>
               </ResponsiveContainer>
               <p></p>
+
+              <h1>Kaikasekai Trends</h1>
+            
+      {/*       
               <div style={{ margin: 0 }}>
                 {subscriptionActive
                   ? "Range: Current + Next month"
                   : "Range: Current month"}
               </div>
+     */}
+              
 
 <div style={{ margin: 0 }}>
-  Advanced AI powered algorithm predicts the global BTC trend with {mape}%<sup>*</sup> accuracy.
+  Advanced AI-powered algorithm predicts the global BTC trend with {mape}%<sup>*</sup> accuracy.
 </div>
 <small style={{ display: "block", marginTop: 2 }}>
   <sup>*</sup> Based on rolling 30-day metrics.
@@ -652,50 +658,8 @@ const handleSendFeedback = async () => {
               </div>
       )}
 
-              {!hasWhitelist && (
-  <Button
-    variant="contained"
-    onClick={handleBuyWhitelist}
-  >
-    Buy Whitelist ({whitelistPrice ? (whitelistPrice / 1e6).toFixed(4) : "..." } USDC)
-  </Button>
-)}
+
 <p></p>
-
-<Button
-  variant="contained"
-  onClick={handlePayFeedback}
->
-  Contact us ({feedbackPrice ? (feedbackPrice / 1e6).toFixed(4) : "..."} USDC)
-</Button>
-
-{showFeedbackForm && (
-  <div style={{ marginTop: 20, border: "1px solid #ccc", padding: 10, borderRadius: 0 }}>
-    <h4>FeedBack</h4>
-    <TextField
-      label="Your email"
-      value={feedbackEmail}
-      onChange={(e) => setFeedbackEmail(e.target.value)}
-      fullWidth
-      margin="dense"
-    />
-    <TextField
-      label="Message"
-      value={feedbackMessage}
-      onChange={(e) => setFeedbackMessage(e.target.value)}
-      fullWidth
-      multiline
-      rows={4}
-      margin="dense"
-    />
-    <Button
-      variant="contained"
-      onClick={handleSendFeedback}
-    >
-      Send
-    </Button>
-  </div>
-)}
 
             </div>
           )}
@@ -760,8 +724,8 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
           </div>
         )}
 
-        {/* === Cookies Page === 
-        {page === "cookies" && (
+        {/* === Contact Page === */}
+        {page === "contact" && (
           <div style={{ marginTop: 20 }}>
             <Button
               variant="outlined"
@@ -771,15 +735,49 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
             >
               ← Back
             </Button>
-            <h3>Cookies Policy</h3>
+            <h3>Contact Developers</h3>
             <p>
-              This site uses cookies to enhance the browsing experience. By
-              continuing to use this website, you agree to our use of cookies in
-              accordance with applicable laws.
+
+<Button
+  variant="contained"
+  onClick={handlePayFeedback}
+>
+  Contact us ({feedbackPrice ? (feedbackPrice / 1e6).toFixed(4) : "..."} USDC)
+</Button>
+
+{showFeedbackForm && (
+  <div style={{ marginTop: 20, border: "1px solid #ccc", padding: 10, borderRadius: 0 }}>
+    <h4>FeedBack</h4>
+    <TextField
+      label="Your email"
+      value={feedbackEmail}
+      onChange={(e) => setFeedbackEmail(e.target.value)}
+      fullWidth
+      margin="dense"
+    />
+    <TextField
+      label="Message"
+      value={feedbackMessage}
+      onChange={(e) => setFeedbackMessage(e.target.value)}
+      fullWidth
+      multiline
+      rows={4}
+      margin="dense"
+    />
+    <Button
+      variant="contained"
+      onClick={handleSendFeedback}
+    >
+      Send
+    </Button>
+  </div>
+)}
+              
+              Send a message to Developers
             </p>
           </div>
         )}
-        */}
+        
 <p></p>
         {/* === Accordions (тоже вынесены, теперь видны всегда) === */}
       {/* === Accordions === */}
@@ -816,10 +814,20 @@ At the beginning of each month, the forecast for the new month is released, whil
   </AccordionSummary>
   <AccordionDetails style={{ padding: "0px 0", textAlign: "justify" }}>
     <Typography>
-Kaikasekai means “Flourishing World.<br></br>
+Kaikasekai means "Flourishing World".<br></br>
 This insider-level, on-chain verified product empowers traders worldwide with the full potential of AI, open to everyone — whale or not — and price-friendly.
 <br></br><br></br>
-Join the program:<br></br>
+
+              {!hasWhitelist && (
+  <Button
+    variant="contained"
+    onClick={handleBuyWhitelist}
+  >
+   Join the program  ({whitelistPrice ? (whitelistPrice / 1e6).toFixed(4) : "..." } USDC)
+  </Button>
+)}
+      
+<br></br>
 Your wallet will be linked to the smart contract.
 Use your wallet number as your referral code — your subscribers get 50% off, and you earn 10% on every purchase.
     </Typography>
@@ -991,44 +999,44 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
     <rect x="5" y="6" width="1" height="1" fill="#ffd700"/>
     <rect x="6" y="5" width="1" height="1" fill="#ffd700"/>
     <rect x="3" y="6" width="1" height="1" fill="#ffd700"/>
-    <rect x="1" y="6" width="1" height="1" fill="#ddba00"/>
-    <rect x="0" y="5" width="1" height="1" fill="#ddba00"/>
-    <rect x="0" y="4" width="1" height="1" fill="#ff8000"/>
-    <rect x="1" y="4" width="1" height="1" fill="#ff8000"/>
-    <rect x="0" y="3" width="1" height="1" fill="#ff8000"/>
-    <rect x="1" y="3" width="1" height="1" fill="#ff8000"/>
-    <rect x="0" y="2" width="1" height="1" fill="#ff8000"/>
-    <rect x="1" y="2" width="1" height="1" fill="#ff8000"/>
-    <rect x="2" y="2" width="1" height="1" fill="#de6f00"/>
-    <rect x="2" y="3" width="1" height="1" fill="#de6f00"/>
-    <rect x="2" y="4" width="1" height="1" fill="#de6f00"/>
-    <rect x="3" y="2" width="1" height="1" fill="#de6f00"/>
-    <rect x="4" y="2" width="1" height="1" fill="#de6f00"/>
-    <rect x="7" y="2" width="1" height="1" fill="#de6f00"/>
-    <rect x="7" y="3" width="1" height="1" fill="#de6f00"/>
-    <rect x="7" y="4" width="1" height="1" fill="#de6f00"/>
-    <rect x="1" y="1" width="1" height="1" fill="#ff8000"/>
-    <rect x="2" y="0" width="1" height="1" fill="#ff8000"/>
-    <rect x="3" y="0" width="1" height="1" fill="#ff8000"/>
-    <rect x="4" y="0" width="1" height="1" fill="#ff8000"/>
-    <rect x="5" y="0" width="1" height="1" fill="#ff8000"/>
-    <rect x="2" y="1" width="1" height="1" fill="#ff8000"/>
-    <rect x="3" y="1" width="1" height="1" fill="#ff8000"/>
-    <rect x="4" y="1" width="1" height="1" fill="#ff8000"/>
-    <rect x="5" y="1" width="1" height="1" fill="#ff8000"/>
-    <rect x="6" y="1" width="1" height="1" fill="#ff8000"/>
-    <rect x="6" y="2" width="1" height="1" fill="#ff8000"/>
-    <rect x="6" y="3" width="1" height="1" fill="#ff8000"/>
-    <rect x="6" y="4" width="1" height="1" fill="#ff8000"/>
-    <rect x="5" y="2" width="1" height="1" fill="#ff8000"/>
-    <rect x="5" y="3" width="1" height="1" fill="#ff8000"/>
-    <rect x="5" y="4" width="1" height="1" fill="#ff8000"/>
-    <rect x="2" y="7" width="1" height="1" fill="#ddba00"/>
-    <rect x="3" y="7" width="1" height="1" fill="#ddba00"/>
-    <rect x="4" y="7" width="1" height="1" fill="#ddba00"/>
-    <rect x="5" y="7" width="1" height="1" fill="#ddba00"/>
-    <rect x="6" y="6" width="1" height="1" fill="#ddba00"/>
-    <rect x="7" y="5" width="1" height="1" fill="#ddba00"/>
+    <rect x="1" y="6" width="1" height="1" fill="#d9b700"/>
+    <rect x="0" y="5" width="1" height="1" fill="#d9b700"/>
+    <rect x="0" y="4" width="1" height="1" fill="#f7931a"/>
+    <rect x="1" y="4" width="1" height="1" fill="#f7931a"/>
+    <rect x="0" y="3" width="1" height="1" fill="#f7931a"/>
+    <rect x="1" y="3" width="1" height="1" fill="#f7931a"/>
+    <rect x="0" y="2" width="1" height="1" fill="#f7931a"/>
+    <rect x="1" y="2" width="1" height="1" fill="#f7931a"/>
+    <rect x="2" y="2" width="1" height="1" fill="#d17c16"/>
+    <rect x="2" y="3" width="1" height="1" fill="#d17c16"/>
+    <rect x="2" y="4" width="1" height="1" fill="#d17c16"/>
+    <rect x="3" y="2" width="1" height="1" fill="#d17c16"/>
+    <rect x="4" y="2" width="1" height="1" fill="#d17c16"/>
+    <rect x="7" y="2" width="1" height="1" fill="#d17c16"/>
+    <rect x="7" y="3" width="1" height="1" fill="#d17c16"/>
+    <rect x="7" y="4" width="1" height="1" fill="#d17c16"/>
+    <rect x="1" y="1" width="1" height="1" fill="#f7931a"/>
+    <rect x="2" y="0" width="1" height="1" fill="#f7931a"/>
+    <rect x="3" y="0" width="1" height="1" fill="#f7931a"/>
+    <rect x="4" y="0" width="1" height="1" fill="#f7931a"/>
+    <rect x="5" y="0" width="1" height="1" fill="#f7931a"/>
+    <rect x="2" y="1" width="1" height="1" fill="#f7931a"/>
+    <rect x="3" y="1" width="1" height="1" fill="#f7931a"/>
+    <rect x="4" y="1" width="1" height="1" fill="#f7931a"/>
+    <rect x="5" y="1" width="1" height="1" fill="#f7931a"/>
+    <rect x="6" y="1" width="1" height="1" fill="#f7931a"/>
+    <rect x="6" y="2" width="1" height="1" fill="#f7931a"/>
+    <rect x="6" y="3" width="1" height="1" fill="#f7931a"/>
+    <rect x="6" y="4" width="1" height="1" fill="#f7931a"/>
+    <rect x="5" y="2" width="1" height="1" fill="#f7931a"/>
+    <rect x="5" y="3" width="1" height="1" fill="#f7931a"/>
+    <rect x="5" y="4" width="1" height="1" fill="#f7931a"/>
+    <rect x="2" y="7" width="1" height="1" fill="#d9b700"/>
+    <rect x="3" y="7" width="1" height="1" fill="#d9b700"/>
+    <rect x="4" y="7" width="1" height="1" fill="#d9b700"/>
+    <rect x="5" y="7" width="1" height="1" fill="#d9b700"/>
+    <rect x="6" y="6" width="1" height="1" fill="#d9b700"/>
+    <rect x="7" y="5" width="1" height="1" fill="#d9b700"/>
     <rect x="4" y="6" width="1" height="1" fill="#ffd700"/>
   </g>
 </svg>    
@@ -1041,10 +1049,10 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
         <div className="footer-content">
           <div className="footer-links">
             <span className="footer-link" onClick={() => setPage("disclaimer")}>
-              Disclaimer
+              Terms & Privacy
             </span>
-            <span className="footer-link" onClick={() => setPage("cookies")}>
-              Cookies
+            <span className="footer-link" onClick={() => setPage("contact")}>
+              Contact Developers
             </span>
           </div>
 
@@ -1061,7 +1069,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
               <rect x="100" y="50" width="50" height="50" fill="#0080FF" />
               <rect x="50" y="100" width="50" height="50" fill="#FF0080" />
             </svg>
-            <span className="footer-copy"> Copyright © 2025 kaikasekai</span>
+            <span className="footer-copy"> © 2025 Kaikasekai, all rights reserved</span>
           </div>
         </div>
       </footer>
