@@ -1025,16 +1025,16 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
     <rect x="5" y="4" width="1" height="1" fill="#e3e3e6"/>
     <rect x="5" y="3" width="1" height="1" fill="#e3e3e6"/>
     <rect x="5" y="2" width="1" height="1" fill="#e3e3e6"/>
-    <rect x="5" y="1" width="1" height="1" fill="#f7e27c"/>
-    <rect x="0" y="4" width="1" height="1" fill="#f7e27c"/>
+    <rect x="5" y="1" width="1" height="1" fill="#ffd700"/>
+    <rect x="0" y="4" width="1" height="1" fill="#ffd700"/>
     <rect x="4" y="1" width="1" height="1" fill="#e3e3e6"/>
     <rect x="3" y="1" width="1" height="1" fill="#e3e3e6"/>
     <rect x="2" y="1" width="1" height="1" fill="#e3e3e6"/>
     <rect x="1" y="2" width="1" height="1" fill="#e3e3e6"/>
     <rect x="3" y="2" width="1" height="1" fill="#c8c8cc"/>
     <rect x="4" y="2" width="1" height="1" fill="#c8c8cc"/>
-    <rect x="2" y="2" width="1" height="1" fill="#cc4c8d"/>
-    <rect x="6" y="4" width="1" height="1" fill="#cc4c8d"/>
+    <rect x="2" y="2" width="1" height="1" fill="#ff0080"/>
+    <rect x="6" y="4" width="1" height="1" fill="#ff0080"/>
     <rect x="2" y="3" width="1" height="1" fill="#c8c8cc"/>
     <rect x="2" y="4" width="1" height="1" fill="#c8c8cc"/>
     <rect x="7" y="2" width="1" height="1" fill="#c8c8cc"/>
