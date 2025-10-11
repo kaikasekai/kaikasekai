@@ -937,7 +937,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
       style={{
         background: "white",
         border: "1px solid #ccc",
-        borderRadius: "12px",
+        borderRadius: "0px",
         padding: "15px",
         boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
         width: "260px",
