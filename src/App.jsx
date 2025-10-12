@@ -35,6 +35,7 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import emailjs from "@emailjs/browser";
+import ProofCarousel from "./ProofCarousel";
 
 // === CSV Data ===
 const RAW_URL =
@@ -548,6 +549,13 @@ const handleSendFeedback = async () => {
                       135000, 140000, 145000, 150000, 155000,
                     ]}
                     tickFormatter={(v) => v.toLocaleString()}
+                    label={{
+    value: "USD",
+    angle: -90,
+    position: "insideLeft",
+    offset: 0,
+    style: { textAnchor: "middle" }, {/*, fill: "#666", fontSize: 14, fontWeight: 500 }, */}
+  }}
                   />
                   <Tooltip />
                   <Legend />
@@ -842,66 +850,33 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
   >
     <Typography>Proofs</Typography>
   </AccordionSummary>
-  <AccordionDetails style={{ padding: "0px 0" }}>
-    {proofs.length === 0 ? (
-      <Typography>No proofs yet.</Typography>
-    ) : (
-      <div>
-        {proofs.map((nft) => {
-          const resultUrl = `https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.id}.PNG`;
-          return (
-            <div
-              key={nft.id}
-              style={{
-                display: "flex",
-                gap: 20,
-                marginBottom: 20,
-                alignItems: "flex-start",
-              }}
-            >
-              <div style={{ flex: 1 }}>
-                {nft.image ? (
-                  <>
-                    <img
-                      src={nft.image}
-                      alt={nft.name}
-                      style={{ width: "100%", borderRadius: 0 }}
-                    />
-                    <h4 style={{ margin: "10px 0 5px" }}>{nft.name}</h4>
-                    <p>
-                      {nft.description}
-                    </p>
-                    <a
-                      href={nft.polygonscan}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        display: "block",
-                        marginTop: 5,
-                      }}
-                    >
-                      View on Polygonscan
-                    </a>
-                  </>
-                ) : (
-                  <Typography>Loading NFT {nft.id}…</Typography>
-                )}
-              </div>
-
-              <div style={{ flex: 1 }}>
-                <img
-                  src={resultUrl}
-                  alt={`Result ${nft.id}`}
-                  style={{ width: "100%", borderRadius: 0 }}
-                  onError={(e) => (e.target.style.display = "none")}
-                />
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    )}
-  </AccordionDetails>
+  <AccordionDetails>
+  {proofs.length === 0 ? (
+    <Typography>No proofs yet.</Typography>
+  ) : (
+    <ProofCarousel
+      proofs={proofs.map((nft) => ({
+        nft: (
+          <div>
+            <img src={nft.image} alt={nft.name} style={{ width: "100%" }} />
+            <h4>{nft.name}</h4>
+            <p>{nft.description}</p>
+            <a href={nft.polygonscan} target="_blank" rel="noopener noreferrer">
+              View on Polygonscan
+            </a>
+          </div>
+        ),
+        result: (
+          <img
+            src={`https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.id}.PNG`}
+            alt={`Result ${nft.id}`}
+            style={{ width: "100%" }}
+          />
+        ),
+      }))}
+    />
+  )}
+</AccordionDetails>
 </Accordion>
 
 {/* === Debug Log (в аккордеоне) === 
@@ -988,7 +963,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
       title="Donate donut"
       aria-label="Donate donut"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8" width="36" height="36">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8" width="36" height="36" shape-rendering="crispEdges">
   <g>
     <rect x="2" y="7" width="1" height="1" fill="#b8ac86"/>
     <rect x="3" y="7" width="1" height="1" fill="#b8ac86"/>
