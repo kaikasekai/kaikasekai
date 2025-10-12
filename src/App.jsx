@@ -144,7 +144,7 @@ const extraSlides = [
         rel="noopener noreferrer"
       >
         <img
-          src="https://pbs.twimg.com/media/GXbJ1sxbAAAfK5O?format=jpg&name=large"
+          src={`https://pbs.twimg.com/media/GXbJ1sxbAAAfK5O?format=jpg&name=large`}
           alt="Nov NFT"
           style={{ width: "100%", borderRadius: "10px" }}
         />
@@ -152,7 +152,7 @@ const extraSlides = [
     ),
     result: (
       <img
-        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/nov24.PNG"
+        src={`https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/4.PNG`}
         alt="Result Nov 2024"
         style={{ width: "100%", borderRadius: "10px" }}
       />
@@ -166,7 +166,7 @@ const extraSlides = [
         rel="noopener noreferrer"
       >
         <img
-          src="https://pbs.twimg.com/media/Ga6FqeqWAAAYU6W?format=jpg&name=large"
+          src={`https://pbs.twimg.com/media/Ga6FqeqWAAAYU6W?format=jpg&name=large`}
           alt="Dec NFT"
           style={{ width: "100%", borderRadius: "10px" }}
         />
