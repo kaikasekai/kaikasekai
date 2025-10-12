@@ -19,10 +19,12 @@ const ProofCarousel = ({ proofs }) => {
   const goToSlide = (index) => setCurrentSlide(index);
 
   const handleTouchStart = (e) => {
+    e.stopPropagation();
     touchStartX.current = e.touches[0].clientX;
   };
 
   const handleTouchEnd = (e) => {
+    e.stopPropagation();
     touchEndX.current = e.changedTouches[0].clientX;
     const diff = touchStartX.current - touchEndX.current;
     if (Math.abs(diff) > 50) {
