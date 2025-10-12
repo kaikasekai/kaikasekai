@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import "./index.css"; // стили возьмутся из твоего общего файла index.css
+import "./index.css";
 
 const ProofCarousel = ({ proofs }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -7,20 +7,15 @@ const ProofCarousel = ({ proofs }) => {
   const touchEndX = useRef(0);
 
   const nextSlide = () => {
-    setCurrentSlide((prev) =>
-      prev === proofs.length - 1 ? 0 : prev + 1
-    );
+    setCurrentSlide((prev) => (prev === proofs.length - 1 ? 0 : prev + 1));
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) =>
-      prev === 0 ? proofs.length - 1 : prev - 1
-    );
+    setCurrentSlide((prev) => (prev === 0 ? proofs.length - 1 : prev - 1));
   };
 
   const goToSlide = (index) => setCurrentSlide(index);
 
-  // swipe support
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
   };
@@ -37,16 +32,14 @@ const ProofCarousel = ({ proofs }) => {
     <div className="carousel">
       <div
         className="carousel-inner"
-        style={{
-          transform: `translateX(-${currentSlide * 100}%)`,
-        }}
+        style={{ transform: `translateX(-${currentSlide * 100}%)` }}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
         {proofs.map((proof, index) => (
           <div className="carousel-slide" key={index}>
-            <div className="nft-section">{proof.nft}</div>
-            <div className="result-section">{proof.result}</div>
+            <div className="slide-content">{proof.nft}</div>
+            <div className="slide-content">{proof.result}</div>
           </div>
         ))}
       </div>
