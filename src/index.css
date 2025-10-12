@@ -315,7 +315,7 @@ code { font-family: var(--font-main); font-size: 0.9rem; }
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
-  height: 400px;
+  height: auto;
   overflow: hidden; /* важно для swipe */
 }
 
@@ -350,7 +350,7 @@ code { font-family: var(--font-main); font-size: 0.9rem; }
   top: 50%;
   transform: translateY(-50%);
   background: rgba(255, 255, 255, 0.2);
-  color: #fff;
+  color: var(--text-dark);
   border: none;
   font-size: 2rem;
   cursor: pointer;
@@ -375,7 +375,7 @@ code { font-family: var(--font-main); font-size: 0.9rem; }
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.4);
+  background: var(--text-dark);
   cursor: pointer;
 }
 
