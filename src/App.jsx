@@ -140,7 +140,7 @@ const extraSlides = [
     nft: (
       <a href="https://twitter.com/example1" target="_blank" rel="noopener noreferrer">
         <img
-          src="https://pbs.twimg.com/media/Example1.jpg"
+          src="https://x.com/kaikasekai/status/1849846927560417575?s=46&t=mq7NzK_MklQbSk36gyR5pg"
           alt="Twitter 1"
           style={{ width: "100%" }}
         />
@@ -149,7 +149,7 @@ const extraSlides = [
     result: (
       <a href="https://twitter.com/example1" target="_blank" rel="noopener noreferrer">
         <img
-          src="https://pbs.twimg.com/media/Example1_2.jpg"
+          src="https://x.com/kaikasekai/status/1862565413160145174?s=46&t=mq7NzK_MklQbSk36gyR5pg"
           alt="Twitter Result 1"
           style={{ width: "100%" }}
         />
@@ -160,7 +160,7 @@ const extraSlides = [
     nft: (
       <a href="https://twitter.com/example2" target="_blank" rel="noopener noreferrer">
         <img
-          src="https://pbs.twimg.com/media/Example2.jpg"
+          src="https://x.com/kaikasekai/status/1873811142566699385?s=46&t=mq7NzK_MklQbSk36gyR5pg"
           alt="Twitter 2"
           style={{ width: "100%" }}
         />
@@ -169,7 +169,7 @@ const extraSlides = [
     result: (
       <a href="https://twitter.com/example2" target="_blank" rel="noopener noreferrer">
         <img
-          src="https://pbs.twimg.com/media/Example2_2.jpg"
+          src="https://x.com/kaikasekai/status/1889382743408255356?s=46&t=mq7NzK_MklQbSk36gyR5pg"
           alt="Twitter Result 2"
           style={{ width: "100%" }}
         />
