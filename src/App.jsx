@@ -556,22 +556,22 @@ const handleSendFeedback = async () => {
     value: "USD",
     angle: -90,
     position: "insideLeft",
-    offset: 10,
+    offset: -10,
     style: { textAnchor: "middle", fill: "#666", fontSize: 14, fontWeight: 500 },
   }}
                   />
                   <Tooltip
   contentStyle={{
-    background: "rgba(18, 18, 20, 0.15)",
+    background: "rgba(18, 18, 20, 0.5)",
     color: "#E8E8EA",
     border: "0px solid rgba(255, 255, 255, 0.05)",
     borderRadius: "0px",
     padding: "12px 16px",
     fontFamily: "'Satoshi', 'Inter', sans-serif",
-    fontSize: "1em",
+    fontSize: "0.9em",
     lineHeight: 1.5,
     boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
-    backdropFilter: "blur(6px)",
+    backdropFilter: "blur(3px)",
     pointerEvents: "none",
     zIndex: 999,
   }}
