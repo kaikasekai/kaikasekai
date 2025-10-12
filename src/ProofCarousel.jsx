@@ -2,7 +2,9 @@ import React, { useState, useRef } from "react";
 import "./index.css";
 
 const ProofCarousel = ({ proofs }) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(
+  proofs.length > 0 ? proofs.length - 1 : 0
+);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
 
