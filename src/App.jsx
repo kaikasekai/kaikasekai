@@ -174,7 +174,7 @@ const extraSlides = [
     ),
     result: (
       <img
-        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/dec24.PNG"
+        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/3.PNG"
         alt="Result Dec 2024"
         style={{ width: "100%", borderRadius: "10px" }}
       />
@@ -196,7 +196,7 @@ const extraSlides = [
     ),
     result: (
       <img
-        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/jan25.PNG"
+        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/4.PNG"
         alt="Result Jan 2025"
         style={{ width: "100%", borderRadius: "10px" }}
       />
@@ -218,7 +218,7 @@ const extraSlides = [
     ),
     result: (
       <img
-        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/febmar25.PNG"
+        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/5.PNG"
         alt="Result Feb/March 2025"
         style={{ width: "100%", borderRadius: "10px" }}
       />
@@ -240,7 +240,7 @@ const extraSlides = [
     ),
     result: (
       <img
-        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/aprjun25.PNG"
+        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/5.PNG"
         alt="Result Apr/Jun 2025"
         style={{ width: "100%", borderRadius: "10px" }}
       />
@@ -262,7 +262,7 @@ const extraSlides = [
     ),
     result: (
       <img
-        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/augsep25.PNG"
+        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/1.PNG"
         alt="Result Aug/Sep 2025"
         style={{ width: "100%", borderRadius: "10px" }}
       />
