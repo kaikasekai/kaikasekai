@@ -555,12 +555,35 @@ const handleSendFeedback = async () => {
                     label={{
     value: "USD",
     angle: -90,
-    position: "outsideLeft",
-    offset: 0,
+    position: "insideLeft",
+    offset: 10,
     style: { textAnchor: "middle", fill: "#666", fontSize: 14, fontWeight: 500 },
   }}
                   />
-                  <Tooltip />
+                  <Tooltip
+  contentStyle={{
+    background: "rgba(18, 18, 20, 0.85)",
+    color: "#E8E8EA",
+    border: "1px solid rgba(255, 255, 255, 0.05)",
+    borderRadius: "8px",
+    padding: "12px 16px",
+    fontFamily: "'Satoshi', 'Inter', sans-serif",
+    fontSize: "14px",
+    lineHeight: 1.5,
+    boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
+    backdropFilter: "blur(6px)",
+    pointerEvents: "none",
+    zIndex: 999,
+  }}
+  itemStyle={{
+    color: "#FFD700",
+    fontWeight: 600
+  }}
+  labelStyle={{
+    color: "#F2F2F3",
+    fontWeight: 500
+  }}
+/>
                   <Legend />
                   <Line
                     type="monotone"
