@@ -191,63 +191,65 @@ strong, b {
    📊 RECHARTS
 --------------------------------------------------------- */
 
-/* === Tooltip / Popup Box === */
-.chart-tooltip {
-  position: absolute;
-  background: rgba(18, 18, 20, 0.85); /* Тёмно-графитовый, с лёгкой прозрачностью */
-  color: #E8E8EA;                     /* Мягкий белый текст */
-  border: 1px solid rgba(255, 255, 255, 0.05); /* Тонкий контур */
-  border-radius: 8px;
-  padding: 12px 16px;
-  font-family: 'Satoshi', 'Inter', sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
-  letter-spacing: 0.2px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); /* Мягкая тень вниз */
-  backdrop-filter: blur(6px);                /* Эффект матового стекла */
-  pointer-events: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  z-index: 999;
+/* ===========================================================
+   Tooltip / Popup Box (приоритетные стили)
+=========================================================== */
+
+body .chart-wrapper .chart-tooltip {
+  position: absolute !important;
+  background: rgba(18, 18, 20, 0.85) !important; /* Тёмно-графитовый */
+  color: #E8E8EA !important;                       /* Мягкий белый текст */
+  border: 1px solid rgba(255, 255, 255, 0.05) !important; /* Тонкий контур */
+  border-radius: 8px !important;
+  padding: 12px 16px !important;
+  font-family: 'Satoshi', 'Inter', sans-serif !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  letter-spacing: 0.2px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important; /* Мягкая тень вниз */
+  backdrop-filter: blur(6px) !important;                /* Эффект матового стекла */
+  pointer-events: none !important;
+  transition: opacity 0.2s ease, transform 0.2s ease !important;
+  z-index: 999 !important;
 }
 
-/* === Tooltip visible === */
-.chart-tooltip.visible {
-  opacity: 1;
-  transform: translateY(0);
+/* Tooltip visible/hidden состояния */
+body .chart-wrapper .chart-tooltip.visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
 }
 
-/* === Tooltip hidden === */
-.chart-tooltip.hidden {
-  opacity: 0;
-  transform: translateY(5px);
+body .chart-wrapper .chart-tooltip.hidden {
+  opacity: 0 !important;
+  transform: translateY(5px) !important;
 }
 
-/* === Основной текст === */
-.chart-tooltip .label {
-  color: #F2F2F3;
-  font-weight: 500;
+/* Основной текст */
+body .chart-wrapper .chart-tooltip .label {
+  color: #F2F2F3 !important;
+  font-weight: 500 !important;
 }
 
-/* === Второстепенный текст === */
-.chart-tooltip .subtext {
-  color: #A6A6AA;
-  font-size: 12px;
-  margin-top: 4px;
+/* Второстепенный текст */
+body .chart-wrapper .chart-tooltip .subtext {
+  color: #A6A6AA !important;
+  font-size: 12px !important;
+  margin-top: 4px !important;
 }
 
-/* === Цветные данные (числа, значения) === */
-.chart-tooltip .value {
-  font-weight: 600;
-  color: #FFD700; /* базовый золотой */
+/* Цветные данные (числа, значения) */
+body .chart-wrapper .chart-tooltip .value {
+  font-weight: 600 !important;
+  color: #FFD700 !important; /* базовый золотой */
 }
 
-/* === Дополнительные акценты (по логотипу) === */
-.chart-tooltip .value.fuchsia { color: #FF0080; }
-.chart-tooltip .value.green   { color: #00FF00; }
-.chart-tooltip .value.blue    { color: #0080FF; }
-.chart-tooltip .value.yellow  { color: #FFD700; }
+/* Дополнительные акценты */
+body .chart-wrapper .chart-tooltip .value.fuchsia { color: #FF0080 !important; }
+body .chart-wrapper .chart-tooltip .value.green   { color: #00FF00 !important; }
+body .chart-wrapper .chart-tooltip .value.blue    { color: #0080FF !important; }
+body .chart-wrapper .chart-tooltip .value.yellow  { color: #FFD700 !important; }
 
-/* === Анимация при появлении === */
+/* Анимация при появлении */
 @keyframes fadeInTooltip {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
