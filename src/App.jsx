@@ -554,7 +554,7 @@ const handleSendFeedback = async () => {
     angle: -90,
     position: "insideLeft",
     offset: 0,
-    style: { textAnchor: "middle" }, {/*, fill: "#666", fontSize: 14, fontWeight: 500 }, */}
+    style: { textAnchor: "middle", fill: "#666", fontSize: 14, fontWeight: 500 },
   }}
                   />
                   <Tooltip />
