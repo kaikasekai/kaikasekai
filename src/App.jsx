@@ -896,31 +896,33 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
   >
     <Typography>Proofs</Typography>
   </AccordionSummary>
-  <AccordionDetails>
+  <AccordionDetails style={{ padding: 0 }}>
   {proofs.length === 0 ? (
     <Typography>No proofs yet.</Typography>
   ) : (
-    <ProofCarousel
-      proofs={proofs.map((nft) => ({
-        nft: (
-          <div>
-            <img src={nft.image} alt={nft.name} style={{ width: "100%" }} />
-            <h4>{nft.name}</h4>
-            <p>{nft.description}</p>
-            <a href={nft.polygonscan} target="_blank" rel="noopener noreferrer">
-              View on Polygonscan
-            </a>
-          </div>
-        ),
-        result: (
-          <img
-            src={`https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.id}.PNG`}
-            alt={`Result ${nft.id}`}
-            style={{ width: "100%" }}
-          />
-        ),
-      }))}
-    />
+    <div className="proofs-wrapper">
+      <ProofCarousel
+        proofs={proofs.map((nft) => ({
+          nft: (
+            <div>
+              <img src={nft.image} alt={nft.name} style={{ width: "100%" }} />
+              <h4>{nft.name}</h4>
+              <p>{nft.description}</p>
+              <a href={nft.polygonscan} target="_blank" rel="noopener noreferrer">
+                View on Polygonscan
+              </a>
+            </div>
+          ),
+          result: (
+            <img
+              src={`https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.id}.PNG`}
+              alt={`Result ${nft.id}`}
+              style={{ width: "100%" }}
+            />
+          ),
+        }))}
+      />
+    </div>
   )}
 </AccordionDetails>
 </Accordion>
