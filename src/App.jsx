@@ -566,21 +566,21 @@ const handleSendFeedback = async () => {
     color: "#E8E8EA",
     border: "0px solid rgba(255, 255, 255, 0.05)",
     borderRadius: "0px",
-    padding: "12px 16px",
+    padding: "10px 12px",
     fontFamily: "'Satoshi', 'Inter', sans-serif",
-    fontSize: "0.9em",
-    lineHeight: 1.5,
+    fontSize: "0.8em",
+    lineHeight: 1.2,
     boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
     backdropFilter: "blur(3px)",
     pointerEvents: "none",
     zIndex: 999,
   }}
   itemStyle={{
-    fontWeight: 400
+    fontWeight: 300
   }}
   labelStyle={{
     color: "#F2F2F3",
-    fontWeight: 500
+    fontWeight: 400
   }}
 />
                   <Legend />
