@@ -305,39 +305,44 @@ code { font-family: var(--font-main); font-size: 0.9rem; }
 
  CAROUSEL
 
-.carousel {
-  position: relative;
-  overflow: hidden;
+.proofs-wrapper {
   width: 100%;
-  max-width: 800px; /* ограничение ширины */
-  margin: 0 auto;   /* центрирование */
-  background: #000;
-  height: 400px;    /* фиксированная высота слайдов */
+  overflow: hidden;
 }
 
-.carousel-slide {
-  flex: 0 0 100%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  gap: 40px;
-  color: white;
-  font-size: 18px;
-  height: 100%; /* теперь соответствует высоте .carousel */
+.carousel {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  height: 400px;
+  overflow: hidden; /* важно для swipe */
 }
 
 .carousel-inner {
   display: flex;
   transition: transform 0.5s ease-in-out;
-  width: 100%;
 }
 
-.nft-section,
-.result-section {
+.carousel-slide {
+  flex: 0 0 100%;
+  display: flex;
+  gap: 10px;
+  height: 100%;
+}
+
+.slide-content {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+}
+
+.slide-content img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
 .carousel-arrow {
@@ -345,34 +350,24 @@ code { font-family: var(--font-main); font-size: 0.9rem; }
   top: 50%;
   transform: translateY(-50%);
   background: rgba(255, 255, 255, 0.2);
-  color: white;
+  color: #fff;
   border: none;
   font-size: 2rem;
-  padding: 8px 16px;
-  border-radius: 50%;
   cursor: pointer;
-  transition: background 0.3s;
+  padding: 8px;
+  border-radius: 50%;
   z-index: 10;
 }
 
-.carousel-arrow:hover {
-  background: rgba(255, 255, 255, 0.4);
-}
-
-.carousel-arrow.left {
-  left: 10px;
-}
-
-.carousel-arrow.right {
-  right: 10px;
-}
+.carousel-arrow.left { left: 10px; }
+.carousel-arrow.right { right: 10px; }
 
 .carousel-dots {
   display: flex;
   justify-content: center;
   gap: 10px;
   position: absolute;
-  bottom: 15px;
+  bottom: 10px;
   width: 100%;
 }
 
@@ -380,12 +375,10 @@ code { font-family: var(--font-main); font-size: 0.9rem; }
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255,255,255,0.4);
   cursor: pointer;
-  transition: background 0.3s;
 }
 
 .dot.active {
   background: white;
 }
-
