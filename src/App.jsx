@@ -132,6 +132,52 @@ function App() {
     prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
   );
 };
+
+
+  // === Extra Slides (Twitter images) ===
+const extraSlides = [
+  {
+    nft: (
+      <a href="https://twitter.com/example1" target="_blank" rel="noopener noreferrer">
+        <img
+          src="https://pbs.twimg.com/media/Example1.jpg"
+          alt="Twitter 1"
+          style={{ width: "100%" }}
+        />
+      </a>
+    ),
+    result: (
+      <a href="https://twitter.com/example1" target="_blank" rel="noopener noreferrer">
+        <img
+          src="https://pbs.twimg.com/media/Example1_2.jpg"
+          alt="Twitter Result 1"
+          style={{ width: "100%" }}
+        />
+      </a>
+    ),
+  },
+  {
+    nft: (
+      <a href="https://twitter.com/example2" target="_blank" rel="noopener noreferrer">
+        <img
+          src="https://pbs.twimg.com/media/Example2.jpg"
+          alt="Twitter 2"
+          style={{ width: "100%" }}
+        />
+      </a>
+    ),
+    result: (
+      <a href="https://twitter.com/example2" target="_blank" rel="noopener noreferrer">
+        <img
+          src="https://pbs.twimg.com/media/Example2_2.jpg"
+          alt="Twitter Result 2"
+          style={{ width: "100%" }}
+        />
+      </a>
+    ),
+  },
+];
+
   
   const log = (msg) =>
     setDebug((d) => [...d, `[${new Date().toLocaleTimeString()}] ${msg}`]);
@@ -198,7 +244,7 @@ function App() {
             polygonscan: `https://polygonscan.com/token/${NFT_ADDRESS}?a=${i}`,
           });
         }
-        setProofs(items);
+        setProofs([...extraSlides, ...items]);
       } catch (e) {
         log("❌ Error loading Proofs: " + (e.message || e));
       }
