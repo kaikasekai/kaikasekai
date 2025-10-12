@@ -161,7 +161,6 @@ strong, b {
 
 .MuiTypography-root,
 .MuiButton-root,
-.MuiTooltip-tooltip,
 .MuiTab-root,
 .MuiMenuItem-root {
   font-family: var(--font-main) !important;
@@ -191,6 +190,68 @@ strong, b {
 /* --------------------------------------------------------
    📊 RECHARTS
 --------------------------------------------------------- */
+
+/* === Tooltip / Popup Box === */
+.chart-tooltip {
+  position: absolute;
+  background: rgba(18, 18, 20, 0.85); /* Тёмно-графитовый, с лёгкой прозрачностью */
+  color: #E8E8EA;                     /* Мягкий белый текст */
+  border: 1px solid rgba(255, 255, 255, 0.05); /* Тонкий контур */
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-family: 'Satoshi', 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 0.2px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); /* Мягкая тень вниз */
+  backdrop-filter: blur(6px);                /* Эффект матового стекла */
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 999;
+}
+
+/* === Tooltip visible === */
+.chart-tooltip.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === Tooltip hidden === */
+.chart-tooltip.hidden {
+  opacity: 0;
+  transform: translateY(5px);
+}
+
+/* === Основной текст === */
+.chart-tooltip .label {
+  color: #F2F2F3;
+  font-weight: 500;
+}
+
+/* === Второстепенный текст === */
+.chart-tooltip .subtext {
+  color: #A6A6AA;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* === Цветные данные (числа, значения) === */
+.chart-tooltip .value {
+  font-weight: 600;
+  color: #FFD700; /* базовый золотой */
+}
+
+/* === Дополнительные акценты (по логотипу) === */
+.chart-tooltip .value.fuchsia { color: #FF0080; }
+.chart-tooltip .value.green   { color: #00FF00; }
+.chart-tooltip .value.blue    { color: #0080FF; }
+.chart-tooltip .value.yellow  { color: #FFD700; }
+
+/* === Анимация при появлении === */
+@keyframes fadeInTooltip {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 .recharts-cartesian-axis-tick-value,
 .recharts-legend-item-text,
