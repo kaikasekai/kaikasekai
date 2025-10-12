@@ -134,51 +134,142 @@ function App() {
 };
 
 
-  // === Extra Slides (Twitter images) ===
+  // --- EXTRA SLIDES (Twitter posts + results from GitHub) ---
 const extraSlides = [
   {
     nft: (
-      <a href="https://twitter.com/example1" target="_blank" rel="noopener noreferrer">
+      <a
+        href="https://x.com/kaikasekai/status/1849846927560417575"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img
-          src="https://x.com/kaikasekai/status/1849846927560417575?s=46&t=mq7NzK_MklQbSk36gyR5pg"
-          alt="Twitter 1"
-          style={{ width: "100%" }}
+          src="https://pbs.twimg.com/media/GXbJ1sxbAAAfK5O?format=jpg&name=large"
+          alt="Nov NFT"
+          style={{ width: "100%", borderRadius: "10px" }}
         />
       </a>
     ),
     result: (
-      <a href="https://twitter.com/example1" target="_blank" rel="noopener noreferrer">
-        <img
-          src="https://x.com/kaikasekai/status/1862565413160145174?s=46&t=mq7NzK_MklQbSk36gyR5pg"
-          alt="Twitter Result 1"
-          style={{ width: "100%" }}
-        />
-      </a>
+      <img
+        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/nov24.PNG"
+        alt="Result Nov 2024"
+        style={{ width: "100%", borderRadius: "10px" }}
+      />
     ),
   },
   {
     nft: (
-      <a href="https://twitter.com/example2" target="_blank" rel="noopener noreferrer">
+      <a
+        href="https://x.com/kaikasekai/status/1862565413160145174"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img
-          src="https://x.com/kaikasekai/status/1873811142566699385?s=46&t=mq7NzK_MklQbSk36gyR5pg"
-          alt="Twitter 2"
-          style={{ width: "100%" }}
+          src="https://pbs.twimg.com/media/Ga6FqeqWAAAYU6W?format=jpg&name=large"
+          alt="Dec NFT"
+          style={{ width: "100%", borderRadius: "10px" }}
         />
       </a>
     ),
     result: (
-      <a href="https://twitter.com/example2" target="_blank" rel="noopener noreferrer">
+      <img
+        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/dec24.PNG"
+        alt="Result Dec 2024"
+        style={{ width: "100%", borderRadius: "10px" }}
+      />
+    ),
+  },
+  {
+    nft: (
+      <a
+        href="https://x.com/kaikasekai/status/1873811142566699385"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img
-          src="https://x.com/kaikasekai/status/1889382743408255356?s=46&t=mq7NzK_MklQbSk36gyR5pg"
-          alt="Twitter Result 2"
-          style={{ width: "100%" }}
+          src="https://pbs.twimg.com/media/GdYtYxwXoAAVkMG?format=jpg&name=large"
+          alt="Jan NFT"
+          style={{ width: "100%", borderRadius: "10px" }}
         />
       </a>
+    ),
+    result: (
+      <img
+        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/jan25.PNG"
+        alt="Result Jan 2025"
+        style={{ width: "100%", borderRadius: "10px" }}
+      />
+    ),
+  },
+  {
+    nft: (
+      <a
+        href="https://x.com/kaikasekai/status/1889382743408255356"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          src="https://pbs.twimg.com/media/GiLZylsXcAAmcqS?format=jpg&name=large"
+          alt="Feb/March NFT"
+          style={{ width: "100%", borderRadius: "10px" }}
+        />
+      </a>
+    ),
+    result: (
+      <img
+        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/febmar25.PNG"
+        alt="Result Feb/March 2025"
+        style={{ width: "100%", borderRadius: "10px" }}
+      />
+    ),
+  },
+  {
+    nft: (
+      <a
+        href="https://x.com/kaikasekai/status/1907479658381099060"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          src="https://pbs.twimg.com/media/Gm45hZgXMAAv5C6?format=jpg&name=large"
+          alt="Apr/Jun NFT"
+          style={{ width: "100%", borderRadius: "10px" }}
+        />
+      </a>
+    ),
+    result: (
+      <img
+        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/aprjun25.PNG"
+        alt="Result Apr/Jun 2025"
+        style={{ width: "100%", borderRadius: "10px" }}
+      />
+    ),
+  },
+  {
+    nft: (
+      <a
+        href="https://x.com/kaikasekai/status/1953139989643940344"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          src="https://pbs.twimg.com/media/Gz-VDGgW0AAoBR_?format=jpg&name=large"
+          alt="Aug/Sep NFT"
+          style={{ width: "100%", borderRadius: "10px" }}
+        />
+      </a>
+    ),
+    result: (
+      <img
+        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/augsep25.PNG"
+        alt="Result Aug/Sep 2025"
+        style={{ width: "100%", borderRadius: "10px" }}
+      />
     ),
   },
 ];
 
-  
   const log = (msg) =>
     setDebug((d) => [...d, `[${new Date().toLocaleTimeString()}] ${msg}`]);
 
