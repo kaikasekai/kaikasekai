@@ -309,14 +309,10 @@ code { font-family: var(--font-main); font-size: 0.9rem; }
   position: relative;
   overflow: hidden;
   width: 100%;
-  height: 100%;
+  max-width: 800px; /* ограничение ширины */
+  margin: 0 auto;   /* центрирование */
   background: #000;
-}
-
-.carousel-inner {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
-  width: 100%;
+  height: 400px;    /* фиксированная высота слайдов */
 }
 
 .carousel-slide {
@@ -327,7 +323,13 @@ code { font-family: var(--font-main); font-size: 0.9rem; }
   gap: 40px;
   color: white;
   font-size: 18px;
-  height: 400px;
+  height: 100%; /* теперь соответствует высоте .carousel */
+}
+
+.carousel-inner {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
 }
 
 .nft-section,
