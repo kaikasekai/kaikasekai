@@ -880,28 +880,50 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
     <Typography>No proofs yet.</Typography>
   ) : (
     <div className="proofs-wrapper">
-      <ProofCarousel
-        proofs={proofs.map((nft) => ({
-          nft: (
-            <div>
-              <img src={nft.image} alt={nft.name} style={{ width: "100%" }} />
-              <h4>{nft.name}</h4>
-              <p>{nft.description}</p>
-              <a href={nft.polygonscan} target="_blank" rel="noopener noreferrer">
-                View on Polygonscan
-              </a>
-            </div>
-          ),
-          result: (
-            <img
-              src={`https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.id}.PNG`}
-              alt={`Result ${nft.id}`}
-              style={{ width: "100%" }}
-            />
-          ),
-        }))}
-      />
-    </div>
+  <ProofCarousel
+    proofs={[
+      // 6 статических слайдов
+      {
+        nft: <div><img src="https://x.com/kaikasekai/status/1849846927560417575?s=46&t=mq7NzK_MklQbSk36gyR5pg" style={{width:"100%"}} /><h4>Nov</h4></div>,
+        result: <img src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/1.PNG" style={{width:"100%"}} />
+      },
+      {
+        nft: <div><img src="https://x.com/kaikasekai/status/1862565413160145174?s=46&t=mq7NzK_MklQbSk36gyR5pg" style={{width:"100%"}} /><h4>Dec</h4></div>,
+        result: <img src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/2.PNG" style={{width:"100%"}} />
+      },
+      {
+        nft: <div><img src="https://x.com/kaikasekai/status/1873811142566699385?s=46&t=mq7NzK_MklQbSk36gyR5pg" style={{width:"100%"}} /><h4>Jan</h4></div>,
+        result: <img src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/3.PNG" style={{width:"100%"}} />
+      },
+      {
+        nft: <div><img src="https://x.com/kaikasekai/status/1889382743408255356?s=46&t=mq7NzK_MklQbSk36gyR5pg" style={{width:"100%"}} /><h4>Feb-Mar</h4></div>,
+        result: <img src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/4.PNG" style={{width:"100%"}} />
+      },
+      {
+        nft: <div><img src="https://x.com/kaikasekai/status/1907479658381099060?s=46&t=mq7NzK_MklQbSk36gyR5pg" style={{width:"100%"}} /><h4>Apr-Jun</h4></div>,
+        result: <img src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/5.PNG" style={{width:"100%"}} />
+      },
+      {
+        nft: <div><img src="https://x.com/kaikasekai/status/1953139989643940344?s=46&t=mq7NzK_MklQbSk36gyR5pg" style={{width:"100%"}} /><h4>Aug-Sep</h4></div>,
+        result: <img src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/6.PNG" style={{width:"100%"}} />
+      },
+      // динамические NFT
+      ...proofs.map((nft) => ({
+        nft: (
+          <div>
+            <img src={nft.image} alt={nft.name} style={{ width: "100%" }} />
+            <h4>{nft.name}</h4>
+            <p>{nft.description}</p>
+            <a href={nft.polygonscan} target="_blank" rel="noopener noreferrer">View on Polygonscan</a>
+          </div>
+        ),
+        result: (
+          <img src={`https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.id}.PNG`} alt={`Result ${nft.id}`} style={{ width: "100%" }} />
+        ),
+      })),
+    ]}
+  />
+</div>
   )}
 </AccordionDetails>
 </Accordion>
