@@ -1,42 +1,48 @@
-/* === Base Styles === */
+/* === Base Styles & Variable Font === */
 
 @font-face {
-  font-family: 'Satoshi';
-  src: url('./assets/fonts/Satoshi-Light.woff2') format('woff2');
-  font-weight: 300;
-  font-style: normal;
+  font-family: "Satoshi";
+  src: url("/fonts/Satoshi-Variable.woff2") format("woff2");
+  font-weight: 300 700;
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'Satoshi';
-  src: url('./assets/fonts/SatoshiRegular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
+/* 🔽 CSS переменные KAIKASEKAI */
+:root {
+  /* COLORS */
+  --text-dark: #1c1c1c;
+  --text-light: #ffffff;
+  --bg-dark: #0e111a;
+  --bg-dark-alt: #0b0c10;
+  --bg-light: #ffffff;
+
+  /* OPACITY LEVELS */
+  --opacity-strong: 1;
+  --opacity-medium: 0.85;
+  --opacity-dim: 0.65;
+  --opacity-faint: 0.5;
+
+  /* FONT SETTINGS */
+  --font-main: "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* FONT SIZES */
+  --fs-h1: 32px;
+  --fs-h2: 24px;
+  --fs-h3: 18px;
+  --fs-body: 16px;
+  --fs-small: 14px;
+  --fs-micro: 12px;
+
+  /* LINE HEIGHTS */
+  --lh-tight: 1.2;
+  --lh-normal: 1.6;
+  --lh-loose: 1.75;
 }
 
-@font-face {
-  font-family: 'Satoshi';
-  src: url('./assets/fonts/Satoshi-Medium.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Satoshi';
-  src: url('./assets/fonts/Satoshi-Bold.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
 /* --------------------------------------------------------
    🔤 GLOBAL TYPOGRAPHY SETTINGS
 --------------------------------------------------------- */
 
-/* Базовый размер — 14px, но адаптивный через clamp()
-   (минимум 14px, максимум 18px, плавное масштабирование) */
 html {
   font-size: clamp(14px, 1vw, 18px);
   height: 100%;
@@ -45,19 +51,20 @@ html {
   flex-direction: column;
 }
 
-/* Основной текст */
 body, #root {
-  font-family: 'Satoshi', sans-serif;
+  font-family: var(--font-main);
   font-weight: 400;
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
   margin: 0;
   padding: 0;
-  background-color: #fff;
-  color: #1c1c1c;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
   display: flex;
   flex-direction: column;
   height: 100%;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 /* --------------------------------------------------------
@@ -65,203 +72,176 @@ body, #root {
 --------------------------------------------------------- */
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Satoshi', sans-serif;
+  font-family: var(--font-main);
   font-weight: 700;
-  font-size: 1.6rem; /* 1.6 × базового (≈16px) */
-  line-height: 1.3;
-  margin: 0.8em 0 0.4em;
+  line-height: var(--lh-tight);
+  color: var(--text-dark);
+  margin: 0 0 0.5em 0;
 }
+
+h1 { font-size: var(--fs-h1); opacity: var(--opacity-strong); }
+h2 { font-size: var(--fs-h2); opacity: 0.95; }
+h3 { font-size: var(--fs-h3); opacity: 0.9; }
+h4, h5, h6 { font-size: var(--fs-body); opacity: var(--opacity-medium); }
 
 strong, b {
   font-weight: 700;
-  font-size: 1.6em; /* 1.6 × относительно родительского размера */
-  line-height: inherit;
+  font-size: 1.2em;
+  color: var(--text-dark);
+  opacity: var(--opacity-strong);
 }
 
 /* --------------------------------------------------------
-   🧩 MATERIAL UI COMPONENTS (Buttons, Accordions, Tooltips)
+   🧩 MATERIAL UI COMPONENTS
 --------------------------------------------------------- */
-/* Accordion заголовки */
-.MuiAccordionSummary-root {
-  font-family: 'Satoshi', sans-serif !important;
-  min-height: unset !important;
-  align-items: flex-start !important;
-  transition: none !important;
-  padding: 6px 0 !important;
-}
-
-/* Typography внутри заголовка */
-.MuiAccordionSummary-root .MuiTypography-root {
-  font-family: 'Satoshi', sans-serif !important;
-  font-weight: 400 !important;
-  font-size: 1.6rem !important;
-}
-
-/* Контент внутри заголовка */
-.MuiAccordionSummary-content {
-  font-family: 'Satoshi', sans-serif !important;
-  margin: 0 !important;
-  align-items: center !important;
-  transition: none !important;
-}
-
-/* AccordionDetails (контент) */
-.MuiAccordionDetails-root {
-  padding-top: 6px !important; /* отступ между заголовком и контентом */
-  font-family: 'Satoshi', sans-serif !important;
-  padding-bottom: 6px !important;
-  font-weight: 400 !important;
-  font-size: 1rem !important;
-}
-
-.MuiButton-root,
-.MuiTooltip-tooltip,
-.MuiTab-root,
-.MuiMenuItem-root {
-  font-family: 'Satoshi', sans-serif !important;
-  font-weight: 400 !important;
-  font-size: 1rem !important;
-  text-transform: none !important; /* сохраняем регистр */
-}
 
 .MuiAccordion-root {
-  background-color: #fff !important;
-  font-family: 'Satoshi', sans-serif !important;
-  color: #000 !important;
+  background-color: var(--bg-light) !important;
+  font-family: var(--font-main) !important;
+  color: var(--text-dark) !important;
   box-shadow: none !important;
   border: none !important;
   margin: 0 !important;
-  transition: none !important; /* убираем резкие анимации MUI */
+  transition: none !important;
 }
 
 .MuiAccordion-root:before {
   display: none !important;
 }
 
-/* === Accordion Summary (заголовок) === */
-.MuiAccordionSummary-root.Mui-expanded {
-  font-family: 'Satoshi', sans-serif !important;
+.MuiAccordionSummary-root {
+  font-family: var(--font-main) !important;
   min-height: unset !important;
+  align-items: flex-start !important;
+  transition: none !important;
+  padding: 6px 0 !important;
 }
 
+.MuiAccordionSummary-root .MuiTypography-root {
+  font-family: var(--font-main) !important;
+  font-weight: 400 !important;
+  font-size: 1.6rem !important;
+}
+
+.MuiAccordionSummary-content {
+  font-family: var(--font-main) !important;
+  margin: 0 !important;
+  align-items: center !important;
+  transition: none !important;
+}
+
+.MuiAccordionDetails-root {
+  padding: 6px 0 !important;
+  font-family: var(--font-main) !important;
+  font-weight: 400 !important;
+  font-size: 1rem !important;
+}
+
+.MuiAccordionSummary-root.Mui-expanded,
 .MuiAccordionSummary-content.Mui-expanded {
-  font-family: 'Satoshi', sans-serif !important;
+  min-height: unset !important;
   margin: 0 !important;
   align-items: center !important;
 }
 
-/* Убираем любые отступы у первого и последнего аккордеона */
-.MuiAccordion-root:first-of-type {
-  margin-top: 0 !important;
-}
+.MuiAccordion-root:first-of-type { margin-top: 0 !important; }
+.MuiAccordion-root:last-of-type { margin-bottom: 0 !important; }
 
-.MuiAccordion-root:last-of-type {
-  margin-bottom: 0 !important;
-}
+.MuiAccordionSummary-expandIconWrapper { color: var(--text-dark); }
 
-/* === Expand Icon === */
-
-.MuiAccordionSummary-expandIconWrapper {
-  color: #fff;
-}
-
-/* Общий стиль для значков + / − */
 .accordion-icon {
   font-size: 1.6rem;
   font-weight: 500;
   line-height: 1;
-  color: #1c1c1c;
+  color: var(--text-dark);
   width: 24px;
   display: inline-block;
   text-align: center;
 }
 
-.MuiTypography-root {
-  font-family: 'Satoshi', sans-serif !important;
+.MuiTypography-root,
+.MuiButton-root,
+.MuiTooltip-tooltip,
+.MuiTab-root,
+.MuiMenuItem-root {
+  font-family: var(--font-main) !important;
   font-weight: 400 !important;
   font-size: 1rem !important;
   line-height: 1.5 !important;
-  color: #1c1c1c !important;
+  color: var(--text-dark) !important;
+  text-transform: none !important;
 }
 
-/*==========BUTTONS===========*/
 .MuiButton-root {
-  box-shadow: none !important; /* убираем тень */
-  border-radius: 0px !important; /* лёгкое скругление */
-  text-transform: none !important; /* чтобы текст не был капсом */
+  box-shadow: none !important;
+  border-radius: 0px !important;
   margin: 10px 0 10px 10px;
 }
 
 .MuiButton-contained {
-  background-color: #ffd700 !important; /* основной цвет, если нужно */
-  color: #1c1c1c !important; /* цвет текста */
+  background-color: #ffd700 !important;
+  color: var(--text-dark) !important;
 }
 
 .MuiButton-contained:hover {
-  background-color: #fecb00 !important; /* цвет при наведении */
-  box-shadow: none !important; /* чтобы тень не появлялась на hover */
+  background-color: #fecb00 !important;
+  box-shadow: none !important;
 }
 
 /* --------------------------------------------------------
-   📊 RECHARTS (Axes, Tooltip, Legend)
+   📊 RECHARTS
 --------------------------------------------------------- */
 
 .recharts-cartesian-axis-tick-value,
 .recharts-legend-item-text,
 .recharts-tooltip-item,
 .recharts-tooltip-label {
-  font-family: 'Satoshi', sans-serif !important;
+  font-family: var(--font-main) !important;
   font-size: 0.9rem !important;
   font-weight: 400;
 }
 
-/* === Контейнер для графика === */
-
 .chart-wrapper {
-  background: radial-gradient(circle at 50% 40%, #0e111a, #0b0c10 80%);
+  background: radial-gradient(circle at 50% 40%, var(--bg-dark), var(--bg-dark-alt) 80%);
   border-radius: 0px;
-  padding: 10px; /* добавляем больше воздуха справа и слева */
-  box-sizing: border-box; /* предотвращает переполнение */
+  padding: 10px;
+  box-sizing: border-box;
 }
-
-/* === Сам график (svg внутри LineChart) === */
 
 .chart {
   overflow: visible;
 }
 
-/* === Сетка === */
-
 .recharts-cartesian-grid line {
   stroke: rgba(255, 255, 255, 0.1);
 }
 
-/* === Оси === */
-
 .recharts-cartesian-axis-tick text {
-  fill: #bbb;
-  font-family: 'Satoshi', sans-serif !important;
+  font-family: var(--font-main) !important;
   font-size: 0.9rem !important;
   font-weight: 400;
+  fill: #bbb;
 }
 
 /* --------------------------------------------------------
-   ⚙️ FOOTER (всегда прижат к низу страницы)
+   ⚙️ FOOTER
 --------------------------------------------------------- */
 
 main {
-  flex: 1; /* растягивает основной контент */
+  flex: 1;
   display: flex;
   flex-direction: column;
 }
 
 footer {
   flex-shrink: 0;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid rgba(0,0,0,0.1);
   padding: 10px;
-  background: #fff;
+  background: var(--bg-light);
+  color: var(--text-dark);
   width: 100%;
   margin-top: auto;
+  font-family: var(--font-main);
 }
 
 .footer-content {
@@ -278,7 +258,7 @@ footer {
 }
 
 .footer-link {
-  font-family: 'Satoshi', sans-serif;
+  font-family: var(--font-main);
   color: #555;
   font-size: 0.9rem;
   font-weight: 300;
@@ -287,9 +267,7 @@ footer {
   transition: color 0.2s;
 }
 
-.footer-link:hover {
-  color: #1c1c1c;
-}
+.footer-link:hover { color: var(--text-dark); }
 
 .footer-logo-block {
   display: flex;
@@ -298,13 +276,10 @@ footer {
   gap: 10px;
 }
 
-.footer-logo {
-  width: 24px;
-  height: auto;
-}
+.footer-logo { width: 24px; height: auto; }
 
 .footer-copy {
-  font-family: 'Satoshi', sans-serif;
+  font-family: var(--font-main);
   font-size: 0.9rem;
   font-weight: 300;
   color: #555;
@@ -313,20 +288,16 @@ footer {
 }
 
 /* --------------------------------------------------------
-   🧭 GENERAL ELEMENTS
+   🧭 GENERAL ELEMENTS & ADDITIONAL TEXT CLASSES
 --------------------------------------------------------- */
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; font-size: 1rem; }
+code { font-family: var(--font-main); font-size: 0.9rem; }
 
-button {
-  font-family: inherit;
-  font-size: 1rem;
-}
+.text-body { font-size: var(--fs-body); font-weight: 400; opacity: var(--opacity-medium); }
+.text-subtle { font-size: var(--fs-small); font-weight: 300; opacity: var(--opacity-dim); }
+.text-caption { font-size: var(--fs-micro); opacity: var(--opacity-faint); letter-spacing: 0.02em; }
 
-code {
-  font-family: 'Satoshi', sans-serif;
-  font-size: 0.9rem;
-}
+.section { margin-bottom: 3em; }
+.block + .block { margin-top: 1.5em; }
