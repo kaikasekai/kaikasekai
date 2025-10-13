@@ -555,9 +555,9 @@ const handleSendFeedback = async () => {
                     label={{
     value: "USD",
     angle: -90,
-    position: "insideLeft",
+    position: "insideBottomLeft",
     offset: 0,
-    style: { textAnchor: "bottom", fill: "#666", fontSize: 14, fontWeight: 500 },
+    style: { textAnchor: "middle", fill: "#666", fontSize: 14, fontWeight: 500 },
   }}
                   />
                   <Tooltip
@@ -595,7 +595,7 @@ const handleSendFeedback = async () => {
                   <Line
                     type="monotone"
                     dataKey="moving_average"
-                    stroke="#00c69e"
+                    stroke="#f7931a"
                     dot={false}
                     strokeDasharray="5 5"
                     strokeWidth={3}
@@ -615,6 +615,7 @@ const handleSendFeedback = async () => {
                         type="monotone"
                         dataKey={key}
                         stroke={COLORS[idx % COLORS.length]}
+                        strokeOpacity={0.6}
                         dot={false}
                       />
                     ))}
@@ -655,7 +656,7 @@ const handleSendFeedback = async () => {
        
 {subscriptionActive ? (
   <div>
-    <p>✅ Subscription active</p>
+    <p style={{ color: "##00C853" }}>Subscription active</p>
     {subscriptionEnd && (
       <p>
         Your subscription ends on:{" "}
@@ -665,7 +666,7 @@ const handleSendFeedback = async () => {
   </div>
 ) : (
   <div>
-    <p>⚠️ Subscription inactive</p>
+    <p style={{ color: "#FF5252" }}>Subscription inactive</p>
 
               
 
@@ -679,7 +680,8 @@ const handleSendFeedback = async () => {
                   label="Use referral code - 24.9 USDC"
                   value={referrer}
                   onChange={(e) => setReferrer(e.target.value)}
-                  fullWidth
+                  inputProps={{ maxLength: 42 }}
+                  sx={{ width: "26ch" }}
                   margin="dense"
                 />
               )}
