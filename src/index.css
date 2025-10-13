@@ -441,7 +441,7 @@ code { font-family: var(--font-main); font-size: 0.9rem; }
   color: var(--text-dark);
   font-weight: 300;
   border: none;
-  font-size: 3rem;
+  font-size: 2rem;
   cursor: pointer;
   padding: 6px;
   border-radius: 0%;
@@ -461,8 +461,8 @@ code { font-family: var(--font-main); font-size: 0.9rem; }
 }
 
 .dot {
-  width: 5px;
-  height: 5px;
+  width: 4px;
+  height: 4px;
   border-radius: 0%;
   background: var(--text-dark);
   cursor: pointer;
