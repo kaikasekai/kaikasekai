@@ -175,7 +175,7 @@ strong, b {
 .MuiAccordionSummary-expandIconWrapper { color: var(--text-dark); }
 
 .accordion-icon {
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: 300;
   line-height: 1;
   color: var(--text-dark);
