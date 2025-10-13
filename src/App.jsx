@@ -561,7 +561,7 @@ const handleSendFeedback = async () => {
   }}
                   />
                   <Tooltip
-  formatter={(value) => typeof value === "number" ? value.toFixed(1) : value}                 
+  formatter={(value) => typeof value === "number" ? value.toFixed(0) : value}                 
   contentStyle={{
     background: "rgba(18, 18, 20, 0.5)",
     color: "#E8E8EA",
@@ -739,22 +739,22 @@ const handleSendFeedback = async () => {
 
 <h4>Disclaimer</h4>
 Kaikasekai provides AI-powered forecasts and analytical insights for informational and educational purposes only. The content does not constitute financial, investment, or trading advice and should not be interpreted as a recommendation to buy, hold, or sell digital assets. Any trading or investment decisions based on this information are made at the user’s own discretion and risk. Kaikasekai and its affiliates assume no liability for any losses or damages resulting from the use of this website, its forecasts, or related products.
-
+<p></p>
 <h4>Privacy Policy</h4>
 Kaikasekai does not collect personal data or use cookies. Certain features rely on trusted third-party providers, such as EmailGS (for paid communications with developers) and Reown Connect Wallet (for wallet linking and on-chain interactions). Wallet data, private keys, and payment details remain private and are never accessed or stored by Kaikasekai.
-
+<p></p>
 <h4>Wallet & Security</h4>
 Connecting a crypto wallet is optional. For security, we recommend using wallets with limited balances. All blockchain transactions are public and recorded on-chain, and Kaikasekai has no control over gas fees, confirmations, or transaction outcomes.
-
+<p></p>
 <h4>Intellectual Property</h4>
 All forecasts, models, algorithms, site content, text, and visuals are the exclusive property of Kaikasekai. Any unauthorized use, copying, modification, or redistribution of this material without prior written consent is prohibited.
-
+<p></p>
 <h4>External Links</h4>
 This site may include links to external platforms or blockchain networks. Kaikasekai is not responsible for their availability, performance, or data handling practices.
-
+<p></p>
 <h4>Forecast Accuracy</h4>
 Forecasts are developed with a focus on analytical precision but cannot guarantee future results. Information may be updated or contain inaccuracies, and independent research is recommended before making financial or investment decisions.
-
+<p></p>
 <h4>Acceptance of Terms</h4>
 Use of this site constitutes acknowledgment and acceptance of these terms.
             </p>
@@ -811,7 +811,6 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
   </div>
 )}
               
-              Send a message to Developers
             </p>
           </div>
         )}
@@ -896,7 +895,8 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
         style={{ width: '100%' }}
         alt="November 2024"
       />
-      <a href="https://pbs.twimg.com/media/FpG7q3uXwAAb6z6?format=jpg&name=large" target="_blank" rel="noopener noreferrer">November 2024</a>
+      <p></p>
+      <a href="https://x.com/kaikasekai/status/1849846927560417575?s=46&t=mq7NzK_MklQbSk36gyR5pg" target="_blank" rel="noopener noreferrer">November 2024</a>
     </div>
   ),
   result: <img src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/1.PNG" style={{ width: '100%' }} alt="Result 1" />,
@@ -909,7 +909,8 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
         style={{ width: '100%' }}
         alt="December 2024"
       />
-      <a href="https://pbs.twimg.com/media/FpG7q3uXwAAb6z6?format=jpg&name=large" target="_blank" rel="noopener noreferrer">December 2024</a>
+      <p></p>
+      <a href="https://x.com/kaikasekai/status/1862565413160145174?s=46&t=mq7NzK_MklQbSk36gyR5pg" target="_blank" rel="noopener noreferrer">December 2024</a>
     </div>
   ),
   result: <img src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/2.PNG" style={{ width: '100%' }} alt="Result 2" />,
@@ -919,10 +920,11 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
     <div>
       <img
         src="https://pbs.twimg.com/media/GgEdStmWoAAwSPG.jpg"
-        style={{ width: '100%' }}
+        style={{ height: '100%' }}
         alt="January 2025"
       />
-      <a href="https://pbs.twimg.com/media/FpG7q3uXwAAb6z6?format=jpg&name=large" target="_blank" rel="noopener noreferrer">January 2025</a>
+      <p></p>
+      <a href="https://x.com/kaikasekai/status/1873811142566699385?s=46&t=mq7NzK_MklQbSk36gyR5pg" target="_blank" rel="noopener noreferrer">January 2025</a>
     </div>
   ),
   result: <img src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/3.PNG" style={{ width: '100%' }} alt="Result 3" />,
@@ -935,7 +937,8 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
         style={{ width: '100%' }}
         alt="February-March 2025"
       />
-      <a href="https://pbs.twimg.com/media/FpG7q3uXwAAb6z6?format=jpg&name=large" target="_blank" rel="noopener noreferrer">February-March 2025</a>
+      <p></p>
+      <a href="https://x.com/kaikasekai/status/1889382743408255356?s=46&t=mq7NzK_MklQbSk36gyR5pg" target="_blank" rel="noopener noreferrer">February-March 2025</a>
     </div>
   ),
   result: <img src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/4.PNG" style={{ width: '100%' }} alt="Result 4" />,
@@ -948,7 +951,8 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
         style={{ width: '100%' }}
         alt="April-June 2025"
       />
-      <a href="https://pbs.twimg.com/media/FpG7q3uXwAAb6z6?format=jpg&name=large" target="_blank" rel="noopener noreferrer">April-June 2025</a>
+      <p></p>
+      <a href="https://x.com/kaikasekai/status/1907479658381099060?s=46&t=mq7NzK_MklQbSk36gyR5pg" target="_blank" rel="noopener noreferrer">April-June 2025</a>
     </div>
   ),
   result: <img src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/5.PNG" style={{ width: '100%' }} alt="Result 5" />,
@@ -961,7 +965,8 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
         style={{ width: '100%' }}
         alt="August-September 2025"
       />
-      <a href="https://pbs.twimg.com/media/FpG7q3uXwAAb6z6?format=jpg&name=large" target="_blank" rel="noopener noreferrer">August-September 2025</a>
+      <p></p>
+      <a href="https://x.com/kaikasekai/status/1953139989643940344?s=46&t=mq7NzK_MklQbSk36gyR5pg" target="_blank" rel="noopener noreferrer">August-September 2025</a>
     </div>
   ),
   result: <img src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/6.PNG" style={{ width: '100%' }} alt="Result 6" />,
