@@ -636,7 +636,7 @@ const handleSendFeedback = async () => {
 <div style={{ margin: 0 }}>
   Advanced AI-powered algorithm predicts the global BTC trend with {mape}%<sup>*</sup> accuracy.
 </div>
-<small style={{ display: "block", marginTop: 2, color: "#666666 }}>
+<small style={{ display: "block", marginTop: 2, color: "#666666" }}>
   <sup>*</sup> Based on rolling 30-day metrics.
 </small>
 
@@ -645,7 +645,7 @@ const handleSendFeedback = async () => {
       {/* === Wallet section === */}
       {!account ? (
         <div style={{ display: "inline-block", marginTop: 10 }}>
-            <Button variant="contained" onClick={connectWallet} style={{ width: "auto" }}>
+            <Button variant="contained" onClick={connectWallet} style={{ width: "auto", background: "#0080ff", }}>
           Connect Wallet
         </Button>
            </div> 
