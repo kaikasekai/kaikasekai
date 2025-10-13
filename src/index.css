@@ -414,7 +414,7 @@ code { font-family: var(--font-main); font-size: 0.9rem; }
   transform: translateY(-50%);
   background: rgba(255, 255, 255, 0.2);
   color: var(--text-dark);
-  opacity: 0.5;
+  opacity: 0.3;
   border: none;
   font-size: 3rem;
   cursor: pointer;
@@ -436,11 +436,11 @@ code { font-family: var(--font-main); font-size: 0.9rem; }
 }
 
 .dot {
-  width: 9px;
-  height: 9px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: var(--text-dark);
-  opacity: 0.5;
+  opacity: 0.3;
   cursor: pointer;
 }
 
