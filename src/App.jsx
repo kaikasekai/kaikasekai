@@ -556,11 +556,12 @@ const handleSendFeedback = async () => {
     value: "USD",
     angle: -90,
     position: "insideLeft",
-    offset: -10,
-    style: { textAnchor: "middle", fill: "#666", fontSize: 14, fontWeight: 500 },
+    offset: 0,
+    style: { textAnchor: "bottom", fill: "#666", fontSize: 14, fontWeight: 500 },
   }}
                   />
                   <Tooltip
+  formatter={(value) => typeof value === "number" ? value.toFixed(1) : value}                 
   contentStyle={{
     background: "rgba(18, 18, 20, 0.5)",
     color: "#E8E8EA",
@@ -569,7 +570,7 @@ const handleSendFeedback = async () => {
     padding: "10px 12px",
     fontFamily: "'Satoshi', 'Inter', sans-serif",
     fontSize: "0.8em",
-    lineHeight: 1.2,
+    lineHeight: 1,
     boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
     backdropFilter: "blur(3px)",
     pointerEvents: "none",
@@ -602,7 +603,7 @@ const handleSendFeedback = async () => {
                   <Line
                     type="monotone"
                     dataKey="predict"
-                    stroke="#0000ff"
+                    stroke="#0080ff"
                     dot={false}
                     strokeWidth={6}
                   />
@@ -666,20 +667,23 @@ const handleSendFeedback = async () => {
   <div>
     <p>⚠️ Subscription inactive</p>
 
-              {!hasSubscribed && (
+              
+
+            <div style={{ margin: 0 }}>
+              <Button variant="contained" onClick={handleSubscribe}>
+                Subscribe<sup>*</sup> ({price ? (price / 1e6).toFixed(4) : "..." } USDC)
+              </Button>
+
+             {!hasSubscribed && (
                 <TextField
-                  label="Referrer address (optional)"
+                  label="Use referral code - 24.9 USDC"
                   value={referrer}
                   onChange={(e) => setReferrer(e.target.value)}
                   fullWidth
                   margin="dense"
                 />
               )}
-
-            <div style={{ margin: 0 }}>
-              <Button variant="contained" onClick={handleSubscribe}>
-                Subscribe<sup>*</sup> ({price ? (price / 1e6).toFixed(4) : "..." } USDC)
-              </Button>
+              
             </div>
               <small><sup>*</sup>49.9 USDC to unlock next month’s forecast.</small>
               {nextEndTime && (
@@ -733,25 +737,25 @@ const handleSendFeedback = async () => {
             <p>
               
 
-Disclaimer
+<h4>Disclaimer</h4>
 Kaikasekai provides AI-powered forecasts and analytical insights for informational and educational purposes only. The content does not constitute financial, investment, or trading advice and should not be interpreted as a recommendation to buy, hold, or sell digital assets. Any trading or investment decisions based on this information are made at the user’s own discretion and risk. Kaikasekai and its affiliates assume no liability for any losses or damages resulting from the use of this website, its forecasts, or related products.
 
-Privacy Policy
+<h4>Privacy Policy</h4>
 Kaikasekai does not collect personal data or use cookies. Certain features rely on trusted third-party providers, such as EmailGS (for paid communications with developers) and Reown Connect Wallet (for wallet linking and on-chain interactions). Wallet data, private keys, and payment details remain private and are never accessed or stored by Kaikasekai.
 
-Wallet & Security
+<h4>Wallet & Security</h4>
 Connecting a crypto wallet is optional. For security, we recommend using wallets with limited balances. All blockchain transactions are public and recorded on-chain, and Kaikasekai has no control over gas fees, confirmations, or transaction outcomes.
 
-Intellectual Property
+<h4>Intellectual Property</h4>
 All forecasts, models, algorithms, site content, text, and visuals are the exclusive property of Kaikasekai. Any unauthorized use, copying, modification, or redistribution of this material without prior written consent is prohibited.
 
-External Links
+<h4>External Links</h4>
 This site may include links to external platforms or blockchain networks. Kaikasekai is not responsible for their availability, performance, or data handling practices.
 
-Forecast Accuracy
+<h4>Forecast Accuracy</h4>
 Forecasts are developed with a focus on analytical precision but cannot guarantee future results. Information may be updated or contain inaccuracies, and independent research is recommended before making financial or investment decisions.
 
-Acceptance of Terms
+<h4>Acceptance of Terms</h4>
 Use of this site constitutes acknowledgment and acceptance of these terms.
             </p>
           </div>
@@ -768,6 +772,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
             >
               ← Back
             </Button>
+            <p></p>
             <h3>Contact Developers</h3>
             <p>
 
@@ -887,11 +892,11 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
   nft: (
     <div>
       <img
-        src="https://pbs.twimg.com/media/FpG7q3uXwAAb6z6?format=jpg&name=large"
+        src="https://pbs.twimg.com/media/Gav5-CTWIAAv-Wf.jpg"
         style={{ width: '100%' }}
-        alt="Nov"
+        alt="November 2024"
       />
-      <h4>Nov</h4>
+      <a href="https://pbs.twimg.com/media/FpG7q3uXwAAb6z6?format=jpg&name=large" target="_blank" rel="noopener noreferrer">November 2024</a>
     </div>
   ),
   result: <img src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/1.PNG" style={{ width: '100%' }} alt="Result 1" />,
@@ -900,11 +905,11 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
   nft: (
     <div>
       <img
-        src="https://pbs.twimg.com/media/FpG7q3uXwAAb6z6?format=jpg&name=large"
+        src="https://pbs.twimg.com/media/GdkpXY4WUAABozr.jpg"
         style={{ width: '100%' }}
-        alt="Dec"
+        alt="December 2024"
       />
-      <h4>Dec</h4>
+      <a href="https://pbs.twimg.com/media/FpG7q3uXwAAb6z6?format=jpg&name=large" target="_blank" rel="noopener noreferrer">December 2024</a>
     </div>
   ),
   result: <img src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/2.PNG" style={{ width: '100%' }} alt="Result 2" />,
@@ -913,11 +918,11 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
   nft: (
     <div>
       <img
-        src="https://pbs.twimg.com/media/FpG7q3uXwAAb6z6?format=jpg&name=large"
+        src="https://pbs.twimg.com/media/GgEdStmWoAAwSPG.jpg"
         style={{ width: '100%' }}
-        alt="Jan"
+        alt="January 2025"
       />
-      <h4>Jan</h4>
+      <a href="https://pbs.twimg.com/media/FpG7q3uXwAAb6z6?format=jpg&name=large" target="_blank" rel="noopener noreferrer">January 2025</a>
     </div>
   ),
   result: <img src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/3.PNG" style={{ width: '100%' }} alt="Result 3" />,
@@ -926,11 +931,11 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
   nft: (
     <div>
       <img
-        src="https://pbs.twimg.com/media/FpG7q3uXwAAb6z6?format=jpg&name=large"
+        src="https://pbs.twimg.com/media/GjhvfCqW0AAPNY5.jpg"
         style={{ width: '100%' }}
-        alt="Feb-Mar"
+        alt="February-March 2025"
       />
-      <h4>Feb-Mar</h4>
+      <a href="https://pbs.twimg.com/media/FpG7q3uXwAAb6z6?format=jpg&name=large" target="_blank" rel="noopener noreferrer">February-March 2025</a>
     </div>
   ),
   result: <img src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/4.PNG" style={{ width: '100%' }} alt="Result 4" />,
@@ -939,11 +944,11 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
   nft: (
     <div>
       <img
-        src="https://pbs.twimg.com/media/FpG7q3uXwAAb6z6?format=jpg&name=large"
+        src="https://pbs.twimg.com/media/Gni6nlrXEAAfkLw.jpg"
         style={{ width: '100%' }}
-        alt="Apr-Jun"
+        alt="April-June 2025"
       />
-      <h4>Apr-Jun</h4>
+      <a href="https://pbs.twimg.com/media/FpG7q3uXwAAb6z6?format=jpg&name=large" target="_blank" rel="noopener noreferrer">April-June 2025</a>
     </div>
   ),
   result: <img src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/5.PNG" style={{ width: '100%' }} alt="Result 5" />,
@@ -952,11 +957,11 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
   nft: (
     <div>
       <img
-        src="https://pbs.twimg.com/media/FpG7q3uXwAAb6z6?format=jpg&name=large"
+        src="https://pbs.twimg.com/media/GxryXIYWMAAaRUD.jpg"
         style={{ width: '100%' }}
-        alt="Aug-Sep"
+        alt="August-September 2025"
       />
-      <h4>Aug-Sep</h4>
+      <a href="https://pbs.twimg.com/media/FpG7q3uXwAAb6z6?format=jpg&name=large" target="_blank" rel="noopener noreferrer">August-September 2025</a>
     </div>
   ),
   result: <img src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/6.PNG" style={{ width: '100%' }} alt="Result 6" />,
@@ -1013,8 +1018,8 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
 <div
   style={{
     position: "fixed",
-    bottom: "20px",
-    left: "20px",
+    bottom: "15px",
+    left: "15px",
     zIndex: 9999,
   }}
 >
@@ -1066,7 +1071,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
       title="Donate donut"
       aria-label="Donate donut"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8" width="36" height="36" shape-rendering="crispEdges">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8" width="24" height="24" shape-rendering="crispEdges">
   <g>
     <rect x="2" y="7" width="1" height="1" fill="#b8ac86"/>
     <rect x="3" y="7" width="1" height="1" fill="#b8ac86"/>
