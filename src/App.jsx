@@ -555,7 +555,7 @@ const handleSendFeedback = async () => {
                     label={{
     value: "USD",
     angle: -90,
-    position: "insideBottomLeft",
+    position: "outsideBottomLeft",
     offset: 0,
     style: { textAnchor: "middle", fill: "#666", fontSize: 14, fontWeight: 500 },
   }}
@@ -563,11 +563,11 @@ const handleSendFeedback = async () => {
                   <Tooltip
   formatter={(value) => typeof value === "number" ? value.toFixed(0) : value}                 
   contentStyle={{
-    background: "rgba(18, 18, 20, 0.5)",
+    background: "rgba(18, 18, 20, 0.6)",
     color: "#E8E8EA",
     border: "0px solid rgba(255, 255, 255, 0.05)",
     borderRadius: "0px",
-    padding: "10px 12px",
+    padding: "10px 10px",
     fontFamily: "'Satoshi', 'Inter', sans-serif",
     fontSize: "0.8em",
     lineHeight: 1,
@@ -595,7 +595,7 @@ const handleSendFeedback = async () => {
                   <Line
                     type="monotone"
                     dataKey="moving_average"
-                    stroke="#f7931a"
+                    stroke="#5c4b7d"
                     dot={false}
                     strokeDasharray="5 5"
                     strokeWidth={3}
@@ -615,7 +615,6 @@ const handleSendFeedback = async () => {
                         type="monotone"
                         dataKey={key}
                         stroke={COLORS[idx % COLORS.length]}
-                        strokeOpacity={0.6}
                         dot={false}
                       />
                     ))}
@@ -637,7 +636,7 @@ const handleSendFeedback = async () => {
 <div style={{ margin: 0 }}>
   Advanced AI-powered algorithm predicts the global BTC trend with {mape}%<sup>*</sup> accuracy.
 </div>
-<small style={{ display: "block", marginTop: 2 }}>
+<small style={{ display: "block", marginTop: 2, color: "#666666 }}>
   <sup>*</sup> Based on rolling 30-day metrics.
 </small>
 
@@ -652,11 +651,11 @@ const handleSendFeedback = async () => {
            </div> 
       ) : (
         <div>
-          <p>Connected: {account}</p>
+          <p style={{ color: "#0080ff" }}>Connected: {account}</p>
        
 {subscriptionActive ? (
   <div>
-    <p style={{ color: "##00C853" }}>Subscription active</p>
+    <p style={{ color: "#00C853" }}>Subscription active</p>
     {subscriptionEnd && (
       <p>
         Your subscription ends on:{" "}
@@ -672,22 +671,22 @@ const handleSendFeedback = async () => {
 
             <div style={{ margin: 0 }}>
               <Button variant="contained" onClick={handleSubscribe}>
-                Subscribe<sup>*</sup> ({price ? (price / 1e6).toFixed(4) : "..." } USDC)
+              ({price ? (price / 1e6).toFixed(4) : "..." } USDC) to unlock next month
               </Button>
-
+<div>
              {!hasSubscribed && (
                 <TextField
-                  label="Use referral code - 24.9 USDC"
+                  label="Use referral code to pay 24.9 USDC"
                   value={referrer}
                   onChange={(e) => setReferrer(e.target.value)}
                   inputProps={{ maxLength: 42 }}
-                  sx={{ width: "26ch" }}
+                  fullWidth={false}
                   margin="dense"
                 />
               )}
-              
+</div>
             </div>
-              <small><sup>*</sup>49.9 USDC to unlock next month’s forecast.</small>
+
               {nextEndTime && (
                 <p>
                   Next subscription will end on:{" "}
