@@ -297,7 +297,7 @@ body .chart-wrapper .chart-tooltip .value.yellow  { color: #FFD700 !important; }
 }
 
 .chart {
-  overflow: hidden;
+  overflow: visible;
 }
 
 .recharts-cartesian-grid line {
