@@ -649,7 +649,7 @@ const handleSendFeedback = async () => {
   sx={{
     backgroundColor: "#0080ff",
     color: "#ffffff",
-    fontWeight: 600,
+    fontWeight: 500,
     border: "none",
     borderRadius: "6px",
     padding: "0.7em 1.6em",
@@ -693,9 +693,9 @@ const handleSendFeedback = async () => {
   sx={{
     backgroundColor: "#F7931A",
     color: "#101214",
-    fontWeight: 600,
+    fontWeight: 500,
     border: "none",
-    borderRadius: "6px,
+    borderRadius: "6px",
     padding: "0.7em 1.6em",
     cursor: "pointer",
     transition: "all 0.25s ease-in-out",
@@ -920,7 +920,7 @@ This insider-level, on-chain verified product empowers traders worldwide with th
     sx={{
     backgroundColor: "#FFD700",
     color: "#101214",
-    fontWeight: 600,
+    fontWeight: 500,
     border: "none",
     borderRadius: "6px",
     padding: "0.7em 1.6em",
