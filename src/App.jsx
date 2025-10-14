@@ -648,8 +648,8 @@ const handleSendFeedback = async () => {
             <Button
   onClick={connectWallet}
   sx={{
-    backgroundColor: "var(--tech-blue)",
-    color: "var(--white)",
+    backgroundColor: "#0080ff",
+    color: "#ffffff",
     fontWeight: 600,
     border: "none",
     borderRadius: "6px",
