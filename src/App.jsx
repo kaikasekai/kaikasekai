@@ -648,20 +648,20 @@ const handleSendFeedback = async () => {
   onClick={connectWallet}
   sx={{
     backgroundColor: "#0080ff",
-    color: "#ffffff !important",
-    fontWeight: 600 !important,
+    color: "#ffffff",
+    fontWeight: 600,
     border: "none",
-    borderRadius: "6px !important",
+    borderRadius: "6px",
     padding: "0.7em 1.6em",
     cursor: "pointer",
     transition: "all 0.25s ease-in-out",
     "&:hover": {
-      backgroundColor: "#3399FF !important",
+      backgroundColor: "#3399FF",
       boxShadow: "0 4px 10px rgba(0, 128, 255, 0.4)",
     },
     "&:active": {
-      transform: "scale(0.97) !important",
-      filter: "brightness(0.9) !important",
+      transform: "scale(0.97)",
+      filter: "brightness(0.9)",
     },
   }}
 >
@@ -691,21 +691,21 @@ const handleSendFeedback = async () => {
             <div style={{ margin: 0 }}>
               <Button variant="contained" onClick={handleSubscribe}
   sx={{
-    backgroundColor: "#F7931A !important",
-    color: "#101214 !important",
-    fontWeight: 600 !important,
+    backgroundColor: "#F7931A",
+    color: "#101214",
+    fontWeight: 600,
     border: "none",
-    borderRadius: "6px !important",
+    borderRadius: "6px,
     padding: "0.7em 1.6em",
     cursor: "pointer",
     transition: "all 0.25s ease-in-out",
     "&:hover": {
-      backgroundColor: "#FFA733 !important",
+      backgroundColor: "#FFA733",
       boxShadow: "0 4px 10px rgba(247, 147, 26, 0.4)",
     },
     "&:active": {
-      transform: "scale(0.97) !important",
-      filter: "brightness(0.9) !important",
+      transform: "scale(0.97)",
+      filter: "brightness(0.9)",
     },
   }}
 >
@@ -819,22 +819,22 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
   variant="contained"
   onClick={handlePayFeedback}
   sx={{
-    backgroundColor: "transparent !important",
-    border: "1.5px solid #0080ff !important",
-    color: "#0080ff !important",
-    fontWeight: 500 !important,
-    borderRadius: "6px !important",
+    backgroundColor: "transparent",
+    border: "1.5px solid #0080ff",
+    color: "#0080ff",
+    fontWeight: 500,
+    borderRadius: "6px",
     padding: "0.7em 1.6em",
     cursor: "pointer",
     transition: "all 0.25s ease-in-out",
     "&:hover": {
-      backgroundColor: "#0080ff !important",
-      color: "#ffffff !important",
+      backgroundColor: "#0080ff",
+      color: "#ffffff",
       boxShadow: "0 4px 10px rgba(0, 128, 255, 0.3)",
     },
     "&:active": {
-      transform: "scale(0.97) !important",
-      filter: "brightness(0.95) !important",
+      transform: "scale(0.97)",
+      filter: "brightness(0.95)",
     },
   }}
 >
@@ -918,21 +918,21 @@ This insider-level, on-chain verified product empowers traders worldwide with th
     variant="contained"
     onClick={handleBuyWhitelist}
     sx={{
-    backgroundColor: "#FFD700 !important",
-    color: "#101214 !important",
-    fontWeight: 600 !important,
+    backgroundColor: "#FFD700",
+    color: "#101214",
+    fontWeight: 600,
     border: "none",
-    borderRadius: "6px !important",
+    borderRadius: "6px",
     padding: "0.7em 1.6em",
     cursor: "pointer",
     transition: "all 0.25s ease-in-out",
     "&:hover": {
-      backgroundColor: "#FFDD33 !important",
+      backgroundColor: "#FFDD33",
       boxShadow: "0 4px 10px rgba(255, 215, 0, 0.4)",
     },
     "&:active": {
-      transform: "scale(0.97) !important",
-      filter: "brightness(0.9) !important",
+      transform: "scale(0.97)",
+      filter: "brightness(0.9)",
     },
   }}
   >
@@ -1203,7 +1203,6 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
     "&:hover": {
       transform: "scale(1.5)",
       filter: "brightness(1.5)",
-      boxShadow: "0 0px 0px rgba(255, 215, 0, 0.15)",
     },
     "&:active": {
       transform: "scale(0.97)",
