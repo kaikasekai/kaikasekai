@@ -652,9 +652,7 @@ const handleSendFeedback = async () => {
     fontWeight: 500,
     border: "none",
     borderRadius: "0px",
-    padding: "0.7em 1.6em",
     cursor: "pointer",
-    transition: "all 0.25s ease-in-out",
     "&:hover": {
       backgroundColor: "#3399FF",
     },
@@ -691,9 +689,7 @@ const handleSendFeedback = async () => {
     fontWeight: 500,
     border: "none",
     borderRadius: "0px",
-    padding: "0.7em 1.6em",
     cursor: "pointer",
-    transition: "all 0.25s ease-in-out",
     "&:hover": {
       backgroundColor: "#FFA733",
     },
@@ -800,18 +796,10 @@ This insider-level, on-chain verified product empowers traders worldwide with th
     color: "#101214",
     fontWeight: 500,
     border: "none",
-    borderRadius: "6px",
-    padding: "0.7em 1.6em",
+    borderRadius: "0px",
     cursor: "pointer",
-    transition: "all 0.25s ease-in-out",
     "&:hover": {
       backgroundColor: "#FFDD33",
-      boxShadow: "0 4px 10px rgba(255, 215, 0, 0.4)",
-    },
-    "&:active": {
-      transform: "scale(0.97)",
-      filter: "brightness(0.9)",
-    },
   }}
   >
    Join the program  ({whitelistPrice ? (whitelistPrice / 1e6).toFixed(4) : "..." } USDC)
@@ -1088,11 +1076,10 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
     color: "#0080ff",
     fontWeight: 500,
     borderRadius: "0px",
-    padding: "0.7em 1.6em",
     cursor: "pointer",
-    transition: "all 0.25s ease-in-out",
     "&:hover": {
       backgroundColor: "#0080ff",
+      color: "#ffffff",
     },
   }}
 >
@@ -1182,9 +1169,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
     <button
       onClick={() => setShowDonatePopup(true)}
       sx={{
-    backgroundColor: "transparent",
     cursor: "pointer",
-    transition: "all 0.25s ease-in-out",
     "&:hover": {
       transform: "scale(1.1)",
     },
