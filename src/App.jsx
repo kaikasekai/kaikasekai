@@ -1026,6 +1026,18 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
           <div style={{ marginTop: 20, textAlign: "justify" }}>
             <Button
               variant="outlined"
+              sx={{
+    backgroundColor: "transparent",
+    border: "1.5px solid #0080ff",
+    color: "#0080ff",
+    fontWeight: 500,
+    borderRadius: "0px",
+    cursor: "pointer",
+    "&:hover": {
+      backgroundColor: "transparent",
+      color: "#0080ff",
+    },
+  }}
               size="small"
               onClick={() => setPage("main")}
               style={{ marginBottom: 20, textTransform: 'none' }}
@@ -1065,6 +1077,18 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
           <div style={{ marginTop: 20 }}>
             <Button
               variant="outlined"
+              sx={{
+    backgroundColor: "transparent",
+    border: "1.5px solid #0080ff",
+    color: "#0080ff",
+    fontWeight: 500,
+    borderRadius: "0px",
+    cursor: "pointer",
+    "&:hover": {
+      backgroundColor: "transparent",
+      color: "#0080ff",
+    },
+  }}
               size="small"
               onClick={() => setPage("main")}
               style={{ marginBottom: 20, textTransform: 'none' }}
@@ -1159,6 +1183,18 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
       <Button
         variant="contained"
         disableElevation
+        sx={{
+    backgroundColor: "transparent",
+    border: "1.5px solid #0080ff",
+    color: "#0080ff",
+    fontWeight: 500,
+    borderRadius: "0px",
+    cursor: "pointer",
+    "&:hover": {
+      backgroundColor: "#0080ff",
+      color: "#ffffff",
+    },
+  }}
         fullWidth
         onClick={handleDonate}
         style={{ marginTop: "10px" }}
