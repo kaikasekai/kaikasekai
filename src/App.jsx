@@ -646,6 +646,7 @@ const handleSendFeedback = async () => {
         <div style={{ display: "inline-block", marginTop: 10 }}>
             <Button
   onClick={connectWallet}
+  disableElevation
   sx={{
     backgroundColor: "#0080ff",
     color: "#ffffff",
@@ -683,6 +684,7 @@ const handleSendFeedback = async () => {
 
             <div style={{ margin: 0 }}>
               <Button variant="contained" onClick={handleSubscribe}
+                disableElevation
   sx={{
     backgroundColor: "#F7931A",
     color: "#101214",
@@ -742,14 +744,8 @@ const handleSendFeedback = async () => {
           </Button>
         </div>
       )}
-        */}    
-          </>
-        )}
-        
-<p></p>
-        
-        {/* === Accordions (тоже вынесены, теперь видны всегда) === */}
-      {/* === Accordions === */}
+        */}   
+               {/* === Accordions === */}
 <Accordion style={{ marginTop: 0, boxShadow: "none", border: "none" }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("how") ? "−" : "+"}</span>}
@@ -791,6 +787,7 @@ This insider-level, on-chain verified product empowers traders worldwide with th
   <Button
     variant="contained"
     onClick={handleBuyWhitelist}
+    disableElevation
     sx={{
     backgroundColor: "#FFD700",
     color: "#101214",
@@ -987,6 +984,12 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
   )}
 </AccordionDetails>
 </Accordion>
+          </>
+        )}
+        
+<p></p>
+        
+        {/* === Accordions (тоже вынесены, теперь видны всегда) === */}
 
 {/* === Debug Log (в аккордеоне) === 
 <Accordion style={{ marginTop: 1, boxShadow: "none", border: "none" }}>
@@ -1016,7 +1019,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
 
  
         
-      </main>
+      
 
 {/* === Disclaimer Page === */}
         {page === "disclaimer" && (
@@ -1122,7 +1125,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
             </p>
           </div>
         )}
-      
+      </main>
 
 {/* === Floating Donate Donut Button (inline SVG version) === */}
 <div
