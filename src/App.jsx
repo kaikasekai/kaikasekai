@@ -568,7 +568,6 @@ const handleSendFeedback = async () => {
     border: "0px solid rgba(255, 255, 255, 0.05)",
     borderRadius: "0px",
     padding: "10px 10px",
-    fontFamily: "'Satoshi', 'Inter', sans-serif",
     fontSize: "0.8em",
     lineHeight: 1,
     boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
@@ -649,20 +648,20 @@ const handleSendFeedback = async () => {
   onClick={connectWallet}
   sx={{
     backgroundColor: "#0080ff",
-    color: "#ffffff",
-    fontWeight: 600,
+    color: "#ffffff !important",
+    fontWeight: 600 !important,
     border: "none",
     borderRadius: "6px !important",
     padding: "0.7em 1.6em",
     cursor: "pointer",
     transition: "all 0.25s ease-in-out",
     "&:hover": {
-      backgroundColor: "#3399FF",
+      backgroundColor: "#3399FF !important",
       boxShadow: "0 4px 10px rgba(0, 128, 255, 0.4)",
     },
     "&:active": {
-      transform: "scale(0.97)",
-      filter: "brightness(0.9)",
+      transform: "scale(0.97) !important",
+      filter: "brightness(0.9) !important",
     },
   }}
 >
@@ -692,21 +691,21 @@ const handleSendFeedback = async () => {
             <div style={{ margin: 0 }}>
               <Button variant="contained" onClick={handleSubscribe}
   sx={{
-    backgroundColor: "#F7931A",
-    color: "#101214",
-    fontWeight: 600,
+    backgroundColor: "#F7931A !important",
+    color: "#101214 !important",
+    fontWeight: 600 !important,
     border: "none",
     borderRadius: "6px !important",
     padding: "0.7em 1.6em",
     cursor: "pointer",
     transition: "all 0.25s ease-in-out",
     "&:hover": {
-      backgroundColor: "#FFA733",
+      backgroundColor: "#FFA733 !important",
       boxShadow: "0 4px 10px rgba(247, 147, 26, 0.4)",
     },
     "&:active": {
-      transform: "scale(0.97)",
-      filter: "brightness(0.9)",
+      transform: "scale(0.97) !important",
+      filter: "brightness(0.9) !important",
     },
   }}
 >
@@ -821,21 +820,21 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
   onClick={handlePayFeedback}
   sx={{
     backgroundColor: "transparent !important",
-    border: "1.5px solid #0080ff",
-    color: "#0080ff",
-    fontWeight: 500,
+    border: "1.5px solid #0080ff !important",
+    color: "#0080ff !important",
+    fontWeight: 500 !important,
     borderRadius: "6px !important",
     padding: "0.7em 1.6em",
     cursor: "pointer",
     transition: "all 0.25s ease-in-out",
     "&:hover": {
-      backgroundColor: "#0080ff",
-      color: "#ffffff",
+      backgroundColor: "#0080ff !important",
+      color: "#ffffff !important",
       boxShadow: "0 4px 10px rgba(0, 128, 255, 0.3)",
     },
     "&:active": {
-      transform: "scale(0.97)",
-      filter: "brightness(0.95)",
+      transform: "scale(0.97) !important",
+      filter: "brightness(0.95) !important",
     },
   }}
 >
@@ -919,21 +918,21 @@ This insider-level, on-chain verified product empowers traders worldwide with th
     variant="contained"
     onClick={handleBuyWhitelist}
     sx={{
-    backgroundColor: "#FFD700",
-    color: "#101214",
-    fontWeight: 600,
+    backgroundColor: "#FFD700 !important",
+    color: "#101214 !important",
+    fontWeight: 600 !important,
     border: "none",
     borderRadius: "6px !important",
     padding: "0.7em 1.6em",
     cursor: "pointer",
     transition: "all 0.25s ease-in-out",
     "&:hover": {
-      backgroundColor: "#FFDD33",
+      backgroundColor: "#FFDD33 !important",
       boxShadow: "0 4px 10px rgba(255, 215, 0, 0.4)",
     },
     "&:active": {
-      transform: "scale(0.97)",
-      filter: "brightness(0.9)",
+      transform: "scale(0.97) !important",
+      filter: "brightness(0.9) !important",
     },
   }}
   >
