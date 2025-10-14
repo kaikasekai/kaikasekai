@@ -800,6 +800,7 @@ This insider-level, on-chain verified product empowers traders worldwide with th
     cursor: "pointer",
     "&:hover": {
       backgroundColor: "#FFDD33",
+    },
   }}
   >
    Join the program  ({whitelistPrice ? (whitelistPrice / 1e6).toFixed(4) : "..." } USDC)
