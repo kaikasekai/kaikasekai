@@ -556,7 +556,7 @@ const handleSendFeedback = async () => {
     value: "USD",
     angle: -90,
     position: "outsideBottomLeft",
-    offset: -10,
+    offset: 0,
     style: { textAnchor: "middle", fill: "#666", fontSize: 14, fontWeight: 500 },
   }}
                   />
@@ -594,7 +594,7 @@ const handleSendFeedback = async () => {
                   <Line
                     type="monotone"
                     dataKey="moving_average"
-                    stroke="#5c4b7d"
+                    stroke="#9A1AF7"
                     dot={false}
                     strokeDasharray="5 5"
                     strokeWidth={3}
@@ -651,17 +651,12 @@ const handleSendFeedback = async () => {
     color: "#ffffff",
     fontWeight: 500,
     border: "none",
-    borderRadius: "6px",
+    borderRadius: "0px",
     padding: "0.7em 1.6em",
     cursor: "pointer",
     transition: "all 0.25s ease-in-out",
     "&:hover": {
       backgroundColor: "#3399FF",
-      boxShadow: "0 4px 10px rgba(0, 128, 255, 0.4)",
-    },
-    "&:active": {
-      transform: "scale(0.97)",
-      filter: "brightness(0.9)",
     },
   }}
 >
@@ -695,17 +690,12 @@ const handleSendFeedback = async () => {
     color: "#101214",
     fontWeight: 500,
     border: "none",
-    borderRadius: "6px",
+    borderRadius: "0px",
     padding: "0.7em 1.6em",
     cursor: "pointer",
     transition: "all 0.25s ease-in-out",
     "&:hover": {
       backgroundColor: "#FFA733",
-      boxShadow: "0 4px 10px rgba(247, 147, 26, 0.4)",
-    },
-    "&:active": {
-      transform: "scale(0.97)",
-      filter: "brightness(0.9)",
     },
   }}
 >
@@ -760,120 +750,8 @@ const handleSendFeedback = async () => {
           </>
         )}
         
-            
-        {/* === Disclaimer Page === */}
-        {page === "disclaimer" && (
-          <div style={{ marginTop: 20, textAlign: "justify" }}>
-            <Button
-              variant="outlined"
-              size="small"
-              onClick={() => setPage("main")}
-              style={{ marginBottom: 20, textTransform: 'none' }}
-            >
-              ← Back
-            </Button>
-            <h3>Terms & Privacy</h3>
-            <p>
-              
-
-<h4>Disclaimer</h4>
-Kaikasekai provides AI-powered forecasts and analytical insights for informational and educational purposes only. The content does not constitute financial, investment, or trading advice and should not be interpreted as a recommendation to buy, hold, or sell digital assets. Any trading or investment decisions based on this information are made at the user’s own discretion and risk. Kaikasekai and its affiliates assume no liability for any losses or damages resulting from the use of this website, its forecasts, or related products.
 <p></p>
-<h4>Privacy Policy</h4>
-Kaikasekai does not collect personal data or use cookies. Certain features rely on trusted third-party providers, such as EmailGS (for paid communications with developers) and Reown Connect Wallet (for wallet linking and on-chain interactions). Wallet data, private keys, and payment details remain private and are never accessed or stored by Kaikasekai.
-<p></p>
-<h4>Wallet & Security</h4>
-Connecting a crypto wallet is optional. For security, we recommend using wallets with limited balances. All blockchain transactions are public and recorded on-chain, and Kaikasekai has no control over gas fees, confirmations, or transaction outcomes.
-<p></p>
-<h4>Intellectual Property</h4>
-All forecasts, models, algorithms, site content, text, and visuals are the exclusive property of Kaikasekai. Any unauthorized use, copying, modification, or redistribution of this material without prior written consent is prohibited.
-<p></p>
-<h4>External Links</h4>
-This site may include links to external platforms or blockchain networks. Kaikasekai is not responsible for their availability, performance, or data handling practices.
-<p></p>
-<h4>Forecast Accuracy</h4>
-Forecasts are developed with a focus on analytical precision but cannot guarantee future results. Information may be updated or contain inaccuracies, and independent research is recommended before making financial or investment decisions.
-<p></p>
-<h4>Acceptance of Terms</h4>
-Use of this site constitutes acknowledgment and acceptance of these terms.
-            </p>
-          </div>
-        )}
-
-        {/* === Contact Page === */}
-        {page === "contact" && (
-          <div style={{ marginTop: 20 }}>
-            <Button
-              variant="outlined"
-              size="small"
-              onClick={() => setPage("main")}
-              style={{ marginBottom: 20, textTransform: 'none' }}
-            >
-              ← Back
-            </Button>
-            <p></p>
-            <h3>Contact Developers</h3>
-            <p>
-
-<Button
-  variant="contained"
-  onClick={handlePayFeedback}
-  sx={{
-    backgroundColor: "transparent",
-    border: "1.5px solid #0080ff",
-    color: "#0080ff",
-    fontWeight: 500,
-    borderRadius: "6px",
-    padding: "0.7em 1.6em",
-    cursor: "pointer",
-    transition: "all 0.25s ease-in-out",
-    "&:hover": {
-      backgroundColor: "#0080ff",
-      color: "#ffffff",
-      boxShadow: "0 4px 10px rgba(0, 128, 255, 0.3)",
-    },
-    "&:active": {
-      transform: "scale(0.97)",
-      filter: "brightness(0.95)",
-    },
-  }}
->
-  Contact us ({feedbackPrice ? (feedbackPrice / 1e6).toFixed(4) : "..."} USDC)
-</Button>
-
-{showFeedbackForm && (
-  <div style={{ marginTop: 20, border: "1px solid #ccc", padding: 10, borderRadius: 0 }}>
-    <h4>FeedBack</h4>
-    <TextField
-      label="Your email"
-      value={feedbackEmail}
-      onChange={(e) => setFeedbackEmail(e.target.value)}
-      fullWidth
-      margin="dense"
-    />
-    <TextField
-      label="Message"
-      value={feedbackMessage}
-      onChange={(e) => setFeedbackMessage(e.target.value)}
-      fullWidth
-      multiline
-      rows={4}
-      margin="dense"
-    />
-    <Button
-      variant="outlined"
-      onClick={handleSendFeedback}
-    >
-      Send
-    </Button>
-  </div>
-)}
-              
-            </p>
-          </div>
-        )}
         
-<p></p>
         {/* === Accordions (тоже вынесены, теперь видны всегда) === */}
       {/* === Accordions === */}
 <Accordion style={{ marginTop: 0, boxShadow: "none", border: "none" }}>
@@ -1146,6 +1024,113 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
   </AccordionDetails>
 </Accordion>
 */}
+
+ {/* === Disclaimer Page === */}
+        {page === "disclaimer" && (
+          <div style={{ marginTop: 20, textAlign: "justify" }}>
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={() => setPage("main")}
+              style={{ marginBottom: 20, textTransform: 'none' }}
+            >
+              ← Back
+            </Button>
+            <h3>Terms & Privacy</h3>
+            <p>
+              
+
+<h4>Disclaimer</h4>
+Kaikasekai provides AI-powered forecasts and analytical insights for informational and educational purposes only. The content does not constitute financial, investment, or trading advice and should not be interpreted as a recommendation to buy, hold, or sell digital assets. Any trading or investment decisions based on this information are made at the user’s own discretion and risk. Kaikasekai and its affiliates assume no liability for any losses or damages resulting from the use of this website, its forecasts, or related products.
+<p></p>
+<h4>Privacy Policy</h4>
+Kaikasekai does not collect personal data or use cookies. Certain features rely on trusted third-party providers, such as EmailGS (for paid communications with developers) and Reown Connect Wallet (for wallet linking and on-chain interactions). Wallet data, private keys, and payment details remain private and are never accessed or stored by Kaikasekai.
+<p></p>
+<h4>Wallet & Security</h4>
+Connecting a crypto wallet is optional. For security, we recommend using wallets with limited balances. All blockchain transactions are public and recorded on-chain, and Kaikasekai has no control over gas fees, confirmations, or transaction outcomes.
+<p></p>
+<h4>Intellectual Property</h4>
+All forecasts, models, algorithms, site content, text, and visuals are the exclusive property of Kaikasekai. Any unauthorized use, copying, modification, or redistribution of this material without prior written consent is prohibited.
+<p></p>
+<h4>External Links</h4>
+This site may include links to external platforms or blockchain networks. Kaikasekai is not responsible for their availability, performance, or data handling practices.
+<p></p>
+<h4>Forecast Accuracy</h4>
+Forecasts are developed with a focus on analytical precision but cannot guarantee future results. Information may be updated or contain inaccuracies, and independent research is recommended before making financial or investment decisions.
+<p></p>
+<h4>Acceptance of Terms</h4>
+Use of this site constitutes acknowledgment and acceptance of these terms.
+            </p>
+          </div>
+        )}
+
+        {/* === Contact Page === */}
+        {page === "contact" && (
+          <div style={{ marginTop: 20 }}>
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={() => setPage("main")}
+              style={{ marginBottom: 20, textTransform: 'none' }}
+            >
+              ← Back
+            </Button>
+            <p></p>
+            <h3>Contact Developers</h3>
+            <p>
+
+<Button
+  variant="contained"
+  onClick={handlePayFeedback}
+  sx={{
+    backgroundColor: "transparent",
+    border: "1.5px solid #0080ff",
+    color: "#0080ff",
+    fontWeight: 500,
+    borderRadius: "0px",
+    padding: "0.7em 1.6em",
+    cursor: "pointer",
+    transition: "all 0.25s ease-in-out",
+    "&:hover": {
+      backgroundColor: "#0080ff",
+    },
+  }}
+>
+  Contact us ({feedbackPrice ? (feedbackPrice / 1e6).toFixed(4) : "..."} USDC)
+</Button>
+
+{showFeedbackForm && (
+  <div style={{ marginTop: 20, border: "1px solid #ccc", padding: 10, borderRadius: 0 }}>
+    <h4>FeedBack</h4>
+    <TextField
+      label="Your email"
+      value={feedbackEmail}
+      onChange={(e) => setFeedbackEmail(e.target.value)}
+      fullWidth
+      margin="dense"
+    />
+    <TextField
+      label="Message"
+      value={feedbackMessage}
+      onChange={(e) => setFeedbackMessage(e.target.value)}
+      fullWidth
+      multiline
+      rows={4}
+      margin="dense"
+    />
+    <Button
+      variant="outlined"
+      onClick={handleSendFeedback}
+    >
+      Send
+    </Button>
+  </div>
+)}
+              
+            </p>
+          </div>
+        )}
+        
       </main>
 
 {/* === Floating Donate Donut Button (inline SVG version) === */}
@@ -1201,12 +1186,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
     cursor: "pointer",
     transition: "all 0.25s ease-in-out",
     "&:hover": {
-      transform: "scale(1.5)",
-      filter: "brightness(1.5)",
-    },
-    "&:active": {
-      transform: "scale(0.97)",
-      filter: "brightness(0.9)",
+      transform: "scale(1.1)",
     },
   }}
     >
