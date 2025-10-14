@@ -1158,6 +1158,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
       />
       <Button
         variant="contained"
+        disableElevation
         fullWidth
         onClick={handleDonate}
         style={{ marginTop: "10px" }}
@@ -1175,8 +1176,17 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
     </div>
   ) : (
     <button
-      disableElevation
       onClick={() => setShowDonatePopup(true)}
+      style={{
+    all: "unset",          // убирает ВСЕ браузерные стили
+    cursor: "pointer",
+    display: "inline-block",
+    background: "transparent",
+    border: "none",
+    padding: 0,
+    margin: 0,
+    lineHeight: 0,
+  }}
     >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8" width="24" height="24" shape-rendering="crispEdges">
   <g>
