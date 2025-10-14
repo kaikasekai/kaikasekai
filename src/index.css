@@ -48,7 +48,7 @@
   --opacity-faint: 0.5;
 
   /* FONT SETTINGS */
-  --font-main: "Satoshi" sans-serif;
+  --font-main: 'Satoshi';
 
   /* FONT SIZES */
   --fs-h1: 32px;
