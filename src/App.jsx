@@ -538,7 +538,7 @@ const handleSendFeedback = async () => {
           <>
             {/* === Chart === */}
             <div style={{ marginTop: 0 }}>
-              <ResponsiveContainer width="100%" height={300} className="chart-wrapper">
+              <ResponsiveContainer width="100%" height={600} className="chart-wrapper">
                 <LineChart data={filteredData}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis
@@ -556,7 +556,7 @@ const handleSendFeedback = async () => {
     value: "USD",
     angle: -90,
     position: "outsideBottomLeft",
-    offset: 0,
+    offset: -10,
     style: { textAnchor: "middle", fill: "#666", fontSize: 14, fontWeight: 500 },
   }}
                   />
@@ -652,7 +652,7 @@ const handleSendFeedback = async () => {
     color: "#ffffff",
     fontWeight: 600,
     border: "none",
-    borderRadius: "6px",
+    borderRadius: "6px !important",
     padding: "0.7em 1.6em",
     cursor: "pointer",
     transition: "all 0.25s ease-in-out",
@@ -696,7 +696,7 @@ const handleSendFeedback = async () => {
     color: "#101214",
     fontWeight: 600,
     border: "none",
-    borderRadius: "6px",
+    borderRadius: "6px !important",
     padding: "0.7em 1.6em",
     cursor: "pointer",
     transition: "all 0.25s ease-in-out",
@@ -820,11 +820,11 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
   variant="contained"
   onClick={handlePayFeedback}
   sx={{
-    backgroundColor: "transparent",
+    backgroundColor: "transparent !important",
     border: "1.5px solid #0080ff",
     color: "#0080ff",
     fontWeight: 500,
-    borderRadius: "6px",
+    borderRadius: "6px !important",
     padding: "0.7em 1.6em",
     cursor: "pointer",
     transition: "all 0.25s ease-in-out",
@@ -923,7 +923,7 @@ This insider-level, on-chain verified product empowers traders worldwide with th
     color: "#101214",
     fontWeight: 600,
     border: "none",
-    borderRadius: "6px",
+    borderRadius: "6px !important",
     padding: "0.7em 1.6em",
     cursor: "pointer",
     transition: "all 0.25s ease-in-out",
@@ -1202,7 +1202,9 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
     cursor: "pointer",
     transition: "all 0.25s ease-in-out",
     "&:hover": {
-      boxShadow: "0 4px 10px rgba(255, 215, 0, 0.15)",
+      transform: "scale(1.5)",
+      filter: "brightness(1.5)",
+      boxShadow: "0 0px 0px rgba(255, 215, 0, 0.15)",
     },
     "&:active": {
       transform: "scale(0.97)",
