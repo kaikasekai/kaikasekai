@@ -1014,7 +1014,11 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
 </Accordion>
 */}
 
- {/* === Disclaimer Page === */}
+ 
+        
+      </main>
+
+{/* === Disclaimer Page === */}
         {page === "disclaimer" && (
           <div style={{ marginTop: 20, textAlign: "justify" }}>
             <Button
@@ -1118,8 +1122,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
             </p>
           </div>
         )}
-        
-      </main>
+      
 
 {/* === Floating Donate Donut Button (inline SVG version) === */}
 <div
@@ -1169,12 +1172,6 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
   ) : (
     <button
       onClick={() => setShowDonatePopup(true)}
-      sx={{
-    cursor: "pointer",
-    "&:hover": {
-      transform: "scale(1.1)",
-    },
-  }}
     >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8" width="24" height="24" shape-rendering="crispEdges">
   <g>
