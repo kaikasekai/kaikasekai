@@ -195,6 +195,7 @@ strong, b {
   line-height: var(--lh-normal);
   color: var(--text-dark);
   text-transform: none !important;
+  box-shadow: none;
 }
 
 .MuiButton-root {
@@ -206,6 +207,7 @@ strong, b {
 .MuiButton-contained {
   background-color: #ffd700;
   color: var(--text-dark);
+  box-shadow: none;
 }
 
 .MuiButton-contained:hover {
