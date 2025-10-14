@@ -538,7 +538,7 @@ const handleSendFeedback = async () => {
           <>
             {/* === Chart === */}
             <div style={{ marginTop: 0 }}>
-              <ResponsiveContainer width="100%" height={500} className="chart-wrapper">
+              <ResponsiveContainer width="100%" height={300} className="chart-wrapper">
                 <LineChart data={filteredData}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis
@@ -645,9 +645,29 @@ const handleSendFeedback = async () => {
       {/* === Wallet section === */}
       {!account ? (
         <div style={{ display: "inline-block", marginTop: 10 }}>
-            <Button variant="contained" onClick={connectWallet} style={{ width: "auto", background: "#0080ff", }}>
-          Connect Wallet
-        </Button>
+            <Button
+  onClick={connectWallet}
+  sx={{
+    backgroundColor: "var(--tech-blue)",
+    color: "var(--white)",
+    fontWeight: 600,
+    border: "none",
+    borderRadius: "6px",
+    padding: "0.7em 1.6em",
+    cursor: "pointer",
+    transition: "all 0.25s ease-in-out",
+    "&:hover": {
+      backgroundColor: "#3399FF",
+      boxShadow: "0 4px 10px rgba(0, 128, 255, 0.4)",
+    },
+    "&:active": {
+      transform: "scale(0.97)",
+      filter: "brightness(0.9)",
+    },
+  }}
+>
+  Connect Wallet
+</Button>
            </div> 
       ) : (
         <div>
@@ -670,7 +690,26 @@ const handleSendFeedback = async () => {
               
 
             <div style={{ margin: 0 }}>
-              <Button variant="contained" onClick={handleSubscribe}>
+              <Button variant="contained" onClick={handleSubscribe}
+  sx={{
+    backgroundColor: "#F7931A",
+    color: "#101214",
+    fontWeight: 600,
+    border: "none",
+    borderRadius: "6px",
+    padding: "0.7em 1.6em",
+    cursor: "pointer",
+    transition: "all 0.25s ease-in-out",
+    "&:hover": {
+      backgroundColor: "#FFA733",
+      boxShadow: "0 4px 10px rgba(247, 147, 26, 0.4)",
+    },
+    "&:active": {
+      transform: "scale(0.97)",
+      filter: "brightness(0.9)",
+    },
+  }}
+>
               ({price ? (price / 1e6).toFixed(4) : "..." } USDC) to unlock next month
               </Button>
 <div>
@@ -680,7 +719,7 @@ const handleSendFeedback = async () => {
                   value={referrer}
                   onChange={(e) => setReferrer(e.target.value)}
                   inputProps={{ maxLength: 42 }}
-                  fullWidth={false}
+                  sx={{ width: "42ch"}}
                   margin="dense"
                 />
               )}
@@ -780,6 +819,25 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
 <Button
   variant="contained"
   onClick={handlePayFeedback}
+  sx={{
+    backgroundColor: "transparent",
+    border: "1.5px solid #0080ff",
+    color: "#0080ff",
+    fontWeight: 500,
+    borderRadius: "6px",
+    padding: "0.7em 1.6em",
+    cursor: "pointer",
+    transition: "all 0.25s ease-in-out",
+    "&:hover": {
+      backgroundColor: "#0080ff",
+      color: "#ffffff",
+      boxShadow: "0 4px 10px rgba(0, 128, 255, 0.3)",
+    },
+    "&:active": {
+      transform: "scale(0.97)",
+      filter: "brightness(0.95)",
+    },
+  }}
 >
   Contact us ({feedbackPrice ? (feedbackPrice / 1e6).toFixed(4) : "..."} USDC)
 </Button>
@@ -804,7 +862,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
       margin="dense"
     />
     <Button
-      variant="contained"
+      variant="outlined"
       onClick={handleSendFeedback}
     >
       Send
@@ -860,6 +918,24 @@ This insider-level, on-chain verified product empowers traders worldwide with th
   <Button
     variant="contained"
     onClick={handleBuyWhitelist}
+    sx={{
+    backgroundColor: "#FFD700",
+    color: "#101214",
+    fontWeight: 600,
+    border: "none",
+    borderRadius: "6px",
+    padding: "0.7em 1.6em",
+    cursor: "pointer",
+    transition: "all 0.25s ease-in-out",
+    "&:hover": {
+      backgroundColor: "#FFDD33",
+      boxShadow: "0 4px 10px rgba(255, 215, 0, 0.4)",
+    },
+    "&:active": {
+      transform: "scale(0.97)",
+      filter: "brightness(0.9)",
+    },
+  }}
   >
    Join the program  ({whitelistPrice ? (whitelistPrice / 1e6).toFixed(4) : "..." } USDC)
   </Button>
@@ -1121,14 +1197,18 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
   ) : (
     <button
       onClick={() => setShowDonatePopup(true)}
-      style={{
-        background: "transparent",
-        border: "none",
-        padding: 0,
-        cursor: "pointer",
-      }}
-      title="Donate donut"
-      aria-label="Donate donut"
+      sx={{
+    backgroundColor: "transparent",
+    cursor: "pointer",
+    transition: "all 0.25s ease-in-out",
+    "&:hover": {
+      boxShadow: "0 4px 10px rgba(255, 215, 0, 0.15)",
+    },
+    "&:active": {
+      transform: "scale(0.97)",
+      filter: "brightness(0.9)",
+    },
+  }}
     >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8" width="24" height="24" shape-rendering="crispEdges">
   <g>
