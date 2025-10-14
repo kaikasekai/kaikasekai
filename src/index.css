@@ -151,6 +151,7 @@ strong, b {
 .MuiAccordionSummary-content {
   font-family: var(--font-main);
   margin: 0 !important;
+  font-size: var(--fs-body) !important;
   align-items: center !important;
   transition: none !important;
 }
