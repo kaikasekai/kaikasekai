@@ -638,6 +638,7 @@ const handleSendFeedback = async () => {
 <small style={{ display: "block", marginTop: 2, color: "#666666" }}>
   <sup>*</sup> Based on rolling 30-day metrics.
 </small>
+              </div>
 
 {/* === Subscription block (вынесено над connect wallet) === */}
 <div style={{ marginTop: 10 }}>
