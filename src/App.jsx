@@ -673,11 +673,13 @@ fontWeight: 400,
       <div>
         <p style={{ color: "#FF5252" }}>Subscription inactive</p>
       </div>
+      <div>
       {nextEndTime && (
       <p>
       Subscription will end on:{""}
         {new Date(nextEndTime * 1000).toLocaleDateString()}
       </p>
+        </div>
     )
   ) : null}
 
