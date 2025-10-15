@@ -658,9 +658,8 @@ fontWeight: 400,
 
            {/* === Subscription block === */}
 {account ? (
-            <div>
-  
-    subscriptionActive ? (
+  <div>
+    {subscriptionActive ? (
       <div>
         <p style={{ color: "#00C853" }}>Subscription active</p>
         {subscriptionEnd && (
@@ -674,14 +673,16 @@ fontWeight: 400,
       <div>
         <p style={{ color: "#FF5252" }}>Subscription inactive</p>
         {nextEndTime && (
+          <p>
             Subscription will end on:{" "}
             {new Date(nextEndTime * 1000).toLocaleDateString()}
+          </p>
         )}
       </div>
-    )
-  
-</div>
-  ) : null}
+    )}
+  </div>
+) : null}
+
 
 
   {/* Кнопка и TextField видны всегда */}
