@@ -635,7 +635,7 @@ const handleSendFeedback = async () => {
 <div style={{
   margin: 0,
 fontWeight: 400,
-  fontSize: "1.6rem",
+  fontSize: "1.6em",
 }}>
   Advanced AI-powered algorithm predicts the global BTC trend with {mape}%<sup>*</sup> accuracy
 </div>
@@ -655,14 +655,14 @@ fontWeight: 400,
       backgroundColor: "#F7931A",
       color: "#101214",
       fontWeight: 500,
-      fontSize: "1.2rem",
+      fontSize: "1.2em",
       border: "none",
       borderRadius: 0,
       cursor: "pointer",
       "&:hover": {
         backgroundColor: "#FFA733",
       },
-      height: 1.5rem, // примерная высота кнопки
+      height: 1.5em, // примерная высота кнопки
     }}
   >
     Unlock next month ( 49.9 USDC )
@@ -677,9 +677,9 @@ fontWeight: 400,
     inputProps={{
       maxLength: 42,
       style: {
-        fontSize: "1rem",
+        fontSize: "1em",
         fontWeight: 400,
-        height: 1.5rem, // одинаковая высота с кнопкой
+        height: 1em, // одинаковая высота с кнопкой
         width: "45ch",
         textAlign: "center",
       },
@@ -716,7 +716,7 @@ fontWeight: 400,
         backgroundColor: "#0080ff",
         color: "#ffffff",
         fontWeight: 500,
-        fontSize: "1.2rem",
+        fontSize: "1.2em",
         border: "none",
         borderRadius: "0px",
         cursor: "pointer",
@@ -822,7 +822,7 @@ This insider-level, on-chain verified product empowers traders worldwide with th
     backgroundColor: "#FFD700",
     color: "#101214",
     fontWeight: 500,
-    fontSize: "1.2rem",
+    fontSize: "1.2em",
     border: "none",
     borderRadius: "0px",
     cursor: "pointer",
@@ -831,7 +831,7 @@ This insider-level, on-chain verified product empowers traders worldwide with th
     },
   }}
   >
-   Join the program ( 99.9 USDC )
+    ( 99.9 USDC )
   </Button>
 )}
       
@@ -1139,6 +1139,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
     border: "1.5px solid #0080ff",
     color: "#0080ff",
     fontWeight: 500,
+    fontSize: "1.2em",
     borderRadius: "0px",
     cursor: "pointer",
     "&:hover": {
