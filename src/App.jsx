@@ -641,7 +641,7 @@ const handleSendFeedback = async () => {
               </div>
 
 {/* === Subscription block (вынесено над connect wallet) === */}
-<div style={{ marginTop: 10, display: "flex", flexDirection: "column", gap: 0.5rem }}>
+<div style={{ display: "flex", flexDirection: "column", gap: 0.5rem, marginTop: 10 }}>
   <Button
     variant="contained"
     onClick={handleSubscribe}
@@ -652,41 +652,44 @@ const handleSendFeedback = async () => {
       fontWeight: 500,
       border: "none",
       borderRadius: 0,
-      height: 40,
-      minWidth: 180,
-      padding: "0 16px",
       cursor: "pointer",
       "&:hover": {
         backgroundColor: "#FFA733",
       },
+      height: 36, // примерная высота кнопки
     }}
   >
     49.9 USDC to unlock next month
   </Button>
-
-  {!hasSubscribed && (
-    <TextField
-      placeholder="Use referral code to pay 24.9 USDC"
-      value={referrer}
-      onChange={(e) => setReferrer(e.target.value)}
-      inputProps={{
-        maxLength: 42,
-        style: {
-          padding: "0 8px",
-          height: "40px", // чтобы совпадало с кнопкой
-          boxSizing: "border-box",
-          fontSize: "0.875rem",
+</br>
+  <TextField
+    variant="outlined"
+    label="Use referral code to pay 24.9 USDC"
+    value={referrer}
+    onChange={(e) => setReferrer(e.target.value)}
+    inputProps={{
+      maxLength: 42,
+      style: {
+        padding: "0 12px",
+        fontSize: "0.875rem",
+        height: 36, // одинаковая высота с кнопкой
+      },
+    }}
+    sx={{
+      "& .MuiOutlinedInput-root": {
+        borderRadius: 0, // убрать скругление
+        "& fieldset": {
+          borderColor: "#F7931A",
         },
-      }}
-      InputProps={{
-        disableUnderline: true,
-      }}
-      sx={{
-        borderRadius: 0,
-        width: "45ch", // текстовое поле растягивается под ширину кнопки
-      }}
-    />
-  )}
+        "&:hover fieldset": {
+          borderColor: "#F7931A",
+        },
+        "&.Mui-focused fieldset": {
+          borderColor: "#F7931A",
+        },
+      },
+    }}
+  />
 </div>
 
 {/* === Wallet section === */}
