@@ -663,34 +663,34 @@ const handleSendFeedback = async () => {
 
   {!hasSubscribed && (
     <TextField
-      label="Use referral code to pay 24.9 USDC"
+      placeholder="Use referral code to pay 24.9 USDC"
       value={referrer}
       onChange={(e) => setReferrer(e.target.value)}
       inputProps={{
         maxLength: 42,
         style: {
-          width: "44ch",      // чуть шире, чтобы помещалось 42 символа
+          width: "44ch", // чуть шире, чтобы помещалось 42 символа
           fontSize: "0.875rem",
-          lineHeight: 1.2,
           padding: "0 8px",
+          height: "100%", // занимает всю высоту контейнера
           boxSizing: "border-box",
+          display: "flex",
+          alignItems: "center", // вертикальное выравнивание текста
         },
       }}
       InputProps={{
-        disableUnderline: true, // убираем нижнюю линию
+        disableUnderline: true,
       }}
       sx={{
-        mt: 1, // отступ между кнопкой и полем
+        mt: 1, // небольшой отступ между кнопкой и полем
         "& .MuiInputBase-root": {
-          height: "auto",
-          minHeight: "unset",
-          padding: "12px 0", // подстраивается под кнопку
+          height: "40px", // подстраиваем под кнопку, можно заменить на auto
+          padding: 0,
         },
       }}
     />
   )}
 </div>
-
 
 {/* === Wallet section === */}
 {!account ? (
@@ -1185,7 +1185,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
         border: "1px solid #ccc",
         borderRadius: "0px",
         padding: "15px",
-        boxShadow: none,
+        boxShadow: "0 1px 1px rgba(0,0,0,0.15)",
         width: "260px",
       }}
     >
