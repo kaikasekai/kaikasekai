@@ -819,10 +819,11 @@ This insider-level, on-chain verified product empowers traders worldwide with th
     onClick={handleBuyWhitelist}
     disableElevation
     sx={{
+    marginBottom: 6,
     backgroundColor: "#FFD700",
     color: "#101214",
     fontWeight: 500,
-    fontSize: "1.2em",
+    fontSize: "1.2rem",
     border: "none",
     borderRadius: "0px",
     cursor: "pointer",
@@ -831,11 +832,10 @@ This insider-level, on-chain verified product empowers traders worldwide with th
     },
   }}
   >
-    ( 99.9 USDC )
+    Activate Referral Wallet ( 99.9 USDC )
   </Button>
 )}
       
-<p></p>
 Your wallet will be linked to the smart contract.
 Use your wallet number as your referral code — your subscribers get 50% off, and you earn 10% on every purchase.
     </Typography>
@@ -1018,7 +1018,6 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
           </>
         )}
         
-<p></p>
         
         {/* === Accordions (тоже вынесены, теперь видны всегда) === */}
 
@@ -1054,7 +1053,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
 
 {/* === Disclaimer Page === */}
         {page === "disclaimer" && (
-          <div style={{ marginTop: 20, textAlign: "justify" fontWeight: 400, fontSize: "1rem",}}>
+          <div style={{ marginTop: 20, textAlign: "justify" fontWeight: 400, fontSize: "1rem" }}>
             <Button
               variant="outlined"
               sx={{
@@ -1105,7 +1104,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
 
         {/* === Contact Page === */}
         {page === "contact" && (
-          <div style={{ marginTop: 20 }}>
+          <div style={{ marginTop: 20 fontWeight: 400, fontSize: "1rem" }}>
             <Button
               variant="outlined"
               sx={{
@@ -1139,7 +1138,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
     border: "1.5px solid #0080ff",
     color: "#0080ff",
     fontWeight: 500,
-    fontSize: "1.2em",
+    fontSize: "1.2rem",
     borderRadius: "0px",
     cursor: "pointer",
     "&:hover": {
