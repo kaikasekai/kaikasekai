@@ -778,9 +778,9 @@ fontWeight: 400,
 ) : (
   <div>
     <p style={{ color: "#0080ff" }}>Connected: {account}</p>
-</div>
-    )
-) : null}
+  </div>
+)}
+
         
       {/* === Donate (оставляем только для подключённого кошелька) === 
       {account && (
