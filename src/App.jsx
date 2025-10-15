@@ -639,94 +639,107 @@ const handleSendFeedback = async () => {
   <sup>*</sup> Based on rolling 30-day metrics.
 </small>
 
-            </div>
-      
-      {/* === Wallet section === */}
-      {!account ? (
-        <div style={{ display: "inline-block", marginTop: 10 }}>
-            <Button
-  onClick={connectWallet}
-  disableElevation
-  sx={{
-    backgroundColor: "#0080ff",
-    color: "#ffffff",
-    fontWeight: 500,
-    border: "none",
-    borderRadius: "0px",
-    cursor: "pointer",
-    "&:hover": {
-      backgroundColor: "#3399FF",
+{/* === Subscription block (вынесено над connect wallet) === */}
+<div style={{ marginTop: 10 }}>
+  <Button
+    variant="contained"
+    onClick={handleSubscribe}
+    disableElevation
+    sx={{
+      backgroundColor: "#F7931A",
+      color: "#101214",
+      fontWeight: 500,
+      border: "none",
+      borderRadius: "0px",
+      cursor: "pointer",
+      "&:hover": {
+        backgroundColor: "#FFA733",
+      },
+    }}
+  >
+    ({price ? (price / 1e6).toFixed(4) : "..."} USDC) to unlock next month
+  </Button>
+
+  {!hasSubscribed && (
+    <TextField
+      label="Use referral code to pay 24.9 USDC"
+      value={referrer}
+      onChange={(e) => setReferrer(e.target.value)}
+      inputProps={{
+    maxLength: 42,
+    style: {
+      width: "42ch",
+      fontSize: "0.875rem",   // под размер основного текста
+      lineHeight: 1.2,
+      padding: 0,
     },
   }}
->
-  Connect Wallet
-</Button>
-           </div> 
-      ) : (
-        <div>
-          <p style={{ color: "#0080ff" }}>Connected: {account}</p>
-       
-{subscriptionActive ? (
-  <div>
-    <p style={{ color: "#00C853" }}>Subscription active</p>
-    {subscriptionEnd && (
-      <p>
-        Your subscription ends on:{" "}
-        {new Date(subscriptionEnd * 1000).toLocaleDateString()}
-      </p>
-    )}
+  InputProps={{
+    disableUnderline: true,   // убираем нижнюю линию
+  }}
+  sx={{
+    "& .MuiInputBase-root": {
+      height: "auto",
+      minHeight: "unset",
+    },
+    mt: 1,
+  }}
+    />
+  )}
+</div>
+
+{/* === Wallet section === */}
+{!account ? (
+  <div style={{ display: "inline-block", marginTop: 10 }}>
+    <Button
+      onClick={connectWallet}
+      disableElevation
+      sx={{
+        backgroundColor: "#0080ff",
+        color: "#ffffff",
+        fontWeight: 500,
+        border: "none",
+        borderRadius: "0px",
+        cursor: "pointer",
+        "&:hover": {
+          backgroundColor: "#3399FF",
+        },
+      }}
+    >
+      Connect Wallet
+    </Button>
   </div>
 ) : (
   <div>
-    <p style={{ color: "#FF5252" }}>Subscription inactive</p>
+    <p style={{ color: "#0080ff" }}>Connected: {account}</p>
 
-              
+    {subscriptionActive ? (
+      <div>
+        <p style={{ color: "#00C853" }}>Subscription active</p>
+        {subscriptionEnd && (
+          <p>
+            Your subscription ends on:{" "}
+            {new Date(subscriptionEnd * 1000).toLocaleDateString()}
+          </p>
+        )}
+      </div>
+    ) : (
+      <div>
+        <p style={{ color: "#FF5252" }}>Subscription inactive</p>
 
-            <div style={{ margin: 0 }}>
-              <Button variant="contained" onClick={handleSubscribe}
-                disableElevation
-  sx={{
-    backgroundColor: "#F7931A",
-    color: "#101214",
-    fontWeight: 500,
-    border: "none",
-    borderRadius: "0px",
-    cursor: "pointer",
-    "&:hover": {
-      backgroundColor: "#FFA733",
-    },
-  }}
->
-              ({price ? (price / 1e6).toFixed(4) : "..." } USDC) to unlock next month
-              </Button>
-<div>
-             {!hasSubscribed && (
-                <TextField
-                  label="Use referral code to pay 24.9 USDC"
-                  value={referrer}
-                  onChange={(e) => setReferrer(e.target.value)}
-                  inputProps={{ maxLength: 42 }}
-                  sx={{ width: "42ch"}}
-                  margin="dense"
-                />
-              )}
-</div>
-            </div>
+        {nextEndTime && (
+          <p>
+            Next subscription will end on:{" "}
+            {new Date(nextEndTime * 1000).toLocaleDateString()}
+          </p>
+        )}
+      </div>
+    )}
 
-              {nextEndTime && (
-                <p>
-                  Next subscription will end on:{" "}
-                  {new Date(nextEndTime * 1000).toLocaleDateString()}
-                </p>
-              )}
-              </div>
-      )}
+    <p></p>
+  </div>
+)}
 
-
-<p></p>
-
-            </div>
-          )}
         
       {/* === Donate (оставляем только для подключённого кошелька) === 
       {account && (
@@ -1184,9 +1197,9 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
         variant="contained"
         disableElevation
         sx={{
-    backgroundColor: "transparent",
-    border: "1.5px solid #0080ff",
-    color: "#0080ff",
+    backgroundColor: "#0080ff",
+    border: "0px",
+    color: "#ffffff",
     fontWeight: 500,
     borderRadius: "0px",
     cursor: "pointer",
@@ -1212,9 +1225,9 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
     </div>
   ) : (
     <button
-      onClick={() => setShowDonatePopup(true)}
-      style={{
-    all: "unset",          // убирает ВСЕ браузерные стили
+  onClick={() => setShowDonatePopup(true)}
+  style={{
+    all: "unset",               // убирает все браузерные стили
     cursor: "pointer",
     display: "inline-block",
     background: "transparent",
@@ -1222,8 +1235,17 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
     padding: 0,
     margin: 0,
     lineHeight: 0,
+    transition: "transform 0.2s ease, filter 0.2s ease",
   }}
-    >
+  onMouseEnter={(e) => {
+    e.currentTarget.style.transform = "scale(1.2)";
+    e.currentTarget.style.filter = "brightness(1.2)";
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.transform = "scale(1)";
+    e.currentTarget.style.filter = "brightness(1)";
+  }}
+>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8" width="24" height="24" shape-rendering="crispEdges">
   <g>
     <rect x="2" y="7" width="1" height="1" fill="#b8ac86"/>
