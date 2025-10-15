@@ -651,15 +651,10 @@ fontWeight: 400,
 </div>
               </div>
 
-{/* === Subscription block (вынесено над connect wallet) === */}
-    
-            
-
-
-           {/* === Subscription block === */}
-{account ? (
-  <div>
-    {subscriptionActive ? (
+{/* === Subscription block === */}
+<div>
+  {account ? (
+    subscriptionActive ? (
       <div>
         <p style={{ color: "#00C853" }}>Subscription active</p>
         {subscriptionEnd && (
@@ -679,14 +674,10 @@ fontWeight: 400,
           </p>
         )}
       </div>
-    )}
-  </div>
-) : null}
-
-
+    )
+  ) : null}
 
   {/* Кнопка и TextField видны всегда */}
-  {!hasSubscribed && (
   <div
     style={{
       display: "flex",
@@ -718,7 +709,8 @@ fontWeight: 400,
     >
       Unlock Next Month (49.9 USDC)
     </Button>
-    
+
+    {!hasSubscribed && (
       <TextField
         variant="outlined"
         label="24.9 USDC with referral code"
@@ -745,9 +737,9 @@ fontWeight: 400,
           },
         }}
       />
-    </div>
     )}
   </div>
+</div>
 
 {/* === Wallet section === */}
 {!account ? (
@@ -774,8 +766,6 @@ fontWeight: 400,
     <p style={{ color: "#0080ff" }}>Connected: {account}</p>
   </div>
 )}
-
-
         
       {/* === Donate (оставляем только для подключённого кошелька) === 
       {account && (
