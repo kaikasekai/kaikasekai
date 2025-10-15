@@ -635,7 +635,7 @@ const handleSendFeedback = async () => {
 <div style={{
   margin: 0,
 fontWeight: 400,
-  fontSize: "1.6em",
+  fontSize: "1.6rem",
 }}>
   Advanced AI-powered algorithm predicts the global BTC trend with {mape}%<sup>*</sup> accuracy
 </div>
@@ -655,14 +655,14 @@ fontWeight: 400,
       backgroundColor: "#F7931A",
       color: "#101214",
       fontWeight: 500,
-      fontSize: "1.2em",
+      fontSize: "1.2rem",
       border: "none",
       borderRadius: 0,
       cursor: "pointer",
       "&:hover": {
         backgroundColor: "#FFA733",
       },
-      height: 1.5em, // примерная высота кнопки
+      height: "1.5em", // примерная высота кнопки
     }}
   >
     Unlock next month ( 49.9 USDC )
@@ -677,9 +677,9 @@ fontWeight: 400,
     inputProps={{
       maxLength: 42,
       style: {
-        fontSize: "1em",
+        fontSize: "1rem",
         fontWeight: 400,
-        height: 1em, // одинаковая высота с кнопкой
+        height: "1em", // одинаковая высота с кнопкой
         width: "45ch",
         textAlign: "center",
       },
