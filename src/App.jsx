@@ -532,12 +532,19 @@ const handleSendFeedback = async () => {
 
   return (
     <>
-      <main style={{ padding: "20px", maxWidth: "1000px", margin: "0 auto" }}>
+      <main
+        style={{
+    padding: "clamp(10px, 2vw, 30px)", // адаптивные отступы
+    maxWidth: "min(95vw, 1000px)",     // не выходит за границы экрана
+    margin: "0 auto",                  // выравнивает по центру
+    boxSizing: "border-box",           // учитывает padding в ширине
+  }}
+        >
         {/* === Страница MAIN === */}
         {page === "main" && (
           <>
             {/* === Chart === */}
-            <div style={{ marginTop: 0 }}>
+            <div style={{ width: "100%", height: "60vh", minHeight: "300px" }}>
               <ResponsiveContainer width="100%" height={600} className="chart-wrapper">
                 <LineChart data={filteredData}>
                   <CartesianGrid strokeDasharray="3 3" />
@@ -633,7 +640,7 @@ const handleSendFeedback = async () => {
               
 
 <div style={{
-  margin: 0,
+  margin: 10,
 fontWeight: 400,
   fontSize: "1.6rem",
 }}>
@@ -650,8 +657,8 @@ fontWeight: 400,
     display: "flex",
     flexDirection: "column",
     gap: "8px", // небольшой отступ между кнопкой и полем
-    marginTop: 20,
-    marginBottom: 20,
+    marginTop: 10,
+    marginBottom:20,
     alignItems: "flex-start",
   }}
 >
@@ -660,7 +667,7 @@ fontWeight: 400,
     onClick={handleSubscribe}
     disableElevation
     sx={{
-      width: "28ch", // одинаковая ширина
+      width: "24ch", // одинаковая ширина
       height: "42px", // фиксированная высота, как у textfield
       backgroundColor: "#F7931A",
       color: "#101214",
@@ -689,7 +696,7 @@ fontWeight: 400,
       },
     }}
     sx={{
-  width: "42ch",
+  width: "36ch",
   "& .MuiOutlinedInput-root": {
     height: "42px",
     borderRadius: 0,
