@@ -738,7 +738,8 @@ const handleSendFeedback = async () => {
 
     <p></p>
     <p></p>
-
+</div>
+    )}
         
       {/* === Donate (оставляем только для подключённого кошелька) === 
       {account && (
