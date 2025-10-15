@@ -641,7 +641,7 @@ const handleSendFeedback = async () => {
               </div>
 
 {/* === Subscription block (вынесено над connect wallet) === */}
-<div style={{ display: "flex", flexDirection: "column", gap: 6, marginTop: 10 }}>
+<div style={{ display: "flex", flexDirection: "column", gap: 0, marginTop: 10 }}>
   <Button
     variant="contained"
     onClick={handleSubscribe}
@@ -661,7 +661,8 @@ const handleSendFeedback = async () => {
   >
     49.9 USDC to unlock next month
   </Button>
-</br>
+<div style={{ marginTop: 10 }}>
+
   <TextField
     variant="outlined"
     label="Use referral code to pay 24.9 USDC"
@@ -690,8 +691,10 @@ const handleSendFeedback = async () => {
       },
     }}
   />
+  
+ </div>
 </div>
-
+            
 {/* === Wallet section === */}
 {!account ? (
   <div style={{ display: "inline-block", marginTop: 10 }}>
