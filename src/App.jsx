@@ -544,8 +544,8 @@ const handleSendFeedback = async () => {
         {page === "main" && (
           <>
             {/* === Chart === */}
-            <div style={{ width: "100%", height: "60vh", minHeight: "300px" }}>
-              <ResponsiveContainer width="100%" height={600} className="chart-wrapper">
+            <div style={{ width: "100%", minHeight: "200px" }}>
+              <ResponsiveContainer width="100%" height={500} className="chart-wrapper">
                 <LineChart data={filteredData}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis
@@ -640,7 +640,7 @@ const handleSendFeedback = async () => {
               
 
 <div style={{
-  margin: 10,
+  marginTop: 10,
 fontWeight: 400,
   fontSize: "1.6rem",
 }}>
@@ -667,7 +667,7 @@ fontWeight: 400,
     onClick={handleSubscribe}
     disableElevation
     sx={{
-      width: "24ch", // одинаковая ширина
+      width: "28ch", // одинаковая ширина
       height: "42px", // фиксированная высота, как у textfield
       backgroundColor: "#F7931A",
       color: "#101214",
