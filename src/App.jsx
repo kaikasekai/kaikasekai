@@ -676,6 +676,7 @@ fontWeight: 400,
   )}
 
   {/* Кнопка и TextField видны всегда */}
+  {!hasSubscribed && (
   <div
   style={{
     display: "flex",
@@ -708,7 +709,6 @@ fontWeight: 400,
     Unlock Next Month (49.9 USDC)
   </Button>
     
-    {!hasSubscribed && (
       <TextField
     variant="outlined"
     label="24.9 USDC with referral code"
@@ -778,30 +778,6 @@ fontWeight: 400,
 ) : (
   <div>
     <p style={{ color: "#0080ff" }}>Connected: {account}</p>
-
-    {subscriptionActive ? (
-      <div>
-        <p style={{ color: "#00C853" }}>Subscription active</p>
-        {subscriptionEnd && (
-          <p>
-            Your subscription ends on:{" "}
-            {new Date(subscriptionEnd * 1000).toLocaleDateString()}
-          </p>
-        )}
-      </div>
-    ) : (
-      <div>
-        <p style={{ color: "#FF5252" }}>Subscription inactive</p>
-
-        {nextEndTime && (
-          <p>
-            Subscription will end on:{" "}
-            {new Date(nextEndTime * 1000).toLocaleDateString()}
-          </p>
-        )}
-      </div>
-    )}
-    
 </div>
     )}
         
