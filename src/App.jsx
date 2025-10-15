@@ -673,7 +673,7 @@ fontWeight: 400,
         <p style={{ color: "#FF5252" }}>Subscription inactive</p>
       </div>
     )
-  )}
+) : null}
 
   {/* Кнопка и TextField видны всегда */}
   {!hasSubscribed && (
@@ -779,7 +779,8 @@ fontWeight: 400,
   <div>
     <p style={{ color: "#0080ff" }}>Connected: {account}</p>
 </div>
-    )}
+    )
+) : null}
         
       {/* === Donate (оставляем только для подключённого кошелька) === 
       {account && (
