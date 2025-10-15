@@ -658,7 +658,7 @@ const handleSendFeedback = async () => {
       },
     }}
   >
-    ({price ? (price / 1e6).toFixed(4) : "..."} USDC) to unlock next month
+    49.9 USDC to unlock next month
   </Button>
 
   {!hasSubscribed && (
@@ -667,27 +667,30 @@ const handleSendFeedback = async () => {
       value={referrer}
       onChange={(e) => setReferrer(e.target.value)}
       inputProps={{
-    maxLength: 42,
-    style: {
-      width: "42ch",
-      fontSize: "0.875rem",   // под размер основного текста
-      lineHeight: 1.2,
-      padding: 0,
-    },
-  }}
-  InputProps={{
-    disableUnderline: true,   // убираем нижнюю линию
-  }}
-  sx={{
-    "& .MuiInputBase-root": {
-      height: "auto",
-      minHeight: "unset",
-    },
-    mt: 1,
-  }}
+        maxLength: 42,
+        style: {
+          width: "44ch",      // чуть шире, чтобы помещалось 42 символа
+          fontSize: "0.875rem",
+          lineHeight: 1.2,
+          padding: "0 8px",
+          boxSizing: "border-box",
+        },
+      }}
+      InputProps={{
+        disableUnderline: true, // убираем нижнюю линию
+      }}
+      sx={{
+        mt: 1, // отступ между кнопкой и полем
+        "& .MuiInputBase-root": {
+          height: "auto",
+          minHeight: "unset",
+          padding: "12px 0", // подстраивается под кнопку
+        },
+      }}
     />
   )}
 </div>
+
 
 {/* === Wallet section === */}
 {!account ? (
@@ -795,7 +798,7 @@ At the beginning of each month, the forecast for the new month is released, whil
     <Typography>
 Kaikasekai means "Flourishing World".<br></br>
 This insider-level, on-chain verified product empowers traders worldwide with the full potential of AI, open to everyone — whale or not — and price-friendly.
-<br></br><br></br>
+<p></p>
 
               {!hasWhitelist && (
   <Button
@@ -814,11 +817,11 @@ This insider-level, on-chain verified product empowers traders worldwide with th
     },
   }}
   >
-   Join the program  ({whitelistPrice ? (whitelistPrice / 1e6).toFixed(4) : "..." } USDC)
+   Join the program (99.9 USDC)
   </Button>
 )}
       
-<br></br>
+<p></p>
 Your wallet will be linked to the smart contract.
 Use your wallet number as your referral code — your subscribers get 50% off, and you earn 10% on every purchase.
     </Typography>
@@ -1130,7 +1133,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
     },
   }}
 >
-  Contact us ({feedbackPrice ? (feedbackPrice / 1e6).toFixed(4) : "..."} USDC)
+  Contact us (99.9 USDC)
 </Button>
 
 {showFeedbackForm && (
@@ -1182,7 +1185,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
         border: "1px solid #ccc",
         borderRadius: "0px",
         padding: "15px",
-        boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+        boxShadow: none,
         width: "260px",
       }}
     >
@@ -1236,15 +1239,6 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
     padding: 0,
     margin: 0,
     lineHeight: 0,
-    transition: "transform 0.2s ease, filter 0.2s ease",
-  }}
-  onMouseEnter={(e) => {
-    e.currentTarget.style.transform = "scale(1.2)";
-    e.currentTarget.style.filter = "brightness(1.2)";
-  }}
-  onMouseLeave={(e) => {
-    e.currentTarget.style.transform = "scale(1)";
-    e.currentTarget.style.filter = "brightness(1)";
   }}
 >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8" width="24" height="24" shape-rendering="crispEdges">
