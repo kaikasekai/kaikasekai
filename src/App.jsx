@@ -650,7 +650,8 @@ fontWeight: 400,
     display: "flex",
     flexDirection: "column",
     gap: "8px", // небольшой отступ между кнопкой и полем
-    marginTop: 10,
+    marginTop: 20,
+    marginBottom: 20,
     alignItems: "flex-start",
   }}
 >
@@ -659,7 +660,7 @@ fontWeight: 400,
     onClick={handleSubscribe}
     disableElevation
     sx={{
-      width: "42ch", // одинаковая ширина
+      width: "28ch", // одинаковая ширина
       height: "42px", // фиксированная высота, как у textfield
       backgroundColor: "#F7931A",
       color: "#101214",
@@ -673,7 +674,7 @@ fontWeight: 400,
       },
     }}
   >
-    Unlock next month (49.9 USDC)
+    Unlock Next Month (49.9 USDC)
   </Button>
 <div>
   <TextField
@@ -688,7 +689,7 @@ fontWeight: 400,
       },
     }}
     sx={{
-  width: "45ch",
+  width: "42ch",
   "& .MuiOutlinedInput-root": {
     height: "42px",
     borderRadius: 0,
@@ -712,6 +713,7 @@ fontWeight: 400,
   "& .MuiInputLabel-root": {
     color: "#cccccc",
     "&.Mui-focused": { color: "#cccccc" },
+    textAlign: "center",
   },
 }}
   />
@@ -721,7 +723,7 @@ fontWeight: 400,
             
 {/* === Wallet section === */}
 {!account ? (
-  <div style={{ display: "inline-block", marginTop: 10 }}>
+  <div style={{ display: "inline-block", marginTop: 10, marginBottom: 60 }}>
     <Button
       onClick={connectWallet}
       disableElevation
@@ -789,7 +791,7 @@ fontWeight: 400,
       )}
         */}   
                {/* === Accordions === */}
-<Accordion style={{ marginTop: 150, boxShadow: "none", border: "none" }}>
+<Accordion style={{ marginTop: 10, boxShadow: "none", border: "none" }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("how") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("how")}
@@ -825,7 +827,7 @@ At the beginning of each month, the forecast for the new month is released, whil
 Kaikasekai means "Flourishing World".<br></br>
 This insider-level, on-chain verified product empowers traders worldwide with the full potential of AI, open to everyone — whale or not — and price-friendly.
 
-<div style={{ marginTop: 10, marginBottom: 10, boxShadow: "none", border: "none" }}>
+<div style={{ marginTop: 10, marginBottom: 0, boxShadow: "none", border: "none" }}>
               {!hasWhitelist && (
   <Button
     variant="contained"
@@ -1259,14 +1261,16 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
     <button
   onClick={() => setShowDonatePopup(true)}
   style={{
-    all: "unset",               // убирает все браузерные стили
-    cursor: "pointer",
+    all: "unset",            // полностью убирает ВСЕ браузерные стили кнопки
+    cursor: "pointer",       // оставляем только курсор
     display: "inline-block",
     background: "transparent",
     border: "none",
     padding: 0,
     margin: 0,
     lineHeight: 0,
+    boxShadow: "none",
+    outline: "none",
   }}
 >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8" width="24" height="24" shape-rendering="crispEdges">
