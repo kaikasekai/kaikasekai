@@ -647,12 +647,12 @@ const handleSendFeedback = async () => {
     onClick={handleSubscribe}
     disableElevation
     sx={{
+      width: "45ch",
       backgroundColor: "#F7931A",
       color: "#101214",
       fontWeight: 500,
       border: "none",
       borderRadius: 0,
-      minWidth: 180,
       cursor: "pointer",
       "&:hover": {
         backgroundColor: "#FFA733",
@@ -660,20 +660,19 @@ const handleSendFeedback = async () => {
       height: 36, // примерная высота кнопки
     }}
   >
-    49.9 USDC to unlock next month
+    49.9 USDC to unlock next month's forecast
   </Button>
 <div style={{ marginTop: 10 }}>
 
   <TextField
     variant="outlined"
-    label="Use referral code to pay 24.9 USDC"
+    label="24.9 USDC with referral code"
     value={referrer}
     onChange={(e) => setReferrer(e.target.value)}
     inputProps={{
       maxLength: 42,
       style: {
-        padding: "0 12px",
-        fontSize: "0.875rem",
+        fontSize: "0.9rem",
         height: 36, // одинаковая высота с кнопкой
         width: "45ch",
         textAlign: "center",
@@ -681,14 +680,19 @@ const handleSendFeedback = async () => {
     }}
     sx={{
     "& .MuiOutlinedInput-root": {
-      borderRadius: 0,
-      "& fieldset": { borderColor: "#F7931A" },         // обычная рамка
-      "&:hover fieldset": { borderColor: "#F7931A" },   // при hover
-      "&.Mui-focused fieldset": { borderColor: "#F7931A" }, // при focus
-    },
-    "& .MuiInputLabel-root": {
-      color: "#F7931A",               // label цвет
-      "&.Mui-focused": { color: "#F7931A" }, // label при focus
+          borderRadius: 0,
+          "& fieldset": { borderColor: "#F7931A" },
+          "&:hover fieldset": { borderColor: "#F7931A" },
+          "&.Mui-focused fieldset": {
+            borderColor: "#F7931A",
+          },
+        },
+        "& .MuiInputLabel-root": {
+          color: "#F7931A",
+          "&.Mui-focused": { color: "#F7931A" },
+        },
+        "& input": {
+          textAlign: "center",
     },
   }}
   />
