@@ -645,30 +645,37 @@ fontWeight: 400,
               </div>
 
 {/* === Subscription block (вынесено над connect wallet) === */}
-<div style={{ display: "flex", flexDirection: "column", gap: 0, marginTop: 10 }}>
+<div
+  style={{
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px", // небольшой отступ между кнопкой и полем
+    marginTop: 10,
+    alignItems: "flex-start",
+  }}
+>
   <Button
     variant="contained"
     onClick={handleSubscribe}
     disableElevation
     sx={{
-      width: "36ch",
+      width: "45ch", // одинаковая ширина
+      height: "42px", // фиксированная высота, как у textfield
       backgroundColor: "#F7931A",
       color: "#101214",
       fontWeight: 500,
-      fontSize: "1.2rem",
+      fontSize: "1rem",
       border: "none",
       borderRadius: 0,
       cursor: "pointer",
       "&:hover": {
         backgroundColor: "#FFA733",
       },
-      height: "1.5em", // примерная высота кнопки
     }}
   >
-    Unlock next month ( 49.9 USDC )
+    Unlock next month (49.9 USDC)
   </Button>
-<div style={{ marginTop: 1 }}>
-
+<div>
   <TextField
     variant="outlined"
     label="24.9 USDC with referral code"
@@ -677,33 +684,30 @@ fontWeight: 400,
     inputProps={{
       maxLength: 42,
       style: {
-        fontSize: "1rem",
-        fontWeight: 400,
-        height: "1em", // одинаковая высота с кнопкой
-        width: "45ch",
         textAlign: "center",
       },
     }}
     sx={{
-    "& .MuiOutlinedInput-root": {
-          borderRadius: 0,
-          "& fieldset": { borderColor: "#cccccc" },
-          "&:hover fieldset": { borderColor: "#cccccc" },
-          "&.Mui-focused fieldset": {
-            borderColor: "#cccccc",
-          },
-        },
-        "& .MuiInputLabel-root": {
-          color: "#cccccc",
-          "&.Mui-focused": { color: "#cccccc" },
-        },
+      width: "45ch", // такая же ширина, как у кнопки
+      "& .MuiOutlinedInput-root": {
+        height: "42px", // такая же высота
+        borderRadius: 0,
+        "& fieldset": { borderColor: "#cccccc" },
+        "&:hover fieldset": { borderColor: "#cccccc" },
+        "&.Mui-focused fieldset": { borderColor: "#cccccc" },
         "& input": {
           textAlign: "center",
-    },
-  }}
+          padding: 0,
+        },
+      },
+      "& .MuiInputLabel-root": {
+        color: "#F7931A",
+        "&.Mui-focused": { color: "#F7931A" },
+      },
+    }}
   />
-  
- </div>
+</div>
+
 </div>
             
 {/* === Wallet section === */}
