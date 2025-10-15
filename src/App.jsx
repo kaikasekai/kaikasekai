@@ -1053,7 +1053,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
 
 {/* === Disclaimer Page === */}
         {page === "disclaimer" && (
-          <div style={{ marginTop: 20, textAlign: "justify" fontWeight: 400, fontSize: "1rem" }}>
+          <div style={{ marginTop: 20, textAlign: "justify", fontWeight: 400, fontSize: "1rem" }}>
             <Button
               variant="outlined"
               sx={{
@@ -1147,7 +1147,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
     },
   }}
 >
-  Contact us ( 99.9 USDC )
+  Access Developers ( 99.9 USDC )
 </Button>
 
 {showFeedbackForm && (
