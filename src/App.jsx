@@ -652,6 +652,7 @@ const handleSendFeedback = async () => {
       fontWeight: 500,
       border: "none",
       borderRadius: 0,
+      minWidth: 180,
       cursor: "pointer",
       "&:hover": {
         backgroundColor: "#FFA733",
@@ -674,22 +675,22 @@ const handleSendFeedback = async () => {
         padding: "0 12px",
         fontSize: "0.875rem",
         height: 36, // одинаковая высота с кнопкой
+        width: "45ch",
+        textAlign: "center",
       },
     }}
     sx={{
-      "& .MuiOutlinedInput-root": {
-        borderRadius: 0, // убрать скругление
-        "& fieldset": {
-          borderColor: "#F7931A",
-        },
-        "&:hover fieldset": {
-          borderColor: "#F7931A",
-        },
-        "&.Mui-focused fieldset": {
-          borderColor: "#F7931A",
-        },
-      },
-    }}
+    "& .MuiOutlinedInput-root": {
+      borderRadius: 0,
+      "& fieldset": { borderColor: "#F7931A" },         // обычная рамка
+      "&:hover fieldset": { borderColor: "#F7931A" },   // при hover
+      "&.Mui-focused fieldset": { borderColor: "#F7931A" }, // при focus
+    },
+    "& .MuiInputLabel-root": {
+      color: "#F7931A",               // label цвет
+      "&.Mui-focused": { color: "#F7931A" }, // label при focus
+    },
+  }}
   />
   
  </div>
