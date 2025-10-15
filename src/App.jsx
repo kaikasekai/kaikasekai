@@ -652,12 +652,6 @@ fontWeight: 400,
               </div>
 
 {/* === Subscription block (вынесено над connect wallet) === */}
-{!account ? (
-  ) : (
-
-  {subscriptionActive ? (
-
-    ) : (
     <div
   style={{
     display: "flex",
@@ -690,7 +684,6 @@ fontWeight: 400,
     Unlock Next Month (49.9 USDC)
   </Button>
 
-{!hasSubscribed && (  
   <div>
   <TextField
     variant="outlined"
@@ -733,10 +726,8 @@ fontWeight: 400,
 }}
   />
 </div>
-  )}
-)}
 </div>
-  )}         
+            
 {/* === Wallet section === */}
 {!account ? (
   <div style={{ display: "inline-block", marginTop: 10, marginBottom: 60 }}>
