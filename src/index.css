@@ -73,6 +73,7 @@ html {
   height: 100%;
   margin: 0;
   display: flex;
+  overflow-x: hidden;
   flex-direction: column;
 }
 
@@ -87,6 +88,7 @@ body, #root {
   color: var(--text-dark);
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
   height: 100%;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
