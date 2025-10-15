@@ -657,7 +657,7 @@ fontWeight: 400,
 
 
             <div>
-  {walletConnected && (
+  {account && (
     subscriptionActive ? (
       <div>
         <p style={{ color: "#00C853" }}>Subscription active</p>
