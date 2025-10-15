@@ -641,7 +641,7 @@ const handleSendFeedback = async () => {
               </div>
 
 {/* === Subscription block (вынесено над connect wallet) === */}
-<div style={{ marginTop: 10 }}>
+<div style={{ marginTop: 10, display: "flex", gap: 8 }}> 
   <Button
     variant="contained"
     onClick={handleSubscribe}
@@ -651,7 +651,10 @@ const handleSendFeedback = async () => {
       color: "#101214",
       fontWeight: 500,
       border: "none",
-      borderRadius: "0px",
+      borderRadius: 0,
+      height: 40, // одинаковая высота
+      minWidth: 180, // можно подстроить по желанию
+      padding: "0 16px",
       cursor: "pointer",
       "&:hover": {
         backgroundColor: "#FFA733",
@@ -669,24 +672,22 @@ const handleSendFeedback = async () => {
       inputProps={{
         maxLength: 42,
         style: {
-          width: "44ch", // чуть шире, чтобы помещалось 42 символа
-          fontSize: "0.875rem",
           padding: "0 8px",
-          height: "100%", // занимает всю высоту контейнера
+          height: "100%",
           boxSizing: "border-box",
-          display: "flex",
-          alignItems: "center", // вертикальное выравнивание текста
+          fontSize: "0.875rem",
         },
       }}
       InputProps={{
         disableUnderline: true,
       }}
       sx={{
-        mt: 1, // небольшой отступ между кнопкой и полем
+        height: 40, // одинаково с кнопкой
         "& .MuiInputBase-root": {
-          height: "40px", // подстраиваем под кнопку, можно заменить на auto
-          padding: 0,
+          height: "100%",
+          borderRadius: 0,
         },
+        flexGrow: 1, // чтобы занимало доступное место
       }}
     />
   )}
@@ -733,15 +734,13 @@ const handleSendFeedback = async () => {
 
         {nextEndTime && (
           <p>
-            Next subscription will end on:{" "}
+            Subscription will end on:{" "}
             {new Date(nextEndTime * 1000).toLocaleDateString()}
           </p>
         )}
       </div>
     )}
-
-    <p></p>
-    <p></p>
+    
 </div>
     )}
         
@@ -763,7 +762,7 @@ const handleSendFeedback = async () => {
       )}
         */}   
                {/* === Accordions === */}
-<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none" }}>
+<Accordion style={{ marginTop: 60, boxShadow: "none", border: "none" }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("how") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("how")}
@@ -817,7 +816,7 @@ This insider-level, on-chain verified product empowers traders worldwide with th
     },
   }}
   >
-   Join the program (99.9 USDC)
+   Join the program ( 99.9 USDC )
   </Button>
 )}
       
@@ -1133,7 +1132,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
     },
   }}
 >
-  Contact us (99.9 USDC)
+  Contact us ( 99.9 USDC )
 </Button>
 
 {showFeedbackForm && (
@@ -1191,7 +1190,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
     >
       <h4 style={{ margin: "0 0 10px 0" }}>Donute</h4>
       <TextField
-        label="Amount (USDC)"
+        label="Amount ( USDC )"
         value={donateAmount}
         onChange={(e) => setDonateAmount(e.target.value)}
         fullWidth
