@@ -656,8 +656,9 @@ fontWeight: 400,
             
 
 
-            <div>
-  {account && (
+           {/* === Subscription block === */}
+<div>
+  {account ? (
     subscriptionActive ? (
       <div>
         <p style={{ color: "#00C853" }}>Subscription active</p>
@@ -673,86 +674,72 @@ fontWeight: 400,
         <p style={{ color: "#FF5252" }}>Subscription inactive</p>
       </div>
     )
-)}
+  ) : null}
 
   {/* Кнопка и TextField видны всегда */}
   {!hasSubscribed && (
   <div
-  style={{
-    display: "flex",
-    flexDirection: "column",
-    gap: "8px", // небольшой отступ между кнопкой и полем
-    marginTop: 10,
-    marginBottom:20,
-    alignItems: "flex-start",
-  }}
->
-  <Button
-    variant="contained"
-    onClick={handleSubscribe}
-    disableElevation
-    sx={{
-      width: "28ch", // одинаковая ширина
-      height: "42px", // фиксированная высота, как у textfield
-      backgroundColor: "#F7931A",
-      color: "#101214",
-      fontWeight: 500,
-      fontSize: "1.2rem",
-      border: "none",
-      borderRadius: 0,
-      cursor: "pointer",
-      "&:hover": {
-        backgroundColor: "#FFA733",
-      },
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      gap: "8px",
+      marginTop: 10,
+      marginBottom: 20,
+      alignItems: "flex-start",
     }}
   >
-    Unlock Next Month (49.9 USDC)
-  </Button>
+    <Button
+      variant="contained"
+      onClick={handleSubscribe}
+      disableElevation
+      sx={{
+        width: "36ch",
+        height: "42px",
+        backgroundColor: "#F7931A",
+        color: "#101214",
+        fontWeight: 500,
+        fontSize: "1.2rem",
+        border: "none",
+        borderRadius: 0,
+        cursor: "pointer",
+        "&:hover": {
+          backgroundColor: "#FFA733",
+        },
+      }}
+    >
+      Unlock Next Month (49.9 USDC)
+    </Button>
     
       <TextField
-    variant="outlined"
-    label="24.9 USDC with referral code"
-    value={referrer}
-    onChange={(e) => setReferrer(e.target.value)}
-    inputProps={{
-      maxLength: 42,
-      style: {
-        textAlign: "center",
-      },
-    }}
-    sx={{
-  width: "36ch",
-  "& .MuiOutlinedInput-root": {
-    height: "42px",
-    borderRadius: 0,
-    "& fieldset": {
-      borderColor: "#cccccc",
-      borderWidth: "1px", // одинаковая толщина
-    },
-    "&:hover fieldset": {
-      borderColor: "#cccccc",
-      borderWidth: "1px", // не утолщается при ховере
-    },
-    "&.Mui-focused fieldset": {
-      borderColor: "#cccccc",
-      borderWidth: "1px", // не утолщается при фокусе
-    },
-    "& input": {
-      textAlign: "center",
-      padding: 0,
-    },
-  },
-  "& .MuiInputLabel-root": {
-    color: "#cccccc",
-    "&.Mui-focused": { color: "#cccccc" },
-    textAlign: "center",
-  },
-}}
-  />
+        variant="outlined"
+        label="24.9 USDC with referral code"
+        value={referrer}
+        onChange={(e) => setReferrer(e.target.value)}
+        inputProps={{
+          maxLength: 42,
+          style: { textAlign: "center" },
+        }}
+        sx={{
+          width: "36ch",
+          "& .MuiOutlinedInput-root": {
+            height: "42px",
+            borderRadius: 0,
+            "& fieldset": { borderColor: "#cccccc", borderWidth: "1px" },
+            "&:hover fieldset": { borderColor: "#cccccc" },
+            "&.Mui-focused fieldset": { borderColor: "#cccccc" },
+            "& input": { textAlign: "center", padding: 0 },
+          },
+          "& .MuiInputLabel-root": {
+            color: "#cccccc",
+            "&.Mui-focused": { color: "#cccccc" },
+            textAlign: "center",
+          },
+        }}
+      />
     )}
   </div>
 </div>
-            
+
 {/* === Wallet section === */}
 {!account ? (
   <div style={{ display: "inline-block", marginTop: 10, marginBottom: 60 }}>
@@ -765,11 +752,9 @@ fontWeight: 400,
         fontWeight: 500,
         fontSize: "1.2rem",
         border: "none",
-        borderRadius: "0px",
+        borderRadius: 0,
         cursor: "pointer",
-        "&:hover": {
-          backgroundColor: "#3399FF",
-        },
+        "&:hover": { backgroundColor: "#3399FF" },
       }}
     >
       Connect Wallet
@@ -780,6 +765,7 @@ fontWeight: 400,
     <p style={{ color: "#0080ff" }}>Connected: {account}</p>
   </div>
 )}
+
 
         
       {/* === Donate (оставляем только для подключённого кошелька) === 
