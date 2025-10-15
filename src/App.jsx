@@ -1104,7 +1104,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
 
         {/* === Contact Page === */}
         {page === "contact" && (
-          <div style={{ marginTop: 20 fontWeight: 400, fontSize: "1rem" }}>
+          <div style={{ marginTop: 20, fontWeight: 400, fontSize: "1rem" }}>
             <Button
               variant="outlined"
               sx={{
