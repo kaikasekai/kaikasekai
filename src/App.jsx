@@ -673,7 +673,7 @@ fontWeight: 400,
         <p style={{ color: "#FF5252" }}>Subscription inactive</p>
       </div>
     )
-) : null}
+)}
 
   {/* Кнопка и TextField видны всегда */}
   {!hasSubscribed && (
