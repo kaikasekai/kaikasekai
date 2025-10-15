@@ -641,7 +641,7 @@ const handleSendFeedback = async () => {
               </div>
 
 {/* === Subscription block (вынесено над connect wallet) === */}
-<div style={{ marginTop: 10, display: "flex", gap: 8 }}> 
+<div style={{ marginTop: 10, display: "flex", flexDirection: "column", gap: 0.5rem }}>
   <Button
     variant="contained"
     onClick={handleSubscribe}
@@ -652,8 +652,8 @@ const handleSendFeedback = async () => {
       fontWeight: 500,
       border: "none",
       borderRadius: 0,
-      height: 40, // одинаковая высота
-      minWidth: 180, // можно подстроить по желанию
+      height: 40,
+      minWidth: 180,
       padding: "0 16px",
       cursor: "pointer",
       "&:hover": {
@@ -673,7 +673,7 @@ const handleSendFeedback = async () => {
         maxLength: 42,
         style: {
           padding: "0 8px",
-          height: "100%",
+          height: "40px", // чтобы совпадало с кнопкой
           boxSizing: "border-box",
           fontSize: "0.875rem",
         },
@@ -682,12 +682,8 @@ const handleSendFeedback = async () => {
         disableUnderline: true,
       }}
       sx={{
-        height: 40, // одинаково с кнопкой
-        "& .MuiInputBase-root": {
-          height: "100%",
-          borderRadius: 0,
-        },
-        flexGrow: 1, // чтобы занимало доступное место
+        borderRadius: 0,
+        width: "45ch", // текстовое поле растягивается под ширину кнопки
       }}
     />
   )}
@@ -762,7 +758,7 @@ const handleSendFeedback = async () => {
       )}
         */}   
                {/* === Accordions === */}
-<Accordion style={{ marginTop: 60, boxShadow: "none", border: "none" }}>
+<Accordion style={{ marginTop: 150, boxShadow: "none", border: "none" }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("how") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("how")}
@@ -1193,6 +1189,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
         label="Amount ( USDC )"
         value={donateAmount}
         onChange={(e) => setDonateAmount(e.target.value)}
+        sx={{ borderRadius: 0 }}
         fullWidth
         margin="dense"
       />
