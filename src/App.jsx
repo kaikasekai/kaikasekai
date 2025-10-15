@@ -652,7 +652,31 @@ fontWeight: 400,
               </div>
 
 {/* === Subscription block (вынесено над connect wallet) === */}
-    <div
+    
+            
+
+
+            <div>
+  {walletConnected && (
+    subscriptionActive ? (
+      <div>
+        <p style={{ color: "#00C853" }}>Subscription active</p>
+        {subscriptionEnd && (
+          <p>
+            Your subscription ends on:{" "}
+            {new Date(subscriptionEnd * 1000).toLocaleDateString()}
+          </p>
+        )}
+      </div>
+    ) : (
+      <div>
+        <p style={{ color: "#FF5252" }}>Subscription inactive</p>
+      </div>
+    )
+  )}
+
+  {/* Кнопка и TextField видны всегда */}
+  <div
   style={{
     display: "flex",
     flexDirection: "column",
@@ -683,9 +707,9 @@ fontWeight: 400,
   >
     Unlock Next Month (49.9 USDC)
   </Button>
-
-  <div>
-  <TextField
+    
+    {!hasSubscribed && (
+      <TextField
     variant="outlined"
     label="24.9 USDC with referral code"
     value={referrer}
@@ -725,7 +749,8 @@ fontWeight: 400,
   },
 }}
   />
-</div>
+    )}
+  </div>
 </div>
             
 {/* === Wallet section === */}
