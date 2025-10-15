@@ -680,6 +680,7 @@ fontWeight: 400,
         {new Date(nextEndTime * 1000).toLocaleDateString()}
       </p>
         </div>
+        )}
     )
   ) : null}
 
