@@ -659,12 +659,12 @@ fontWeight: 400,
     onClick={handleSubscribe}
     disableElevation
     sx={{
-      width: "45ch", // одинаковая ширина
+      width: "42ch", // одинаковая ширина
       height: "42px", // фиксированная высота, как у textfield
       backgroundColor: "#F7931A",
       color: "#101214",
       fontWeight: 500,
-      fontSize: "1rem",
+      fontSize: "1.2rem",
       border: "none",
       borderRadius: 0,
       cursor: "pointer",
@@ -688,23 +688,32 @@ fontWeight: 400,
       },
     }}
     sx={{
-      width: "45ch", // такая же ширина, как у кнопки
-      "& .MuiOutlinedInput-root": {
-        height: "42px", // такая же высота
-        borderRadius: 0,
-        "& fieldset": { borderColor: "#cccccc" },
-        "&:hover fieldset": { borderColor: "#cccccc" },
-        "&.Mui-focused fieldset": { borderColor: "#cccccc" },
-        "& input": {
-          textAlign: "center",
-          padding: 0,
-        },
-      },
-      "& .MuiInputLabel-root": {
-        color: "#F7931A",
-        "&.Mui-focused": { color: "#F7931A" },
-      },
-    }}
+  width: "45ch",
+  "& .MuiOutlinedInput-root": {
+    height: "42px",
+    borderRadius: 0,
+    "& fieldset": {
+      borderColor: "#cccccc",
+      borderWidth: "1px", // одинаковая толщина
+    },
+    "&:hover fieldset": {
+      borderColor: "#cccccc",
+      borderWidth: "1px", // не утолщается при ховере
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#cccccc",
+      borderWidth: "1px", // не утолщается при фокусе
+    },
+    "& input": {
+      textAlign: "center",
+      padding: 0,
+    },
+  },
+  "& .MuiInputLabel-root": {
+    color: "#cccccc",
+    "&.Mui-focused": { color: "#cccccc" },
+  },
+}}
   />
 </div>
 
@@ -720,7 +729,7 @@ fontWeight: 400,
         backgroundColor: "#0080ff",
         color: "#ffffff",
         fontWeight: 500,
-        fontSize: "1.2em",
+        fontSize: "1.2rem",
         border: "none",
         borderRadius: "0px",
         cursor: "pointer",
@@ -815,8 +824,8 @@ At the beginning of each month, the forecast for the new month is released, whil
     <Typography>
 Kaikasekai means "Flourishing World".<br></br>
 This insider-level, on-chain verified product empowers traders worldwide with the full potential of AI, open to everyone — whale or not — and price-friendly.
-<p></p>
 
+<div style={{ marginTop: 10, marginBottom: 10, boxShadow: "none", border: "none" }}>
               {!hasWhitelist && (
   <Button
     variant="contained"
@@ -836,10 +845,10 @@ This insider-level, on-chain verified product empowers traders worldwide with th
     },
   }}
   >
-    Activate Referral Wallet ( 99.9 USDC )
+    Activate Referral Wallet (99.9 USDC)
   </Button>
 )}
-      
+  </div>    
 Your wallet will be linked to the smart contract.
 Use your wallet number as your referral code — your subscribers get 50% off, and you earn 10% on every purchase.
     </Typography>
@@ -1151,7 +1160,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
     },
   }}
 >
-  Access Developers ( 99.9 USDC )
+  Access Developers (99.9 USDC)
 </Button>
 
 {showFeedbackForm && (
