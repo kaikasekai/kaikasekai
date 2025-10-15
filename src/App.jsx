@@ -736,9 +736,9 @@ fontWeight: 400,
           },
         }}
       />
+    </div>
     )}
   </div>
-</div>
 
 {/* === Wallet section === */}
 {!account ? (
