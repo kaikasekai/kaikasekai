@@ -641,7 +641,7 @@ const handleSendFeedback = async () => {
               </div>
 
 {/* === Subscription block (вынесено над connect wallet) === */}
-<div style={{ display: "flex", flexDirection: "column", gap: 0.5rem, marginTop: 10 }}>
+<div style={{ display: "flex", flexDirection: "column", gap: 6, marginTop: 10 }}>
   <Button
     variant="contained"
     onClick={handleSubscribe}
