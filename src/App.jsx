@@ -632,12 +632,16 @@ const handleSendFeedback = async () => {
      */}
               
 
-<div style={{ margin: 0 }}>
-  Advanced AI-powered algorithm predicts the global BTC trend with {mape}%<sup>*</sup> accuracy.
+<div style={{
+  margin: 0,
+fontWeight: 400,
+  fontSize: "1.6rem",
+}}>
+  Advanced AI-powered algorithm predicts the global BTC trend with {mape}%<sup>*</sup> accuracy
 </div>
-<small style={{ display: "block", marginTop: 2, color: "#666666" }}>
-  <sup>*</sup> Based on rolling 30-day metrics.
-</small>
+<div style={{ display: "block", marginTop: 2, color: "#666666", fontWeight: 300, fontSize: "0.9rem" }}>
+  <sup>*</sup> Based on rolling 30-day metrics
+</div>
               </div>
 
 {/* === Subscription block (вынесено над connect wallet) === */}
@@ -647,22 +651,23 @@ const handleSendFeedback = async () => {
     onClick={handleSubscribe}
     disableElevation
     sx={{
-      width: "45ch",
+      width: "36ch",
       backgroundColor: "#F7931A",
       color: "#101214",
       fontWeight: 500,
+      fontSize: "1.2rem",
       border: "none",
       borderRadius: 0,
       cursor: "pointer",
       "&:hover": {
         backgroundColor: "#FFA733",
       },
-      height: 36, // примерная высота кнопки
+      height: 1.5rem, // примерная высота кнопки
     }}
   >
-    49.9 USDC to unlock next month's forecast
+    Unlock next month ( 49.9 USDC )
   </Button>
-<div style={{ marginTop: 10 }}>
+<div style={{ marginTop: 1 }}>
 
   <TextField
     variant="outlined"
@@ -672,8 +677,9 @@ const handleSendFeedback = async () => {
     inputProps={{
       maxLength: 42,
       style: {
-        fontSize: "0.9rem",
-        height: 36, // одинаковая высота с кнопкой
+        fontSize: "1rem",
+        fontWeight: 400,
+        height: 1.5rem, // одинаковая высота с кнопкой
         width: "45ch",
         textAlign: "center",
       },
@@ -681,15 +687,15 @@ const handleSendFeedback = async () => {
     sx={{
     "& .MuiOutlinedInput-root": {
           borderRadius: 0,
-          "& fieldset": { borderColor: "#F7931A" },
-          "&:hover fieldset": { borderColor: "#F7931A" },
+          "& fieldset": { borderColor: "#cccccc" },
+          "&:hover fieldset": { borderColor: "#cccccc" },
           "&.Mui-focused fieldset": {
-            borderColor: "#F7931A",
+            borderColor: "#cccccc",
           },
         },
         "& .MuiInputLabel-root": {
-          color: "#F7931A",
-          "&.Mui-focused": { color: "#F7931A" },
+          color: "#cccccc",
+          "&.Mui-focused": { color: "#cccccc" },
         },
         "& input": {
           textAlign: "center",
@@ -710,6 +716,7 @@ const handleSendFeedback = async () => {
         backgroundColor: "#0080ff",
         color: "#ffffff",
         fontWeight: 500,
+        fontSize: "1.2rem",
         border: "none",
         borderRadius: "0px",
         cursor: "pointer",
@@ -777,7 +784,7 @@ const handleSendFeedback = async () => {
   >
     <Typography>How it works</Typography>
   </AccordionSummary>
-  <AccordionDetails style={{ padding: "0px 0", textAlign: "justify" }}>
+  <AccordionDetails style={{ padding: "0px 0", textAlign: "justify", fontWeight: 400, fontSize: "1rem" }}>
     <Typography>
 Each thin, colorful line on the chart represents a unique AI model predicting the most probable scenario for Bitcoin’s next move. The thick dark-blue line shows the averaged outcome of these AI model cluster scenarios — the core BTC trend forecast — while the thick orange line displays historical BTC data.
 <br></br><br></br>
@@ -800,7 +807,7 @@ At the beginning of each month, the forecast for the new month is released, whil
   >
     <Typography>Referral programm</Typography>
   </AccordionSummary>
-  <AccordionDetails style={{ padding: "0px 0", textAlign: "justify" }}>
+  <AccordionDetails style={{ padding: "0px 0", textAlign: "justify", fontWeight: 400, fontSize: "1rem" }}>
     <Typography>
 Kaikasekai means "Flourishing World".<br></br>
 This insider-level, on-chain verified product empowers traders worldwide with the full potential of AI, open to everyone — whale or not — and price-friendly.
@@ -815,6 +822,7 @@ This insider-level, on-chain verified product empowers traders worldwide with th
     backgroundColor: "#FFD700",
     color: "#101214",
     fontWeight: 500,
+    fontSize: "1.2rem",
     border: "none",
     borderRadius: "0px",
     cursor: "pointer",
@@ -1046,7 +1054,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
 
 {/* === Disclaimer Page === */}
         {page === "disclaimer" && (
-          <div style={{ marginTop: 20, textAlign: "justify" }}>
+          <div style={{ marginTop: 20, textAlign: "justify" fontWeight: 400, fontSize: "1rem",}}>
             <Button
               variant="outlined"
               sx={{
