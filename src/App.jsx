@@ -685,7 +685,7 @@ fontWeight: 400,
       flexDirection: "column",
       gap: "8px",
       marginTop: 10,
-      marginBottom: 20,
+      marginBottom: 10,
       alignItems: "flex-start",
     }}
   >
@@ -719,6 +719,7 @@ fontWeight: 400,
         onChange={(e) => setReferrer(e.target.value)}
         inputProps={{
           maxLength: 42,
+          shrink: true,
           style: { textAlign: "center" },
         }}
         sx={{
@@ -760,7 +761,7 @@ fontWeight: 400,
 
 {/* === Wallet section === */}
 {!account ? (
-  <div style={{ display: "inline-block", marginTop: 10, marginBottom: 60 }}>
+  <div style={{ display: "inline-block", marginTop: 0, marginBottom: 60 }}>
     <Button
       onClick={connectWallet}
       disableElevation
@@ -802,7 +803,7 @@ fontWeight: 400,
       )}
         */}   
                {/* === Accordions === */}
-<Accordion style={{ marginTop: 10, boxShadow: "none", border: "none" }}>
+<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none" }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("how") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("how")}
@@ -838,7 +839,7 @@ At the beginning of each month, the forecast for the new month is released, whil
 Kaikasekai means "Flourishing World".<br></br>
 This insider-level, on-chain verified product empowers traders worldwide with the full potential of AI, open to everyone — whale or not — and price-friendly.
 
-<div style={{ marginTop: 10, marginBottom: 0, boxShadow: "none", border: "none" }}>
+<div style={{ marginTop: 10, marginBottom: 10, boxShadow: "none", border: "none" }}>
               {!hasWhitelist && (
   <Button
     variant="contained"
@@ -1185,6 +1186,9 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
       onChange={(e) => setFeedbackEmail(e.target.value)}
       fullWidth
       margin="dense"
+      sx={{
+    borderRadius: "0px",
+  }}
     />
     <TextField
       label="Message"
@@ -1194,10 +1198,27 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
       multiline
       rows={4}
       margin="dense"
+      sx={{
+    borderRadius: "0px",
+  }}
     />
     <Button
       variant="outlined"
       onClick={handleSendFeedback}
+      sx={{
+    backgroundColor: "transparent",
+    marginTop: 10,
+    border: "1.5px solid #0080ff",
+    color: "#0080ff",
+    fontWeight: 500,
+    borderRadius: "0px",
+    cursor: "pointer",
+    "&:hover": {
+      backgroundColor: "transparent",
+      color: "#0080ff",
+    },
+  }}
+      size="small"
     >
       Send
     </Button>
