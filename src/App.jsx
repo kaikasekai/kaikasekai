@@ -678,6 +678,7 @@ fontWeight: 400,
   ) : null}
 
   {/* Кнопка и TextField видны всегда */}
+  {!hasSubscribed && (
   <div
     style={{
       display: "flex",
@@ -693,7 +694,7 @@ fontWeight: 400,
       onClick={handleSubscribe}
       disableElevation
       sx={{
-        width: "36ch",
+        width: "28ch",
         height: "42px",
         backgroundColor: "#F7931A",
         color: "#101214",
@@ -710,7 +711,7 @@ fontWeight: 400,
       Unlock Next Month (49.9 USDC)
     </Button>
 
-    {!hasSubscribed && (
+    
       <TextField
         variant="outlined"
         label="24.9 USDC with referral code"
@@ -721,24 +722,40 @@ fontWeight: 400,
           style: { textAlign: "center" },
         }}
         sx={{
-          width: "36ch",
-          "& .MuiOutlinedInput-root": {
-            height: "42px",
-            borderRadius: 0,
-            "& fieldset": { borderColor: "#cccccc", borderWidth: "1px" },
-            "&:hover fieldset": { borderColor: "#cccccc" },
-            "&.Mui-focused fieldset": { borderColor: "#cccccc" },
-            "& input": { textAlign: "center", padding: 0 },
-          },
-          "& .MuiInputLabel-root": {
-            color: "#cccccc",
-            "&.Mui-focused": { color: "#cccccc" },
-            textAlign: "center",
-          },
-        }}
+  width: "36ch",
+  padding: 0,
+  "& .MuiOutlinedInput-root": {
+    height: "42px",
+    borderRadius: 0,
+    "& fieldset": {
+      borderColor: "#ccc",
+      borderWidth: "1px", // одинаковая толщина
+    },
+    "&:hover fieldset": {
+      borderColor: "#ccc",
+      borderWidth: "1px", // не утолщается при ховере
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#ccc",
+      borderWidth: "1px", // не утолщается при фокусе
+    },
+    "& input": {
+      textAlign: "center",
+      alignItems: "center",
+      padding: 0,
+    },
+  },
+  "& .MuiInputLabel-root": {
+    color: "#ccc",
+    textAlign: "center",
+    alignItems: "center",
+    "&.Mui-focused": { color: "#ccc" },
+  },
+}}
+
       />
-    )}
   </div>
+  )}
 </div>
 
 {/* === Wallet section === */}
@@ -828,7 +845,7 @@ This insider-level, on-chain verified product empowers traders worldwide with th
     onClick={handleBuyWhitelist}
     disableElevation
     sx={{
-    marginBottom: 6,
+    marginBottom: 0,
     backgroundColor: "#FFD700",
     color: "#101214",
     fontWeight: 500,
