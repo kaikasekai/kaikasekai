@@ -611,7 +611,7 @@ const handleSendFeedback = async () => {
         {page === "main" && (
           <>
             {/* === Chart === */}
-            <div style={{ width: "100%", minHeight: "200px" }}>
+            <div style={{ marginTop: 10, marginBottom: 10, width: "100%", minHeight: "200px" }}>
               <ResponsiveContainer width="100%" height={500} className="chart-wrapper">
                 <LineChart data={filteredData}>
                   <CartesianGrid strokeDasharray="3 3" />
@@ -630,7 +630,7 @@ const handleSendFeedback = async () => {
     value: "USD",
     angle: -90, // вертикально
     position: "insideBottomLeft", // у начала оси, внутри
-    offset: 10, // можно поиграть: 0..20 для тонкой подгонки
+    offset: 15, // можно поиграть: 0..20 для тонкой подгонки
     style: {
       textAnchor: "end",
       fill: "#666",
@@ -712,7 +712,7 @@ const handleSendFeedback = async () => {
               
 
 <div style={{
-  marginTop: 10,
+  marginTop: 20,
 fontWeight: 400,
   fontSize: "1.6rem",
 }}>
@@ -755,9 +755,9 @@ fontWeight: 400,
     style={{
       display: "flex",
       flexDirection: "column",
-      gap: "10px",
-      marginTop: 10,
-      marginBottom: 10,
+      gap: "20px",
+      marginTop: 20,
+      marginBottom: 20,
       alignItems: "flex-start",
     }}
   >
@@ -799,7 +799,7 @@ fontWeight: 400,
   sx={{
   width: "36ch",
   "& .MuiOutlinedInput-root": {
-    height: "36px",
+    height: "24px",
     borderRadius: 0,
     "& fieldset": {
       borderColor: "#ccc",
