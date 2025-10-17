@@ -162,7 +162,7 @@ const ImageZoom = ({ src, alt, style }) => {
         left: 0,
         width: "100vw",
         height: "100vh",
-        backgroundColor: "rgba(0,0,0,0.15)",
+        backgroundColor: "rgba(0,0,0,0.2)",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -410,7 +410,7 @@ const handleBuyWhitelist = async () => {
     alert("✅ You are now whitelisted!");
   } catch (e) {
     log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
-    alert("❌ Whitelist purchase failed, see Debug log");
+    alert("❌ Whitelist purchase failed");
   } finally {
     setProcessing(false);
   }
@@ -475,7 +475,7 @@ const handleSubscribe = async () => {
     alert("✅ Subscription successful!");
   } catch (e) {
     log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
-    alert("❌ Subscription failed, see Debug log");
+    alert("❌ Subscription failed");
   } finally {
     setProcessing(false);
   }
@@ -512,7 +512,7 @@ const handleDonate = async () => {
     alert("✅ Donation sent to contract. Thank you!");
   } catch (e) {
     log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
-    alert("❌ Donation failed, see Debug log");
+    alert("❌ Donation faild");
   } finally {
     setProcessing(false);
   }
@@ -630,7 +630,7 @@ const handleSendFeedback = async () => {
     value: "USD",
     angle: -90, // вертикально
     position: "insideBottomLeft", // у начала оси, внутри
-    offset: -10, // можно поиграть: 0..20 для тонкой подгонки
+    offset: 10, // можно поиграть: 0..20 для тонкой подгонки
     style: {
       textAnchor: "end",
       fill: "#666",
@@ -723,17 +723,6 @@ fontWeight: 400,
 </div>
               </div>
 
-
-<div style={{ padding: "20px" }}>
-      <h2>Проверка Image Zoom</h2>
-
-      <ImageZoom
-        src="https://pbs.twimg.com/media/Gav5-CTWIAAv-Wf.jpg"
-        alt="November 2024"
-      />
-    </div>
-            
-
 {/* === Subscription block === */}
 <div>
   {account ? (
@@ -766,7 +755,7 @@ fontWeight: 400,
     style={{
       display: "flex",
       flexDirection: "column",
-      gap: "3px",
+      gap: "10px",
       marginTop: 10,
       marginBottom: 10,
       alignItems: "flex-start",
@@ -810,7 +799,7 @@ fontWeight: 400,
   sx={{
   width: "36ch",
   "& .MuiOutlinedInput-root": {
-    height: "42px",
+    height: "36px",
     borderRadius: 0,
     "& fieldset": {
       borderColor: "#ccc",
