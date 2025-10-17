@@ -828,7 +828,7 @@ fontWeight: 400,
       "& input": {
         textAlign: "center",
         padding: 0,
-        color: #101214,
+        color: "#101214",
         
       },
     },
