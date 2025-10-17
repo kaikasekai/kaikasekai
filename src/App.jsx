@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import Papa from "papaparse";
 import axios from "axios";
 import {
@@ -142,18 +143,46 @@ function App() {
   
 
 
-// === ImageZoom ===
-// 🔍 Компонент увеличения изображения
-const ImageZoom = ({ src, alt }) => {
+const ImageZoom = ({ src, alt, style }) => {
   const [zoomed, setZoomed] = useState(false);
 
   useEffect(() => {
-    const handleEsc = (e) => {
-      if (e.key === "Escape") setZoomed(false);
-    };
+    const handleEsc = (e) => e.key === "Escape" && setZoomed(false);
     window.addEventListener("keydown", handleEsc);
     return () => window.removeEventListener("keydown", handleEsc);
   }, []);
+
+  // модальное изображение как отдельный узел
+  const zoomContent = (
+    <div
+      onClick={() => setZoomed(false)}
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100vh",
+        backgroundColor: "rgba(0,0,0,0.15)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        zIndex: 99999,
+        cursor: "zoom-out",
+      }}
+    >
+      <img
+        src={src}
+        alt={alt}
+        style={{
+          maxWidth: "95vw",
+          maxHeight: "95vh",
+          objectFit: "contain",
+          borderRadius: "0px",
+          boxShadow: "0 0 0px rgba(255,255,255,0.2)",
+        }}
+      />
+    </div>
+  );
 
   return (
     <>
@@ -166,40 +195,10 @@ const ImageZoom = ({ src, alt }) => {
           width: "100%",
           height: "auto",
           display: "block",
-          borderRadius: "10px",
+          borderRadius: "0px",
         }}
       />
-
-      {zoomed && (
-        <div
-          onClick={() => setZoomed(false)}
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100vw",
-            height: "100vh",
-            backgroundColor: "rgba(0,0,0,0.9)",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            zIndex: 99999, // 👈 Повышаем приоритет
-            cursor: "zoom-out",
-          }}
-        >
-          <img
-            src={src}
-            alt={alt}
-            style={{
-              maxWidth: "95vw",
-              maxHeight: "95vh",
-              objectFit: "contain",
-              borderRadius: "12px",
-              boxShadow: "0 0 20px rgba(255,255,255,0.2)",
-            }}
-          />
-        </div>
-      )}
+      {zoomed && createPortal(zoomContent, document.body)}
     </>
   );
 };
@@ -631,7 +630,7 @@ const handleSendFeedback = async () => {
     value: "USD",
     angle: -90, // вертикально
     position: "insideBottomLeft", // у начала оси, внутри
-    offset: 0, // можно поиграть: 0..20 для тонкой подгонки
+    offset: -10, // можно поиграть: 0..20 для тонкой подгонки
     style: {
       textAnchor: "end",
       fill: "#666",
@@ -753,7 +752,7 @@ fontWeight: 400,
         <p style={{ color: "#FF5252" }}>Subscription inactive</p>
         {nextEndTime && (
           <p>
-            Subscription will end on:{" "}
+            Subscription ends on:{" "}
             {new Date(nextEndTime * 1000).toLocaleDateString()}
           </p>
         )}
@@ -767,7 +766,7 @@ fontWeight: 400,
     style={{
       display: "flex",
       flexDirection: "column",
-      gap: "2px",
+      gap: "3px",
       marginTop: 10,
       marginBottom: 10,
       alignItems: "flex-start",
@@ -809,40 +808,32 @@ fontWeight: 400,
     style: { textAlign: "center" },
   }}
   sx={{
-    width: "36ch",
-    "& .MuiOutlinedInput-root": {
-      height: "42px",
-      borderRadius: 0,
-      "& fieldset": {
-        borderColor: "#ccc",
-        borderWidth: "1px",
-      },
-      "&:hover fieldset": {
-        borderColor: "#ccc",
-        borderWidth: "1px",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "#ccc",
-        borderWidth: "1px",
-      },
-      "& input": {
-        textAlign: "center",
-        padding: 0,
-        color: "#101214",
-        
-      },
+  width: "36ch",
+  "& .MuiOutlinedInput-root": {
+    height: "42px",
+    borderRadius: 0,
+    "& fieldset": {
+      borderColor: "#ccc",
+      borderWidth: "1px", // одинаковая толщина
     },
-    "& .MuiInputLabel-root": {
-      color: "#ccc",
+    "&:hover fieldset": {
+      borderColor: "#ccc",
+      borderWidth: "1px", // не утолщается при ховере
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#ccc",
+      borderWidth: "1px", // не утолщается при фокусе
+    },
+    "& input": {
       textAlign: "center",
-      backgroundColor: "#fff", // добавляем белый фон
-      padding: "0 4px", // немного пространства слева и справа
-      transform: "translate(0%, 50%)", // подгонка по центру, если нужно
-      "&.Mui-focused": {
-        color: "#ccc",
-      },
+      padding: 0,
     },
-  }}
+  },
+  "& .MuiInputLabel-root": {
+    color: "ccc",
+    "&.Mui-focused": { color: "#ccc" },
+  },
+}}
 />
     </div>
 
@@ -1343,10 +1334,10 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
     >
       <h4 style={{ margin: "0 0 10px 0" }}>Donute</h4>
       <TextField
-        label="Amount ( USDC )"
+        label="Amount (USDC)"
         value={donateAmount}
         onChange={(e) => setDonateAmount(e.target.value)}
-        sx={{ borderRadius: 0 }}
+        sx={{ borderRadius: "0px" }}
         fullWidth
         margin="dense"
       />
