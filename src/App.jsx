@@ -134,6 +134,68 @@ function App() {
 };
 
 
+  
+  // 👈 вот сюда вставляем useEffect
+  useEffect(() => {
+    setExpandedItems([]); // закрывает все аккордеоны при смене страницы
+  }, [page]);
+  
+
+
+// === ImageZoom ===
+const ImageZoom = ({ src, alt }) => {
+  const [zoomed, setZoomed] = useState(false);
+
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === "Escape") setZoomed(false);
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, []);
+
+  return (
+    <>
+      <img
+        src={src}
+        alt={alt}
+        onClick={() => setZoomed(true)}
+        style={{ cursor: "zoom-in", width: "100%", height: "auto" }}
+      />
+
+      {zoomed && (
+        <div
+          onClick={() => setZoomed(false)}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            backgroundColor: "rgba(0,0,0,0.9)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 9999,
+            cursor: "zoom-out",
+          }}
+        >
+          <img
+            src={src}
+            alt={alt}
+            style={{
+              maxWidth: "95vw",
+              maxHeight: "95vh",
+              objectFit: "contain",
+              borderRadius: "10px",
+              boxShadow: "0 0 20px rgba(0,0,0,0.5)",
+            }}
+          />
+        </div>
+      )}
+    </>
+  );
+};
 
 
   const log = (msg) =>
@@ -559,12 +621,17 @@ const handleSendFeedback = async () => {
                       135000, 140000, 145000, 150000, 155000,
                     ]}
                     tickFormatter={(v) => v.toLocaleString()}
-                    label={{
+                      label={{
     value: "USD",
-    angle: -90,
-    position: "outsideBottomLeft",
-    offset: 0,
-    style: { textAnchor: "middle", fill: "#666", fontSize: 14, fontWeight: 500 },
+    angle: -90, // вертикально
+    position: "insideBottomLeft", // у начала оси, внутри
+    offset: 0, // можно поиграть: 0..20 для тонкой подгонки
+    style: {
+      textAnchor: "end",
+      fill: "#666",
+      fontSize: 14,
+      fontWeight: 500,
+    },
   }}
                   />
                   <Tooltip
@@ -689,72 +756,77 @@ fontWeight: 400,
       alignItems: "flex-start",
     }}
   >
+
+<div style={{ marginTop: 10, marginBottom: 10, boxShadow: "none", border: "none" }}>
     <Button
-      variant="contained"
-      onClick={handleSubscribe}
-      disableElevation
-      sx={{
-        width: "28ch",
-        height: "42px",
-        backgroundColor: "#F7931A",
-        color: "#101214",
-        fontWeight: 500,
-        fontSize: "1.2rem",
-        border: "none",
-        borderRadius: 0,
-        cursor: "pointer",
-        "&:hover": {
-          backgroundColor: "#FFA733",
-        },
-      }}
+    variant="contained"
+    onClick={handleSubscribe}
+    disableElevation
+    sx={{
+    marginBottom: 0,
+    backgroundColor: "#F7931A",
+    color: "#101214",
+    fontWeight: 500,
+    fontSize: "1.2rem",
+      height: "42px",
+    border: "none",
+    borderRadius: "0px",
+    cursor: "pointer",
+    "&:hover": {
+      backgroundColor: "#FFA733",
+    },
+  }}
     >
       Unlock Next Month (49.9 USDC)
     </Button>
-
-    
+  </div>
+  
+  <div>
       <TextField
-        variant="outlined"
-        label="24.9 USDC with referral code"
-        value={referrer}
-        onChange={(e) => setReferrer(e.target.value)}
-        inputProps={{
-          maxLength: 42,
-          shrink: true,
-          style: { textAlign: "center" },
-        }}
-        sx={{
-  width: "36ch",
-  padding: 0,
-  "& .MuiOutlinedInput-root": {
-    height: "42px",
-    borderRadius: 0,
-    "& fieldset": {
-      borderColor: "#ccc",
-      borderWidth: "1px", // одинаковая толщина
+  variant="outlined"
+  label="24.9 USDC with referral code"
+  value={referrer}
+  onChange={(e) => setReferrer(e.target.value)}
+  inputProps={{
+    maxLength: 42,
+    style: { textAlign: "center" },
+  }}
+  sx={{
+    width: "36ch",
+    "& .MuiOutlinedInput-root": {
+      height: "42px",
+      borderRadius: 0,
+      "& fieldset": {
+        borderColor: "#ccc",
+        borderWidth: "1px",
+      },
+      "&:hover fieldset": {
+        borderColor: "#ccc",
+        borderWidth: "1px",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "#ccc",
+        borderWidth: "1px",
+      },
+      "& input": {
+        textAlign: "center",
+        padding: 0,
+      },
     },
-    "&:hover fieldset": {
-      borderColor: "#ccc",
-      borderWidth: "1px", // не утолщается при ховере
-    },
-    "&.Mui-focused fieldset": {
-      borderColor: "#ccc",
-      borderWidth: "1px", // не утолщается при фокусе
-    },
-    "& input": {
+    "& .MuiInputLabel-root": {
+      color: "#ccc",
       textAlign: "center",
-      alignItems: "center",
-      padding: 0,
+      backgroundColor: "#fff", // добавляем белый фон
+      padding: "0 4px", // немного пространства слева и справа
+      transform: "translate(50%, 50%)", // подгонка по центру, если нужно
+      "&.Mui-focused": {
+        color: "#ccc",
+      },
     },
-  },
-  "& .MuiInputLabel-root": {
-    color: "#ccc",
-    textAlign: "center",
-    alignItems: "center",
-    "&.Mui-focused": { color: "#ccc" },
-  },
-}}
+  }}
+/>
+    </div>
 
-      />
   </div>
   )}
 </div>
@@ -813,12 +885,12 @@ fontWeight: 400,
   </AccordionSummary>
   <AccordionDetails style={{ padding: "0px 0", textAlign: "justify", fontWeight: 400, fontSize: "1rem" }}>
     <Typography>
-Each thin, colorful line on the chart represents a unique AI model predicting the most probable scenario for Bitcoin’s next move. The thick dark-blue line shows the averaged outcome of these AI model cluster scenarios — the core BTC trend forecast — while the thick orange line displays historical BTC data.
+Each thin, colorful line on the chart represents a unique AI model predicting the most probable scenario for Bitcoin’s next move. The thick dark-blue line shows the averaged outcome of these AI model cluster scenarios - the core BTC trend forecast - while the thick orange line displays historical BTC data.
 <br></br><br></br>
 The forecast reflects both mid-term and global BTC trends.
-It may follow one of the cluster models more closely and show slight time elasticity — occurring a bit earlier or later — but it maintains overall consistency even during high volatility and market manipulations, making them easier to spot.
+It may follow one of the cluster models more closely and show slight time elasticity - occurring a bit earlier or later - but it maintains overall consistency even during high volatility and market manipulations, making them easier to spot.
 <br></br><br></br>
-AI models from the cluster perform advanced technical analysis and research nearly every other factor that could influence crypto’s next moves — from stock market indicators to even rarely used metaphysical aspects.
+AI models from the cluster perform advanced technical analysis and research nearly every other factor that could influence crypto’s next moves - from stock market indicators to even rarely used metaphysical aspects.
 <br></br><br></br>
 Models are renewed monthly with additional training data to stay accurate and up to date.
 At the beginning of each month, the forecast for the new month is released, while the current month’s forecast receives updates.
@@ -837,7 +909,7 @@ At the beginning of each month, the forecast for the new month is released, whil
   <AccordionDetails style={{ padding: "0px 0", textAlign: "justify", fontWeight: 400, fontSize: "1rem" }}>
     <Typography>
 Kaikasekai means "Flourishing World".<br></br>
-This insider-level, on-chain verified product empowers traders worldwide with the full potential of AI, open to everyone — whale or not — and price-friendly.
+This insider-level, on-chain verified product empowers traders worldwide with the full potential of AI, open to everyone - whale or not, yet.
 
 <div style={{ marginTop: 10, marginBottom: 10, boxShadow: "none", border: "none" }}>
               {!hasWhitelist && (
@@ -888,7 +960,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
   {
     nft: (
       <div style={{ width: '100%', height: 'calc(100% / 1.6)', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-        <img
+        <ImageZoom
           src="https://pbs.twimg.com/media/Gav5-CTWIAAv-Wf.jpg"
           alt="November 2024"
           style={{ maxWidth: '50%', height: 'auto', display: 'block' }}
@@ -900,7 +972,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
       </div>
     ),
     result: (
-      <img
+      <ImageZoom
         src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/1.PNG"
         alt="Result 1"
         style={{ width: '100%' }}
@@ -910,7 +982,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
   {
     nft: (
       <div style={{ width: '100%', height: 'calc(100% / 1.6)', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-        <img
+        <ImageZoom
           src="https://pbs.twimg.com/media/GdkpXY4WUAABozr.jpg"
           alt="December 2024"
           style={{ maxWidth: '50%', height: 'auto', display: 'block' }}
@@ -922,7 +994,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
       </div>
     ),
     result: (
-      <img
+      <ImageZoom
         src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/2.PNG"
         alt="Result 2"
         style={{ width: '100%' }}
@@ -932,7 +1004,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
   {
     nft: (
       <div style={{ width: '100%', height: 'calc(100% / 1.6)', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-        <img
+        <ImageZoom
           src="https://pbs.twimg.com/media/GgEdStmWoAAwSPG.jpg"
           alt="January 2025"
           style={{ maxWidth: '50%', height: 'auto', display: 'block' }}
@@ -944,7 +1016,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
       </div>
     ),
     result: (
-      <img
+      <ImageZoom
         src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/3.PNG"
         alt="Result 3"
         style={{ width: '100%' }}
@@ -954,7 +1026,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
   {
     nft: (
       <div style={{ width: '100%', height: 'calc(100% / 1.6)', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-        <img
+        <ImageZoom
           src="https://pbs.twimg.com/media/GjhvfCqW0AAPNY5.jpg"
           alt="February-March 2025"
           style={{ maxWidth: '50%', height: 'auto', display: 'block' }}
@@ -966,7 +1038,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
       </div>
     ),
     result: (
-      <img
+      <ImageZoom
         src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/4.PNG"
         alt="Result 4"
         style={{ width: '100%' }}
@@ -976,7 +1048,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
   {
     nft: (
       <div style={{ width: '100%', height: 'calc(100% / 1.6)', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-        <img
+        <ImageZoom
           src="https://pbs.twimg.com/media/Gni6nlrXEAAfkLw.jpg"
           alt="April-June 2025"
           style={{ maxWidth: '50%', height: 'auto', display: 'block' }}
@@ -988,7 +1060,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
       </div>
     ),
     result: (
-      <img
+      <ImageZoom
         src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/5.PNG"
         alt="Result 5"
         style={{ width: '100%' }}
@@ -998,7 +1070,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
   {
     nft: (
       <div style={{ width: '100%', height: 'calc(100% / 1.6)', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-        <img
+        <ImageZoom
           src="https://pbs.twimg.com/media/GxryXIYWMAAaRUD.jpg"
           alt="August-September 2025"
           style={{ maxWidth: '50%', height: 'auto', display: 'block' }}
@@ -1010,7 +1082,7 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
       </div>
     ),
     result: (
-      <img
+      <ImageZoom
         src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/6.PNG"
         alt="Result 6"
         style={{ width: '100%' }}
@@ -1022,14 +1094,14 @@ Use your wallet number as your referral code — your subscribers get 50% off, a
   ...proofs.map((nft) => ({
     nft: (
       <div style={{ width: '100%', height: 'calc(100% / 1.6)', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-        <img src={nft.image} alt={nft.name} style={{ maxWidth: '50%', height: 'auto', display: 'block' }} />
+        <ImageZoom src={nft.image} alt={nft.name} style={{ maxWidth: '50%', height: 'auto', display: 'block' }} />
         <h4>{nft.name}</h4>
         <p>{nft.description}</p>
         <a href={nft.polygonscan} target="_blank" rel="noopener noreferrer">View on Polygonscan</a>
       </div>
     ),
     result: (
-      <img
+      <ImageZoom
         src={`https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.id}.PNG`}
         alt={`Result ${nft.id}`}
         style={{ width: '100%' }}
@@ -1206,10 +1278,10 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
       variant="outlined"
       onClick={handleSendFeedback}
       sx={{
-    backgroundColor: "transparent",
-    marginTop: 10,
-    border: "1.5px solid #0080ff",
-    color: "#0080ff",
+    backgroundColor: "#0080ff",
+    marginTop: 2,
+    border: "0px",
+    color: "#ffffff",
     fontWeight: 500,
     borderRadius: "0px",
     cursor: "pointer",
