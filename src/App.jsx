@@ -143,6 +143,7 @@ function App() {
 
 
 // === ImageZoom ===
+// 🔍 Компонент увеличения изображения
 const ImageZoom = ({ src, alt }) => {
   const [zoomed, setZoomed] = useState(false);
 
@@ -160,7 +161,13 @@ const ImageZoom = ({ src, alt }) => {
         src={src}
         alt={alt}
         onClick={() => setZoomed(true)}
-        style={{ cursor: "zoom-in", width: "100%", height: "auto" }}
+        style={{
+          cursor: "zoom-in",
+          width: "100%",
+          height: "auto",
+          display: "block",
+          borderRadius: "10px",
+        }}
       />
 
       {zoomed && (
@@ -176,7 +183,7 @@ const ImageZoom = ({ src, alt }) => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            zIndex: 9999,
+            zIndex: 99999, // 👈 Повышаем приоритет
             cursor: "zoom-out",
           }}
         >
@@ -187,8 +194,8 @@ const ImageZoom = ({ src, alt }) => {
               maxWidth: "95vw",
               maxHeight: "95vh",
               objectFit: "contain",
-              borderRadius: "10px",
-              boxShadow: "0 0 20px rgba(0,0,0,0.5)",
+              borderRadius: "12px",
+              boxShadow: "0 0 20px rgba(255,255,255,0.2)",
             }}
           />
         </div>
@@ -196,7 +203,6 @@ const ImageZoom = ({ src, alt }) => {
     </>
   );
 };
-
 
   const log = (msg) =>
     setDebug((d) => [...d, `[${new Date().toLocaleTimeString()}] ${msg}`]);
@@ -718,6 +724,17 @@ fontWeight: 400,
 </div>
               </div>
 
+
+<div style={{ padding: "20px" }}>
+      <h2>Проверка Image Zoom</h2>
+
+      <ImageZoom
+        src="https://pbs.twimg.com/media/Gav5-CTWIAAv-Wf.jpg"
+        alt="November 2024"
+      />
+    </div>
+            
+
 {/* === Subscription block === */}
 <div>
   {account ? (
@@ -750,14 +767,14 @@ fontWeight: 400,
     style={{
       display: "flex",
       flexDirection: "column",
-      gap: "8px",
+      gap: "2px",
       marginTop: 10,
       marginBottom: 10,
       alignItems: "flex-start",
     }}
   >
 
-<div style={{ marginTop: 10, marginBottom: 10, boxShadow: "none", border: "none" }}>
+<div style={{ marginTop: 0, marginBottom: 0, boxShadow: "none", border: "none" }}>
     <Button
     variant="contained"
     onClick={handleSubscribe}
@@ -811,6 +828,8 @@ fontWeight: 400,
       "& input": {
         textAlign: "center",
         padding: 0,
+        color: #101214,
+        
       },
     },
     "& .MuiInputLabel-root": {
@@ -818,7 +837,7 @@ fontWeight: 400,
       textAlign: "center",
       backgroundColor: "#fff", // добавляем белый фон
       padding: "0 4px", // немного пространства слева и справа
-      transform: "translate(50%, 50%)", // подгонка по центру, если нужно
+      transform: "translate(0%, 50%)", // подгонка по центру, если нужно
       "&.Mui-focused": {
         color: "#ccc",
       },
@@ -936,7 +955,7 @@ This insider-level, on-chain verified product empowers traders worldwide with th
 )}
   </div>    
 Your wallet will be linked to the smart contract.
-Use your wallet number as your referral code — your subscribers get 50% off, and you earn 10% on every purchase.
+Use your wallet number as your referral code - your subscribers get 50% off, and you earn 10% on every purchase.
     </Typography>
   </AccordionDetails>
 </Accordion>
