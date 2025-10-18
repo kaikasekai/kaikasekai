@@ -392,7 +392,7 @@ const handleBuyWhitelist = async () => {
       log("Approving USDC for whitelist...");
       const approveTx = await usdc.approve(CONTRACT_ADDRESS, wlPrice);
       await approveTx.wait();
-      alert("✅ Approve confirmed. Now confirm Buy Whitelist in your wallet!");
+      alert("✅ Approve confirmed. Now confirm Referral Wallet Activation in your wallet!");
     }
 
     // задержка, чтобы MetaMask успел обработать approve
@@ -401,16 +401,16 @@ const handleBuyWhitelist = async () => {
     log("Buying whitelist...");
     const tx = await contract.buyWhitelist(); // contract уже создан с signer
     await tx.wait();
-    log("✅ BuyWhitelist confirmed");
+    log("✅ Referral Wallet Activated");
 
     // Обновим стейт whitelisted
     const whitelisted = await contract.whitelistedReferrers(account);
     setHasWhitelist(Boolean(whitelisted));
 
-    alert("✅ You are now whitelisted!");
+    alert("✅ Referral Wallet Activated!");
   } catch (e) {
     log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
-    alert("❌ Whitelist purchase failed");
+    alert("❌ Referral Wallet Activation failed");
   } finally {
     setProcessing(false);
   }
@@ -512,7 +512,7 @@ const handleDonate = async () => {
     alert("✅ Donation sent to contract. Thank you!");
   } catch (e) {
     log("❌ ERROR: " + (e?.reason || e?.message || JSON.stringify(e)));
-    alert("❌ Donation faild");
+    alert("❌ Donation failed");
   } finally {
     setProcessing(false);
   }
@@ -569,7 +569,7 @@ const handleSendFeedback = async () => {
       "oC-ls-BvdR82IZ6b4"
     );
 
-    alert("✅ Your message sent to the developers!");
+    alert("✅ Your message sent to developers!");
     setFeedbackEmail("");
     setFeedbackMessage("");
     setShowFeedbackForm(false);
@@ -611,7 +611,7 @@ const handleSendFeedback = async () => {
         {page === "main" && (
           <>
             {/* === Chart === */}
-            <div style={{ marginTop: 10, marginBottom: 10, width: "100%", minHeight: "200px" }}>
+            <div style={{ marginTop: 20, marginBottom: 20, width: "100%", minHeight: "200px" }}>
               <ResponsiveContainer width="100%" height={500} className="chart-wrapper">
                 <LineChart data={filteredData}>
                   <CartesianGrid strokeDasharray="3 3" />
@@ -630,7 +630,7 @@ const handleSendFeedback = async () => {
     value: "USD",
     angle: -90, // вертикально
     position: "insideBottomLeft", // у начала оси, внутри
-    offset: 15, // можно поиграть: 0..20 для тонкой подгонки
+    offset: 18, // можно поиграть: 0..20 для тонкой подгонки
     style: {
       textAnchor: "end",
       fill: "#666",
@@ -698,9 +698,20 @@ const handleSendFeedback = async () => {
                     ))}
                 </LineChart>
               </ResponsiveContainer>
-              <p></p>
 
-              <h1>Kaikasekai Trends</h1>
+              <h1
+  style={{
+    textTransform: "uppercase", // все буквы заглавные
+    fontSize: "2.25rem",         // или "36px"
+    fontWeight: 700,
+    lineHeight: "2.5rem",       // или "40px"
+    marginTop: "1.25rem",
+    marginBottom: "1.25rem",    // или "20px"
+  }}
+>
+  Kaikasekai Trends
+</h1>
+
             
       {/*       
               <div style={{ margin: 0 }}>
@@ -712,7 +723,7 @@ const handleSendFeedback = async () => {
               
 
 <div style={{
-  marginTop: 20,
+  marginTop: 0,
 fontWeight: 400,
   fontSize: "1.6rem",
 }}>
@@ -755,7 +766,7 @@ fontWeight: 400,
     style={{
       display: "flex",
       flexDirection: "column",
-      gap: "20px",
+      gap: "10px",
       marginTop: 20,
       marginBottom: 20,
       alignItems: "flex-start",
@@ -799,7 +810,6 @@ fontWeight: 400,
   sx={{
   width: "36ch",
   "& .MuiOutlinedInput-root": {
-    height: "24px",
     borderRadius: 0,
     "& fieldset": {
       borderColor: "#ccc",
