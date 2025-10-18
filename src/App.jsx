@@ -611,7 +611,7 @@ const handleSendFeedback = async () => {
         {page === "main" && (
           <>
             {/* === Chart === */}
-            <div style={{ marginTop: 20, marginBottom: 20, width: "100%", minHeight: "200px" }}>
+            <div style={{ marginTop: 30, marginBottom: 0, width: "100%", minHeight: "200px" }}>
               <ResponsiveContainer width="100%" height={500} className="chart-wrapper">
                 <LineChart data={filteredData}>
                   <CartesianGrid strokeDasharray="3 3" />
@@ -702,11 +702,11 @@ const handleSendFeedback = async () => {
               <h1
   style={{
     textTransform: "uppercase", // все буквы заглавные
-    fontSize: "2.5rem",         // или "36px"
+    fontSize: "2rem",         // или "36px"
     fontWeight: 700,
-    lineHeight: "2.5em",       // или "40px"
-    marginTop: "1.25em",
-    marginBottom: "1.25em",    // или "20px"
+    lineHeight: "2em",       // или "40px"
+    marginTop: "1em",
+    marginBottom: "1em",    // или "20px"
   }}
 >
   Kaikasekai Trends
@@ -725,7 +725,7 @@ const handleSendFeedback = async () => {
 <div style={{
   marginTop: 0,
 fontWeight: 500,
-  fontSize: "1.7rem",
+  fontSize: "1.6rem",
   lineHeight: "2em", 
 }}>
   Advanced AI-powered algorithm predicts the global BTC trend with {mape}%<sup>*</sup> accuracy
@@ -801,7 +801,7 @@ fontWeight: 500,
   <div>
       <TextField
   variant="outlined"
-  label="24.9 USDC with referral code"
+  placeholder="24.9 USDC with referral code"
   value={referrer}
   onChange={(e) => setReferrer(e.target.value)}
   inputProps={{
