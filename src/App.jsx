@@ -630,7 +630,7 @@ const handleSendFeedback = async () => {
     value: "USD",
     angle: -90, // вертикально
     position: "insideBottomLeft", // у начала оси, внутри
-    offset: 18, // можно поиграть: 0..20 для тонкой подгонки
+    offset: 15, // можно поиграть: 0..20 для тонкой подгонки
     style: {
       textAnchor: "end",
       fill: "#666",
@@ -704,7 +704,6 @@ const handleSendFeedback = async () => {
     textTransform: "uppercase", // все буквы заглавные
     fontSize: "2rem",         // или "36px"
     fontWeight: 700,
-    lineHeight: "2em",       // или "40px"
     marginTop: "1em",
     marginBottom: "1em",    // или "20px"
   }}
@@ -725,8 +724,8 @@ const handleSendFeedback = async () => {
 <div style={{
   marginTop: 0,
 fontWeight: 500,
-  fontSize: "1.6rem",
-  lineHeight: "2em", 
+  fontSize: "1.4rem",
+  lineHeight: "1.5em", 
 }}>
   Advanced AI-powered algorithm predicts the global BTC trend with {mape}%<sup>*</sup> accuracy
 </div>
@@ -736,7 +735,7 @@ fontWeight: 500,
               </div>
 
 {/* === Subscription block === */}
-<div>
+<div style={{ marginTop: 30 }}>
   {account ? (
     subscriptionActive ? (
       <div>
@@ -844,7 +843,7 @@ fontWeight: 500,
 
 {/* === Wallet section === */}
 {!account ? (
-  <div style={{ display: "inline-block", marginTop: 0, marginBottom: 60 }}>
+  <div style={{ display: "inline-block", marginTop: 10, marginBottom: 60 }}>
     <Button
       onClick={connectWallet}
       disableElevation
