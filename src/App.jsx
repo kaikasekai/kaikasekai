@@ -702,11 +702,11 @@ const handleSendFeedback = async () => {
               <h1
   style={{
     textTransform: "uppercase", // все буквы заглавные
-    fontSize: "2.25rem",         // или "36px"
+    fontSize: "2.5rem",         // или "36px"
     fontWeight: 700,
-    lineHeight: "2.5rem",       // или "40px"
-    marginTop: "1.25rem",
-    marginBottom: "1.25rem",    // или "20px"
+    lineHeight: "2.5em",       // или "40px"
+    marginTop: "1.25em",
+    marginBottom: "1.25em",    // или "20px"
   }}
 >
   Kaikasekai Trends
@@ -724,13 +724,14 @@ const handleSendFeedback = async () => {
 
 <div style={{
   marginTop: 0,
-fontWeight: 400,
-  fontSize: "1.6rem",
+fontWeight: 500,
+  fontSize: "1.7rem",
+  lineHeight: "2em", 
 }}>
   Advanced AI-powered algorithm predicts the global BTC trend with {mape}%<sup>*</sup> accuracy
 </div>
-<div style={{ display: "block", marginTop: 2, color: "#666666", fontWeight: 300, fontSize: "0.9rem" }}>
-  <sup>*</sup> Based on rolling 30-day metrics
+<div style={{ display: "block", marginTop: 0, color: "#666", fontWeight: 400, fontSize: "1.1rem", lineHeight: "1.5em" }}>
+  <sup>*</sup>based on rolling 30-day metrics
 </div>
               </div>
 
@@ -811,6 +812,7 @@ fontWeight: 400,
   width: "36ch",
   "& .MuiOutlinedInput-root": {
     borderRadius: 0,
+    height: "42px",
     "& fieldset": {
       borderColor: "#ccc",
       borderWidth: "1px", // одинаковая толщина
