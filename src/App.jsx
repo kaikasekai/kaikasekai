@@ -602,7 +602,7 @@ const handleSendFeedback = async () => {
       <main
         style={{
     padding: 10,
-    maxWidth: "min(95vw, 1000px)",     // не выходит за границы экрана
+    maxWidth: "min(98vw, 1000px)",     // не выходит за границы экрана
     margin: "0 auto",                  // выравнивает по центру
     boxSizing: "border-box",           // учитывает padding в ширине
   }}
@@ -896,8 +896,8 @@ fontWeight: 500,
   >
     <Typography  sx={{ fontWeight: 500, fontSize: "1.8rem" }}>How it works</Typography>
   </AccordionSummary>
-  <AccordionDetails sx={{ padding: "0px 0", textAlign: "justify", fontWeight: 400, fontSize: "1.4rem" }}>
-    <Typography>
+  <AccordionDetails >
+    <Typography sx={{ padding: "0px 0", textAlign: "justify", fontWeight: 400, fontSize: "1.4rem" }}>
 Each thin, colorful line on the chart represents a unique AI model predicting the most probable scenario for Bitcoin’s next move. The thick dark-blue line shows the averaged outcome of these AI model cluster scenarios - the core BTC trend forecast - while the thick orange line displays historical BTC data.
 <br></br><br></br>
 The forecast reflects both mid-term and global BTC trends.
@@ -919,8 +919,8 @@ At the beginning of each month, the forecast for the new month is released, whil
   >
     <Typography sx={{ fontWeight: 500, fontSize: "1.8rem" }}>Referral programm</Typography>
   </AccordionSummary>
-  <AccordionDetails sx={{ padding: "0px 0", textAlign: "justify", fontWeight: 400, fontSize: "1.4rem" }}>
-    <Typography>
+  <AccordionDetails>
+    <Typography  sx={{ padding: "0px 0", textAlign: "justify", fontWeight: 400, fontSize: "1.4rem" }}>
 Kaikasekai means Flourishing World.<br></br>
 This insider-level, on-chain verified product empowers traders worldwide with the full potential of AI, open to everyone - whale or not.
 
@@ -1225,8 +1225,6 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
     backgroundColor: "transparent",
     border: "1.5px solid #0080ff",
     color: "#0080ff",
-    height: "46px",
-      padding: 2,
     fontWeight: 500,
     borderRadius: "0px",
     cursor: "pointer",
