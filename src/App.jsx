@@ -607,8 +607,6 @@ const handleSendFeedback = async () => {
     boxSizing: "border-box",           // учитывает padding в ширине
   }}
         >
-
-<div style={{ padding: 10 }} >
         
         {/* === Страница MAIN === */}
         {page === "main" && (
@@ -701,14 +699,14 @@ const handleSendFeedback = async () => {
                     ))}
                 </LineChart>
               </ResponsiveContainer>
-
+<div style={{ padding: 10 }} >
               <h1
   style={{
     textTransform: "uppercase", // все буквы заглавные
     fontSize: "2rem",         // или "36px"
     fontWeight: 700,
     marginTop: "20px",
-    marginBottom: "20px",    // или "20px"
+    marginBottom: "10px",    // или "20px"
   }}
 >
   Kaikasekai Trends
@@ -738,7 +736,7 @@ fontWeight: 500,
               </div>
 
 {/* === Subscription block === */}
-<div style={{ marginTop: 20 }}>
+<div style={{ marginTop: 40 }}>
   {account ? (
     subscriptionActive ? (
       <div>
