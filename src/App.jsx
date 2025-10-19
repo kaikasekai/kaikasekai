@@ -612,7 +612,7 @@ const handleSendFeedback = async () => {
         {page === "main" && (
           <>
             {/* === Chart === */}
-            <div style={{ marginTop: 30, marginBottom: 0, width: "100%", minHeight: "200px" }}>
+            <div style={{ marginTop: 46, marginBottom: 0, width: "100%", minHeight: "200px" }}>
               <ResponsiveContainer width="100%" height={500} className="chart-wrapper">
                 <LineChart data={filteredData}>
                   <CartesianGrid strokeDasharray="3 3" />
@@ -699,14 +699,14 @@ const handleSendFeedback = async () => {
                     ))}
                 </LineChart>
               </ResponsiveContainer>
-<div style={{ padding: 16 }} >
+<div style={{ padding: "16px" }} >
               <h1
   style={{
     textTransform: "uppercase", // все буквы заглавные
-    fontSize: "2rem",         // или "36px"
+    fontSize: "1.75rem",         // или "36px"
     fontWeight: 700,
     marginTop: "20px",
-    marginBottom: "15px",    // или "20px"
+    marginBottom: "20px",    // или "20px"
   }}
 >
   Kaikasekai Trends
@@ -725,7 +725,7 @@ const handleSendFeedback = async () => {
 <div style={{
   marginTop: 0,
 fontWeight: 500,
-  fontSize: "1.4rem",
+  fontSize: "1.25rem",
   lineHeight: "1.5em", 
 }}>
   Advanced AI-powered algorithm predicts the global BTC trend with {mape}%<sup>*</sup> accuracy
@@ -736,7 +736,7 @@ fontWeight: 500,
               </div>
 
 {/* === Subscription block === */}
-<div style={{ marginTop: 30, padding: 16 }}>
+<div style={{ marginTop: 24, paddingLeft: "16px" }}>
   {account ? (
     subscriptionActive ? (
       <div>
@@ -769,7 +769,7 @@ fontWeight: 500,
       flexDirection: "column",
       gap: "20px",
       marginTop: 10,
-      marginBottom: 20,
+      marginBottom: 10,
       alignItems: "flex-start",
     }}
   >
@@ -785,7 +785,7 @@ fontWeight: 500,
     backgroundColor: "#F7931A",
     color: "#101214",
     fontWeight: 500,
-    fontSize: "1.2rem",
+    fontSize: "1.1rem",
       height: "46px",
     border: "none",
     borderRadius: "0px",
@@ -845,7 +845,7 @@ fontWeight: 500,
 
 {/* === Wallet section === */}
 {!account ? (
-  <div style={{ display: "inline-block", marginTop: 0, marginBottom: 60, padding: 16 }}>
+  <div style={{ display: "inline-block", marginTop: 0, marginBottom: 48, paddingLeft: "16px" }}>
     <Button
       onClick={connectWallet}
       disableElevation
@@ -855,7 +855,7 @@ fontWeight: 500,
         padding: 2,
         height: "46px",
         fontWeight: 500,
-        fontSize: "1.2rem",
+        fontSize: "1.1rem",
         border: "none",
         borderRadius: 0,
         cursor: "pointer",
@@ -866,7 +866,7 @@ fontWeight: 500,
     </Button>
   </div>
 ) : (
-  <div style={{ padding: 16 }}>
+  <div style={{ paddingLeft: "16px" }}>
     <p style={{ color: "#0080ff" }}>Connected: {account}</p>
   </div>
 )}
@@ -892,7 +892,7 @@ fontWeight: 500,
       )}
         */}   
                {/* === Accordions === */}
-<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none", paddingRight: 16 }}>
+<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none", paddingLeft: "16px" }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("how") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("how")}
@@ -915,7 +915,7 @@ At the beginning of each month, the forecast for the new month is released, whil
   </AccordionDetails>
 </Accordion>
 
-<Accordion style={{ marginTop: 0  boxShadow: "none", border: "none", paddingRight: 16 }}>
+<Accordion style={{ marginTop: 0  boxShadow: "none", border: "none", paddingLeft: "16px" }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("ref") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("ref")}
@@ -941,7 +941,7 @@ This insider-level, on-chain verified product empowers traders worldwide with th
       padding: 2,
     color: "#101214",
     fontWeight: 500,
-    fontSize: "1.2rem",
+    fontSize: "1.1rem",
     border: "none",
     borderRadius: "0px",
     cursor: "pointer",
@@ -960,7 +960,7 @@ Use your wallet number as your referral code - your subscribers get 50% off, and
   </AccordionDetails>
 </Accordion>
 
-<Accordion style={{ marginTop: 0, marginLeft: 10,  boxShadow: "none", border: "none", paddingRight: 16 }}>
+<Accordion style={{ marginTop: 0, marginLeft: 10,  boxShadow: "none", border: "none", paddingLeft: "16px" }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("proofs") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("proofs")}
@@ -1258,7 +1258,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
     fontWeight: 500,
     height: "46px",
     padding: 2,
-    fontSize: "1.2rem",
+    fontSize: "1.1rem",
     borderRadius: "0px",
     cursor: "pointer",
     "&:hover": {
