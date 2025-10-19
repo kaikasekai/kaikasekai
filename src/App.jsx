@@ -845,7 +845,7 @@ fontWeight: 500,
 
 {/* === Wallet section === */}
 {!account ? (
-  <div style={{ display: "inline-block", marginTop: 10, marginBottom: 60, padding: 16 }}>
+  <div style={{ display: "inline-block", marginTop: 0, marginBottom: 60, padding: 16 }}>
     <Button
       onClick={connectWallet}
       disableElevation
@@ -866,7 +866,7 @@ fontWeight: 500,
     </Button>
   </div>
 ) : (
-  <div>
+  <div style={{ padding: 16 }}>
     <p style={{ color: "#0080ff" }}>Connected: {account}</p>
   </div>
 )}
@@ -892,7 +892,7 @@ fontWeight: 500,
       )}
         */}   
                {/* === Accordions === */}
-<Accordion style={{ marginTop: 0, marginLeft: 10, boxShadow: "none", border: "none", padding: 16 }}>
+<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none", paddingRight: 16 }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("how") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("how")}
@@ -915,7 +915,7 @@ At the beginning of each month, the forecast for the new month is released, whil
   </AccordionDetails>
 </Accordion>
 
-<Accordion style={{ marginTop: 0, marginLeft: 10,  boxShadow: "none", border: "none", padding: 16 }}>
+<Accordion style={{ marginTop: 0  boxShadow: "none", border: "none", paddingRight: 16 }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("ref") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("ref")}
@@ -960,7 +960,7 @@ Use your wallet number as your referral code - your subscribers get 50% off, and
   </AccordionDetails>
 </Accordion>
 
-<Accordion style={{ marginTop: 0, marginLeft: 10,  boxShadow: "none", border: "none", padding: 16 }}>
+<Accordion style={{ marginTop: 0, marginLeft: 10,  boxShadow: "none", border: "none", paddingRight: 16 }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("proofs") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("proofs")}
