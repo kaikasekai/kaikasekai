@@ -699,14 +699,14 @@ const handleSendFeedback = async () => {
                     ))}
                 </LineChart>
               </ResponsiveContainer>
-<div style={{ padding: 10 }} >
+<div style={{ padding: 16 }} >
               <h1
   style={{
     textTransform: "uppercase", // все буквы заглавные
     fontSize: "2rem",         // или "36px"
     fontWeight: 700,
     marginTop: "20px",
-    marginBottom: "10px",    // или "20px"
+    marginBottom: "15px",    // или "20px"
   }}
 >
   Kaikasekai Trends
@@ -736,7 +736,7 @@ fontWeight: 500,
               </div>
 
 {/* === Subscription block === */}
-<div style={{ marginTop: 40 }}>
+<div style={{ marginTop: 30, padding: 16 }}>
   {account ? (
     subscriptionActive ? (
       <div>
@@ -845,7 +845,7 @@ fontWeight: 500,
 
 {/* === Wallet section === */}
 {!account ? (
-  <div style={{ display: "inline-block", marginTop: 10, marginBottom: 60 }}>
+  <div style={{ display: "inline-block", marginTop: 10, marginBottom: 60, padding: 16 }}>
     <Button
       onClick={connectWallet}
       disableElevation
@@ -892,7 +892,7 @@ fontWeight: 500,
       )}
         */}   
                {/* === Accordions === */}
-<Accordion style={{ marginTop: 0, marginLeft: 10, boxShadow: "none", border: "none" }}>
+<Accordion style={{ marginTop: 0, marginLeft: 10, boxShadow: "none", border: "none", padding: 16 }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("how") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("how")}
@@ -915,7 +915,7 @@ At the beginning of each month, the forecast for the new month is released, whil
   </AccordionDetails>
 </Accordion>
 
-<Accordion style={{ marginTop: 0, marginLeft: 10,  boxShadow: "none", border: "none" }}>
+<Accordion style={{ marginTop: 0, marginLeft: 10,  boxShadow: "none", border: "none", padding: 16 }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("ref") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("ref")}
@@ -960,7 +960,7 @@ Use your wallet number as your referral code - your subscribers get 50% off, and
   </AccordionDetails>
 </Accordion>
 
-<Accordion style={{ marginTop: 0, marginLeft: 10,  boxShadow: "none", border: "none" }}>
+<Accordion style={{ marginTop: 0, marginLeft: 10,  boxShadow: "none", border: "none", padding: 16 }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("proofs") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("proofs")}
