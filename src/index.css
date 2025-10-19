@@ -147,13 +147,13 @@ strong, b {
 .MuiAccordionSummary-root .MuiTypography-root {
   font-family: var(--font-main);
   font-weight: 400;
-  font-size: 1.6rem !important;
+  font-size: 1.8rem !important;
 }
 
 .MuiAccordionSummary-content {
   font-family: var(--font-main);
   margin: 0 !important;
-  font-size: var(--fs-body) !important;
+  font-size: 1.4rem !important;
   align-items: center !important;
   transition: none !important;
 }
@@ -162,7 +162,7 @@ strong, b {
   padding: 6px 0 !important;
   font-family: var(--font-main);
   font-weight: 400;
-  font-size: 1rem;
+  font-size: 1.4rem;
 }
 
 .MuiAccordionSummary-root.Mui-expanded,
@@ -178,11 +178,11 @@ strong, b {
 .MuiAccordionSummary-expandIconWrapper { color: var(--text-dark); }
 
 .accordion-icon {
-  font-size: 2rem;
-  font-weight: 300;
-  line-height: 1;
+  font-size: 2.4rem;
+  font-weight: 400;
+  line-height: 1.5;
   color: var(--text-dark);
-  width: 24px;
+  width: 30px;
   display: inline-block;
   text-align: center;
 }
