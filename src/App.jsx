@@ -705,7 +705,7 @@ const handleSendFeedback = async () => {
     fontSize: "2.35rem",         // или "36px"
     fontWeight: 700,
     marginTop: "30px",
-    marginBottom: "30px",    // или "20px"
+    marginBottom: "20px",    // или "20px"
   }}
 >
   Kaikasekai Trends
@@ -735,7 +735,7 @@ fontWeight: 500,
               </div>
 
 {/* === Subscription block === */}
-<div style={{ marginTop: 50 }}>
+<div style={{ marginTop: 40 }}>
   {account ? (
     subscriptionActive ? (
       <div>
@@ -766,7 +766,7 @@ fontWeight: 500,
     style={{
       display: "flex",
       flexDirection: "column",
-      gap: "10px",
+      gap: "20px",
       marginTop: 20,
       marginBottom: 20,
       alignItems: "flex-start",
@@ -894,9 +894,9 @@ fontWeight: 500,
     onClick={() => toggleAccordion("how")}
     style={{ padding: "0px 0" }}
   >
-    <Typography style={{ fontWeight: 500, fontSize: "1.8rem" }}>How it works</Typography>
+    <Typography  sx={{ fontWeight: 500, fontSize: "1.8rem" }}>How it works</Typography>
   </AccordionSummary>
-  <AccordionDetails style={{ padding: "0px 0", textAlign: "justify", fontWeight: 400, fontSize: "1.4rem" }}>
+  <AccordionDetails sx={{ padding: "0px 0", textAlign: "justify", fontWeight: 400, fontSize: "1.4rem" }}>
     <Typography>
 Each thin, colorful line on the chart represents a unique AI model predicting the most probable scenario for Bitcoin’s next move. The thick dark-blue line shows the averaged outcome of these AI model cluster scenarios - the core BTC trend forecast - while the thick orange line displays historical BTC data.
 <br></br><br></br>
@@ -917,9 +917,9 @@ At the beginning of each month, the forecast for the new month is released, whil
     onClick={() => toggleAccordion("ref")}
     style={{ padding: "0px 0" }}
   >
-    <Typography style={{ fontWeight: 500, fontSize: "1.8rem" }}>Referral programm</Typography>
+    <Typography sx={{ fontWeight: 500, fontSize: "1.8rem" }}>Referral programm</Typography>
   </AccordionSummary>
-  <AccordionDetails style={{ padding: "0px 0", textAlign: "justify", fontWeight: 400, fontSize: "1.4rem" }}>
+  <AccordionDetails sx={{ padding: "0px 0", textAlign: "justify", fontWeight: 400, fontSize: "1.4rem" }}>
     <Typography>
 Kaikasekai means Flourishing World.<br></br>
 This insider-level, on-chain verified product empowers traders worldwide with the full potential of AI, open to everyone - whale or not.
@@ -962,7 +962,7 @@ Use your wallet number as your referral code - your subscribers get 50% off, and
     onClick={() => toggleAccordion("proofs")}
     style={{ padding: "0px 0" }}
   >
-    <Typography style={{ fontWeight: 500, fontSize: "1.8rem" }}>Proofs</Typography>
+    <Typography sx={{ fontWeight: 500, fontSize: "1.8rem" }}>Proofs</Typography>
   </AccordionSummary>
   <AccordionDetails style={{ padding: 0 }}>
   {proofs.length === 0 ? (
