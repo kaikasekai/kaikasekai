@@ -740,7 +740,7 @@ fontWeight: 500,
   {account ? (
     subscriptionActive ? (
       <div>
-        <p style={{ color: "#00C853" }}>Subscription active</p>
+        <p style={{ color: "#00C853", fontSize: "1.25rem", fontWeight: 300 }}>Subscription active</p>
         {subscriptionEnd && (
           <p>
             Your subscription ends on:{" "}
@@ -750,7 +750,7 @@ fontWeight: 500,
       </div>
     ) : (
       <div>
-        <p style={{ color: "#FF5252" }}>Subscription inactive</p>
+        <p style={{ color: "#FF5252", fontSize: "1.25rem", fontWeight: 300 }}>Subscription inactive</p>
         {nextEndTime && (
           <p>
             Subscription ends on:{" "}
@@ -769,7 +769,7 @@ fontWeight: 500,
       flexDirection: "column",
       gap: "20px",
       marginTop: 10,
-      marginBottom: 10,
+      marginBottom: 24,
       alignItems: "flex-start",
     }}
   >
@@ -807,7 +807,7 @@ fontWeight: 500,
   onChange={(e) => setReferrer(e.target.value)}
   inputProps={{
     maxLength: 42,
-    style: { textAlign: "center" },
+    style: { textAlign: "left" },
   }}
   sx={{
   width: "36ch",
@@ -827,7 +827,7 @@ fontWeight: 500,
       borderWidth: "1px", // не утолщается при фокусе
     },
     "& input": {
-      textAlign: "center",
+      textAlign: "left",
       padding: 0,
     },
   },
@@ -867,7 +867,7 @@ fontWeight: 500,
   </div>
 ) : (
   <div style={{ paddingLeft: "16px", marginBottom: "48px" }}>
-    <p style={{ color: "#0080ff" }}>Connected: {account}</p>
+    <p style={{ color: "#0080ff", fontSize: "1.25rem", fontWeight: 300 }}>Connected: {account}</p>
   </div>
 )}
 
@@ -892,13 +892,13 @@ fontWeight: 500,
       )}
         */}   
                {/* === Accordions === */}
-<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none", paddingLeft: "16px" }}>
+<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none", paddingLeft: "16px", paddingRight: "16px" }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("how") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("how")}
     style={{ padding: "0px 0" }}
   >
-    <Typography  sx={{ fontWeight: 500, fontSize: "1.8rem" }}>How it works</Typography>
+    <Typography  sx={{ fontWeight: 500, fontSize: "1.6rem" }}>How it works</Typography>
   </AccordionSummary>
   <AccordionDetails >
     <Typography sx={{ padding: "0px 0", textAlign: "justify", fontWeight: 400, fontSize: "1.4rem" }}>
@@ -915,13 +915,13 @@ At the beginning of each month, the forecast for the new month is released, whil
   </AccordionDetails>
 </Accordion>
 
-<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none", paddingLeft: "16px" }}>
+<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none", paddingLeft: "16px", paddingRight: "16px" }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("ref") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("ref")}
     style={{ padding: "0px 0" }}
   >
-    <Typography sx={{ fontWeight: 500, fontSize: "1.8rem" }}>Referral programm</Typography>
+    <Typography sx={{ fontWeight: 500, fontSize: "1.6rem" }}>Referral programm</Typography>
   </AccordionSummary>
   <AccordionDetails>
     <Typography  sx={{ padding: "0px 0", textAlign: "justify", fontWeight: 400, fontSize: "1.4rem" }}>
@@ -960,13 +960,13 @@ Use your wallet number as your referral code - your subscribers get 50% off, and
   </AccordionDetails>
 </Accordion>
 
-<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none", paddingLeft: "16px" }}>
+<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none", paddingLeft: "16px", paddingRight: "16px" }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("proofs") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("proofs")}
     style={{ padding: "0px 0" }}
   >
-    <Typography sx={{ fontWeight: 500, fontSize: "1.8rem" }}>Proofs</Typography>
+    <Typography sx={{ fontWeight: 500, fontSize: "1.6rem" }}>Proofs</Typography>
   </AccordionSummary>
   <AccordionDetails style={{ padding: 0 }}>
   {proofs.length === 0 ? (
