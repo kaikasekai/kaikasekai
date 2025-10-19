@@ -730,7 +730,7 @@ fontWeight: 500,
 }}>
   Advanced AI-powered algorithm predicts the global BTC trend with {mape}%<sup>*</sup> accuracy
 </div>
-<div style={{ display: "block", marginTop: 0, color: "#666", fontWeight: 400, fontSize: "1.4rem", lineHeight: "1.5em" }}>
+<div style={{ display: "block", marginTop: 0, color: "#666", fontWeight: 400, fontSize: "1.25rem", lineHeight: "1.5em" }}>
   <sup>*</sup>based on rolling 30-day metrics
 </div>
               </div>
@@ -866,7 +866,7 @@ fontWeight: 500,
     </Button>
   </div>
 ) : (
-  <div style={{ paddingLeft: "16px" }}>
+  <div style={{ paddingLeft: "16px", marginBottom: "48px" }}>
     <p style={{ color: "#0080ff" }}>Connected: {account}</p>
   </div>
 )}
@@ -879,7 +879,7 @@ fontWeight: 500,
         <div style={{ marginTop: 20 }}>
           <h3>Donate</h3>
           <TextField
-            label="Amount (USDC)"
+            label="Amount USDC"
             value={donateAmount}
             onChange={(e) => setDonateAmount(e.target.value)}
             fullWidth
@@ -915,7 +915,7 @@ At the beginning of each month, the forecast for the new month is released, whil
   </AccordionDetails>
 </Accordion>
 
-<Accordion style={{ marginTop: 0  boxShadow: "none", border: "none", paddingLeft: "16px" }}>
+<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none", paddingLeft: "16px" }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("ref") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("ref")}
@@ -950,7 +950,7 @@ This insider-level, on-chain verified product empowers traders worldwide with th
     },
   }}
   >
-    Activate Referral Wallet (99.9 USDC)
+    Activate Referral Wallet 99.9 USDC
   </Button>
 )}
   </div>    
@@ -960,7 +960,7 @@ Use your wallet number as your referral code - your subscribers get 50% off, and
   </AccordionDetails>
 </Accordion>
 
-<Accordion style={{ marginTop: 0, marginLeft: 10,  boxShadow: "none", border: "none", paddingLeft: "16px" }}>
+<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none", paddingLeft: "16px" }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("proofs") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("proofs")}
