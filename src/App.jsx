@@ -870,7 +870,10 @@ fontWeight: 500,
     <p style={{ color: "#0080ff" }}>Connected: {account}</p>
   </div>
 )}
-        
+
+   </div>  
+
+            
       {/* === Donate (оставляем только для подключённого кошелька) === 
       {account && (
         <div style={{ marginTop: 20 }}>
@@ -889,7 +892,7 @@ fontWeight: 500,
       )}
         */}   
                {/* === Accordions === */}
-<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none" }}>
+<Accordion style={{ marginTop: 0, marginLeft: 10, boxShadow: "none", border: "none" }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("how") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("how")}
@@ -912,7 +915,7 @@ At the beginning of each month, the forecast for the new month is released, whil
   </AccordionDetails>
 </Accordion>
 
-<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none" }}>
+<Accordion style={{ marginTop: 0, marginLeft: 10,  boxShadow: "none", border: "none" }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("ref") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("ref")}
@@ -957,7 +960,7 @@ Use your wallet number as your referral code - your subscribers get 50% off, and
   </AccordionDetails>
 </Accordion>
 
-<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none" }}>
+<Accordion style={{ marginTop: 0, marginLeft: 10,  boxShadow: "none", border: "none" }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("proofs") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("proofs")}
@@ -1132,8 +1135,8 @@ Use your wallet number as your referral code - your subscribers get 50% off, and
 </Accordion>
           </>
         )}
-        </div>
         
+       
         {/* === Accordions (тоже вынесены, теперь видны всегда) === */}
 
 {/* === Debug Log (в аккордеоне) === 
