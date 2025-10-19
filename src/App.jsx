@@ -1132,7 +1132,7 @@ Use your wallet number as your referral code - your subscribers get 50% off, and
 </Accordion>
           </>
         )}
-        
+        </div>
         
         {/* === Accordions (тоже вынесены, теперь видны всегда) === */}
 
@@ -1320,7 +1320,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
         )}
 
 
-  </div>
+  
 
         
       </main>
