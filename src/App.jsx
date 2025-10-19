@@ -607,6 +607,9 @@ const handleSendFeedback = async () => {
     boxSizing: "border-box",           // учитывает padding в ширине
   }}
         >
+
+<div style={{ padding: 10 }} >
+        
         {/* === Страница MAIN === */}
         {page === "main" && (
           <>
@@ -702,9 +705,9 @@ const handleSendFeedback = async () => {
               <h1
   style={{
     textTransform: "uppercase", // все буквы заглавные
-    fontSize: "2.35rem",         // или "36px"
+    fontSize: "2rem",         // или "36px"
     fontWeight: 700,
-    marginTop: "30px",
+    marginTop: "20px",
     marginBottom: "20px",    // или "20px"
   }}
 >
@@ -735,7 +738,7 @@ fontWeight: 500,
               </div>
 
 {/* === Subscription block === */}
-<div style={{ marginTop: 40 }}>
+<div style={{ marginTop: 20 }}>
   {account ? (
     subscriptionActive ? (
       <div>
@@ -767,7 +770,7 @@ fontWeight: 500,
       display: "flex",
       flexDirection: "column",
       gap: "20px",
-      marginTop: 20,
+      marginTop: 10,
       marginBottom: 20,
       alignItems: "flex-start",
     }}
@@ -1317,6 +1320,11 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
             </p>
           </div>
         )}
+
+
+  </div>
+
+        
       </main>
 
 {/* === Floating Donate Donut Button (inline SVG version) === */}
