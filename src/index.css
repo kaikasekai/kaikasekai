@@ -79,8 +79,8 @@ html {
 
 body, #root {
   font-family: var(--font-main) !important;
-  font-weight: 400;
-  font-size: 1.4rem;
+  font-weight: 300;
+  font-size: 1.25rem;
   line-height: var(--lh-normal);
   margin: 0;
   padding: 0;
@@ -113,7 +113,7 @@ h4, h5, h6 { font-size: var(--fs-body); opacity: var(--opacity-medium); }
 
 strong, b {
   font-weight: 700;
-  font-size: 1.2em;
+  font-size: 1.25em;
   color: var(--text-dark);
   opacity: var(--opacity-strong);
 }
@@ -298,6 +298,7 @@ body .chart-wrapper .chart-tooltip .value.yellow  { color: #FFD700 !important; }
   background: radial-gradient(circle at 50% 40%, var(--bg-dark), var(--bg-dark-alt) 80%);
   border-radius: 0px;
   padding: 10px;
+  padding-top: 20px;
   box-sizing: border-box;
 }
 
@@ -329,7 +330,7 @@ main {
 footer {
   flex-shrink: 0;
   border-top: 1px solid rgba(0,0,0,0.1);
-  padding: 10px;
+  padding: 20px;
   background: var(--bg-light);
   color: var(--text-dark);
   width: 100%;
@@ -347,12 +348,12 @@ footer {
   display: flex;
   justify-content: center;
   gap: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
 }
 
 .footer-link {
   font-family: var(--font-main);
-  color: #555;
+  color: #666;
   font-size: 0.9rem;
   font-weight: 300;
   cursor: pointer;
@@ -375,9 +376,8 @@ footer {
   font-family: var(--font-main);
   font-size: 0.9rem;
   font-weight: 300;
-  color: #555;
+  color: #666;
   text-align: center;
-  padding: 1em 0;
 }
 
 /* --------------------------------------------------------
