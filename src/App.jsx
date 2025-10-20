@@ -846,7 +846,7 @@ fontWeight: 500,
 
 {/* === Wallet section === */}
 {!account ? (
-  <div style={{ display: "inline-block", marginTop: 0, marginBottom: 48, paddingLeft: 20px" }}>
+  <div style={{ display: "inline-block", marginTop: 0, marginBottom: 48, paddingLeft: "20px" }}>
     <Button
       onClick={connectWallet}
       disableElevation
@@ -961,7 +961,7 @@ Use your wallet number as your referral code - your subscribers get 50% off, and
   </AccordionDetails>
 </Accordion>
 
-<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none", paddingLeft: 20px", paddingRight: 20px" }}>
+<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none", paddingLeft: "20px", paddingRight: "20px" }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("proofs") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("proofs")}
