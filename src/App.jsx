@@ -699,13 +699,13 @@ const handleSendFeedback = async () => {
                     ))}
                 </LineChart>
               </ResponsiveContainer>
-<div style={{ padding: "16px" }} >
+<div style={{ padding: "20px" }} >
               <h1
   style={{
     textTransform: "uppercase", // все буквы заглавные
-    fontSize: "1.75rem",         // или "36px"
+    fontSize: "1.8rem",         // или "36px"
     fontWeight: 700,
-    marginTop: "20px",
+    marginTop: "10px",
     marginBottom: "20px",    // или "20px"
   }}
 >
@@ -736,7 +736,7 @@ fontWeight: 500,
               </div>
 
 {/* === Subscription block === */}
-<div style={{ marginTop: 24, paddingLeft: "16px" }}>
+<div style={{ marginTop: 24, paddingLeft: "20px" }}>
   {account ? (
     subscriptionActive ? (
       <div>
@@ -783,7 +783,7 @@ fontWeight: 500,
     marginBottom: 0,
       padding: 2,
     backgroundColor: "#F7931A",
-    color: "#101214",
+    color: "#1c1c1c",
     fontWeight: 500,
     fontSize: "1.1rem",
       height: "46px",
@@ -810,7 +810,8 @@ fontWeight: 500,
     style: { textAlign: "left" },
   }}
   sx={{
-  width: "36ch",
+  width: "32ch",
+    padding: 2,
   "& .MuiOutlinedInput-root": {
     borderRadius: 0,
     height: "46px",
@@ -845,7 +846,7 @@ fontWeight: 500,
 
 {/* === Wallet section === */}
 {!account ? (
-  <div style={{ display: "inline-block", marginTop: 0, marginBottom: 48, paddingLeft: "16px" }}>
+  <div style={{ display: "inline-block", marginTop: 0, marginBottom: 48, paddingLeft: 20px" }}>
     <Button
       onClick={connectWallet}
       disableElevation
@@ -866,7 +867,7 @@ fontWeight: 500,
     </Button>
   </div>
 ) : (
-  <div style={{ paddingLeft: "16px", marginBottom: "48px" }}>
+  <div style={{ paddingLeft: "20px", marginBottom: "48px" }}>
     <p style={{ color: "#0080ff", fontSize: "1.25rem", fontWeight: 300 }}>Connected: {account}</p>
   </div>
 )}
@@ -892,7 +893,7 @@ fontWeight: 500,
       )}
         */}   
                {/* === Accordions === */}
-<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none", paddingLeft: "16px", paddingRight: "16px" }}>
+<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none", paddingLeft: "20px", paddingRight: "20px" }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("how") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("how")}
@@ -901,7 +902,7 @@ fontWeight: 500,
     <Typography  sx={{ fontWeight: 500, fontSize: "1.6rem" }}>How it works</Typography>
   </AccordionSummary>
   <AccordionDetails >
-    <Typography sx={{ padding: "0px 0", textAlign: "justify", fontWeight: 400, fontSize: "1.4rem" }}>
+    <Typography sx={{ padding: "0px 0", textAlign: "justify", fontWeight: 400, fontSize: "1.25rem" }}>
 Each thin, colorful line on the chart represents a unique AI model predicting the most probable scenario for Bitcoin’s next move. The thick dark-blue line shows the averaged outcome of these AI model cluster scenarios - the core BTC trend forecast - while the thick orange line displays historical BTC data.
 <br></br><br></br>
 The forecast reflects both mid-term and global BTC trends.
@@ -915,7 +916,7 @@ At the beginning of each month, the forecast for the new month is released, whil
   </AccordionDetails>
 </Accordion>
 
-<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none", paddingLeft: "16px", paddingRight: "16px" }}>
+<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none", paddingLeft: "20px", paddingRight: "20px" }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("ref") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("ref")}
@@ -924,7 +925,7 @@ At the beginning of each month, the forecast for the new month is released, whil
     <Typography sx={{ fontWeight: 500, fontSize: "1.6rem" }}>Referral programm</Typography>
   </AccordionSummary>
   <AccordionDetails>
-    <Typography  sx={{ padding: "0px 0", textAlign: "justify", fontWeight: 400, fontSize: "1.4rem" }}>
+    <Typography  sx={{ padding: "0px 0", textAlign: "justify", fontWeight: 400, fontSize: "1.25rem" }}>
 Kaikasekai means Flourishing World.<br></br>
 This insider-level, on-chain verified product empowers traders worldwide with the full potential of AI, open to everyone - whale or not.
 
@@ -939,7 +940,7 @@ This insider-level, on-chain verified product empowers traders worldwide with th
     backgroundColor: "#FFD700",
       height: "46px",
       padding: 2,
-    color: "#101214",
+    color: "#1c1c1c",
     fontWeight: 500,
     fontSize: "1.1rem",
     border: "none",
@@ -960,7 +961,7 @@ Use your wallet number as your referral code - your subscribers get 50% off, and
   </AccordionDetails>
 </Accordion>
 
-<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none", paddingLeft: "16px", paddingRight: "16px" }}>
+<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none", paddingLeft: 20px", paddingRight: 20px" }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("proofs") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("proofs")}
@@ -1171,7 +1172,7 @@ Use your wallet number as your referral code - your subscribers get 50% off, and
 
 {/* === Disclaimer Page === */}
         {page === "disclaimer" && (
-          <div style={{ marginTop: 20, textAlign: "justify", fontWeight: 400, fontSize: "1.4rem" }}>
+          <div style={{ marginTop: 32, marginBottom: 40, textAlign: "justify", fontWeight: 400, fontSize: "1rem", padding: 20 }}>
             <Button
               variant="outlined"
               sx={{
@@ -1192,29 +1193,29 @@ Use your wallet number as your referral code - your subscribers get 50% off, and
             >
               ← Back
             </Button>
-            <h3 style={{ fontWeight: 700, fontSize: "3rem" }}>Terms & Privacy</h3>
+            <h3 style={{ fontWeight: 700, fontSize: "1.8rem" }}>Terms & Privacy</h3>
             <p>
               
 
-<h4 style={{ fontWeight: 500, fontSize: "1.8rem" }}>Disclaimer</h4>
+<h4 style={{ fontWeight: 500, fontSize: "1.25rem" }}>Disclaimer</h4>
 Kaikasekai provides AI-powered forecasts and analytical insights for informational and educational purposes only. The content does not constitute financial, investment, or trading advice and should not be interpreted as a recommendation to buy, hold, or sell digital assets. Any trading or investment decisions based on this information are made at the user’s own discretion and risk. Kaikasekai and its affiliates assume no liability for any losses or damages resulting from the use of this website, its forecasts, or related products.
 <p></p>
-<h4 style={{ fontWeight: 500, fontSize: "1.8rem" }}>Privacy Policy</h4>
+<h4 style={{ fontWeight: 500, fontSize: "1.25rem" }}>Privacy Policy</h4>
 Kaikasekai does not collect personal data or use cookies. Certain features rely on trusted third-party providers, such as EmailGS (for paid communications with developers) and Reown Connect Wallet (for wallet linking and on-chain interactions). Wallet data, private keys, and payment details remain private and are never accessed or stored by Kaikasekai.
 <p></p>
-<h4 style={{ fontWeight: 500, fontSize: "1.8rem" }}>Wallet & Security</h4>
+<h4 style={{ fontWeight: 500, fontSize: "1.25rem" }}>Wallet & Security</h4>
 Connecting a crypto wallet is optional. For security, we recommend using wallets with limited balances. All blockchain transactions are public and recorded on-chain, and Kaikasekai has no control over gas fees, confirmations, or transaction outcomes.
 <p></p>
-<h4 style={{ fontWeight: 500, fontSize: "1.8rem" }}>Intellectual Property</h4>
+<h4 style={{ fontWeight: 500, fontSize: "1.25rem" }}>Intellectual Property</h4>
 All forecasts, models, algorithms, site content, text, and visuals are the exclusive property of Kaikasekai. Any unauthorized use, copying, modification, or redistribution of this material without prior written consent is prohibited.
 <p></p>
-<h4 style={{ fontWeight: 500, fontSize: "1.8rem" }}>External Links</h4>
+<h4 style={{ fontWeight: 500, fontSize: "1.25rem" }}>External Links</h4>
 This site may include links to external platforms or blockchain networks. Kaikasekai is not responsible for their availability, performance, or data handling practices.
 <p></p>
-<h4 style={{ fontWeight: 500, fontSize: "1.8rem" }}>Forecast Accuracy</h4>
+<h4 style={{ fontWeight: 500, fontSize: "1.25rem" }}>Forecast Accuracy</h4>
 Forecasts are developed with a focus on analytical precision but cannot guarantee future results. Information may be updated or contain inaccuracies, and independent research is recommended before making financial or investment decisions.
 <p></p>
-<h4 style={{ fontWeight: 500, fontSize: "1.8rem" }}>Acceptance of Terms</h4>
+<h4 style={{ fontWeight: 500, fontSize: "1.25rem" }}>Acceptance of Terms</h4>
 Use of this site constitutes acknowledgment and acceptance of these terms.
             </p>
           </div>
