@@ -989,11 +989,11 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
         />
         <div
         style={{
-          marginTop: '8px',      // расстояние от картинки до ссылки
-          color: '#1c1c1c',       // цвет ссылки (Twitter blue)
-          fontSize: '0.95rem',       // размер шрифта
-          textDecoration: 'none', // убрать подчёркивание
-          marginBottom: '6px',   // расстояние до ссылки под ней (View on...)
+          marginTop: "8px",      // расстояние от картинки до ссылки
+          color: "#1c1c1c",       // цвет ссылки (Twitter blue)
+          fontSize: "0.95rem",       // размер шрифта
+          textDecoration: "none", // убрать подчёркивание
+          marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
         }}
           >
           Nov 24 Forecast
@@ -1001,11 +1001,11 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
         
         <a href="https://x.com/kaikasekai/status/1849846927560417575?s=46&t=mq7NzK_MklQbSk36gyR5pg" target="_blank" rel="noopener noreferrer"
           style={{
-          marginTop: '0px',      // расстояние от картинки до ссылки
-          color: '#1c1c1c',       // цвет ссылки (Twitter blue)
-          fontSize: '0.85rem',       // размер шрифта
-          textDecoration: 'none', // убрать подчёркивание
-          marginBottom: '0px',   // расстояние до ссылки под ней (View on...)
+          marginTop: "0px",      // расстояние от картинки до ссылки
+          color: "#1c1c1c",       // цвет ссылки (Twitter blue)
+          fontSize: "0.85rem",       // размер шрифта
+          textDecoration: "none", // убрать подчёркивание
+          marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
         }}
           >
           View on
@@ -1032,11 +1032,11 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
 
      <div
         style={{
-          marginTop: '8px',      // расстояние от картинки до ссылки
-          color: '#666',       // цвет ссылки (Twitter blue)
-          fontSize: '0.95rem',       // размер шрифта
-          textDecoration: 'none', // убрать подчёркивание
-          marginBottom: '6px',   // расстояние до ссылки под ней (View on...)
+          marginTop: "8px",      // расстояние от картинки до ссылки
+          color: "#666",       // цвет ссылки (Twitter blue)
+          fontSize: "0.95rem",       // размер шрифта
+          textDecoration: "none", // убрать подчёркивание
+          marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
         }}
           >
           Result: 95.1%
@@ -1054,11 +1054,11 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
         />
         <div
         style={{
-          marginTop: '8px',      // расстояние от картинки до ссылки
-          color: '#1c1c1c',       // цвет ссылки (Twitter blue)
-          fontSize: '0.95rem',       // размер шрифта
-          textDecoration: 'none', // убрать подчёркивание
-          marginBottom: '6px',   // расстояние до ссылки под ней (View on...)
+          marginTop: "8px",      // расстояние от картинки до ссылки
+          color: "#1c1c1c",       // цвет ссылки (Twitter blue)
+          fontSize: "0.95rem",       // размер шрифта
+          textDecoration: "none", // убрать подчёркивание
+          marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
         }}
           >
           Dec 24 Forecast
@@ -1066,11 +1066,11 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
         
         <a href="https://x.com/kaikasekai/status/1862565413160145174?s=46&t=mq7NzK_MklQbSk36gyR5pg"
           style={{
-          marginTop: '0px',      // расстояние от картинки до ссылки
-          color: '#1c1c1c',       // цвет ссылки (Twitter blue)
-          fontSize: '0.85rem',       // размер шрифта
-          textDecoration: 'none', // убрать подчёркивание
-          marginBottom: '0px',   // расстояние до ссылки под ней (View on...)
+          marginTop: "0px",      // расстояние от картинки до ссылки
+          color: "#1c1c1c",       // цвет ссылки (Twitter blue)
+          fontSize: "0.85rem",       // размер шрифта
+          textDecoration: "none", // убрать подчёркивание
+          marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
         }}
           >
           View on
@@ -1097,11 +1097,11 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
 
      <div
         style={{
-          marginTop: '8px',      // расстояние от картинки до ссылки
-          color: '#666',       // цвет ссылки (Twitter blue)
-          fontSize: '0.95rem',       // размер шрифта
-          textDecoration: 'none', // убрать подчёркивание
-          marginBottom: '6px',   // расстояние до ссылки под ней (View on...)
+          marginTop: "8px",      // расстояние от картинки до ссылки
+          color: "#666",       // цвет ссылки (Twitter blue)
+          fontSize: "0.95rem",       // размер шрифта
+          textDecoration: "none", // убрать подчёркивание
+          marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
         }}
           >
           Result: 95.1%
@@ -1119,11 +1119,11 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
         />
 <div
         style={{
-          marginTop: '8px',      // расстояние от картинки до ссылки
-          color: '#1c1c1c',       // цвет ссылки (Twitter blue)
-          fontSize: '0.95rem',       // размер шрифта
-          textDecoration: 'none', // убрать подчёркивание
-          marginBottom: '6px',   // расстояние до ссылки под ней (View on...)
+          marginTop: "8px",      // расстояние от картинки до ссылки
+          color: "#1c1c1c",       // цвет ссылки (Twitter blue)
+          fontSize: "0.95rem",       // размер шрифта
+          textDecoration: "none", // убрать подчёркивание
+          marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
         }}
           >
           Jan 25 Forecast
@@ -1131,11 +1131,11 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
         
         <a href="https://x.com/kaikasekai/status/1873811142566699385?s=46&t=mq7NzK_MklQbSk36gyR5pg"
           style={{
-          marginTop: '0px',      // расстояние от картинки до ссылки
-          color: '#1c1c1c',       // цвет ссылки (Twitter blue)
-          fontSize: '0.85rem',       // размер шрифта
-          textDecoration: 'none', // убрать подчёркивание
-          marginBottom: '0px',   // расстояние до ссылки под ней (View on...)
+          marginTop: "0px",      // расстояние от картинки до ссылки
+          color: "#1c1c1c",       // цвет ссылки (Twitter blue)
+          fontSize: "0.85rem",       // размер шрифта
+          textDecoration: "none", // убрать подчёркивание
+          marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
         }}
           >
           View on
@@ -1162,11 +1162,11 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
 
      <div
         style={{
-          marginTop: '8px',      // расстояние от картинки до ссылки
-          color: '#666',       // цвет ссылки (Twitter blue)
-          fontSize: '0.95rem',       // размер шрифта
-          textDecoration: 'none', // убрать подчёркивание
-          marginBottom: '6px',   // расстояние до ссылки под ней (View on...)
+          marginTop: "8px",      // расстояние от картинки до ссылки
+          color: "#666",       // цвет ссылки (Twitter blue)
+          fontSize: "0.95rem",       // размер шрифта
+          textDecoration: "none", // убрать подчёркивание
+          marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
         }}
           >
           Result: 95.1%
@@ -1185,11 +1185,11 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
 
         <div
         style={{
-          marginTop: '8px',      // расстояние от картинки до ссылки
-          color: '#1c1c1c',       // цвет ссылки (Twitter blue)
-          fontSize: '0.95rem',       // размер шрифта
-          textDecoration: 'none', // убрать подчёркивание
-          marginBottom: '6px',   // расстояние до ссылки под ней (View on...)
+          marginTop: "8px",      // расстояние от картинки до ссылки
+          color: "#1c1c1c",       // цвет ссылки (Twitter blue)
+          fontSize: "0.95rem",       // размер шрифта
+          textDecoration: "none", // убрать подчёркивание
+          marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
         }}
           >
           Feb-Mar 25 Forecast
@@ -1197,11 +1197,11 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
         
         <a href="https://x.com/kaikasekai/status/1889382743408255356?s=46&t=mq7NzK_MklQbSk36gyR5pg"
           style={{
-          marginTop: '0px',      // расстояние от картинки до ссылки
-          color: '#1c1c1c',       // цвет ссылки (Twitter blue)
-          fontSize: '0.85rem',       // размер шрифта
-          textDecoration: 'none', // убрать подчёркивание
-          marginBottom: '0px',   // расстояние до ссылки под ней (View on...)
+          marginTop: "0px",      // расстояние от картинки до ссылки
+          color: "#1c1c1c",       // цвет ссылки (Twitter blue)
+          fontSize: "0.85rem",       // размер шрифта
+          textDecoration: "none", // убрать подчёркивание
+          marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
         }}
           >
           View on
@@ -1228,11 +1228,11 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
 
      <div
         style={{
-          marginTop: '8px',      // расстояние от картинки до ссылки
-          color: '#666',       // цвет ссылки (Twitter blue)
-          fontSize: '0.95rem',       // размер шрифта
-          textDecoration: 'none', // убрать подчёркивание
-          marginBottom: '6px',   // расстояние до ссылки под ней (View on...)
+          marginTop: "8px",      // расстояние от картинки до ссылки
+          color: "#666",       // цвет ссылки (Twitter blue)
+          fontSize: "0.95rem",       // размер шрифта
+          textDecoration: "none", // убрать подчёркивание
+          marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
         }}
           >
           Result: 95.1%
@@ -1251,11 +1251,11 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
 
         <div
         style={{
-          marginTop: '8px',      // расстояние от картинки до ссылки
-          color: '#1c1c1c',       // цвет ссылки (Twitter blue)
-          fontSize: '0.95rem',       // размер шрифта
-          textDecoration: 'none', // убрать подчёркивание
-          marginBottom: '6px',   // расстояние до ссылки под ней (View on...)
+          marginTop: "8px",      // расстояние от картинки до ссылки
+          color: "#1c1c1c",       // цвет ссылки (Twitter blue)
+          fontSize: "0.95rem",       // размер шрифта
+          textDecoration: "none", // убрать подчёркивание
+          marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
         }}
           >
           Apr-Jun 25 Forecast
@@ -1263,11 +1263,11 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
         
         <a href="https://x.com/kaikasekai/status/1907479658381099060?s=46&t=mq7NzK_MklQbSk36gyR5pg"
           style={{
-          marginTop: '0px',      // расстояние от картинки до ссылки
-          color: '#1c1c1c',       // цвет ссылки (Twitter blue)
-          fontSize: '0.85rem',       // размер шрифта
-          textDecoration: 'none', // убрать подчёркивание
-          marginBottom: '0px',   // расстояние до ссылки под ней (View on...)
+          marginTop: "0px",      // расстояние от картинки до ссылки
+          color: "#1c1c1c",       // цвет ссылки (Twitter blue)
+          fontSize: "0.85rem",       // размер шрифта
+          textDecoration: "none", // убрать подчёркивание
+          marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
         }}
           >
           View on
@@ -1294,11 +1294,11 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
 
      <div
         style={{
-          marginTop: '8px',      // расстояние от картинки до ссылки
-          color: '#666',       // цвет ссылки (Twitter blue)
-          fontSize: '0.95rem',       // размер шрифта
-          textDecoration: 'none', // убрать подчёркивание
-          marginBottom: '6px',   // расстояние до ссылки под ней (View on...)
+          marginTop: "8px",      // расстояние от картинки до ссылки
+          color: "#666",       // цвет ссылки (Twitter blue)
+          fontSize: "0.95rem",       // размер шрифта
+          textDecoration: "none", // убрать подчёркивание
+          marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
         }}
           >
           Result: 95.1%
@@ -1317,11 +1317,11 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
 
 <div
         style={{
-          marginTop: '8px',      // расстояние от картинки до ссылки
-          color: '#1c1c1c',       // цвет ссылки (Twitter blue)
-          fontSize: '0.95rem',       // размер шрифта
-          textDecoration: 'none', // убрать подчёркивание
-          marginBottom: '6px',   // расстояние до ссылки под ней (View on...)
+          marginTop: "8px",      // расстояние от картинки до ссылки
+          color: "#1c1c1c",       // цвет ссылки (Twitter blue)
+          fontSize: "0.95rem",       // размер шрифта
+          textDecoration: "none", // убрать подчёркивание
+          marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
         }}
           >
           Aug-Sep 25 Forecast
@@ -1329,11 +1329,11 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
         
         <a href="https://x.com/kaikasekai/status/1953139989643940344?s=46&t=mq7NzK_MklQbSk36gyR5pg"
           style={{
-          marginTop: '0px',      // расстояние от картинки до ссылки
-          color: '#1c1c1c',       // цвет ссылки (Twitter blue)
-          fontSize: '0.85rem',       // размер шрифта
-          textDecoration: 'none', // убрать подчёркивание
-          marginBottom: '0px',   // расстояние до ссылки под ней (View on...)
+          marginTop: "0px",      // расстояние от картинки до ссылки
+          color: "#1c1c1c",       // цвет ссылки (Twitter blue)
+          fontSize: "0.85rem",       // размер шрифта
+          textDecoration: "none", // убрать подчёркивание
+          marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
         }}
           >
           View on
@@ -1360,11 +1360,11 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
 
      <div
         style={{
-          marginTop: '8px',      // расстояние от картинки до ссылки
-          color: '#666',       // цвет ссылки (Twitter blue)
-          fontSize: '0.95rem',       // размер шрифта
-          textDecoration: 'none', // убрать подчёркивание
-          marginBottom: '6px',   // расстояние до ссылки под ней (View on...)
+          marginTop: "8px",      // расстояние от картинки до ссылки
+          color: "#666",       // цвет ссылки (Twitter blue)
+          fontSize: "0.95rem",       // размер шрифта
+          textDecoration: "none", // убрать подчёркивание
+          marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
         }}
           >
           Result: 95.1%
@@ -1382,11 +1382,11 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
 
 <div
         style={{
-          marginTop: '8px',      // расстояние от картинки до ссылки
-          color: '#1c1c1c',       // цвет ссылки (Twitter blue)
-          fontSize: '0.95rem',       // размер шрифта
-          textDecoration: 'none', // убрать подчёркивание
-          marginBottom: '6px',   // расстояние до ссылки под ней (View on...)
+          marginTop: "8px",      // расстояние от картинки до ссылки
+          color: "#1c1c1c",       // цвет ссылки (Twitter blue)
+          fontSize: "0.95rem",       // размер шрифта
+          textDecoration: "none", // убрать подчёркивание
+          marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
         }}
           >
           Oct 25 Forecast
@@ -1394,11 +1394,11 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
         
         <a href={nft.polygonscan} target="_blank" rel="noopener noreferrer"
           style={{
-          marginTop: '0px',      // расстояние от картинки до ссылки
-          color: '#1c1c1c',       // цвет ссылки (Twitter blue)
-          fontSize: '0.85rem',       // размер шрифта
-          textDecoration: 'none', // убрать подчёркивание
-          marginBottom: '0px',   // расстояние до ссылки под ней (View on...)
+          marginTop: "0px",      // расстояние от картинки до ссылки
+          color: "#1c1c1c",       // цвет ссылки (Twitter blue)
+          fontSize: "0.85rem",       // размер шрифта
+          textDecoration: "none", // убрать подчёркивание
+          marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
         }}
           >
           View on
@@ -1431,11 +1431,11 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
 
      <div
         style={{
-          marginTop: '8px',      // расстояние от картинки до ссылки
-          color: '#666',       // цвет ссылки (Twitter blue)
-          fontSize: '0.95rem',       // размер шрифта
-          textDecoration: 'none', // убрать подчёркивание
-          marginBottom: '6px',   // расстояние до ссылки под ней (View on...)
+          marginTop: "8px",      // расстояние от картинки до ссылки
+          color: "#666",       // цвет ссылки (Twitter blue)
+          fontSize: "0.95rem",       // размер шрифта
+          textDecoration: "none", // убрать подчёркивание
+          marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
         }}
           >
           Result: 95.1%
