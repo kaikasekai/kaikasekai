@@ -43,24 +43,22 @@ const RAW_URL =
   "https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/data.csv";
 const COLORS = [
   "#ff0000",
-  "#ff8000",
   "#ffff00",
   "#00ff00",
   "#00ffff",
-  "#0080ff",
-  "#8000ff",
   "#ff0080",
   "#ff00ff",
-  "#bfff00",
-  "#00ffbf",
-  "#00bfff",
-  "#bf00ff",
-  "#4000ff",
+  "#00a37a",
+  "#4b00ff",
+  "#ff5c73",
+  "#aa00a8",
+  "#aaff00",
+  "#c44200",
 ];
 
 // === Contract Config ===
-const OWNER_ADDRESS = "0xd801cA2291a797e377533D134e129eA258810673";
-const CONTRACT_ADDRESS = "0x1b453Ed4252Ea0e64CaB49E918fbcfC62d7fAf20";
+const OWNER_ADDRESS = "0xb57ec96FC3E9cF588c5E6fEfCad14F21F65e4Dff";
+const CONTRACT_ADDRESS = "0x0E8304ac6711742b9c632D00006062c45db383F5";
 const CONTRACT_ABI = [
   "function setNextEndTime(uint256 _endTime) external",
   "function nextEndTime() view returns (uint256)",
@@ -674,7 +672,7 @@ const handleSendFeedback = async () => {
                   <Line
                     type="monotone"
                     dataKey="moving_average"
-                    stroke="#9A1AF7"
+                    stroke="#8000ff"
                     dot={false}
                     strokeDasharray="5 5"
                     strokeWidth={3}
@@ -730,7 +728,7 @@ fontWeight: 500,
 }}>
   Advanced AI-powered algorithm predicts the global BTC trend with {mape}%<sup>*</sup> accuracy
 </div>
-<div style={{ display: "block", marginTop: 0, color: "#666", fontWeight: 400, fontSize: "1.25rem", lineHeight: "1.5em" }}>
+<div style={{ display: "block", marginTop: 0, marginBottom: 0, color: "#666", fontWeight: 400, fontSize: "1.25rem", lineHeight: "1.5em" }}>
   <sup>*</sup>based on rolling 30-day metrics
 </div>
               </div>
@@ -767,8 +765,8 @@ fontWeight: 500,
     style={{
       display: "flex",
       flexDirection: "column",
-      gap: "20px",
-      marginTop: 10,
+      gap: "16px",
+      marginTop: 0,
       marginBottom: 24,
       alignItems: "flex-start",
     }}
@@ -811,7 +809,6 @@ fontWeight: 500,
   }}
   sx={{
   width: "32ch",
-    padding: 2,
   "& .MuiOutlinedInput-root": {
     borderRadius: 0,
     height: "46px",
@@ -829,7 +826,7 @@ fontWeight: 500,
     },
     "& input": {
       textAlign: "left",
-      padding: 0,
+      padding: "0 0 0 15px",
     },
   },
   "& .MuiInputLabel-root": {
@@ -846,7 +843,7 @@ fontWeight: 500,
 
 {/* === Wallet section === */}
 {!account ? (
-  <div style={{ display: "inline-block", marginTop: 0, marginBottom: 48, paddingLeft: "20px" }}>
+  <div style={{ display: "inline-block", marginTop: 0, marginBottom: 56, paddingLeft: "20px" }}>
     <Button
       onClick={connectWallet}
       disableElevation
@@ -867,7 +864,7 @@ fontWeight: 500,
     </Button>
   </div>
 ) : (
-  <div style={{ paddingLeft: "20px", marginBottom: "48px" }}>
+  <div style={{ paddingLeft: "20px", marginBottom: "56px" }}>
     <p style={{ color: "#0080ff", fontSize: "1.25rem", fontWeight: 300 }}>Connected: {account}</p>
   </div>
 )}
@@ -903,7 +900,7 @@ fontWeight: 500,
   </AccordionSummary>
   <AccordionDetails >
     <Typography sx={{ padding: "0px 0", textAlign: "justify", fontWeight: 400, fontSize: "1.25rem" }}>
-Each thin, colorful line on the chart represents a unique AI model predicting the most probable scenario for Bitcoin’s next move. The thick dark-blue line shows the averaged outcome of these AI model cluster scenarios - the core BTC trend forecast - while the thick orange line displays historical BTC data.
+Each thin, colorful line on the chart represents a unique AI model predicting the most probable scenario for Bitcoin’s next move. The thick blue line shows the averaged outcome of these AI model cluster scenarios - the core BTC trend forecast - while the thick orange line displays historical BTC data.
 <br></br><br></br>
 The forecast reflects both mid-term and global BTC trends.
 It may follow one of the cluster models more closely and show slight time elasticity - occurring a bit earlier or later - but it maintains overall consistency even during high volatility and market manipulations, making them easier to spot.
@@ -912,6 +909,9 @@ AI models from the cluster perform advanced technical analysis and research near
 <br></br><br></br>
 Models are renewed monthly with additional training data to stay accurate and up to date.
 At the beginning of each month, the forecast for the new month is released, while the current month’s forecast receives updates.
+      
+    <div style="height: 56px;"></div>
+
   </Typography>
   </AccordionDetails>
 </Accordion>
@@ -922,14 +922,14 @@ At the beginning of each month, the forecast for the new month is released, whil
     onClick={() => toggleAccordion("ref")}
     style={{ padding: "0px 0" }}
   >
-    <Typography sx={{ fontWeight: 500, fontSize: "1.6rem" }}>Referral programm</Typography>
+    <Typography sx={{ fontWeight: 500, fontSize: "1.6rem" }}>Referral program</Typography>
   </AccordionSummary>
   <AccordionDetails>
     <Typography  sx={{ padding: "0px 0", textAlign: "justify", fontWeight: 400, fontSize: "1.25rem" }}>
 Kaikasekai means Flourishing World.<br></br>
 This insider-level, on-chain verified product empowers traders worldwide with the full potential of AI, open to everyone - whale or not.
 
-<div style={{ marginTop: 20, marginBottom: 20, boxShadow: "none", border: "none" }}>
+<div style={{ marginTop: 24, marginBottom: 24, boxShadow: "none", border: "none" }}>
               {!hasWhitelist && (
   <Button
     variant="contained"
@@ -955,8 +955,10 @@ This insider-level, on-chain verified product empowers traders worldwide with th
   </Button>
 )}
   </div>    
-Your wallet will be linked to the smart contract.
-Use your wallet number as your referral code - your subscribers get 50% off, and you earn 10% on every purchase.
+Join the program - your wallet will be whitelisted and linked to the smart contract. Use your wallet number as your referral code: your subscribers get 50% off, and you earn 10% on every purchase.
+
+<div style="height: 56px;"></div>
+      
     </Typography>
   </AccordionDetails>
 </Accordion>
@@ -985,18 +987,60 @@ Use your wallet number as your referral code - your subscribers get 50% off, and
           alt="November 2024"
           style={{ maxWidth: '50%', height: 'auto', display: 'block' }}
         />
-        <p></p>
-        <a href="https://x.com/kaikasekai/status/1849846927560417575?s=46&t=mq7NzK_MklQbSk36gyR5pg" target="_blank" rel="noopener noreferrer">
-          November 2024
+        <div
+        style={{
+          marginTop: '8px',      // расстояние от картинки до ссылки
+          color: '#1c1c1c',       // цвет ссылки (Twitter blue)
+          fontSize: '0.95rem',       // размер шрифта
+          textDecoration: 'none', // убрать подчёркивание
+          marginBottom: '6px',   // расстояние до ссылки под ней (View on...)
+        }}
+          >
+          Nov 24 Forecast
+        </div>
+        
+        <a href="https://x.com/kaikasekai/status/1849846927560417575?s=46&t=mq7NzK_MklQbSk36gyR5pg" target="_blank" rel="noopener noreferrer"
+          style={{
+          marginTop: '0px',      // расстояние от картинки до ссылки
+          color: '#1c1c1c',       // цвет ссылки (Twitter blue)
+          fontSize: '0.85rem',       // размер шрифта
+          textDecoration: 'none', // убрать подчёркивание
+          marginBottom: '0px',   // расстояние до ссылки под ней (View on...)
+        }}
+          >
+          View on
+          <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 300 300"
+    width="16"
+    height="16"
+    fill="#1c1c1c"
+  >
+    <path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66" />
+  </svg>
         </a>
+        
       </div>
     ),
     result: (
       <ImageZoom
-        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/1.PNG"
-        alt="Result 1"
+        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/NOV.PNG"
+        alt="Result Nov 24"
         style={{ width: '100%' }}
       />
+
+     <div
+        style={{
+          marginTop: '8px',      // расстояние от картинки до ссылки
+          color: '#666',       // цвет ссылки (Twitter blue)
+          fontSize: '0.95rem',       // размер шрифта
+          textDecoration: 'none', // убрать подчёркивание
+          marginBottom: '6px',   // расстояние до ссылки под ней (View on...)
+        }}
+          >
+          Result: 95.1%
+        </div>
+      
     ),
   },
   {
@@ -1007,18 +1051,59 @@ Use your wallet number as your referral code - your subscribers get 50% off, and
           alt="December 2024"
           style={{ maxWidth: '50%', height: 'auto', display: 'block' }}
         />
-        <p></p>
-        <a href="https://x.com/kaikasekai/status/1862565413160145174?s=46&t=mq7NzK_MklQbSk36gyR5pg" target="_blank" rel="noopener noreferrer">
-          December 2024
+        <div
+        style={{
+          marginTop: '8px',      // расстояние от картинки до ссылки
+          color: '#1c1c1c',       // цвет ссылки (Twitter blue)
+          fontSize: '0.95rem',       // размер шрифта
+          textDecoration: 'none', // убрать подчёркивание
+          marginBottom: '6px',   // расстояние до ссылки под ней (View on...)
+        }}
+          >
+          Dec 24 Forecast
+        </div>
+        
+        <a href="https://x.com/kaikasekai/status/1862565413160145174?s=46&t=mq7NzK_MklQbSk36gyR5pg"
+          style={{
+          marginTop: '0px',      // расстояние от картинки до ссылки
+          color: '#1c1c1c',       // цвет ссылки (Twitter blue)
+          fontSize: '0.85rem',       // размер шрифта
+          textDecoration: 'none', // убрать подчёркивание
+          marginBottom: '0px',   // расстояние до ссылки под ней (View on...)
+        }}
+          >
+          View on
+          <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 300 300"
+    width="16"
+    height="16"
+    fill="#1c1c1c"
+  >
+    <path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66" />
+  </svg>
         </a>
+        
       </div>
     ),
     result: (
       <ImageZoom
-        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/2.PNG"
-        alt="Result 2"
+        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/DEC.PNG"
+        alt="Result Dec 24"
         style={{ width: '100%' }}
       />
+
+     <div
+        style={{
+          marginTop: '8px',      // расстояние от картинки до ссылки
+          color: '#666',       // цвет ссылки (Twitter blue)
+          fontSize: '0.95rem',       // размер шрифта
+          textDecoration: 'none', // убрать подчёркивание
+          marginBottom: '6px',   // расстояние до ссылки под ней (View on...)
+        }}
+          >
+          Result: 95.1%
+        </div>
     ),
   },
   {
@@ -1029,18 +1114,59 @@ Use your wallet number as your referral code - your subscribers get 50% off, and
           alt="January 2025"
           style={{ maxWidth: '50%', height: 'auto', display: 'block' }}
         />
-        <p></p>
-        <a href="https://x.com/kaikasekai/status/1873811142566699385?s=46&t=mq7NzK_MklQbSk36gyR5pg" target="_blank" rel="noopener noreferrer">
-          January 2025
+<div
+        style={{
+          marginTop: '8px',      // расстояние от картинки до ссылки
+          color: '#1c1c1c',       // цвет ссылки (Twitter blue)
+          fontSize: '0.95rem',       // размер шрифта
+          textDecoration: 'none', // убрать подчёркивание
+          marginBottom: '6px',   // расстояние до ссылки под ней (View on...)
+        }}
+          >
+          Jan 25 Forecast
+        </div>
+        
+        <a href="https://x.com/kaikasekai/status/1873811142566699385?s=46&t=mq7NzK_MklQbSk36gyR5pg"
+          style={{
+          marginTop: '0px',      // расстояние от картинки до ссылки
+          color: '#1c1c1c',       // цвет ссылки (Twitter blue)
+          fontSize: '0.85rem',       // размер шрифта
+          textDecoration: 'none', // убрать подчёркивание
+          marginBottom: '0px',   // расстояние до ссылки под ней (View on...)
+        }}
+          >
+          View on
+          <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 300 300"
+    width="16"
+    height="16"
+    fill="#1c1c1c"
+  >
+    <path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66" />
+  </svg>
         </a>
+        
       </div>
     ),
     result: (
       <ImageZoom
-        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/3.PNG"
-        alt="Result 3"
+        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/JAN.PNG"
+        alt="Result Jan 25"
         style={{ width: '100%' }}
       />
+
+     <div
+        style={{
+          marginTop: '8px',      // расстояние от картинки до ссылки
+          color: '#666',       // цвет ссылки (Twitter blue)
+          fontSize: '0.95rem',       // размер шрифта
+          textDecoration: 'none', // убрать подчёркивание
+          marginBottom: '6px',   // расстояние до ссылки под ней (View on...)
+        }}
+          >
+          Result: 95.1%
+        </div>
     ),
   },
   {
@@ -1051,18 +1177,61 @@ Use your wallet number as your referral code - your subscribers get 50% off, and
           alt="February-March 2025"
           style={{ maxWidth: '50%', height: 'auto', display: 'block' }}
         />
-        <p></p>
-        <a href="https://x.com/kaikasekai/status/1889382743408255356?s=46&t=mq7NzK_MklQbSk36gyR5pg" target="_blank" rel="noopener noreferrer">
-          February-March 2025
+
+        <div
+        style={{
+          marginTop: '8px',      // расстояние от картинки до ссылки
+          color: '#1c1c1c',       // цвет ссылки (Twitter blue)
+          fontSize: '0.95rem',       // размер шрифта
+          textDecoration: 'none', // убрать подчёркивание
+          marginBottom: '6px',   // расстояние до ссылки под ней (View on...)
+        }}
+          >
+          Feb-Mar 25 Forecast
+        </div>
+        
+        <a href="https://x.com/kaikasekai/status/1889382743408255356?s=46&t=mq7NzK_MklQbSk36gyR5pg"
+          style={{
+          marginTop: '0px',      // расстояние от картинки до ссылки
+          color: '#1c1c1c',       // цвет ссылки (Twitter blue)
+          fontSize: '0.85rem',       // размер шрифта
+          textDecoration: 'none', // убрать подчёркивание
+          marginBottom: '0px',   // расстояние до ссылки под ней (View on...)
+        }}
+          >
+          View on
+          <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 300 300"
+    width="16"
+    height="16"
+    fill="#1c1c1c"
+  >
+    <path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66" />
+  </svg>
         </a>
+        
       </div>
     ),
     result: (
       <ImageZoom
-        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/4.PNG"
-        alt="Result 4"
+        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/FEBMAR.PNG"
+        alt="Result Feb-Mar 25"
         style={{ width: '100%' }}
       />
+
+     <div
+        style={{
+          marginTop: '8px',      // расстояние от картинки до ссылки
+          color: '#666',       // цвет ссылки (Twitter blue)
+          fontSize: '0.95rem',       // размер шрифта
+          textDecoration: 'none', // убрать подчёркивание
+          marginBottom: '6px',   // расстояние до ссылки под ней (View on...)
+        }}
+          >
+          Result: 95.1%
+        </div>
+    
     ),
   },
   {
@@ -1073,18 +1242,60 @@ Use your wallet number as your referral code - your subscribers get 50% off, and
           alt="April-June 2025"
           style={{ maxWidth: '50%', height: 'auto', display: 'block' }}
         />
-        <p></p>
-        <a href="https://x.com/kaikasekai/status/1907479658381099060?s=46&t=mq7NzK_MklQbSk36gyR5pg" target="_blank" rel="noopener noreferrer">
-          April-June 2025
+
+        <div
+        style={{
+          marginTop: '8px',      // расстояние от картинки до ссылки
+          color: '#1c1c1c',       // цвет ссылки (Twitter blue)
+          fontSize: '0.95rem',       // размер шрифта
+          textDecoration: 'none', // убрать подчёркивание
+          marginBottom: '6px',   // расстояние до ссылки под ней (View on...)
+        }}
+          >
+          Apr-Jun 25 Forecast
+        </div>
+        
+        <a href="https://x.com/kaikasekai/status/1907479658381099060?s=46&t=mq7NzK_MklQbSk36gyR5pg"
+          style={{
+          marginTop: '0px',      // расстояние от картинки до ссылки
+          color: '#1c1c1c',       // цвет ссылки (Twitter blue)
+          fontSize: '0.85rem',       // размер шрифта
+          textDecoration: 'none', // убрать подчёркивание
+          marginBottom: '0px',   // расстояние до ссылки под ней (View on...)
+        }}
+          >
+          View on
+          <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 300 300"
+    width="16"
+    height="16"
+    fill="#1c1c1c"
+  >
+    <path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66" />
+  </svg>
         </a>
+        
       </div>
     ),
     result: (
       <ImageZoom
-        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/5.PNG"
-        alt="Result 5"
+        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/APRJUN.PNG"
+        alt="Result Apr-Jun 25"
         style={{ width: '100%' }}
       />
+
+     <div
+        style={{
+          marginTop: '8px',      // расстояние от картинки до ссылки
+          color: '#666',       // цвет ссылки (Twitter blue)
+          fontSize: '0.95rem',       // размер шрифта
+          textDecoration: 'none', // убрать подчёркивание
+          marginBottom: '6px',   // расстояние до ссылки под ней (View on...)
+        }}
+          >
+          Result: 95.1%
+        </div>
     ),
   },
   {
@@ -1095,18 +1306,60 @@ Use your wallet number as your referral code - your subscribers get 50% off, and
           alt="August-September 2025"
           style={{ maxWidth: '50%', height: 'auto', display: 'block' }}
         />
-        <p></p>
-        <a href="https://x.com/kaikasekai/status/1953139989643940344?s=46&t=mq7NzK_MklQbSk36gyR5pg" target="_blank" rel="noopener noreferrer">
-          August-September 2025
+
+<div
+        style={{
+          marginTop: '8px',      // расстояние от картинки до ссылки
+          color: '#1c1c1c',       // цвет ссылки (Twitter blue)
+          fontSize: '0.95rem',       // размер шрифта
+          textDecoration: 'none', // убрать подчёркивание
+          marginBottom: '6px',   // расстояние до ссылки под ней (View on...)
+        }}
+          >
+          Aug-Sep 25 Forecast
+        </div>
+        
+        <a href="https://x.com/kaikasekai/status/1953139989643940344?s=46&t=mq7NzK_MklQbSk36gyR5pg"
+          style={{
+          marginTop: '0px',      // расстояние от картинки до ссылки
+          color: '#1c1c1c',       // цвет ссылки (Twitter blue)
+          fontSize: '0.85rem',       // размер шрифта
+          textDecoration: 'none', // убрать подчёркивание
+          marginBottom: '0px',   // расстояние до ссылки под ней (View on...)
+        }}
+          >
+          View on
+          <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 300 300"
+    width="16"
+    height="16"
+    fill="#1c1c1c"
+  >
+    <path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66" />
+  </svg>
         </a>
+        
       </div>
     ),
     result: (
       <ImageZoom
-        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/6.PNG"
-        alt="Result 6"
+        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/AUGSEP.PNG"
+        alt="Result Aug-Sep 25"
         style={{ width: '100%' }}
       />
+
+     <div
+        style={{
+          marginTop: '8px',      // расстояние от картинки до ссылки
+          color: '#666',       // цвет ссылки (Twitter blue)
+          fontSize: '0.95rem',       // размер шрифта
+          textDecoration: 'none', // убрать подчёркивание
+          marginBottom: '6px',   // расстояние до ссылки под ней (View on...)
+        }}
+          >
+          Result: 95.1%
+        </div>
     ),
   },
 
@@ -1115,17 +1368,67 @@ Use your wallet number as your referral code - your subscribers get 50% off, and
     nft: (
       <div style={{ width: '100%', height: 'calc(100% / 1.6)', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
         <ImageZoom src={nft.image} alt={nft.name} style={{ maxWidth: '50%', height: 'auto', display: 'block' }} />
-        <h4>{nft.name}</h4>
-        <p>{nft.description}</p>
-        <a href={nft.polygonscan} target="_blank" rel="noopener noreferrer">View on Polygonscan</a>
+
+
+<div
+        style={{
+          marginTop: '8px',      // расстояние от картинки до ссылки
+          color: '#1c1c1c',       // цвет ссылки (Twitter blue)
+          fontSize: '0.95rem',       // размер шрифта
+          textDecoration: 'none', // убрать подчёркивание
+          marginBottom: '6px',   // расстояние до ссылки под ней (View on...)
+        }}
+          >
+          Oct 25 Forecast
+        </div>
+        
+        <a href={nft.polygonscan} target="_blank" rel="noopener noreferrer"
+          style={{
+          marginTop: '0px',      // расстояние от картинки до ссылки
+          color: '#1c1c1c',       // цвет ссылки (Twitter blue)
+          fontSize: '0.85rem',       // размер шрифта
+          textDecoration: 'none', // убрать подчёркивание
+          marginBottom: '0px',   // расстояние до ссылки под ней (View on...)
+        }}
+          >
+          View on
+          <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          
+          viewBox="0 0 38 33"
+          fill="#8247e5"
+        >
+	<path d="M29,10.2c-0.7-0.4-1.6-0.4-2.4,0L21,13.5l-3.8,2.1l-5.5,3.3c-0.7,0.4-1.6,0.4-2.4,0L5,16.3
+		c-0.7-0.4-1.2-1.2-1.2-2.1v-5c0-0.8,0.4-1.6,1.2-2.1l4.3-2.5c0.7-0.4,1.6-0.4,2.4,0L16,7.2c0.7,0.4,1.2,1.2,1.2,2.1v3.3l3.8-2.2V7
+		c0-0.8-0.4-1.6-1.2-2.1l-8-4.7c-0.7-0.4-1.6-0.4-2.4,0L1.2,5C0.4,5.4,0,6.2,0,7v9.4c0,0.8,0.4,1.6,1.2,2.1l8.1,4.7
+		c0.7,0.4,1.6,0.4,2.4,0l5.5-3.2l3.8-2.2l5.5-3.2c0.7-0.4,1.6-0.4,2.4,0l4.3,2.5c0.7,0.4,1.2,1.2,1.2,2.1v5c0,0.8-0.4,1.6-1.2,2.1
+		L29,28.8c-0.7,0.4-1.6,0.4-2.4,0l-4.3-2.5c-0.7-0.4-1.2-1.2-1.2-2.1V21l-3.8,2.2v3.3c0,0.8,0.4,1.6,1.2,2.1l8.1,4.7
+		c0.7,0.4,1.6,0.4,2.4,0l8.1-4.7c0.7-0.4,1.2-1.2,1.2-2.1V17c0-0.8-0.4-1.6-1.2-2.1L29,10.2z"/>
+</svg>
+        </a>
+        
       </div>
     ),
     result: (
       <ImageZoom
-        src={`https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.id}.PNG`}
+        src={`https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.id}OCT25.PNG`}
         alt={`Result ${nft.id}`}
         style={{ width: '100%' }}
       />
+
+     <div
+        style={{
+          marginTop: '8px',      // расстояние от картинки до ссылки
+          color: '#666',       // цвет ссылки (Twitter blue)
+          fontSize: '0.95rem',       // размер шрифта
+          textDecoration: 'none', // убрать подчёркивание
+          marginBottom: '6px',   // расстояние до ссылки под ней (View on...)
+        }}
+          >
+          Result: 95.1%
+        </div>
     ),
   })),
 ]}
@@ -1134,6 +1437,7 @@ Use your wallet number as your referral code - your subscribers get 50% off, and
   )}
 </AccordionDetails>
 </Accordion>
+            <div style="height: 56px;"></div>
           </>
         )}
         
@@ -1172,7 +1476,7 @@ Use your wallet number as your referral code - your subscribers get 50% off, and
 
 {/* === Disclaimer Page === */}
         {page === "disclaimer" && (
-          <div style={{ marginTop: 32, marginBottom: 40, textAlign: "justify", fontWeight: 400, fontSize: "1rem", padding: 20 }}>
+          <div style={{ marginTop: 32, marginBottom: 56, textAlign: "justify", fontWeight: 400, fontSize: "1rem", padding: 20 }}>
             <Button
               variant="outlined"
               sx={{
@@ -1196,27 +1500,29 @@ Use your wallet number as your referral code - your subscribers get 50% off, and
             <h3 style={{ fontWeight: 700, fontSize: "1.8rem" }}>Terms & Privacy</h3>
             <p>
               
-
+<div style="height: 20px;"></div>
 <h4 style={{ fontWeight: 500, fontSize: "1.25rem" }}>Disclaimer</h4>
 Kaikasekai provides AI-powered forecasts and analytical insights for informational and educational purposes only. The content does not constitute financial, investment, or trading advice and should not be interpreted as a recommendation to buy, hold, or sell digital assets. Any trading or investment decisions based on this information are made at the user’s own discretion and risk. Kaikasekai and its affiliates assume no liability for any losses or damages resulting from the use of this website, its forecasts, or related products.
-<p></p>
+<div style="height: 20px;"></div>
 <h4 style={{ fontWeight: 500, fontSize: "1.25rem" }}>Privacy Policy</h4>
-Kaikasekai does not collect personal data or use cookies. Certain features rely on trusted third-party providers, such as EmailGS (for paid communications with developers) and Reown Connect Wallet (for wallet linking and on-chain interactions). Wallet data, private keys, and payment details remain private and are never accessed or stored by Kaikasekai.
-<p></p>
+Kaikasekai does not collect personal data or use cookies. Certain features rely on trusted third-party providers, such as EmailJS (for paid communications with developers) and Reown Connect Wallet (for wallet linking and on-chain interactions). Wallet data, private keys, and payment details remain private and are never accessed or stored by Kaikasekai.
+<div style="height: 20px;"></div>
 <h4 style={{ fontWeight: 500, fontSize: "1.25rem" }}>Wallet & Security</h4>
 Connecting a crypto wallet is optional. For security, we recommend using wallets with limited balances. All blockchain transactions are public and recorded on-chain, and Kaikasekai has no control over gas fees, confirmations, or transaction outcomes.
-<p></p>
+<div style="height: 20px;"></div>
 <h4 style={{ fontWeight: 500, fontSize: "1.25rem" }}>Intellectual Property</h4>
 All forecasts, models, algorithms, site content, text, and visuals are the exclusive property of Kaikasekai. Any unauthorized use, copying, modification, or redistribution of this material without prior written consent is prohibited.
-<p></p>
+<div style="height: 20px;"></div>
 <h4 style={{ fontWeight: 500, fontSize: "1.25rem" }}>External Links</h4>
 This site may include links to external platforms or blockchain networks. Kaikasekai is not responsible for their availability, performance, or data handling practices.
-<p></p>
+<div style="height: 20px;"></div>
 <h4 style={{ fontWeight: 500, fontSize: "1.25rem" }}>Forecast Accuracy</h4>
 Forecasts are developed with a focus on analytical precision but cannot guarantee future results. Information may be updated or contain inaccuracies, and independent research is recommended before making financial or investment decisions.
-<p></p>
+<div style="height: 20px;"></div>
 <h4 style={{ fontWeight: 500, fontSize: "1.25rem" }}>Acceptance of Terms</h4>
 Use of this site constitutes acknowledgment and acceptance of these terms.
+<div style="height: 20px;"></div>
+
             </p>
           </div>
         )}
@@ -1470,11 +1776,28 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
               Terms & Privacy
             </span>
             <span className="footer-link" onClick={() => setPage("contact")}>
-              Contact Developers
+            </span>
+            <span className="footer-link">
+              <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 300 300"
+    width="20"
+    height="20"
+    fill="#666"
+  >
+    <path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66" />
+  </svg>
             </span>
           </div>
 
-          <div className="footer-logo-block">
+          <div className="footer-logo-block"
+            style={{
+    marginTop: '20px',
+    marginBottom: '40px',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+  }}>
             <svg
               className="footer-logo"
               xmlns="http://www.w3.org/2000/svg"
