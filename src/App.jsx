@@ -910,7 +910,7 @@ AI models from the cluster perform advanced technical analysis and research near
 Models are renewed monthly with additional training data to stay accurate and up to date.
 At the beginning of each month, the forecast for the new month is released, while the current month’s forecast receives updates.
       
-    <div style="height: 56px;"></div>
+    <div style={{ height: "56px" }}></div>
 
   </Typography>
   </AccordionDetails>
@@ -957,7 +957,7 @@ This insider-level, on-chain verified product empowers traders worldwide with th
   </div>    
 Join the program - your wallet will be whitelisted and linked to the smart contract. Use your wallet number as your referral code: your subscribers get 50% off, and you earn 10% on every purchase.
 
-<div style="height: 56px;"></div>
+<div style={{ height: "56px" }}></div>
       
     </Typography>
   </AccordionDetails>
@@ -1449,7 +1449,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
   )}
 </AccordionDetails>
 </Accordion>
-            <div style="height: 56px;"></div>
+            <div style={{ height: "56px" }}></div>
           </>
         )}
         
@@ -1512,28 +1512,29 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
             <h3 style={{ fontWeight: 700, fontSize: "1.8rem" }}>Terms & Privacy</h3>
             <p>
               
-<div style="height: 20px;"></div>
+<div style={{ height: "20px" }}></div>
+
 <h4 style={{ fontWeight: 500, fontSize: "1.25rem" }}>Disclaimer</h4>
 Kaikasekai provides AI-powered forecasts and analytical insights for informational and educational purposes only. The content does not constitute financial, investment, or trading advice and should not be interpreted as a recommendation to buy, hold, or sell digital assets. Any trading or investment decisions based on this information are made at the user’s own discretion and risk. Kaikasekai and its affiliates assume no liability for any losses or damages resulting from the use of this website, its forecasts, or related products.
-<div style="height: 20px;"></div>
+<div style={{ height: "20px" }}></div>
 <h4 style={{ fontWeight: 500, fontSize: "1.25rem" }}>Privacy Policy</h4>
 Kaikasekai does not collect personal data or use cookies. Certain features rely on trusted third-party providers, such as EmailJS (for paid communications with developers) and Reown Connect Wallet (for wallet linking and on-chain interactions). Wallet data, private keys, and payment details remain private and are never accessed or stored by Kaikasekai.
-<div style="height: 20px;"></div>
+<div style={{ height: "20px" }}></div>
 <h4 style={{ fontWeight: 500, fontSize: "1.25rem" }}>Wallet & Security</h4>
 Connecting a crypto wallet is optional. For security, we recommend using wallets with limited balances. All blockchain transactions are public and recorded on-chain, and Kaikasekai has no control over gas fees, confirmations, or transaction outcomes.
-<div style="height: 20px;"></div>
+<div style={{ height: "20px" }}></div>
 <h4 style={{ fontWeight: 500, fontSize: "1.25rem" }}>Intellectual Property</h4>
 All forecasts, models, algorithms, site content, text, and visuals are the exclusive property of Kaikasekai. Any unauthorized use, copying, modification, or redistribution of this material without prior written consent is prohibited.
-<div style="height: 20px;"></div>
+<div style={{ height: "20px" }}></div>
 <h4 style={{ fontWeight: 500, fontSize: "1.25rem" }}>External Links</h4>
 This site may include links to external platforms or blockchain networks. Kaikasekai is not responsible for their availability, performance, or data handling practices.
-<div style="height: 20px;"></div>
+<div style={{ height: "20px" }}></div>
 <h4 style={{ fontWeight: 500, fontSize: "1.25rem" }}>Forecast Accuracy</h4>
 Forecasts are developed with a focus on analytical precision but cannot guarantee future results. Information may be updated or contain inaccuracies, and independent research is recommended before making financial or investment decisions.
-<div style="height: 20px;"></div>
+<div style={{ height: "20px" }}></div>
 <h4 style={{ fontWeight: 500, fontSize: "1.25rem" }}>Acceptance of Terms</h4>
 Use of this site constitutes acknowledgment and acceptance of these terms.
-<div style="height: 20px;"></div>
+<div style={{ height: "20px" }}></div>
 
             </p>
           </div>
