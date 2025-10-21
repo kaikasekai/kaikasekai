@@ -1023,6 +1023,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
       </div>
     ),
     result: (
+		<div>
       <ImageZoom
         src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/NOV.PNG"
         alt="Result Nov 24"
@@ -1040,7 +1041,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
           >
           Result: 95.1%
         </div>
-      
+      </div>
     ),
   },
   {
@@ -1087,6 +1088,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
       </div>
     ),
     result: (
+		<div>
       <ImageZoom
         src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/DEC.PNG"
         alt="Result Dec 24"
@@ -1104,6 +1106,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
           >
           Result: 95.1%
         </div>
+	</div>
     ),
   },
   {
@@ -1150,6 +1153,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
       </div>
     ),
     result: (
+		<div>
       <ImageZoom
         src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/JAN.PNG"
         alt="Result Jan 25"
@@ -1167,6 +1171,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
           >
           Result: 95.1%
         </div>
+		</div>
     ),
   },
   {
@@ -1214,6 +1219,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
       </div>
     ),
     result: (
+		<div>
       <ImageZoom
         src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/FEBMAR.PNG"
         alt="Result Feb-Mar 25"
@@ -1231,7 +1237,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
           >
           Result: 95.1%
         </div>
-    
+    </div>
     ),
   },
   {
@@ -1279,6 +1285,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
       </div>
     ),
     result: (
+		<div>
       <ImageZoom
         src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/APRJUN.PNG"
         alt="Result Apr-Jun 25"
@@ -1296,6 +1303,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
           >
           Result: 95.1%
         </div>
+		</div>
     ),
   },
   {
@@ -1343,6 +1351,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
       </div>
     ),
     result: (
+		<div>
       <ImageZoom
         src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/AUGSEP.PNG"
         alt="Result Aug-Sep 25"
@@ -1360,6 +1369,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
           >
           Result: 95.1%
         </div>
+		</div>
     ),
   },
 
@@ -1412,6 +1422,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
       </div>
     ),
     result: (
+		<div>
       <ImageZoom
         src={`https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.id}OCT25.PNG`}
         alt={`Result ${nft.id}`}
@@ -1429,6 +1440,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
           >
           Result: 95.1%
         </div>
+	</div>
     ),
   })),
 ]}
@@ -1777,8 +1789,14 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
             </span>
             <span className="footer-link" onClick={() => setPage("contact")}>
             </span>
-            <span className="footer-link">
-              <svg
+              <a
+  href="https://x.com/kaikasekai?s=21&t=mq7NzK_MklQbSk36gyR5pg"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="footer-link"
+  style={{ display: 'inline-flex', alignItems: 'center' }}
+>
+				<svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 300 300"
     width="20"
@@ -1787,7 +1805,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
   >
     <path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66" />
   </svg>
-            </span>
+            </a>
           </div>
 
           <div className="footer-logo-block"
