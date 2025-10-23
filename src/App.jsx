@@ -697,7 +697,7 @@ const handleSendFeedback = async () => {
                     ))}
                 </LineChart>
               </ResponsiveContainer>
-<div style={{ paddingTop: "20px", paddingLeft: "10px" }} >
+<div style={{ paddingTop: "20px", paddingLeft: "10px", paddingBottom: "0px", marginBottom: "24px" }} >
               <h1
   style={{
     textTransform: "uppercase", // все буквы заглавные
@@ -772,7 +772,7 @@ fontWeight: 500,
     }}
   >
 
-<div style={{ marginTop: 24, marginBottom: 0, boxShadow: "none", border: "none" }}>
+<div style={{ marginTop: 0, marginBottom: 0, boxShadow: "none", border: "none" }}>
     <Button
     variant="contained"
     onClick={handleSubscribe}
