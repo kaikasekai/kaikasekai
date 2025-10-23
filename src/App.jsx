@@ -704,7 +704,7 @@ const handleSendFeedback = async () => {
     fontSize: "1.8rem",         // или "36px"
     fontWeight: 700,
     marginTop: "10px",
-    marginBottom: "20px",    // или "20px"
+    marginBottom: "10px",    // или "20px"
   }}
 >
   Kaikasekai Trends
@@ -734,7 +734,7 @@ fontWeight: 500,
               </div>
 
 {/* === Subscription block === */}
-<div style={{ marginTop: 24, paddingLeft: "20px" }}>
+<div style={{ marginTop: 0, paddingLeft: "10px" }}>
   {account ? (
     subscriptionActive ? (
       <div>
@@ -767,7 +767,7 @@ fontWeight: 500,
       flexDirection: "column",
       gap: "16px",
       marginTop: 0,
-      marginBottom: 24,
+      marginBottom: 32,
       alignItems: "flex-start",
     }}
   >
@@ -808,7 +808,7 @@ fontWeight: 500,
     style: { textAlign: "left" },
   }}
   sx={{
-  width: "32ch",
+  width: "30ch",
   "& .MuiOutlinedInput-root": {
     borderRadius: 0,
     height: "46px",
@@ -826,7 +826,7 @@ fontWeight: 500,
     },
     "& input": {
       textAlign: "left",
-      padding: "0 0 0 15px",
+      padding: "0 0 0 10px",
     },
   },
   "& .MuiInputLabel-root": {
@@ -843,7 +843,7 @@ fontWeight: 500,
 
 {/* === Wallet section === */}
 {!account ? (
-  <div style={{ display: "inline-block", marginTop: 0, marginBottom: 56, paddingLeft: "20px" }}>
+  <div style={{ display: "inline-block", marginTop: 0, marginBottom: 56, paddingLeft: "10px" }}>
     <Button
       onClick={connectWallet}
       disableElevation
@@ -864,7 +864,7 @@ fontWeight: 500,
     </Button>
   </div>
 ) : (
-  <div style={{ paddingLeft: "20px", marginBottom: "56px" }}>
+  <div style={{ paddingLeft: "10px", marginBottom: "56px" }}>
     <p style={{ color: "#0080ff", fontSize: "1.25rem", fontWeight: 300 }}>Connected: {account}</p>
   </div>
 )}
@@ -890,7 +890,7 @@ fontWeight: 500,
       )}
         */}   
                {/* === Accordions === */}
-<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none", paddingLeft: "20px", paddingRight: "20px" }}>
+<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none", paddingLeft: "10px", paddingRight: "10px" }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("how") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("how")}
@@ -916,7 +916,7 @@ At the beginning of each month, the forecast for the new month is released, whil
   </AccordionDetails>
 </Accordion>
 
-<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none", paddingLeft: "20px", paddingRight: "20px" }}>
+<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none", paddingLeft: "10px", paddingRight: "10px" }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("ref") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("ref")}
@@ -929,7 +929,7 @@ At the beginning of each month, the forecast for the new month is released, whil
 Kaikasekai means Flourishing World.<br></br>
 This insider-level, on-chain verified product empowers traders worldwide with the full potential of AI, open to everyone - whale or not.
 
-<div style={{ marginTop: 24, marginBottom: 24, boxShadow: "none", border: "none" }}>
+<div style={{ marginTop: 32, marginBottom: 32, boxShadow: "none", border: "none" }}>
               {!hasWhitelist && (
   <Button
     variant="contained"
@@ -963,7 +963,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
   </AccordionDetails>
 </Accordion>
 
-<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none", paddingLeft: "20px", paddingRight: "20px" }}>
+<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none", paddingLeft: "10px", paddingRight: "10px" }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("proofs") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("proofs")}
@@ -1008,12 +1008,12 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
           marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
         }}
           >
-          View on
+          View on &nbsp
           <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 300 300"
-    width="16"
-    height="16"
+    width="14"
+    height="14"
     fill="#1c1c1c"
   >
     <path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66" />
@@ -1073,12 +1073,12 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
           marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
         }}
           >
-          View on
+          View on &nbsp
           <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 300 300"
-    width="16"
-    height="16"
+    width="14"
+    height="14"
     fill="#1c1c1c"
   >
     <path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66" />
@@ -1138,12 +1138,12 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
           marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
         }}
           >
-          View on
+          View on  &nbsp
           <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 300 300"
-    width="16"
-    height="16"
+    width="14"
+    height="14"
     fill="#1c1c1c"
   >
     <path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66" />
@@ -1204,12 +1204,12 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
           marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
         }}
           >
-          View on
+          View on &nbsp
           <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 300 300"
-    width="16"
-    height="16"
+    width="14"
+    height="14"
     fill="#1c1c1c"
   >
     <path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66" />
@@ -1270,12 +1270,12 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
           marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
         }}
           >
-          View on
+          View on &nbsp
           <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 300 300"
-    width="16"
-    height="16"
+    width="14"
+    height="14"
     fill="#1c1c1c"
   >
     <path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66" />
@@ -1336,12 +1336,12 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
           marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
         }}
           >
-          View on
+          View on  &nbsp
           <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 300 300"
-    width="16"
-    height="16"
+    width="14"
+    height="14"
     fill="#1c1c1c"
   >
     <path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66" />
@@ -1401,12 +1401,11 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
           marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
         }}
           >
-          View on
+          View on &nbsp
           <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          
+          width="14"
+          height="14"
           viewBox="0 0 38 33"
           fill="#8247e5"
         >
@@ -1789,6 +1788,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
               Terms & Privacy
             </span>
             <span className="footer-link" onClick={() => setPage("contact")}>
+			  Contact Developers
             </span>
               <a
   href="https://x.com/kaikasekai?s=21&t=mq7NzK_MklQbSk36gyR5pg"
@@ -1800,8 +1800,8 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
 				<svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 300 300"
-    width="20"
-    height="20"
+    width="15"
+    height="15"
     fill="#666"
   >
     <path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66" />
@@ -1811,7 +1811,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
 
           <div className="footer-logo-block"
             style={{
-    marginTop: '20px',
+    marginTop: '10px',
     marginBottom: '40px',
     display: 'flex',
     alignItems: 'center',
