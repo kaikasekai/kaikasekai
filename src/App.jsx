@@ -772,7 +772,7 @@ fontWeight: 500,
     }}
   >
 
-<div style={{ marginTop: 0, marginBottom: 0, boxShadow: "none", border: "none" }}>
+<div style={{ marginTop: 24, marginBottom: 0, boxShadow: "none", border: "none" }}>
     <Button
     variant="contained"
     onClick={handleSubscribe}
@@ -805,10 +805,10 @@ fontWeight: 500,
   onChange={(e) => setReferrer(e.target.value)}
   inputProps={{
     maxLength: 42,
-    style: { textAlign: "left" },
+    style: { textAlign: "left", fontSize: "0.9rem" },
   }}
   sx={{
-  width: "30ch",
+  width: "26ch",
   "& .MuiOutlinedInput-root": {
     borderRadius: 0,
     height: "46px",
@@ -826,6 +826,7 @@ fontWeight: 500,
     },
     "& input": {
       textAlign: "left",
+	  fontSize: "0.9rem",
       padding: "0 0 0 10px",
     },
   },
@@ -929,7 +930,7 @@ At the beginning of each month, the forecast for the new month is released, whil
 Kaikasekai means Flourishing World.<br></br>
 This insider-level, on-chain verified product empowers traders worldwide with the full potential of AI, open to everyone - whale or not.
 
-<div style={{ marginTop: 32, marginBottom: 32, boxShadow: "none", border: "none" }}>
+<div style={{ marginTop: 24, marginBottom: 24, boxShadow: "none", border: "none" }}>
               {!hasWhitelist && (
   <Button
     variant="contained"
@@ -1008,7 +1009,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
           marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
         }}
           >
-          View on &nbsp
+          View on{" "}
           <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 300 300"
@@ -1073,7 +1074,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
           marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
         }}
           >
-          View on &nbsp
+          View on{" "}
           <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 300 300"
@@ -1138,7 +1139,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
           marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
         }}
           >
-          View on  &nbsp
+          View on{" "}
           <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 300 300"
@@ -1204,7 +1205,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
           marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
         }}
           >
-          View on &nbsp
+          View on{" "}
           <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 300 300"
@@ -1270,7 +1271,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
           marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
         }}
           >
-          View on &nbsp
+          View on{" "}
           <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 300 300"
@@ -1336,7 +1337,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
           marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
         }}
           >
-          View on  &nbsp
+          View on{" "}
           <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 300 300"
@@ -1401,7 +1402,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
           marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
         }}
           >
-          View on &nbsp
+          View on{" "}
           <svg
           xmlns="http://www.w3.org/2000/svg"
           width="14"
@@ -1508,6 +1509,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
             >
               ← Back
             </Button>
+			  
             <h3 style={{ fontWeight: 700, fontSize: "1.8rem" }}>Terms & Privacy</h3>
             <p>
               
@@ -1541,7 +1543,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
 
         {/* === Contact Page === */}
         {page === "contact" && (
-          <div style={{ marginTop: 20, fontWeight: 400, fontSize: "1rem" }}>
+          <div style={{ marginTop: 32, fontWeight: 400, fontSize: "1rem", padding: 20 }}>
             <Button
               variant="outlined"
               sx={{
@@ -1562,7 +1564,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
             >
               ← Back
             </Button>
-            <p></p>
+			  
             <h3 style={{ fontWeight: 700, fontSize: "1.8rem" }}>Contact Developers</h3>
 
 			  <div style={{ height: "20px" }}></div>
