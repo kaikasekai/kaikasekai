@@ -697,7 +697,7 @@ const handleSendFeedback = async () => {
                     ))}
                 </LineChart>
               </ResponsiveContainer>
-<div style={{ padding: "20px" }} >
+<div style={{ paddingTop: "20px", paddingLeft: "10px" }} >
               <h1
   style={{
     textTransform: "uppercase", // все буквы заглавные
@@ -767,7 +767,7 @@ fontWeight: 500,
       flexDirection: "column",
       gap: "16px",
       marginTop: 0,
-      marginBottom: 32,
+      marginBottom: 24,
       alignItems: "flex-start",
     }}
   >
@@ -1563,7 +1563,10 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
               ← Back
             </Button>
             <p></p>
-            <h3>Contact Developers</h3>
+            <h3 style={{ fontWeight: 700, fontSize: "1.8rem" }}>Contact Developers</h3>
+
+			  <div style={{ height: "20px" }}></div>
+			  
             <p>
 
 <Button
@@ -1667,9 +1670,9 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
         width: "260px",
       }}
     >
-      <h4 style={{ margin: "0 0 10px 0" }}>Donute</h4>
+      <h4 style={{ margin: "0 0 10px 0", fontWeight: 500, fontSize: "1.6rem", color: "#549962" }}>Donute</h4>
       <TextField
-        label="Amount (USDC)"
+        label="USDC"
         value={donateAmount}
         onChange={(e) => setDonateAmount(e.target.value)}
         sx={{ borderRadius: "0px" }}
@@ -1680,7 +1683,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
         variant="contained"
         disableElevation
         sx={{
-    backgroundColor: "#0080ff",
+    backgroundColor: "#69c04c",
     border: "0px",
     color: "#ffffff",
     fontWeight: 500,
@@ -1701,7 +1704,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
         variant="text"
         fullWidth
         onClick={() => setShowDonatePopup(false)}
-        style={{ marginTop: "4px" }}
+        style={{ marginTop: "4px", color: "#549962" }}
       >
         Close
       </Button>
@@ -1812,7 +1815,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
           <div className="footer-logo-block"
             style={{
     marginTop: '10px',
-    marginBottom: '40px',
+    marginBottom: '0px',
     display: 'flex',
     alignItems: 'center',
     gap: '10px',
