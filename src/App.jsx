@@ -1032,7 +1032,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                 result: "https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/AUGSEP.PNG",
 				res: "88.3",
               },
-            ].map(({ month, img, link, result }) => ({
+            ].map(({ month, img, link, result, res }) => ({
               nft: (
                 <div
                   style={{
@@ -1112,7 +1112,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                      width: "100%",
                      maxWidth: "50%",
                      height: "60vw",          // ⬅️ высота = 60% ширины экрана
-    				 maxHeight: "400px",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
+    				 maxHeight: "60vw",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
    					 objectFit: "cover",      // ⬅️ картинка не искажается
   				     display: "block",
                      borderRadius: "0px",
@@ -1151,7 +1151,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                      width: "100%",
                      maxWidth: "50%",
                      height: "60vw",          // ⬅️ высота = 60% ширины экрана
-    				 maxHeight: "400px",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
+    				 maxHeight: "60vw",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
    					 objectFit: "cover",      // ⬅️ картинка не искажается
   				     display: "block",
                      borderRadius: "0px",
@@ -1217,7 +1217,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
           width: "100%",
                      maxWidth: "50%",
                      height: "60vw",          // ⬅️ высота = 60% ширины экрана
-    				 maxHeight: "400px",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
+    				 maxHeight: "60vw",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
    					 objectFit: "cover",      // ⬅️ картинка не искажается
   				     display: "block",
                      borderRadius: "0px",
