@@ -995,36 +995,42 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                 img: "https://pbs.twimg.com/media/Gav5-CTWIAAv-Wf.jpg",
                 link: "https://x.com/kaikasekai/status/1849846927560417575?s=46&t=mq7NzK_MklQbSk36gyR5pg",
                 result: "https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/NOV.PNG",
+				res: "84",
               },
               {
                 month: "Dec 24",
                 img: "https://pbs.twimg.com/media/GdkpXY4WUAABozr.jpg",
                 link: "https://x.com/kaikasekai/status/1862565413160145174?s=46&t=mq7NzK_MklQbSk36gyR5pg",
                 result: "https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/DEC.PNG",
+				res: "94.4",
               },
               {
                 month: "Jan 25",
                 img: "https://pbs.twimg.com/media/GgEdStmWoAAwSPG.jpg",
                 link: "https://x.com/kaikasekai/status/1873811142566699385?s=46&t=mq7NzK_MklQbSk36gyR5pg",
                 result: "https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/JAN.PNG",
+				res: "86.2",
               },
               {
                 month: "Feb-Mar 25",
                 img: "https://pbs.twimg.com/media/GjhvfCqW0AAPNY5.jpg",
                 link: "https://x.com/kaikasekai/status/1889382743408255356?s=46&t=mq7NzK_MklQbSk36gyR5pg",
                 result: "https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/FEBMAR.PNG",
+				res: "83.8",
               },
               {
                 month: "Apr-Jun 25",
                 img: "https://pbs.twimg.com/media/Gni6nlrXEAAfkLw.jpg",
                 link: "https://x.com/kaikasekai/status/1907479658381099060?s=46&t=mq7NzK_MklQbSk36gyR5pg",
                 result: "https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/APRJUN.PNG",
+				res: "91",
               },
               {
                 month: "Aug-Sep 25",
                 img: "https://pbs.twimg.com/media/GxryXIYWMAAaRUD.jpg",
                 link: "https://x.com/kaikasekai/status/1953139989643940344?s=46&t=mq7NzK_MklQbSk36gyR5pg",
                 result: "https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/AUGSEP.PNG",
+				res: "88.3",
               },
             ].map(({ month, img, link, result }) => ({
               nft: (
@@ -1045,7 +1051,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
 					 width: "100%",
                      maxWidth: "50%",
                      height: "60vw",          // ⬅️ высота = 60% ширины экрана
-    				 maxHeight: "400px",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
+    				 maxHeight: "60vw",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
    					 objectFit: "cover",      // ⬅️ картинка не искажается
   				     display: "block",
                      borderRadius: "0px",
@@ -1120,7 +1126,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                       marginBottom: "6px",
                     }}
                   >
-                    Result: 95.1%
+                    Result: {res}%
                   </div>
                 </div>
               ),
@@ -1189,45 +1195,50 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                       />
                     </svg>
                   </a>
-                </div>
-              ),
-              result: (
-                <div
-                  style={{
-                    width: "100%",
-                    height: "60vw",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <ImageZoom
-                    src={`https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.id}.PNG`}
-                    alt={`Result ${nft.id}`}
-                    style={{
-                      width: "100%",
+    </div>
+  ),
+
+  result: (() => {
+  // Формируем имя файла, например "https://.../95.1.PNG"
+  const fileName =
+    nft.resultImage ||
+    `https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.percent}${nft.id}.PNG`;
+
+  // Если percent не задан в данных, пробуем вытащить его из имени файла
+  const match = fileName.match(/([\d.]+)(?=[A-Z]+)/);
+  const percent = nft.percent || (match ? match[1] : "—");
+
+  return (
+    <div>
+      <ImageZoom
+        src={fileName}
+        alt={`Result ${nft.name}`}
+        style={{
+          width: "100%",
                      maxWidth: "50%",
                      height: "60vw",          // ⬅️ высота = 60% ширины экрана
     				 maxHeight: "400px",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
    					 objectFit: "cover",      // ⬅️ картинка не искажается
   				     display: "block",
                      borderRadius: "0px",
-                    }}
-                  />
-                  <div
-                    style={{
-                      marginTop: "8px",
-                      color: "#666",
-                      fontSize: "0.95rem",
-                      marginBottom: "6px",
-                    }}
-                  >
-                    Result: 95.1%
-                  </div>
-                </div>
-              ),
-            })),
+        }}
+      />
+
+      <div
+        style={{
+          marginTop: "8px",
+          color: "#666",
+          fontSize: "0.95rem",
+          textDecoration: "none",
+          marginBottom: "6px",
+        }}
+      >
+        Result: {percent}%
+      </div>
+    </div>
+  );
+})(),
+})),
           ]}
         />
       </div>
