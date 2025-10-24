@@ -728,7 +728,7 @@ fontWeight: 500,
 }}>
   Advanced AI-powered algorithm predicts the global BTC trend with {mape}%<sup>*</sup> accuracy
 </div>
-<div style={{ display: "block", marginTop: 0, marginBottom: 0, color: "#666", fontWeight: 400, fontSize: "1.25rem", lineHeight: "1.5em" }}>
+<div style={{ display: "block", marginTop: 0, marginBottom: 0, color: "#666", fontWeight: 400, fontSize: "1.25rem", lineHeight: "1em" }}>
   <sup>*</sup>based on rolling 30-day metrics
 </div>
               </div>
@@ -808,7 +808,7 @@ fontWeight: 500,
     style: { textAlign: "left", fontSize: "0.9rem" },
   }}
   sx={{
-  width: "26ch",
+  width: "29ch",
   "& .MuiOutlinedInput-root": {
     borderRadius: 0,
     height: "46px",
@@ -827,7 +827,7 @@ fontWeight: 500,
     "& input": {
       textAlign: "left",
 	  fontSize: "0.9rem",
-      padding: "0 0 0 10px",
+      padding: "0 0 0 15px",
     },
   },
   "& .MuiInputLabel-root": {
@@ -986,12 +986,12 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
         <ImageZoom
           src="https://pbs.twimg.com/media/Gav5-CTWIAAv-Wf.jpg"
           alt="November 2024"
-          style={{ maxWidth: '50%', height: 'auto', display: 'block' }}
+          style={{ maxWidth: '50%', height: 'calc(100% / 1.6)', display: 'block' }}
         />
         <div
         style={{
           marginTop: "8px",      // расстояние от картинки до ссылки
-          color: "#1c1c1c",       // цвет ссылки (Twitter blue)
+          color: "#1c1c1c",       // цвет ссылки
           fontSize: "0.95rem",       // размер шрифта
           textDecoration: "none", // убрать подчёркивание
           marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
@@ -1003,7 +1003,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
         <a href="https://x.com/kaikasekai/status/1849846927560417575?s=46&t=mq7NzK_MklQbSk36gyR5pg" target="_blank" rel="noopener noreferrer"
           style={{
           marginTop: "0px",      // расстояние от картинки до ссылки
-          color: "#1c1c1c",       // цвет ссылки (Twitter blue)
+          color: "#1c1c1c",       // цвет ссылки
           fontSize: "0.85rem",       // размер шрифта
           textDecoration: "none", // убрать подчёркивание
           marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
@@ -1028,7 +1028,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
       <ImageZoom
         src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/NOV.PNG"
         alt="Result Nov 24"
-        style={{ width: '100%' }}
+        style={{ maxWidth: '50%', height: 'calc(100% / 1.6)', display: 'block' }}
       />
 
      <div
@@ -1051,7 +1051,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
         <ImageZoom
           src="https://pbs.twimg.com/media/GdkpXY4WUAABozr.jpg"
           alt="December 2024"
-          style={{ maxWidth: '50%', height: 'auto', display: 'block' }}
+          style={{ maxWidth: '50%', height: 'calc(100% / 1.6)', display: 'block' }}
         />
         <div
         style={{
@@ -1093,7 +1093,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
       <ImageZoom
         src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/DEC.PNG"
         alt="Result Dec 24"
-        style={{ width: '100%' }}
+        style={{ maxWidth: '50%', height: 'calc(100% / 1.6)', display: 'block' }}
       />
 
      <div
@@ -1116,7 +1116,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
         <ImageZoom
           src="https://pbs.twimg.com/media/GgEdStmWoAAwSPG.jpg"
           alt="January 2025"
-          style={{ maxWidth: '50%', height: 'auto', display: 'block' }}
+          style={{ maxWidth: '50%', height: 'calc(100% / 1.6)', display: 'block' }}
         />
 <div
         style={{
@@ -1158,7 +1158,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
       <ImageZoom
         src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/JAN.PNG"
         alt="Result Jan 25"
-        style={{ width: '100%' }}
+        style={{ maxWidth: '50%', height: 'calc(100% / 1.6)', display: 'block' }}
       />
 
      <div
@@ -1181,7 +1181,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
         <ImageZoom
           src="https://pbs.twimg.com/media/GjhvfCqW0AAPNY5.jpg"
           alt="February-March 2025"
-          style={{ maxWidth: '50%', height: 'auto', display: 'block' }}
+          style={{ maxWidth: '50%', height: 'calc(100% / 1.6)', display: 'block' }}
         />
 
         <div
@@ -1224,7 +1224,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
       <ImageZoom
         src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/FEBMAR.PNG"
         alt="Result Feb-Mar 25"
-        style={{ width: '100%' }}
+        style={{ maxWidth: '50%', height: 'calc(100% / 1.6)', display: 'block' }}
       />
 
      <div
@@ -1247,7 +1247,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
         <ImageZoom
           src="https://pbs.twimg.com/media/Gni6nlrXEAAfkLw.jpg"
           alt="April-June 2025"
-          style={{ maxWidth: '50%', height: 'auto', display: 'block' }}
+          style={{ maxWidth: '50%', height: 'calc(100% / 1.6)', display: 'block' }}
         />
 
         <div
@@ -1290,7 +1290,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
       <ImageZoom
         src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/APRJUN.PNG"
         alt="Result Apr-Jun 25"
-        style={{ width: '100%' }}
+        style={{ maxWidth: '50%', height: 'calc(100% / 1.6)', display: 'block' }}
       />
 
      <div
@@ -1313,7 +1313,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
         <ImageZoom
           src="https://pbs.twimg.com/media/GxryXIYWMAAaRUD.jpg"
           alt="August-September 2025"
-          style={{ maxWidth: '50%', height: 'auto', display: 'block' }}
+          style={{ maxWidth: '50%', height: 'calc(100% / 1.6)', display: 'block' }}
         />
 
 <div
@@ -1356,7 +1356,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
       <ImageZoom
         src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/AUGSEP.PNG"
         alt="Result Aug-Sep 25"
-        style={{ width: '100%' }}
+        style={{ maxWidth: '50%', height: 'calc(100% / 1.6)', display: 'block' }}
       />
 
      <div
@@ -1378,7 +1378,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
   ...proofs.map((nft) => ({
     nft: (
       <div style={{ width: '100%', height: 'calc(100% / 1.6)', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-        <ImageZoom src={nft.image} alt={nft.name} style={{ maxWidth: '50%', height: 'auto', display: 'block' }} />
+        <ImageZoom src={nft.image} alt={nft.name} style={{ maxWidth: '50%', height: 'calc(100% / 1.6)', display: 'block' }} />
 
 
 <div
@@ -1403,20 +1403,9 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
         }}
           >
           View on{" "}
-          <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="14"
-          height="14"
-          viewBox="0 0 38 33"
-          fill="#8247e5"
-        >
-	<path d="M29,10.2c-0.7-0.4-1.6-0.4-2.4,0L21,13.5l-3.8,2.1l-5.5,3.3c-0.7,0.4-1.6,0.4-2.4,0L5,16.3
-		c-0.7-0.4-1.2-1.2-1.2-2.1v-5c0-0.8,0.4-1.6,1.2-2.1l4.3-2.5c0.7-0.4,1.6-0.4,2.4,0L16,7.2c0.7,0.4,1.2,1.2,1.2,2.1v3.3l3.8-2.2V7
-		c0-0.8-0.4-1.6-1.2-2.1l-8-4.7c-0.7-0.4-1.6-0.4-2.4,0L1.2,5C0.4,5.4,0,6.2,0,7v9.4c0,0.8,0.4,1.6,1.2,2.1l8.1,4.7
-		c0.7,0.4,1.6,0.4,2.4,0l5.5-3.2l3.8-2.2l5.5-3.2c0.7-0.4,1.6-0.4,2.4,0l4.3,2.5c0.7,0.4,1.2,1.2,1.2,2.1v5c0,0.8-0.4,1.6-1.2,2.1
-		L29,28.8c-0.7,0.4-1.6,0.4-2.4,0l-4.3-2.5c-0.7-0.4-1.2-1.2-1.2-2.1V21l-3.8,2.2v3.3c0,0.8,0.4,1.6,1.2,2.1l8.1,4.7
-		c0.7,0.4,1.6,0.4,2.4,0l8.1-4.7c0.7-0.4,1.2-1.2,1.2-2.1V17c0-0.8-0.4-1.6-1.2-2.1L29,10.2z"/>
-</svg>
+		<svg width="14" height="14" viewBox="0 0 360 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M157.743 154.241L141.052 144.58L90.9766 173.561V231.519L141.052 260.5L191.13 231.519V141.359L218.948 125.26L246.77 141.359V173.561L218.948 189.66L202.257 180.002V205.759L218.948 215.42L269.024 186.439V128.481L218.948 99.5L168.873 128.481V218.641L141.052 234.74L113.233 218.641V186.439L141.052 170.34L157.743 179.998V154.241Z" fill="#6C00F6"/>
+        </svg>
         </a>
         
       </div>
@@ -1426,7 +1415,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
       <ImageZoom
         src={`https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.id}OCT25.PNG`}
         alt={`Result ${nft.id}`}
-        style={{ width: '100%' }}
+        style={{ maxWidth: '50%', height: 'calc(100% / 1.6)', display: 'block' }}
       />
 
      <div
