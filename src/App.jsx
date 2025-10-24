@@ -1042,10 +1042,13 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                     src={img}
                     alt={`${month} Forecast`}
                     style={{
-                      maxWidth: "50vw",
-                      height: "auto",
-                      objectFit: "contain",
-                      display: "block",
+					 width: "100%",
+                     maxWidth: "50%",
+                     height: "60vw",          // ⬅️ высота = 60% ширины экрана
+    				 maxHeight: "400px",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
+   					 objectFit: "cover",      // ⬅️ картинка не искажается
+  				     display: "block",
+                     borderRadius: "0px",
                     }}
                   />
                   <div
@@ -1100,10 +1103,13 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                     src={result}
                     alt={`Result ${month}`}
                     style={{
-                      maxWidth: "50vw",
-                      height: "auto",
-                      objectFit: "contain",
-                      display: "block",
+                     width: "100%",
+                     maxWidth: "50%",
+                     height: "60vw",          // ⬅️ высота = 60% ширины экрана
+    				 maxHeight: "400px",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
+   					 objectFit: "cover",      // ⬅️ картинка не искажается
+  				     display: "block",
+                     borderRadius: "0px",
                     }}
                   />
                   <div
@@ -1136,10 +1142,13 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                     src={nft.image}
                     alt={nft.name}
                     style={{
-                      maxWidth: "50vw",
-                      height: "auto",
-                      objectFit: "contain",
-                      display: "block",
+                     width: "100%",
+                     maxWidth: "50%",
+                     height: "60vw",          // ⬅️ высота = 60% ширины экрана
+    				 maxHeight: "400px",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
+   					 objectFit: "cover",      // ⬅️ картинка не искажается
+  				     display: "block",
+                     borderRadius: "0px",
                     }}
                   />
                   <div
@@ -1150,7 +1159,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                       marginBottom: "6px",
                     }}
                   >
-                    Oct 25 Forecast
+                    {nft.name} Forecast
                   </div>
 
                   <a
@@ -1168,8 +1177,8 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                   >
                     View on
                     <svg
-                      width="14"
-                      height="14"
+                      width="24"
+                      height="24"
                       viewBox="0 0 360 360"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -1194,13 +1203,16 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                   }}
                 >
                   <ImageZoom
-                    src={`https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.id}OCT25.PNG`}
+                    src={`https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.id}.PNG`}
                     alt={`Result ${nft.id}`}
                     style={{
-                      maxWidth: "50vw",
-                      height: "auto",
-                      objectFit: "contain",
-                      display: "block",
+                      width: "100%",
+                     maxWidth: "50%",
+                     height: "60vw",          // ⬅️ высота = 60% ширины экрана
+    				 maxHeight: "400px",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
+   					 objectFit: "cover",      // ⬅️ картинка не искажается
+  				     display: "block",
+                     borderRadius: "0px",
                     }}
                   />
                   <div
@@ -1223,7 +1235,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
   </AccordionDetails>
 </Accordion>
 
-            <div style={{ height: "56px" }}></div>
+            <div style={{ height: "89px" }}></div>
           </>
         )}
         
