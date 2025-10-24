@@ -1199,14 +1199,16 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
   ),
 
   result: (() => {
-  // Формируем имя файла, например "https://.../95.1.PNG"
+  // файл с результатом, например "https://.../89.1-2.PNG"
   const fileName =
     nft.resultImage ||
-    `https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.percent}${nft.id}.PNG`;
+    `https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.result}.PNG`;
 
-  // Если percent не задан в данных, пробуем вытащить его из имени файла
-  const match = fileName.match(/([\d.]+)(?=[A-Z]+)/);
-  const percent = nft.percent || (match ? match[1] : "—");
+  // пытаемся извлечь процент и id из имени файла
+  // пример: "89.1-2.PNG" → ["89.1-2", "89.1", "2"]
+  const match = fileName.match(/([\d.]+)-(\d+)\.PNG$/);
+  const percent = match ? `${match[1]}%` : "—";
+  const idFromFile = match ? match[2] : nft.id;
 
   return (
     <div>
