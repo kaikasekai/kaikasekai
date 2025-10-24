@@ -74,6 +74,7 @@ html {
   margin: 0;
   display: flex;
   overflow-x: hidden;
+  overflow-y: auto;
   flex-direction: column;
 }
 
@@ -89,6 +90,7 @@ body, #root {
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+  overflow-y: auto;
   height: 100%;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -452,8 +454,8 @@ code { font-family: var(--font-main); font-size: 0.9rem; }
   z-index: 10;
 }
 
-.carousel-arrow.left { left: 15px; }
-.carousel-arrow.right { right: 15px; }
+.carousel-arrow.left { left: 0px; }
+.carousel-arrow.right { right: 0px; }
 
 .carousel-dots {
   display: flex;
