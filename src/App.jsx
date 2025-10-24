@@ -728,7 +728,7 @@ fontWeight: 500,
 }}>
   Advanced AI-powered algorithm predicts the global BTC trend with {mape}%<sup>*</sup> accuracy
 </div>
-<div style={{ display: "block", marginTop: 0, marginBottom: 0, color: "#666", fontWeight: 400, fontSize: "1.25rem", lineHeight: "1em" }}>
+<div style={{ display: "block", marginTop: 0, marginBottom: 0, color: "#666", fontWeight: 300, fontSize: "1.25rem", lineHeight: "1em" }}>
   <sup>*</sup>based on rolling 30-day metrics
 </div>
               </div>
@@ -964,7 +964,15 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
   </AccordionDetails>
 </Accordion>
 
-<Accordion style={{ marginTop: 0, boxShadow: "none", border: "none", paddingLeft: "10px", paddingRight: "10px" }}>
+<Accordion
+  style={{
+    marginTop: 0,
+    boxShadow: "none",
+    border: "none",
+    paddingLeft: "10px",
+    paddingRight: "10px",
+  }}
+>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("proofs") ? "−" : "+"}</span>}
     onClick={() => toggleAccordion("proofs")}
@@ -972,472 +980,249 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
   >
     <Typography sx={{ fontWeight: 500, fontSize: "1.6rem" }}>Proofs</Typography>
   </AccordionSummary>
+
   <AccordionDetails style={{ padding: 0 }}>
-  {proofs.length === 0 ? (
-    <Typography>No proofs yet.</Typography>
-  ) : (
-    <div className="proofs-wrapper">
-  <ProofCarousel
-    proofs={[
-  // 6 статических слайдов
-  {
-    nft: (
-      <div style={{ width: '100%', height: 'calc(100% / 1.6)', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-        <ImageZoom
-          src="https://pbs.twimg.com/media/Gav5-CTWIAAv-Wf.jpg"
-          alt="November 2024"
-          style={{ maxWidth: '50%', height: 'calc(100% / 1.6)', display: 'block' }}
+    {proofs.length === 0 ? (
+      <Typography>No proofs yet.</Typography>
+    ) : (
+      <div className="proofs-wrapper">
+        <ProofCarousel
+          proofs={[
+            // 6 статических слайдов
+            ...[
+              {
+                month: "Nov 24",
+                img: "https://pbs.twimg.com/media/Gav5-CTWIAAv-Wf.jpg",
+                link: "https://x.com/kaikasekai/status/1849846927560417575?s=46&t=mq7NzK_MklQbSk36gyR5pg",
+                result: "https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/NOV.PNG",
+              },
+              {
+                month: "Dec 24",
+                img: "https://pbs.twimg.com/media/GdkpXY4WUAABozr.jpg",
+                link: "https://x.com/kaikasekai/status/1862565413160145174?s=46&t=mq7NzK_MklQbSk36gyR5pg",
+                result: "https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/DEC.PNG",
+              },
+              {
+                month: "Jan 25",
+                img: "https://pbs.twimg.com/media/GgEdStmWoAAwSPG.jpg",
+                link: "https://x.com/kaikasekai/status/1873811142566699385?s=46&t=mq7NzK_MklQbSk36gyR5pg",
+                result: "https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/JAN.PNG",
+              },
+              {
+                month: "Feb-Mar 25",
+                img: "https://pbs.twimg.com/media/GjhvfCqW0AAPNY5.jpg",
+                link: "https://x.com/kaikasekai/status/1889382743408255356?s=46&t=mq7NzK_MklQbSk36gyR5pg",
+                result: "https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/FEBMAR.PNG",
+              },
+              {
+                month: "Apr-Jun 25",
+                img: "https://pbs.twimg.com/media/Gni6nlrXEAAfkLw.jpg",
+                link: "https://x.com/kaikasekai/status/1907479658381099060?s=46&t=mq7NzK_MklQbSk36gyR5pg",
+                result: "https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/APRJUN.PNG",
+              },
+              {
+                month: "Aug-Sep 25",
+                img: "https://pbs.twimg.com/media/GxryXIYWMAAaRUD.jpg",
+                link: "https://x.com/kaikasekai/status/1953139989643940344?s=46&t=mq7NzK_MklQbSk36gyR5pg",
+                result: "https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/AUGSEP.PNG",
+              },
+            ].map(({ month, img, link, result }) => ({
+              nft: (
+                <div
+                  style={{
+                    width: "100%",
+                    height: "60vw",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <ImageZoom
+                    src={img}
+                    alt={`${month} Forecast`}
+                    style={{
+                      maxWidth: "50vw",
+                      height: "auto",
+                      objectFit: "contain",
+                      display: "block",
+                    }}
+                  />
+                  <div
+                    style={{
+                      marginTop: "8px",
+                      color: "#1c1c1c",
+                      fontSize: "0.95rem",
+                      marginBottom: "6px",
+                    }}
+                  >
+                    {month} Forecast
+                  </div>
+
+                  <a
+                    href={link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      color: "#1c1c1c",
+                      fontSize: "0.85rem",
+                      textDecoration: "none",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "4px",
+                    }}
+                  >
+                    View on
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 300 300"
+                      width="14"
+                      height="14"
+                      fill="#1c1c1c"
+                    >
+                      <path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66" />
+                    </svg>
+                  </a>
+                </div>
+              ),
+              result: (
+                <div
+                  style={{
+                    width: "100%",
+                    height: "60vw",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <ImageZoom
+                    src={result}
+                    alt={`Result ${month}`}
+                    style={{
+                      maxWidth: "50vw",
+                      height: "auto",
+                      objectFit: "contain",
+                      display: "block",
+                    }}
+                  />
+                  <div
+                    style={{
+                      marginTop: "8px",
+                      color: "#666",
+                      fontSize: "0.95rem",
+                      marginBottom: "6px",
+                    }}
+                  >
+                    Result: 95.1%
+                  </div>
+                </div>
+              ),
+            })),
+            // динамические NFT
+            ...proofs.map((nft) => ({
+              nft: (
+                <div
+                  style={{
+                    width: "100%",
+                    height: "60vw",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <ImageZoom
+                    src={nft.image}
+                    alt={nft.name}
+                    style={{
+                      maxWidth: "50vw",
+                      height: "auto",
+                      objectFit: "contain",
+                      display: "block",
+                    }}
+                  />
+                  <div
+                    style={{
+                      marginTop: "8px",
+                      color: "#1c1c1c",
+                      fontSize: "0.95rem",
+                      marginBottom: "6px",
+                    }}
+                  >
+                    Oct 25 Forecast
+                  </div>
+
+                  <a
+                    href={nft.polygonscan}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      color: "#1c1c1c",
+                      fontSize: "0.85rem",
+                      textDecoration: "none",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "4px",
+                    }}
+                  >
+                    View on
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 360 360"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M157.743 154.241L141.052 144.58L90.9766 173.561V231.519L141.052 260.5L191.13 231.519V141.359L218.948 125.26L246.77 141.359V173.561L218.948 189.66L202.257 180.002V205.759L218.948 215.42L269.024 186.439V128.481L218.948 99.5L168.873 128.481V218.641L141.052 234.74L113.233 218.641V186.439L141.052 170.34L157.743 179.998V154.241Z"
+                        fill="#6C00F6"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              ),
+              result: (
+                <div
+                  style={{
+                    width: "100%",
+                    height: "60vw",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <ImageZoom
+                    src={`https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.id}OCT25.PNG`}
+                    alt={`Result ${nft.id}`}
+                    style={{
+                      maxWidth: "50vw",
+                      height: "auto",
+                      objectFit: "contain",
+                      display: "block",
+                    }}
+                  />
+                  <div
+                    style={{
+                      marginTop: "8px",
+                      color: "#666",
+                      fontSize: "0.95rem",
+                      marginBottom: "6px",
+                    }}
+                  >
+                    Result: 95.1%
+                  </div>
+                </div>
+              ),
+            })),
+          ]}
         />
-        <div
-        style={{
-          marginTop: "8px",      // расстояние от картинки до ссылки
-          color: "#1c1c1c",       // цвет ссылки
-          fontSize: "0.95rem",       // размер шрифта
-          textDecoration: "none", // убрать подчёркивание
-          marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
-        }}
-          >
-          Nov 24 Forecast
-        </div>
-        
-        <a href="https://x.com/kaikasekai/status/1849846927560417575?s=46&t=mq7NzK_MklQbSk36gyR5pg" target="_blank" rel="noopener noreferrer"
-          style={{
-          marginTop: "0px",      // расстояние от картинки до ссылки
-          color: "#1c1c1c",       // цвет ссылки
-          fontSize: "0.85rem",       // размер шрифта
-          textDecoration: "none", // убрать подчёркивание
-          marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
-        }}
-          >
-          View on{" "}
-          <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 300 300"
-    width="14"
-    height="14"
-    fill="#1c1c1c"
-  >
-    <path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66" />
-  </svg>
-        </a>
-        
       </div>
-    ),
-    result: (
-		<div>
-      <ImageZoom
-        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/NOV.PNG"
-        alt="Result Nov 24"
-        style={{ maxWidth: '50%', height: 'calc(100% / 1.6)', display: 'block' }}
-      />
-
-     <div
-        style={{
-          marginTop: "8px",      // расстояние от картинки до ссылки
-          color: "#666",       // цвет ссылки (Twitter blue)
-          fontSize: "0.95rem",       // размер шрифта
-          textDecoration: "none", // убрать подчёркивание
-          marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
-        }}
-          >
-          Result: 95.1%
-        </div>
-      </div>
-    ),
-  },
-  {
-    nft: (
-      <div style={{ width: '100%', height: 'calc(100% / 1.6)', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-        <ImageZoom
-          src="https://pbs.twimg.com/media/GdkpXY4WUAABozr.jpg"
-          alt="December 2024"
-          style={{ maxWidth: '50%', height: 'calc(100% / 1.6)', display: 'block' }}
-        />
-        <div
-        style={{
-          marginTop: "8px",      // расстояние от картинки до ссылки
-          color: "#1c1c1c",       // цвет ссылки (Twitter blue)
-          fontSize: "0.95rem",       // размер шрифта
-          textDecoration: "none", // убрать подчёркивание
-          marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
-        }}
-          >
-          Dec 24 Forecast
-        </div>
-        
-        <a href="https://x.com/kaikasekai/status/1862565413160145174?s=46&t=mq7NzK_MklQbSk36gyR5pg"
-          style={{
-          marginTop: "0px",      // расстояние от картинки до ссылки
-          color: "#1c1c1c",       // цвет ссылки (Twitter blue)
-          fontSize: "0.85rem",       // размер шрифта
-          textDecoration: "none", // убрать подчёркивание
-          marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
-        }}
-          >
-          View on{" "}
-          <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 300 300"
-    width="14"
-    height="14"
-    fill="#1c1c1c"
-  >
-    <path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66" />
-  </svg>
-        </a>
-        
-      </div>
-    ),
-    result: (
-		<div>
-      <ImageZoom
-        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/DEC.PNG"
-        alt="Result Dec 24"
-        style={{ maxWidth: '50%', height: 'calc(100% / 1.6)', display: 'block' }}
-      />
-
-     <div
-        style={{
-          marginTop: "8px",      // расстояние от картинки до ссылки
-          color: "#666",       // цвет ссылки (Twitter blue)
-          fontSize: "0.95rem",       // размер шрифта
-          textDecoration: "none", // убрать подчёркивание
-          marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
-        }}
-          >
-          Result: 95.1%
-        </div>
-	</div>
-    ),
-  },
-  {
-    nft: (
-      <div style={{ width: '100%', height: 'calc(100% / 1.6)', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-        <ImageZoom
-          src="https://pbs.twimg.com/media/GgEdStmWoAAwSPG.jpg"
-          alt="January 2025"
-          style={{ maxWidth: '50%', height: 'calc(100% / 1.6)', display: 'block' }}
-        />
-<div
-        style={{
-          marginTop: "8px",      // расстояние от картинки до ссылки
-          color: "#1c1c1c",       // цвет ссылки (Twitter blue)
-          fontSize: "0.95rem",       // размер шрифта
-          textDecoration: "none", // убрать подчёркивание
-          marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
-        }}
-          >
-          Jan 25 Forecast
-        </div>
-        
-        <a href="https://x.com/kaikasekai/status/1873811142566699385?s=46&t=mq7NzK_MklQbSk36gyR5pg"
-          style={{
-          marginTop: "0px",      // расстояние от картинки до ссылки
-          color: "#1c1c1c",       // цвет ссылки (Twitter blue)
-          fontSize: "0.85rem",       // размер шрифта
-          textDecoration: "none", // убрать подчёркивание
-          marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
-        }}
-          >
-          View on{" "}
-          <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 300 300"
-    width="14"
-    height="14"
-    fill="#1c1c1c"
-  >
-    <path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66" />
-  </svg>
-        </a>
-        
-      </div>
-    ),
-    result: (
-		<div>
-      <ImageZoom
-        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/JAN.PNG"
-        alt="Result Jan 25"
-        style={{ maxWidth: '50%', height: 'calc(100% / 1.6)', display: 'block' }}
-      />
-
-     <div
-        style={{
-          marginTop: "8px",      // расстояние от картинки до ссылки
-          color: "#666",       // цвет ссылки (Twitter blue)
-          fontSize: "0.95rem",       // размер шрифта
-          textDecoration: "none", // убрать подчёркивание
-          marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
-        }}
-          >
-          Result: 95.1%
-        </div>
-		</div>
-    ),
-  },
-  {
-    nft: (
-      <div style={{ width: '100%', height: 'calc(100% / 1.6)', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-        <ImageZoom
-          src="https://pbs.twimg.com/media/GjhvfCqW0AAPNY5.jpg"
-          alt="February-March 2025"
-          style={{ maxWidth: '50%', height: 'calc(100% / 1.6)', display: 'block' }}
-        />
-
-        <div
-        style={{
-          marginTop: "8px",      // расстояние от картинки до ссылки
-          color: "#1c1c1c",       // цвет ссылки (Twitter blue)
-          fontSize: "0.95rem",       // размер шрифта
-          textDecoration: "none", // убрать подчёркивание
-          marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
-        }}
-          >
-          Feb-Mar 25 Forecast
-        </div>
-        
-        <a href="https://x.com/kaikasekai/status/1889382743408255356?s=46&t=mq7NzK_MklQbSk36gyR5pg"
-          style={{
-          marginTop: "0px",      // расстояние от картинки до ссылки
-          color: "#1c1c1c",       // цвет ссылки (Twitter blue)
-          fontSize: "0.85rem",       // размер шрифта
-          textDecoration: "none", // убрать подчёркивание
-          marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
-        }}
-          >
-          View on{" "}
-          <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 300 300"
-    width="14"
-    height="14"
-    fill="#1c1c1c"
-  >
-    <path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66" />
-  </svg>
-        </a>
-        
-      </div>
-    ),
-    result: (
-		<div>
-      <ImageZoom
-        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/FEBMAR.PNG"
-        alt="Result Feb-Mar 25"
-        style={{ maxWidth: '50%', height: 'calc(100% / 1.6)', display: 'block' }}
-      />
-
-     <div
-        style={{
-          marginTop: "8px",      // расстояние от картинки до ссылки
-          color: "#666",       // цвет ссылки (Twitter blue)
-          fontSize: "0.95rem",       // размер шрифта
-          textDecoration: "none", // убрать подчёркивание
-          marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
-        }}
-          >
-          Result: 95.1%
-        </div>
-    </div>
-    ),
-  },
-  {
-    nft: (
-      <div style={{ width: '100%', height: 'calc(100% / 1.6)', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-        <ImageZoom
-          src="https://pbs.twimg.com/media/Gni6nlrXEAAfkLw.jpg"
-          alt="April-June 2025"
-          style={{ maxWidth: '50%', height: 'calc(100% / 1.6)', display: 'block' }}
-        />
-
-        <div
-        style={{
-          marginTop: "8px",      // расстояние от картинки до ссылки
-          color: "#1c1c1c",       // цвет ссылки (Twitter blue)
-          fontSize: "0.95rem",       // размер шрифта
-          textDecoration: "none", // убрать подчёркивание
-          marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
-        }}
-          >
-          Apr-Jun 25 Forecast
-        </div>
-        
-        <a href="https://x.com/kaikasekai/status/1907479658381099060?s=46&t=mq7NzK_MklQbSk36gyR5pg"
-          style={{
-          marginTop: "0px",      // расстояние от картинки до ссылки
-          color: "#1c1c1c",       // цвет ссылки (Twitter blue)
-          fontSize: "0.85rem",       // размер шрифта
-          textDecoration: "none", // убрать подчёркивание
-          marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
-        }}
-          >
-          View on{" "}
-          <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 300 300"
-    width="14"
-    height="14"
-    fill="#1c1c1c"
-  >
-    <path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66" />
-  </svg>
-        </a>
-        
-      </div>
-    ),
-    result: (
-		<div>
-      <ImageZoom
-        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/APRJUN.PNG"
-        alt="Result Apr-Jun 25"
-        style={{ maxWidth: '50%', height: 'calc(100% / 1.6)', display: 'block' }}
-      />
-
-     <div
-        style={{
-          marginTop: "8px",      // расстояние от картинки до ссылки
-          color: "#666",       // цвет ссылки (Twitter blue)
-          fontSize: "0.95rem",       // размер шрифта
-          textDecoration: "none", // убрать подчёркивание
-          marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
-        }}
-          >
-          Result: 95.1%
-        </div>
-		</div>
-    ),
-  },
-  {
-    nft: (
-      <div style={{ width: '100%', height: 'calc(100% / 1.6)', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-        <ImageZoom
-          src="https://pbs.twimg.com/media/GxryXIYWMAAaRUD.jpg"
-          alt="August-September 2025"
-          style={{ maxWidth: '50%', height: 'calc(100% / 1.6)', display: 'block' }}
-        />
-
-<div
-        style={{
-          marginTop: "8px",      // расстояние от картинки до ссылки
-          color: "#1c1c1c",       // цвет ссылки (Twitter blue)
-          fontSize: "0.95rem",       // размер шрифта
-          textDecoration: "none", // убрать подчёркивание
-          marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
-        }}
-          >
-          Aug-Sep 25 Forecast
-        </div>
-        
-        <a href="https://x.com/kaikasekai/status/1953139989643940344?s=46&t=mq7NzK_MklQbSk36gyR5pg"
-          style={{
-          marginTop: "0px",      // расстояние от картинки до ссылки
-          color: "#1c1c1c",       // цвет ссылки (Twitter blue)
-          fontSize: "0.85rem",       // размер шрифта
-          textDecoration: "none", // убрать подчёркивание
-          marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
-        }}
-          >
-          View on{" "}
-          <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 300 300"
-    width="14"
-    height="14"
-    fill="#1c1c1c"
-  >
-    <path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66" />
-  </svg>
-        </a>
-        
-      </div>
-    ),
-    result: (
-		<div>
-      <ImageZoom
-        src="https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/AUGSEP.PNG"
-        alt="Result Aug-Sep 25"
-        style={{ maxWidth: '50%', height: 'calc(100% / 1.6)', display: 'block' }}
-      />
-
-     <div
-        style={{
-          marginTop: "8px",      // расстояние от картинки до ссылки
-          color: "#666",       // цвет ссылки (Twitter blue)
-          fontSize: "0.95rem",       // размер шрифта
-          textDecoration: "none", // убрать подчёркивание
-          marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
-        }}
-          >
-          Result: 95.1%
-        </div>
-		</div>
-    ),
-  },
-
-  // динамические NFT
-  ...proofs.map((nft) => ({
-    nft: (
-      <div style={{ width: '100%', height: 'calc(100% / 1.6)', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-        <ImageZoom src={nft.image} alt={nft.name} style={{ maxWidth: '50%', height: 'calc(100% / 1.6)', display: 'block' }} />
-
-
-<div
-        style={{
-          marginTop: "8px",      // расстояние от картинки до ссылки
-          color: "#1c1c1c",       // цвет ссылки (Twitter blue)
-          fontSize: "0.95rem",       // размер шрифта
-          textDecoration: "none", // убрать подчёркивание
-          marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
-        }}
-          >
-          Oct 25 Forecast
-        </div>
-        
-        <a href={nft.polygonscan} target="_blank" rel="noopener noreferrer"
-          style={{
-          marginTop: "0px",      // расстояние от картинки до ссылки
-          color: "#1c1c1c",       // цвет ссылки (Twitter blue)
-          fontSize: "0.85rem",       // размер шрифта
-          textDecoration: "none", // убрать подчёркивание
-          marginBottom: "0px",   // расстояние до ссылки под ней (View on...)
-        }}
-          >
-          View on{" "}
-		<svg width="14" height="14" viewBox="0 0 360 360" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M157.743 154.241L141.052 144.58L90.9766 173.561V231.519L141.052 260.5L191.13 231.519V141.359L218.948 125.26L246.77 141.359V173.561L218.948 189.66L202.257 180.002V205.759L218.948 215.42L269.024 186.439V128.481L218.948 99.5L168.873 128.481V218.641L141.052 234.74L113.233 218.641V186.439L141.052 170.34L157.743 179.998V154.241Z" fill="#6C00F6"/>
-        </svg>
-        </a>
-        
-      </div>
-    ),
-    result: (
-		<div>
-      <ImageZoom
-        src={`https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.id}OCT25.PNG`}
-        alt={`Result ${nft.id}`}
-        style={{ maxWidth: '50%', height: 'calc(100% / 1.6)', display: 'block' }}
-      />
-
-     <div
-        style={{
-          marginTop: "8px",      // расстояние от картинки до ссылки
-          color: "#666",       // цвет ссылки (Twitter blue)
-          fontSize: "0.95rem",       // размер шрифта
-          textDecoration: "none", // убрать подчёркивание
-          marginBottom: "6px",   // расстояние до ссылки под ней (View on...)
-        }}
-          >
-          Result: 95.1%
-        </div>
-	</div>
-    ),
-  })),
-]}
-  />
-</div>
-  )}
-</AccordionDetails>
+    )}
+  </AccordionDetails>
 </Accordion>
+
             <div style={{ height: "56px" }}></div>
           </>
         )}
