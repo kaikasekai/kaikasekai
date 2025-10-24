@@ -1008,7 +1008,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                 month: "Jan 25",
                 img: "https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/IMG_4920.jpeg",
                 link: "https://x.com/kaikasekai/status/1873811142566699385?s=46&t=mq7NzK_MklQbSk36gyR5pg",
-                result: "https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/JAN.PNG",
+                result: "https://pbs.twimg.com/media/GjhvfCqW0AAPNY5.jpg",
 				res: "86.2",
               },
               {
@@ -1020,7 +1020,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
               },
               {
                 month: "Apr-Jun 25",
-                img: "https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/resultsIMG_4919.jpeg",
+                img: "https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/IMG_4919.jpeg",
                 link: "https://x.com/kaikasekai/status/1907479658381099060?s=46&t=mq7NzK_MklQbSk36gyR5pg",
                 result: "https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/APRJUN.PNG",
 				res: "91",
