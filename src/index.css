@@ -330,7 +330,7 @@ main {
 footer {
   flex-shrink: 0;
   border-top: 1px solid rgba(0,0,0,0.1);
-  padding: 20px;
+  padding-top: 20px;
   background: var(--bg-light);
   color: var(--text-dark);
   width: 100%;
@@ -347,7 +347,7 @@ footer {
 .footer-links {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 15px;
   margin-bottom: 0px;
 }
 
