@@ -595,8 +595,50 @@ const handleSendFeedback = async () => {
   }
 });
 
+	const styles = {
+    header: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "flex-start",
+      gap: "1rem",
+      padding: "0.5rem",
+      borderBottom: "1px solid #ccc",
+    },
+    logo: {
+      width: "36px",
+      height: "auto",
+      flexShrink: 0,
+    },
+    title: {
+      fontFamily: '"Menlo", sans-serif',
+      fontSize: "clamp(1rem, 2vw, 1.5rem)",
+      fontWeight: 600,
+      color: "#333",
+    },
+    main: {
+      padding: "1rem",
+    },
+  };
+
   return (
     <>
+
+    <header style={styles.header}>
+        <svg
+          style={styles.logo}
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 150 150"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <rect x="50" y="0" width="50" height="50" fill="#FFFF00" />
+          <rect x="0" y="50" width="50" height="50" fill="#00FF00" />
+          <rect x="50" y="50" width="50" height="50" fill="#FFD700" />
+          <rect x="100" y="50" width="50" height="50" fill="#0080FF" />
+          <rect x="50" y="100" width="50" height="50" fill="#FF0080" />
+        </svg>
+        <span style={styles.title}>Kaikasekai Trends</span>
+      </header>
+		
       <main
         style={{
     padding: 10,
