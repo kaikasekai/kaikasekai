@@ -636,7 +636,6 @@ const handleSendFeedback = async () => {
           <rect x="100" y="50" width="50" height="50" fill="#0080FF" />
           <rect x="50" y="100" width="50" height="50" fill="#FF0080" />
         </svg>
-        <span style={styles.title}>Kaikasekai Trends</span>
       </header>
 		
       <main
