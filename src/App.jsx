@@ -595,7 +595,7 @@ const handleSendFeedback = async () => {
   }
 });
 
-    useEffect(() => {
+	useEffect(() => {
     // 🔹 SVG favicon прямо в коде
     const svgIcon = `
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150">
@@ -621,7 +621,7 @@ const handleSendFeedback = async () => {
       document.head.removeChild(favicon);
     };
   }, []);
-	
+
 	const styles = {
     header: {
       display: "flex",
@@ -687,10 +687,10 @@ const handleSendFeedback = async () => {
                     tickFormatter={(d) => dayjs(d).format("MMM D")}
                   />
                   <YAxis
-                    domain={[50000, 180000]}
+                    domain={[60000, 160000]}
                     ticks={[
-                      50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000, 130000, 140000, 150000,
-                      160000, 170000, 180000
+                      60000, 70000, 80000, 90000, 100000,
+                      110000, 120000, 130000, 140000, 150000, 160000,
                     ]}
                     tickFormatter={(v) => v.toLocaleString()}
                       label={{
@@ -947,7 +947,6 @@ fontWeight: 500,
     />
   </svg>
 </Button>
-
   </div>
 ) : (
   <div style={{ paddingLeft: "10px", marginBottom: "56px" }}>
@@ -1218,100 +1217,112 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
             })),
             // динамические NFT
             ...proofs.map((nft) => ({
-nft: (
-<div
-style={{
-width: "100%",
-height: "60vw",
-display: "flex",
-flexDirection: "column",
-alignItems: "center",
-justifyContent: "center",
-}}
->
-<ImageZoom
-src={nft.image}
-alt={nft.name}
-style={{
-width: "100%",
-maxWidth: "50%",
-height: "60vw",
-maxHeight: "60vw",
-objectFit: "cover",
-display: "block",
-borderRadius: "0px",
-}}
-/>
-<div
-style={{
-marginTop: "8px",
-color: "#1c1c1c",
-fontSize: "0.95rem",
-marginBottom: "6px",
-}}
->
-{nft.name} Forecast </div>
+              nft: (
+                <div
+                  style={{
+                    width: "100%",
+                    height: "60vw",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <ImageZoom
+                    src={nft.image}
+                    alt={nft.name}
+                    style={{
+                     width: "100%",
+                     maxWidth: "50%",
+                     height: "60vw",          // ⬅️ высота = 60% ширины экрана
+    				 maxHeight: "60vw",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
+   					 objectFit: "cover",      // ⬅️ картинка не искажается
+  				     display: "block",
+                     borderRadius: "0px",
+                    }}
+                  />
+                  <div
+                    style={{
+                      marginTop: "8px",
+                      color: "#1c1c1c",
+                      fontSize: "0.95rem",
+                      marginBottom: "6px",
+                    }}
+                  >
+                    {nft.name} Forecast
+                  </div>
 
-  <a
-    href={nft.polygonscan}
-    target="_blank"
-    rel="noopener noreferrer"
-    style={{
-      color: "#1c1c1c",
-      fontSize: "0.85rem",
-      textDecoration: "none",
-      display: "inline-flex",
-      alignItems: "center",
-      gap: "4px",
-    }}
-  >
-    View on
-    <svg width="24" height="24" viewBox="0 0 360 360" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M157.743 154.241L141.052 144.58L90.9766 173.561V231.519L141.052 260.5L191.13 231.519V141.359L218.948 125.26L246.77 141.359V173.561L218.948 189.66L202.257 180.002V205.759L218.948 215.42L269.024 186.439V128.481L218.948 99.5L168.873 128.481V218.641L141.052 234.74L113.233 218.641V186.439L141.052 170.34L157.743 179.998V154.241Z" fill="#6C00F6"/>
-    </svg>
-  </a>
-</div>
-
-),
-
-result: (() => {
-// формируем имя файла по id nft
-const fileName = `https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.id}-xxx.png`;
-
-// извлекаем процент из имени файла (xxx → 3 цифры, первые две = целая часть, третья = десятичная)
-const match = fileName.match(/-(\d{3})\.png$/i);
-const percent = match
-  ? `${parseInt(match[1].slice(0, 2), 10)}.${match[1].slice(2)}%`
-  : "—";
-
-return (
-  <div>
-    <ImageZoom
-      src={fileName}
-      alt={`Result ${nft.name}`}
-      style={{
-        width: "100%",
-        maxWidth: "50%",
-        height: "60vw",
-        maxHeight: "60vw",
-        objectFit: "cover",
-        display: "block",
-        borderRadius: "0px",
-      }}
-    />
-    <div
-      style={{
-        marginTop: "8px",
-        color: "#666",
-        fontSize: "0.95rem",
-        textDecoration: "none",
-        marginBottom: "6px",
-      }}
-    >
-      Result: {percent}
+                  <a
+                    href={nft.polygonscan}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      color: "#1c1c1c",
+                      fontSize: "0.85rem",
+                      textDecoration: "none",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "4px",
+                    }}
+                  >
+                    View on
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 360 360"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M157.743 154.241L141.052 144.58L90.9766 173.561V231.519L141.052 260.5L191.13 231.519V141.359L218.948 125.26L246.77 141.359V173.561L218.948 189.66L202.257 180.002V205.759L218.948 215.42L269.024 186.439V128.481L218.948 99.5L168.873 128.481V218.641L141.052 234.74L113.233 218.641V186.439L141.052 170.34L157.743 179.998V154.241Z"
+                        fill="#6C00F6"
+                      />
+                    </svg>
+                  </a>
     </div>
-  </div>
-);
+  ),
+
+  result: (() => {
+  // файл с результатом, например "https://.../89.1-2.PNG"
+  const fileName =
+    nft.resultImage ||
+    `https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.result}.PNG`;
+
+  // пытаемся извлечь процент и id из имени файла
+  // пример: "89.1-2.PNG" → ["89.1-2", "89.1", "2"]
+  const match = fileName.match(/([\d.]+)-(\d+)\.PNG$/);
+  const percent = match ? `${match[1]}%` : "—";
+  const idFromFile = match ? match[2] : nft.id;
+
+  return (
+    <div>
+      <ImageZoom
+        src={fileName}
+        alt={`Result ${nft.name}`}
+        style={{
+          width: "100%",
+                     maxWidth: "50%",
+                     height: "60vw",          // ⬅️ высота = 60% ширины экрана
+    				 maxHeight: "60vw",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
+   					 objectFit: "cover",      // ⬅️ картинка не искажается
+  				     display: "block",
+                     borderRadius: "0px",
+        }}
+      />
+
+      <div
+        style={{
+          marginTop: "8px",
+          color: "#666",
+          fontSize: "0.95rem",
+          textDecoration: "none",
+          marginBottom: "6px",
+        }}
+      >
+        Result: {percent}%
+      </div>
+    </div>
+  );
 })(),
 })),
           ]}
@@ -1549,7 +1560,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
         label="USDC"
         value={donateAmount}
         onChange={(e) => setDonateAmount(e.target.value)}
-        style={{ borderRadius: "0px" }}
+        sx={{ borderRadius: "0px" }}
         fullWidth
         margin="dense"
       />
