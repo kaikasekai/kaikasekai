@@ -1245,42 +1245,44 @@ marginBottom: "6px",
 ),
 
 result: (() => {
-// формируем имя файла по id nft
-const fileName = `https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.id}-xxx.png`;
-// извлекаем процент из имени файла (xxx → 3 цифры, первые две = целая часть, третья = десятичная)
-const match = fileName.match(/-(\d{3})\.png$/i);
-const percent = match
-  ? `${parseInt(match[1].slice(0, 2), 10)}.${match[1].slice(2)}%`
-  : "—";
+  // Формируем имя файла: nft.id-xxx.png
+  // Предполагаем, что nft.resultNum = 951 → 95.1%
+  const resultNum = nft.resultNum; // число вида 951
+  const fileName = `${nft.id}-${resultNum}.png`;
 
-return (
-  <div>
-    <ImageZoom
-      src={fileName}
-      alt={`Result ${nft.name}`}
-      style={{
-        width: "100%",
-        maxWidth: "50%",
-        height: "60vw",
-        maxHeight: "60vw",
-        objectFit: "cover",
-        display: "block",
-        borderRadius: "0px",
-      }}
-    />
-    <div
-      style={{
-        marginTop: "8px",
-        color: "#666",
-        fontSize: "0.95rem",
-        textDecoration: "none",
-        marginBottom: "6px",
-      }}
-    >
-      Result: {percent}
+  // Извлекаем процент: последние три цифры → xx.x%
+  const rawPercent = fileName.match(/-(\d{3})\.png$/i)?.[1];
+  const percent = rawPercent ? `${rawPercent.slice(0, 2)}.${rawPercent.slice(2)}%` : "—";
+
+  const fileUrl = `https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${fileName}`;
+
+  return (
+    <div>
+      <ImageZoom
+        src={fileUrl}
+        alt={`Result ${nft.name}`}
+        style={{
+          width: "100%",
+          maxWidth: "50%",
+          height: "60vw",
+          maxHeight: "60vw",
+          objectFit: "cover",
+          display: "block",
+          borderRadius: "0px",
+        }}
+      />
+      <div
+        style={{
+          marginTop: "8px",
+          color: "#666",
+          fontSize: "0.95rem",
+          marginBottom: "6px",
+        }}
+      >
+        Result: {percent}
+      </div>
     </div>
-  </div>
-);
+  );
 })(),
 })),
 
