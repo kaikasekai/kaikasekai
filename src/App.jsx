@@ -690,7 +690,7 @@ const handleSendFeedback = async () => {
                     domain={[50000, 180000]}
                     ticks={[
                       50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000, 130000, 140000, 150000,
-                      160000, 170000, 180000,
+                      160000, 170000, 180000
                     ]}
                     tickFormatter={(v) => v.toLocaleString()}
                       label={{
@@ -914,36 +914,40 @@ fontWeight: 500,
 {!account ? (
   <div style={{ display: "inline-block", marginTop: 0, marginBottom: 56, paddingLeft: "10px" }}>
     <Button
-      onClick={connectWallet}
-      disableElevation
-      sx={{
-        backgroundColor: "#0080ff",
-        color: "#ffffff",
-        padding: 2,
-        height: "46px",
-        fontWeight: 500,
-        fontSize: "1.1rem",
-        border: "none",
-        borderRadius: 0,
-        cursor: "pointer",
-        "&:hover": { backgroundColor: "#3399FF" },
-		gap: "4px",
-      }}
-    >
-      Connect Wallet
-	                <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 360 360"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M157.743 154.241L141.052 144.58L90.9766 173.561V231.519L141.052 260.5L191.13 231.519V141.359L218.948 125.26L246.77 141.359V173.561L218.948 189.66L202.257 180.002V205.759L218.948 215.42L269.024 186.439V128.481L218.948 99.5L168.873 128.481V218.641L141.052 234.74L113.233 218.641V186.439L141.052 170.34L157.743 179.998V154.241Z"
-                        fill="#6C00F6"
-                      />
-                    </svg>
-    </Button>
+  onClick={connectWallet}
+  disableElevation
+  sx={{
+    display: "flex",
+    alignItems: "center",
+    gap: "4px",
+    backgroundColor: "#0080ff",
+    color: "#ffffff",
+    padding: 2,
+    height: "46px",
+    fontWeight: 500,
+    fontSize: "1.1rem",
+    border: "none",
+    borderRadius: 0,
+    cursor: "pointer",
+    "&:hover": { backgroundColor: "#3399FF" },
+  }}
+>
+  Connect Wallet
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 360 360"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    style={{ display: "block" }}
+  >
+    <path
+      d="M157.743 154.241L141.052 144.58L90.9766 173.561V231.519L141.052 260.5L191.13 231.519V141.359L218.948 125.26L246.77 141.359V173.561L218.948 189.66L202.257 180.002V205.759L218.948 215.42L269.024 186.439V128.481L218.948 99.5L168.873 128.481V218.641L141.052 234.74L113.233 218.641V186.439L141.052 170.34L157.743 179.998V154.241Z"
+      fill="#6C00F6"
+    />
+  </svg>
+</Button>
+
   </div>
 ) : (
   <div style={{ paddingLeft: "10px", marginBottom: "56px" }}>
