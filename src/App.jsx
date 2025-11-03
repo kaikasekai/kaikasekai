@@ -595,6 +595,33 @@ const handleSendFeedback = async () => {
   }
 });
 
+    useEffect(() => {
+    // 🔹 SVG favicon прямо в коде
+    const svgIcon = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150">
+        <rect x="50" y="0" width="50" height="50" fill="#FFFF00" />
+        <rect x="0" y="50" width="50" height="50" fill="#00FF00" />
+        <rect x="50" y="50" width="50" height="50" fill="#FFD700" />
+        <rect x="100" y="50" width="50" height="50" fill="#0080FF" />
+        <rect x="50" y="100" width="50" height="50" fill="#FF0080" />
+      </svg>
+    `;
+
+    // 🔹 Создаём favicon из SVG (data URI)
+    const favicon = document.createElement("link");
+    favicon.rel = "icon";
+    favicon.type = "image/svg+xml";
+    favicon.href = "data:image/svg+xml," + encodeURIComponent(svgIcon);
+
+    // Добавляем в <head>
+    document.head.appendChild(favicon);
+
+    // Очистка при размонтировании
+    return () => {
+      document.head.removeChild(favicon);
+    };
+  }, []);
+	
 	const styles = {
     header: {
       display: "flex",
@@ -660,10 +687,10 @@ const handleSendFeedback = async () => {
                     tickFormatter={(d) => dayjs(d).format("MMM D")}
                   />
                   <YAxis
-                    domain={[100000, 150000]}
+                    domain={[50000, 180000]}
                     ticks={[
-                      105000, 110000, 115000, 120000, 125000, 130000,
-                      135000, 140000, 145000, 150000, 155000,
+                      50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000, 130000, 140000, 150000,
+                      160000, 170000, 180000,
                     ]}
                     tickFormatter={(v) => v.toLocaleString()}
                       label={{
@@ -745,7 +772,7 @@ const handleSendFeedback = async () => {
     fontSize: "1.8rem",         // или "36px"
     fontWeight: 700,
     marginTop: "10px",
-    marginBottom: "10px",    // или "20px"
+    marginBottom: "15px",    // или "20px"
   }}
 >
   Kaikasekai Trends
@@ -900,9 +927,22 @@ fontWeight: 500,
         borderRadius: 0,
         cursor: "pointer",
         "&:hover": { backgroundColor: "#3399FF" },
+		gap: "4px",
       }}
     >
       Connect Wallet
+	                <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 360 360"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M157.743 154.241L141.052 144.58L90.9766 173.561V231.519L141.052 260.5L191.13 231.519V141.359L218.948 125.26L246.77 141.359V173.561L218.948 189.66L202.257 180.002V205.759L218.948 215.42L269.024 186.439V128.481L218.948 99.5L168.873 128.481V218.641L141.052 234.74L113.233 218.641V186.439L141.052 170.34L157.743 179.998V154.241Z"
+                        fill="#6C00F6"
+                      />
+                    </svg>
     </Button>
   </div>
 ) : (
@@ -942,7 +982,7 @@ fontWeight: 500,
   </AccordionSummary>
   <AccordionDetails >
     <Typography sx={{ padding: "0px 0", textAlign: "justify", fontWeight: 400, fontSize: "1.25rem" }}>
-Each thin, colorful line on the chart represents a unique AI model predicting the most probable scenario for Bitcoin’s next move. The thick blue line shows the averaged outcome of these AI model cluster scenarios - the core BTC trend forecast - while the thick orange line displays historical BTC data.
+Each thin, colorful line on the chart represents an unique AI model predicting the most probable scenario for Bitcoin’s next move. The thick blue line shows the averaged outcome of these AI model cluster scenarios - the core BTC trend forecast - while the thick orange line displays historical BTC data.
 <br></br><br></br>
 The forecast reflects both mid-term and global BTC trends.
 It may follow one of the cluster models more closely and show slight time elasticity - occurring a bit earlier or later - but it maintains overall consistency even during high volatility and market manipulations, making them easier to spot.
@@ -1174,112 +1214,100 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
             })),
             // динамические NFT
             ...proofs.map((nft) => ({
-              nft: (
-                <div
-                  style={{
-                    width: "100%",
-                    height: "60vw",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <ImageZoom
-                    src={nft.image}
-                    alt={nft.name}
-                    style={{
-                     width: "100%",
-                     maxWidth: "50%",
-                     height: "60vw",          // ⬅️ высота = 60% ширины экрана
-    				 maxHeight: "60vw",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
-   					 objectFit: "cover",      // ⬅️ картинка не искажается
-  				     display: "block",
-                     borderRadius: "0px",
-                    }}
-                  />
-                  <div
-                    style={{
-                      marginTop: "8px",
-                      color: "#1c1c1c",
-                      fontSize: "0.95rem",
-                      marginBottom: "6px",
-                    }}
-                  >
-                    {nft.name} Forecast
-                  </div>
+nft: (
+<div
+style={{
+width: "100%",
+height: "60vw",
+display: "flex",
+flexDirection: "column",
+alignItems: "center",
+justifyContent: "center",
+}}
+>
+<ImageZoom
+src={nft.image}
+alt={nft.name}
+style={{
+width: "100%",
+maxWidth: "50%",
+height: "60vw",
+maxHeight: "60vw",
+objectFit: "cover",
+display: "block",
+borderRadius: "0px",
+}}
+/>
+<div
+style={{
+marginTop: "8px",
+color: "#1c1c1c",
+fontSize: "0.95rem",
+marginBottom: "6px",
+}}
+>
+{nft.name} Forecast </div>
 
-                  <a
-                    href={nft.polygonscan}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      color: "#1c1c1c",
-                      fontSize: "0.85rem",
-                      textDecoration: "none",
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "4px",
-                    }}
-                  >
-                    View on
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 360 360"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M157.743 154.241L141.052 144.58L90.9766 173.561V231.519L141.052 260.5L191.13 231.519V141.359L218.948 125.26L246.77 141.359V173.561L218.948 189.66L202.257 180.002V205.759L218.948 215.42L269.024 186.439V128.481L218.948 99.5L168.873 128.481V218.641L141.052 234.74L113.233 218.641V186.439L141.052 170.34L157.743 179.998V154.241Z"
-                        fill="#6C00F6"
-                      />
-                    </svg>
-                  </a>
+  <a
+    href={nft.polygonscan}
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{
+      color: "#1c1c1c",
+      fontSize: "0.85rem",
+      textDecoration: "none",
+      display: "inline-flex",
+      alignItems: "center",
+      gap: "4px",
+    }}
+  >
+    View on
+    <svg width="24" height="24" viewBox="0 0 360 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M157.743 154.241L141.052 144.58L90.9766 173.561V231.519L141.052 260.5L191.13 231.519V141.359L218.948 125.26L246.77 141.359V173.561L218.948 189.66L202.257 180.002V205.759L218.948 215.42L269.024 186.439V128.481L218.948 99.5L168.873 128.481V218.641L141.052 234.74L113.233 218.641V186.439L141.052 170.34L157.743 179.998V154.241Z" fill="#6C00F6"/>
+    </svg>
+  </a>
+</div>
+
+),
+
+result: (() => {
+// формируем имя файла по id nft
+const fileName = `https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.id}-xxx.png`;
+
+// извлекаем процент из имени файла (xxx → 3 цифры, первые две = целая часть, третья = десятичная)
+const match = fileName.match(/-(\d{3})\.png$/i);
+const percent = match
+  ? `${parseInt(match[1].slice(0, 2), 10)}.${match[1].slice(2)}%`
+  : "—";
+
+return (
+  <div>
+    <ImageZoom
+      src={fileName}
+      alt={`Result ${nft.name}`}
+      style={{
+        width: "100%",
+        maxWidth: "50%",
+        height: "60vw",
+        maxHeight: "60vw",
+        objectFit: "cover",
+        display: "block",
+        borderRadius: "0px",
+      }}
+    />
+    <div
+      style={{
+        marginTop: "8px",
+        color: "#666",
+        fontSize: "0.95rem",
+        textDecoration: "none",
+        marginBottom: "6px",
+      }}
+    >
+      Result: {percent}
     </div>
-  ),
-
-  result: (() => {
-  // файл с результатом, например "https://.../89.1-2.PNG"
-  const fileName =
-    nft.resultImage ||
-    `https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.result}.PNG`;
-
-  // пытаемся извлечь процент и id из имени файла
-  // пример: "89.1-2.PNG" → ["89.1-2", "89.1", "2"]
-  const match = fileName.match(/([\d.]+)-(\d+)\.PNG$/);
-  const percent = match ? `${match[1]}%` : "—";
-  const idFromFile = match ? match[2] : nft.id;
-
-  return (
-    <div>
-      <ImageZoom
-        src={fileName}
-        alt={`Result ${nft.name}`}
-        style={{
-          width: "100%",
-                     maxWidth: "50%",
-                     height: "60vw",          // ⬅️ высота = 60% ширины экрана
-    				 maxHeight: "60vw",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
-   					 objectFit: "cover",      // ⬅️ картинка не искажается
-  				     display: "block",
-                     borderRadius: "0px",
-        }}
-      />
-
-      <div
-        style={{
-          marginTop: "8px",
-          color: "#666",
-          fontSize: "0.95rem",
-          textDecoration: "none",
-          marginBottom: "6px",
-        }}
-      >
-        Result: {percent}%
-      </div>
-    </div>
-  );
+  </div>
+);
 })(),
 })),
           ]}
@@ -1517,7 +1545,7 @@ Use of this site constitutes acknowledgment and acceptance of these terms.
         label="USDC"
         value={donateAmount}
         onChange={(e) => setDonateAmount(e.target.value)}
-        sx={{ borderRadius: "0px" }}
+        style={{ borderRadius: "0px" }}
         fullWidth
         margin="dense"
       />
