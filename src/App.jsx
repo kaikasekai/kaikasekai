@@ -594,34 +594,7 @@ const handleSendFeedback = async () => {
     return d.isSameOrAfter(startOfMonth) && d.isSameOrBefore(endOfThisMonth);
   }
 });
-
-	useEffect(() => {
-    // 🔹 SVG favicon прямо в коде
-    const svgIcon = `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150">
-        <rect x="50" y="0" width="50" height="50" fill="#FFFF00" />
-        <rect x="0" y="50" width="50" height="50" fill="#00FF00" />
-        <rect x="50" y="50" width="50" height="50" fill="#FFD700" />
-        <rect x="100" y="50" width="50" height="50" fill="#0080FF" />
-        <rect x="50" y="100" width="50" height="50" fill="#FF0080" />
-      </svg>
-    `;
-
-    // 🔹 Создаём favicon из SVG (data URI)
-    const favicon = document.createElement("link");
-    favicon.rel = "icon";
-    favicon.type = "image/svg+xml";
-    favicon.href = "data:image/svg+xml," + encodeURIComponent(svgIcon);
-
-    // Добавляем в <head>
-    document.head.appendChild(favicon);
-
-    // Очистка при размонтировании
-    return () => {
-      document.head.removeChild(favicon);
-    };
-  }, []);
-
+	
 	const styles = {
     header: {
       display: "flex",
