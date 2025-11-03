@@ -1223,6 +1223,7 @@ marginBottom: "6px",
 }}
 >
 {nft.name} Forecast </div>
+
   <a
     href={nft.polygonscan}
     target="_blank"
@@ -1238,53 +1239,58 @@ marginBottom: "6px",
   >
     View on
     <svg width="24" height="24" viewBox="0 0 360 360" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M157.743 154.241L141.052 144.58L90.9766 173.561V231.519L141.052 260.5L191.13 231.519V141.359L218.948 125.26L246.77 141.359V173.561L218.948 189.66L202.257 180.002V205.759L218.948 215.42L269.024 186.439V128.481L218.948 99.5L168.873 128.481V218.641L141.052 234.74L113.233 218.641V186.439L141.052 170.34L157.743 179.998V154.241Z" fill="#6C00F6"/>
+      <path
+        d="M157.743 154.241L141.052 144.58L90.9766 173.561V231.519L141.052 260.5L191.13 231.519V141.359L218.948 125.26L246.77 141.359V173.561L218.948 189.66L202.257 180.002V205.759L218.948 215.42L269.024 186.439V128.481L218.948 99.5L168.873 128.481V218.641L141.052 234.74L113.233 218.641V186.439L141.052 170.34L157.743 179.998V154.241Z"
+        fill="#6C00F6"
+      />
     </svg>
   </a>
 </div>
 ),
 
 result: (() => {
-  // Формируем имя файла: nft.id-xxx.png
-  // Предполагаем, что nft.resultNum = 951 → 95.1%
-  const resultNum = nft.resultNum; // число вида 951
-  const fileName = `${nft.id}-${resultNum}.png`;
+// Используем nft.resultImage если есть, иначе формируем по nft.id и nft.resultNum
+const fileName = nft.resultImage
+? nft.resultImage
+: `${nft.id}-${nft.resultNum}.png`;
+const fileUrl = nft.resultImage
+  ? nft.resultImage
+  : `https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${fileName}`;
 
-  // Извлекаем процент: последние три цифры → xx.x%
-  const rawPercent = fileName.match(/-(\d{3})\.png$/i)?.[1];
-  const percent = rawPercent ? `${rawPercent.slice(0, 2)}.${rawPercent.slice(2)}%` : "—";
+// Извлекаем процент из последних 3 цифр имени файла: 951 → 95.1%
+const rawPercent = fileName.match(/-(\d{3})\.png$/i)?.[1];
+const percent = rawPercent ? `${rawPercent.slice(0, 2)}.${rawPercent.slice(2)}%` : "—";
 
-  const fileUrl = `https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${fileName}`;
-
-  return (
-    <div>
-      <ImageZoom
-        src={fileUrl}
-        alt={`Result ${nft.name}`}
-        style={{
-          width: "100%",
-          maxWidth: "50%",
-          height: "60vw",
-          maxHeight: "60vw",
-          objectFit: "cover",
-          display: "block",
-          borderRadius: "0px",
-        }}
-      />
-      <div
-        style={{
-          marginTop: "8px",
-          color: "#666",
-          fontSize: "0.95rem",
-          marginBottom: "6px",
-        }}
-      >
-        Result: {percent}
-      </div>
+return (
+  <div>
+    <ImageZoom
+      src={fileUrl}
+      alt={`Result ${nft.name}`}
+      style={{
+        width: "100%",
+        maxWidth: "50%",
+        height: "60vw",
+        maxHeight: "60vw",
+        objectFit: "cover",
+        display: "block",
+        borderRadius: "0px",
+      }}
+    />
+    <div
+      style={{
+        marginTop: "8px",
+        color: "#666",
+        fontSize: "0.95rem",
+        marginBottom: "6px",
+      }}
+    >
+      Result: {percent}
     </div>
-  );
+  </div>
+);
 })(),
-})),
+}))
+
 
           ]}
         />
