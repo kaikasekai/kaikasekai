@@ -894,44 +894,52 @@ fontWeight: 500,
 
 {/* === Wallet section === */}
 {!account ? (
-  <div style={{ display: "inline-block", marginTop: 0, marginBottom: 56, paddingLeft: "10px" }}>
-    <Button
-  onClick={connectWallet}
-  disableElevation
-  sx={{
-    display: "flex",
-    alignItems: "center",
-    gap: "4px",
-    backgroundColor: "#0080ff",
-    color: "#ffffff",
-    padding: 2,
-    height: "46px",
-    fontWeight: 500,
-    fontSize: "1.1rem",
-    border: "none",
-    borderRadius: 0,
-    cursor: "pointer",
-    "&:hover": { backgroundColor: "#3399FF" },
+  <div
+  style={{
+    display: "inline-flex",
+    alignItems: "flex-start",
+    gap: "5px",
+    marginTop: 0,
+    marginBottom: 56,
+    paddingLeft: "10px",
   }}
 >
-  Connect Wallet
-</Button>
-
-	  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 360 360"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    style={{ display: "block" }}
+  <Button
+    onClick={connectWallet}
+    disableElevation
+    sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: "4px",
+      backgroundColor: "#0080ff",
+      color: "#ffffff",
+      padding: 2,
+      height: "46px",
+      fontWeight: 500,
+      fontSize: "1.1rem",
+      border: "none",
+      borderRadius: 0,
+      cursor: "pointer",
+      "&:hover": { backgroundColor: "#3399FF" },
+    }}
   >
-    <path
-      d="M157.743 154.241L141.052 144.58L90.9766 173.561V231.519L141.052 260.5L191.13 231.519V141.359L218.948 125.26L246.77 141.359V173.561L218.948 189.66L202.257 180.002V205.759L218.948 215.42L269.024 186.439V128.481L218.948 99.5L168.873 128.481V218.641L141.052 234.74L113.233 218.641V186.439L141.052 170.34L157.743 179.998V154.241Z"
-      fill="#6C00F6"
-    />
+    Connect Wallet
+  </Button>
+
+<svg
+width="24"
+height="24"
+viewBox="0 0 360 360"
+fill="none"
+xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)"
+style={{ display: "block" }}
+>
+<path d="M157.743 154.241L141.052 144.58L90.9766 173.561V231.519L141.052 260.5L191.13 231.519V141.359L218.948 125.26L246.77 141.359V173.561L218.948 189.66L202.257 180.002V205.759L218.948 215.42L269.024 186.439V128.481L218.948 99.5L168.873 128.481V218.641L141.052 234.74L113.233 218.641V186.439L141.052 170.34L157.743 179.998V154.241Z"
+  fill="#6C00F6"
+/>
   </svg>
-	  
-  </div>
+</div>
+
 ) : (
   <div style={{ paddingLeft: "10px", marginBottom: "56px" }}>
     <p style={{ color: "#0080ff", fontSize: "1.25rem", fontWeight: 300 }}>Connected: {account}</p>
@@ -1117,7 +1125,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                     alt={`${month} Forecast`}
                     style={{
 					 width: "100%",
-                     maxWidth: "50%",
+                     maxWidth: "45%",
                      height: "60vw",          // ⬅️ высота = 60% ширины экрана
     				 maxHeight: "60vw",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
    					 objectFit: "cover",      // ⬅️ картинка не искажается
@@ -1178,7 +1186,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                     alt={`Result ${month}`}
                     style={{
                      width: "100%",
-                     maxWidth: "50%",
+                     maxWidth: "45%",
                      height: "60vw",          // ⬅️ высота = 60% ширины экрана
     				 maxHeight: "60vw",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
    					 objectFit: "cover",      // ⬅️ картинка не искажается
@@ -1217,7 +1225,7 @@ src={nft.image}
 alt={nft.name}
 style={{
 width: "100%",
-maxWidth: "50%",
+maxWidth: "45%",
 height: "60vw",
 maxHeight: "60vw",
 objectFit: "cover",
@@ -1264,7 +1272,7 @@ src={`https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft
 alt={`Result ${nft.name}`}
 style={{
 width: "100%",
-maxWidth: "50%",
+maxWidth: "45%",
 height: "60vw",
 maxHeight: "60vw",
 objectFit: "cover",
