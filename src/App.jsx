@@ -892,7 +892,7 @@ fontWeight: 500,
   sx={{
     display: "flex",
     alignItems: "center",
-    gap: "2px",
+    gap: "4px",
     backgroundColor: "#0080ff",
     color: "#ffffff",
     padding: 2,
@@ -906,7 +906,9 @@ fontWeight: 500,
   }}
 >
   Connect Wallet
-  <svg
+</Button>
+
+	  <svg
     width="24"
     height="24"
     viewBox="0 0 360 360"
@@ -919,7 +921,7 @@ fontWeight: 500,
       fill="#6C00F6"
     />
   </svg>
-</Button>
+	  
   </div>
 ) : (
   <div style={{ paddingLeft: "10px", marginBottom: "56px" }}>
@@ -1189,7 +1191,15 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
               ),
             })),
             // динамические NFT
-            ...proofs.map((nft) => ({
+const nftPercents = {
+2: 87.6,
+3: —,
+4: —,
+5: —,
+// ... и так далее, можно подставить все id
+};
+
+...proofs.map((nft) => ({
 nft: (
 <div
 style={{
@@ -1223,7 +1233,6 @@ marginBottom: "6px",
 }}
 >
 {nft.name} Forecast </div>
-
   <a
     href={nft.polygonscan}
     target="_blank"
@@ -1248,49 +1257,33 @@ marginBottom: "6px",
 </div>
 ),
 
-result: (() => {
-// Используем nft.resultImage если есть, иначе формируем по nft.id и nft.resultNum
-const fileName = nft.resultImage
-? nft.resultImage
-: `${nft.id}-${nft.resultNum}.png`;
-const fileUrl = nft.resultImage
-  ? nft.resultImage
-  : `https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${fileName}`;
-
-// Извлекаем процент из последних 3 цифр имени файла: 951 → 95.1%
-const rawPercent = fileName.match(/-(\d{3})\.png$/i)?.[1];
-const percent = rawPercent ? `${rawPercent.slice(0, 2)}.${rawPercent.slice(2)}%` : "—";
-
-return (
-  <div>
-    <ImageZoom
-      src={fileUrl}
-      alt={`Result ${nft.name}`}
-      style={{
-        width: "100%",
-        maxWidth: "50%",
-        height: "60vw",
-        maxHeight: "60vw",
-        objectFit: "cover",
-        display: "block",
-        borderRadius: "0px",
-      }}
-    />
-    <div
-      style={{
-        marginTop: "8px",
-        color: "#666",
-        fontSize: "0.95rem",
-        marginBottom: "6px",
-      }}
-    >
-      Result: {percent}
-    </div>
-  </div>
-);
-})(),
+result: ( <div>
+<ImageZoom
+src={`https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.name}.png`}
+alt={`Result ${nft.name}`}
+style={{
+width: "100%",
+maxWidth: "50%",
+height: "60vw",
+maxHeight: "60vw",
+objectFit: "cover",
+display: "block",
+borderRadius: "0px",
+}}
+/>
+<div
+style={{
+marginTop: "8px",
+color: "#666",
+fontSize: "0.95rem",
+marginBottom: "6px",
+}}
+>
+Result: {nftPercents[nft.id] ? `${nftPercents[nft.id]}%` : "—"}
+</div>
+</div>
+),
 }))
-
 
           ]}
         />
