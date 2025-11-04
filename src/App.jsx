@@ -594,6 +594,15 @@ const handleSendFeedback = async () => {
     return d.isSameOrAfter(startOfMonth) && d.isSameOrBefore(endOfThisMonth);
   }
 });
+
+
+	const nftPercents = {
+2: 87.6,
+3: —,
+4: —,
+5: —,
+// ... и так далее, можно подставить все id
+};
 	
 	const styles = {
     header: {
@@ -1191,14 +1200,6 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
               ),
             })),
             // динамические NFT
-const nftPercents = {
-2: 87.6,
-3: —,
-4: —,
-5: —,
-// ... и так далее, можно подставить все id
-};
-
 ...proofs.map((nft) => ({
 nft: (
 <div
