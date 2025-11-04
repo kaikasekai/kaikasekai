@@ -1114,6 +1114,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                   style={{
                     width: "100%",
                     height: "60vw",
+					padding: "5px",
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
@@ -1125,7 +1126,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                     alt={`${month} Forecast`}
                     style={{
 					 width: "100%",
-                     maxWidth: "45%",
+                     maxWidth: "50%",
                      height: "60vw",          // ⬅️ высота = 60% ширины экрана
     				 maxHeight: "60vw",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
    					 objectFit: "cover",      // ⬅️ картинка не искажается
@@ -1174,6 +1175,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                 <div
                   style={{
                     width: "100%",
+					padding: "5px",
                     height: "60vw",
                     display: "flex",
                     flexDirection: "column",
@@ -1186,7 +1188,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                     alt={`Result ${month}`}
                     style={{
                      width: "100%",
-                     maxWidth: "45%",
+                     maxWidth: "50%",
                      height: "60vw",          // ⬅️ высота = 60% ширины экрана
     				 maxHeight: "60vw",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
    					 objectFit: "cover",      // ⬅️ картинка не искажается
@@ -1213,6 +1215,7 @@ nft: (
 <div
 style={{
 width: "100%",
+padding: "5px",
 height: "60vw",
 display: "flex",
 flexDirection: "column",
@@ -1225,7 +1228,7 @@ src={nft.image}
 alt={nft.name}
 style={{
 width: "100%",
-maxWidth: "45%",
+maxWidth: "50%",
 height: "60vw",
 maxHeight: "60vw",
 objectFit: "cover",
@@ -1266,13 +1269,23 @@ marginBottom: "6px",
 </div>
 ),
 
-result: ( <div>
+result: ( <div
+                  style={{
+                    width: "100%",
+					padding: "5px",
+                    height: "60vw",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
 <ImageZoom
 src={`https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.name}.png`}
 alt={`Result ${nft.name}`}
 style={{
 width: "100%",
-maxWidth: "45%",
+maxWidth: "50%",
 height: "60vw",
 maxHeight: "60vw",
 objectFit: "cover",
