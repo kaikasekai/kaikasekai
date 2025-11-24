@@ -719,6 +719,13 @@ const handleSendFeedback = async () => {
                     dot={false}
                     strokeWidth={6}
                   />
+				  <Line
+                    type="monotone"
+                    dataKey="predict"
+                    stroke="#0080ff"
+                    dot={false}
+                    strokeWidth={6}
+                  />
                   <Line
                     type="monotone"
                     dataKey="moving_average"
@@ -726,13 +733,6 @@ const handleSendFeedback = async () => {
                     dot={false}
                     strokeDasharray="5 5"
                     strokeWidth={3}
-                  />
-                  <Line
-                    type="monotone"
-                    dataKey="predict"
-                    stroke="#0080ff"
-                    dot={false}
-                    strokeWidth={6}
                   />
                   {Object.keys(data[0])
                     .filter((k) => k.startsWith("p_"))
@@ -1117,7 +1117,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
 					padding: "5px",
                     display: "flex",
                     flexDirection: "column",
-                    alignItems: "center",
+                    alignItems: "bottom",
                     justifyContent: "center",
                   }}
                 >
@@ -1179,7 +1179,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                     height: "60vw",
                     display: "flex",
                     flexDirection: "column",
-                    alignItems: "center",
+                    alignItems: "bottom",
                     justifyContent: "center",
                   }}
                 >
@@ -1219,7 +1219,7 @@ padding: "5px",
 height: "60vw",
 display: "flex",
 flexDirection: "column",
-alignItems: "center",
+alignItems: "bottom",
 justifyContent: "center",
 }}
 >
@@ -1276,7 +1276,7 @@ result: ( <div
                     height: "60vw",
                     display: "flex",
                     flexDirection: "column",
-                    alignItems: "center",
+                    alignItems: "bottom",
                     justifyContent: "center",
                   }}
                 >
