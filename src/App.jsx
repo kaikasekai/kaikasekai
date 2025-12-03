@@ -598,7 +598,7 @@ const handleSendFeedback = async () => {
 
 	const nftPercents = {
 2: 87.6,
-3: 99.9,
+3: 86.6,
 4: 99.9,
 5: 99.9,
 // ... и так далее, можно подставить все id
@@ -669,10 +669,10 @@ const handleSendFeedback = async () => {
                     tickFormatter={(d) => dayjs(d).format("MMM D")}
                   />
                   <YAxis
-                    domain={[60000, 160000]}
+                    domain={[40000, 150000]}
                     ticks={[
-                      70000, 80000, 90000, 100000,
-                      110000, 120000, 130000, 140000, 150000, 160000,
+                      50000, 60000, 70000, 80000, 90000, 100000,
+                      110000, 120000, 130000, 140000, 150000,
                     ]}
                     tickFormatter={(v) => v.toLocaleString()}
                       label={{
