@@ -1117,8 +1117,8 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
 					padding: "5px",
                     display: "flex",
                     flexDirection: "column",
-                    alignItems: "bottom",
-                    justifyContent: "center",
+                    alignItems: "center",
+                    justifyContent: "flex-start",
                   }}
                 >
                   <ImageZoom
@@ -1179,7 +1179,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                     height: "60vw",
                     display: "flex",
                     flexDirection: "column",
-                    alignItems: center",
+                    alignItems: "center",
                     justifyContent: "flex-start",
                   }}
                 >
@@ -1226,8 +1226,8 @@ padding: "5px",
 height: "60vw",
 display: "flex",
 flexDirection: "column",
-alignItems: "bottom",
-justifyContent: "center",
+alignItems: "center",
+justifyContent: "flex-start",
 }}
 >
 <ImageZoom
