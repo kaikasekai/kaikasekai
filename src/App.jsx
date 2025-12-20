@@ -619,7 +619,7 @@ const handleSendFeedback = async () => {
       flexShrink: 0,
     },
     title: {
-      fontFamily: '"Menlo", sans-serif',
+      fontFamily: 'Satoshi',
       fontSize: "clamp(1rem, 2vw, 1.5rem)",
       fontWeight: 600,
       color: "#333",
@@ -1117,7 +1117,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
 					padding: "5px",
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "flex-end",
+                    justifyContent: "center",
                   }}
                 >
                   <ImageZoom
@@ -1131,6 +1131,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
   				     display: "block",
                      borderRadius: "0px",
 				     margin: "0 auto",
+					 justifyContent: "flex-end",
                     }}
                   />
                   <div
@@ -1178,7 +1179,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                     height: "60vw",
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "flex-end",
+                    justifyContent: "center",
                   }}
                 >
                   <ImageZoom
@@ -1192,6 +1193,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
   				     display: "block",
                      borderRadius: "0px",
 					 margin: "0 auto",
+					 justifyContent: "flex-end",
                     }}
                   />
                   <div
@@ -1224,7 +1226,7 @@ padding: "5px",
 height: "60vw",
 display: "flex",
 flexDirection: "column",
-justifyContent: "flex-end",
+justifyContent: "center",
 }}
 >
 <ImageZoom
@@ -1237,6 +1239,7 @@ objectFit: "contain",
 display: "block",
 borderRadius: "0px",
 margin: "0 auto",
+justifyContent: "flex-end",
 }}
 />
 <div
@@ -1313,7 +1316,7 @@ result: ( <div
                     height: "60vw",
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "flex-end",
+                    justifyContent: "center",
                   }}
                 >
 <ImageZoom
@@ -1325,6 +1328,7 @@ objectFit: "contain",
 display: "block",
 borderRadius: "0px",
 margin: "0 auto",
+justifyContent: "flex-end",
 }}
 />
 <div
