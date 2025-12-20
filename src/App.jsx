@@ -599,8 +599,8 @@ const handleSendFeedback = async () => {
 	const nftPercents = {
 2: 87.6,
 3: 86.6,
-4: 99.9,
-5: 99.9,
+4: 0.0,
+5: 0.0,
 // ... и так далее, можно подставить все id
 };
 	
@@ -1117,21 +1117,20 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
 					padding: "5px",
                     display: "flex",
                     flexDirection: "column",
-                    alignItems: "bottom",
-                    justifyContent: "center",
+                    justifyContent: "flex-end",
                   }}
                 >
                   <ImageZoom
                     src={img}
                     alt={`${month} Forecast`}
                     style={{
-					 width: "100%",
-                     maxWidth: "50%",
-                     height: "60vw",          // ⬅️ высота = 60% ширины экрана
-    				 maxHeight: "60vw",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
-   					 objectFit: "cover",      // ⬅️ картинка не искажается
+					 width: "50%",
+                     height: "auto",          // ⬅️ высота = 60% ширины экрана
+    			//	 maxHeight: "60vw",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
+   					 objectFit: "contain",      // ⬅️ картинка не искажается
   				     display: "block",
                      borderRadius: "0px",
+				     margin: "0 auto",
                     }}
                   />
                   <div
@@ -1179,21 +1178,20 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                     height: "60vw",
                     display: "flex",
                     flexDirection: "column",
-                    alignItems: "bottom",
-                    justifyContent: "center",
+                    justifyContent: "flex-end",
                   }}
                 >
                   <ImageZoom
                     src={result}
                     alt={`Result ${month}`}
                     style={{
-                     width: "100%",
-                     maxWidth: "50%",
-                     height: "60vw",          // ⬅️ высота = 60% ширины экрана
-    				 maxHeight: "60vw",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
-   					 objectFit: "cover",      // ⬅️ картинка не искажается
+                     width: "50%",
+                     height: "auto",          // ⬅️ высота = 60% ширины экрана
+    			//	 maxHeight: "60vw",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
+   					 objectFit: "contain",      // ⬅️ картинка не искажается
   				     display: "block",
                      borderRadius: "0px",
+					 margin: "0 auto",
                     }}
                   />
                   <div
@@ -1226,21 +1224,19 @@ padding: "5px",
 height: "60vw",
 display: "flex",
 flexDirection: "column",
-alignItems: "bottom",
-justifyContent: "center",
+justifyContent: "flex-end",
 }}
 >
 <ImageZoom
 src={nft.image}
 alt={nft.name}
 style={{
-width: "100%",
-maxWidth: "50%",
-height: "60vw",
-maxHeight: "60vw",
-objectFit: "cover",
+width: "50%",
+//maxHeight: "60vw",
+objectFit: "contain",
 display: "block",
 borderRadius: "0px",
+margin: "0 auto",
 }}
 />
 <div
@@ -1317,21 +1313,18 @@ result: ( <div
                     height: "60vw",
                     display: "flex",
                     flexDirection: "column",
-                    alignItems: "bottom",
-                    justifyContent: "center",
+                    justifyContent: "flex-end",
                   }}
                 >
 <ImageZoom
 src={`https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft.name}.png`}
 alt={`Result ${nft.name}`}
 style={{
-width: "100%",
-maxWidth: "50%",
-height: "60vw",
-maxHeight: "60vw",
-objectFit: "cover",
+width: "50%",
+objectFit: "contain",
 display: "block",
 borderRadius: "0px",
+margin: "0 auto",
 }}
 />
 <div
