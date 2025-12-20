@@ -264,7 +264,6 @@ const ImageZoom = ({ src, alt, style }) => {
             description: metadata.description,
             image: imgUrl,
             polygonscan: `https://polygonscan.com/token/${NFT_ADDRESS}?a=${i}`,
-			opensea: `https://opensea.io/item/polygon/0x0878c09ffe2e702c1a7987b38c63c42e2062b803/${i}`,
           });
         }
         setProofs(items);
@@ -600,7 +599,7 @@ const handleSendFeedback = async () => {
 	const nftPercents = {
 2: 87.6,
 3: 86.6,
-4: xx.x,
+4: 00.0,
 5: 99.9,
 // ... и так далее, можно подставить все id
 };
@@ -1273,7 +1272,7 @@ marginBottom: "6px",
 
 
  <a
-    href={nft.opensea}
+    href={`https://opensea.io/item/polygon/0x0878c09ffe2e702c1a7987b38c63c42e2062b803/${i}`}
     target="_blank"
     rel="noopener noreferrer"
     style={{
