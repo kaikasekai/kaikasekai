@@ -1126,7 +1126,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                     style={{
 					 width: "50%",
                   //   height: "auto",         // ⬅️ высота = 60% ширины экрана
-    				 maxHeight: 50%",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
+    				 maxHeight: "50%",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
    					 objectFit: "contain",      // ⬅️ картинка не искажается
   				     display: "block",
                      borderRadius: "0px",
