@@ -1179,8 +1179,8 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                     height: "60vw",
                     display: "flex",
                     flexDirection: "column",
-                    alignItems: "bottom",
-                    justifyContent: "center",
+                    alignItems: center",
+                    justifyContent: "flex-start",
                   }}
                 >
                   <ImageZoom
@@ -1207,7 +1207,11 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                     Result: {res}%
                   </div>
 
-<div></div>
+<div
+  style={{
+    height: "24px", // подгони если нужно
+  }}
+/>
 					
                 </div>
               ),
@@ -1248,7 +1252,18 @@ marginBottom: "6px",
 }}
 >
 {nft.name} Forecast </div>
-  <a
+  
+	<div
+  style={{
+    display: "flex",
+    gap: "12px",
+    alignItems: "center",
+    flexWrap: "nowrap",
+  }}
+>
+	
+	
+	<a
     href={nft.polygonscan}
     target="_blank"
     rel="noopener noreferrer"
@@ -1269,8 +1284,6 @@ marginBottom: "6px",
       />
     </svg>
   </a>
-
-
  <a
     href={`https://opensea.io/item/polygon/0x0878c09ffe2e702c1a7987b38c63c42e2062b803/${nft.id}`}
     target="_blank"
@@ -1292,7 +1305,8 @@ marginBottom: "6px",
   </a>
 
 
-	
+	</div>
+		
 </div>
 ),
 
@@ -1303,8 +1317,8 @@ result: ( <div
                     height: "60vw",
                     display: "flex",
                     flexDirection: "column",
-                    alignItems: "bottom",
-                    justifyContent: "center",
+                    alignItems: "center",
+                    justifyContent: "flex-start",
                   }}
                 >
 <ImageZoom
@@ -1331,8 +1345,16 @@ marginBottom: "6px",
 Result: {nftPercents[nft.id] ? `${nftPercents[nft.id]}%` : "—"}
 </div>
 
-<div></div>
+<div
+  style={{
+    height: "24px", // подгони если нужно
+  }}
+/>
+
 	
+
+	
+
 </div>
 ),
 }))
