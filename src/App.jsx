@@ -1113,7 +1113,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                 <div
                   style={{
                     width: "100%",
-                    height: "60vw",
+                    maxHeight: "60vw",
 					padding: "5px",
                     display: "flex",
                     flexDirection: "column",
@@ -1176,7 +1176,7 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                   style={{
                     width: "100%",
 					padding: "5px",
-                    height: "60vw",
+                    maxHeight: "60vw",
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "center",
@@ -1223,7 +1223,7 @@ nft: (
 style={{
 width: "100%",
 padding: "5px",
-height: "60vw",
+maxHeight: "60vw",
 display: "flex",
 flexDirection: "column",
 justifyContent: "center",
@@ -1313,7 +1313,7 @@ result: ( <div
                   style={{
                     width: "100%",
 					padding: "5px",
-                    height: "60vw",
+                    maxHeight: "60vw",
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "center",
