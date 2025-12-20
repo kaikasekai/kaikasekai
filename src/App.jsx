@@ -1125,8 +1125,8 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                     alt={`${month} Forecast`}
                     style={{
 					 width: "50%",
-                     height: "auto",          // ⬅️ высота = 60% ширины экрана
-    			//	 maxHeight: "60vw",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
+                  //   height: "auto",         // ⬅️ высота = 60% ширины экрана
+    				 maxHeight: 50%",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
    					 objectFit: "contain",      // ⬅️ картинка не искажается
   				     display: "block",
                      borderRadius: "0px",
@@ -1187,8 +1187,8 @@ Join the program - your wallet will be whitelisted and linked to the smart contr
                     alt={`Result ${month}`}
                     style={{
                      width: "50%",
-                     height: "auto",          // ⬅️ высота = 60% ширины экрана
-    			//	 maxHeight: "60vw",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
+                  //   height: "auto",          // ⬅️ высота = 60% ширины экрана
+    				 maxHeight: "50%",      // ⬅️ можно ограничить верхнюю границу, чтобы не было слишком больших
    					 objectFit: "contain",      // ⬅️ картинка не искажается
   				     display: "block",
                      borderRadius: "0px",
@@ -1234,7 +1234,7 @@ src={nft.image}
 alt={nft.name}
 style={{
 width: "50%",
-//maxHeight: "60vw",
+maxHeight: "50%",
 objectFit: "contain",
 display: "block",
 borderRadius: "0px",
@@ -1324,6 +1324,7 @@ src={`https://raw.githubusercontent.com/kaikasekai/kaikasekai/main/results/${nft
 alt={`Result ${nft.name}`}
 style={{
 width: "50%",
+maxHeight: "50%",
 objectFit: "contain",
 display: "block",
 borderRadius: "0px",
