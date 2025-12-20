@@ -1272,7 +1272,7 @@ marginBottom: "6px",
 
 
  <a
-    href={`https://opensea.io/item/polygon/0x0878c09ffe2e702c1a7987b38c63c42e2062b803/${i}`}
+    href={`https://opensea.io/item/polygon/0x0878c09ffe2e702c1a7987b38c63c42e2062b803/${nft.id}`}
     target="_blank"
     rel="noopener noreferrer"
     style={{
