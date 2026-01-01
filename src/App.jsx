@@ -599,7 +599,7 @@ const handleSendFeedback = async () => {
 	const nftPercents = {
 2: 87.6,
 3: 86.6,
-4: 0.0,
+4: 96.9,
 5: 0.0,
 // ... и так далее, можно подставить все id
 };
