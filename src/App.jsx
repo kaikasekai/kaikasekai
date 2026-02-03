@@ -601,7 +601,7 @@ const handleSendFeedback = async () => {
 2: 87.6,
 3: 86.6,
 4: 96.7,
-5: 0.0,
+5: 93.1,
 // ... и так далее, можно подставить все id
 };
 	
@@ -670,10 +670,10 @@ const handleSendFeedback = async () => {
                     tickFormatter={(d) => dayjs(d).format("MMM D")}
                   />
                   <YAxis
-                    domain={[40000, 150000]}
+                    domain={[40000, 120000]}
                     ticks={[
-                      50000, 60000, 70000, 80000, 90000, 100000,
-                      110000, 120000, 130000, 140000, 150000,
+                      40000, 50000, 60000, 70000, 80000, 90000, 100000,
+                      110000, 120000,
                     ]}
                     tickFormatter={(v) => v.toLocaleString()}
                       label={{
@@ -1033,7 +1033,7 @@ This insider-level, on-chain verified product empowers traders worldwide with th
   </Button>
 )}
   </div>    
-Join the program - your wallet will be whitelisted and linked to the smart contract. Use your wallet number as your referral code: your subscribers get 50% off, and you earn 10% on every purchase.
+Join the program - your wallet will be whitelisted and linked to the smart contract. Use your wallet number as your referral code: your subscribers get 50% off, and you earn 50% on every purchase.
 
 <div style={{ height: "56px" }}></div>
       
