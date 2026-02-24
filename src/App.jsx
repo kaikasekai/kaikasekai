@@ -256,7 +256,7 @@ for (let i = 2; i <= count; i++) {
     let uri = await nftContract.tokenURI(i);
 
     if (uri.startsWith("ipfs://"))
-      uri = "https://cloudflare-ipfs.com/ipfs/" + uri.slice(7);
+      uri = "https://ipfs.io/ipfs/" + uri.slice(7);
 
     const res = await fetch(uri);
 
@@ -279,7 +279,7 @@ for (let i = 2; i <= count; i++) {
     }
 
     let imgUrl = metadata.image.startsWith("ipfs://")
-      ? "https://cloudflare-ipfs.com/ipfs/" + metadata.image.slice(7)
+      ? "https:/ipfs.io/ipfs/" + metadata.image.slice(7)
       : metadata.image;
 
     items.push({
