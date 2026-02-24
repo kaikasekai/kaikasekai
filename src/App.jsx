@@ -247,6 +247,7 @@ const ImageZoom = ({ src, alt, style }) => {
       const provider = new JsonRpcProvider("https://rpc.ankr.com/polygon");
 const nftContract = new Contract(NFT_ADDRESS, NFT_ABI, provider);
 const total = Number(await nftContract.totalSupply());
+console.log("TOTAL:", total);
 const items = [];
 const count = Math.min(total, 6);
 
@@ -294,6 +295,7 @@ for (let i = 2; i <= count; i++) {
   }
 }
 
+console.log("ITEMS:", items);
 // ЭТО КЛЮЧЕВОЕ — ВСЕГДА ВЫЗЫВАЕТСЯ
 setProofs(items);
     };
@@ -1397,7 +1399,7 @@ Result: {nftPercents[nft.id] ? `${nftPercents[nft.id]}%` : "—"}
        
         {/* === Accordions (тоже вынесены, теперь видны всегда) === */}
 
-{/* === Debug Log (в аккордеоне) === 
+{/* === Debug Log (в аккордеоне) === */}
 <Accordion style={{ marginTop: 1, boxShadow: "none", border: "none" }}>
   <AccordionSummary
     expandIcon={<span className="accordion-icon">{expandedItems.includes("debug") ? "−" : "+"}</span>}
@@ -1421,7 +1423,7 @@ Result: {nftPercents[nft.id] ? `${nftPercents[nft.id]}%` : "—"}
     </div>
   </AccordionDetails>
 </Accordion>
-*/}
+
 
  
         
