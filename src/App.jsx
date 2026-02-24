@@ -253,11 +253,11 @@ const ImageZoom = ({ src, alt, style }) => {
         for (let i = 2; i <= count; i++) {
           let uri = await nftContract.tokenURI(i);
           if (uri.startsWith("ipfs://"))
-            uri = "https://ipfs.io/ipfs/" + uri.slice(7);
+            uri = "https://gateway.pinata.cloud/ipfs/" + uri.slice(7);
           const res = await fetch(uri);
           const metadata = await res.json();
           let imgUrl = metadata.image.startsWith("ipfs://")
-            ? "https://ipfs.io/ipfs/" + metadata.image.slice(7)
+            ? "https://gateway.pinata.cloud/ipfs/" + metadata.image.slice(7)
             : metadata.image;
           items.push({
             id: i,
