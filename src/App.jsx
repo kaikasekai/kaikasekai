@@ -244,7 +244,7 @@ const ImageZoom = ({ src, alt, style }) => {
   // === NFT Proofs ===
   useEffect(() => {
     const loadProofsWithoutWallet = async () => {
-      const provider = new JsonRpcProvider("https://rpc.ankr.com/polygon");
+      const provider = new JsonRpcProvider("https://polygon.drpc.org");
 const nftContract = new Contract(NFT_ADDRESS, NFT_ABI, provider);
 const total = Number(await nftContract.totalSupply());
 alert("TOTAL: " + total);
@@ -321,7 +321,7 @@ setProofs(items);
                 chainId: "0x89",
                 chainName: "Polygon Mainnet",
                 nativeCurrency: { name: "POL", symbol: "POL", decimals: 18 },
-                rpcUrls: ["https://rpc.ankr.com/polygon"],
+                rpcUrls: ["https://polygon.drpc.org"],
                 blockExplorerUrls: ["https://polygonscan.com"],
               },
             ],
