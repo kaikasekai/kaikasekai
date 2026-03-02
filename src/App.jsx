@@ -247,9 +247,8 @@ const ImageZoom = ({ src, alt, style }) => {
       const provider = new JsonRpcProvider("https://polygon.drpc.org");
 const nftContract = new Contract(NFT_ADDRESS, NFT_ABI, provider);
 const total = Number(await nftContract.totalSupply());
-alert("TOTAL: " + total);
 const items = [];
-const count = Math.min(total, 15);
+const count = Math.min(total, 6);
 
 for (let i = 2; i <= count; i++) {
   try {
@@ -294,9 +293,6 @@ for (let i = 2; i <= count; i++) {
     console.log("skip nft", i, e.message);
   }
 }
-
-alert("ITEMS: " + JSON.stringify(items));
-// ЭТО КЛЮЧЕВОЕ — ВСЕГДА ВЫЗЫВАЕТСЯ
 setProofs(items);
     };
     loadProofsWithoutWallet();
