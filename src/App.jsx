@@ -249,7 +249,7 @@ const ImageZoom = ({ src, alt, style }) => {
         const nftContract = new Contract(NFT_ADDRESS, NFT_ABI, provider);
         const total = Number(await nftContract.totalSupply());
         const items = [];
-        const count = Math.min(total, 6);
+        const count = Math.min(total, 15);
         for (let i = 2; i <= count; i++) {
           let uri = await nftContract.tokenURI(i);
           if (uri.startsWith("ipfs://"))
