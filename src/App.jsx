@@ -607,6 +607,7 @@ const handleSendFeedback = async () => {
 8: 94.2,
 9: 94.1,
 10: 84.8,
+11: 97.6,
 		
 // ... и так далее, можно подставить все id
 };
@@ -676,9 +677,9 @@ const handleSendFeedback = async () => {
                     tickFormatter={(d) => dayjs(d).format("MMM D")}
                   />
                   <YAxis
-                    domain={[40000, 90000]}
+                    domain={[40000, 100000]}
                     ticks={[
-                      40000, 50000, 60000, 70000, 80000, 90000,
+                      50000, 60000, 70000, 80000, 90000, 100000
                     ]}
                     tickFormatter={(v) => v.toLocaleString()}
                       label={{
