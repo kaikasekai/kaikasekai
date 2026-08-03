@@ -1,79 +1,106 @@
-import requests
 import csv
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
-FILENAME = 'data.csv'
+import requests
 
-def fetch_btc_price_closed(date_str):
+FILENAME = "data.csv"
+
+URL = "https://api.binance.com/api/v3/klines"
+
+
+def fetch_previous_day_close():
     """
-    Получает цену закрытия BTC на указанную дату (по UTC),
-    используя CoinGecko /coins/bitcoin/history.
-    ⚠️ CoinGecko возвращает цену на начало дня UTC, 
-       поэтому нужно вызывать для (дата + 1 день), чтобы получить close предыдущего дня.
-    :param date_str: 'YYYY-MM-DD'
-    :return: float | None
+    Возвращает цену закрытия предыдущего завершённого дня UTC.
     """
-    date_for_api = datetime.strptime(date_str, "%Y-%m-%d").strftime("%d-%m-%Y")
-    url = f"https://api.coingecko.com/api/v3/coins/bitcoin/history?date={date_for_api}"
 
-    try:
-        response = requests.get(url, timeout=10)
-        response.raise_for_status()
-        data = response.json()
-        return data['market_data']['current_price']['usd']
-    except (requests.RequestException, KeyError):
-        print(f"⚠️ Не удалось получить данные CoinGecko за {date_str}")
-        return None
+    params = {
+        "symbol": "BTCUSDT",
+        "interval": "1d",
+        "limit": 2
+    }
+
+    response = requests.get(URL, params=params, timeout=20)
+    response.raise_for_status()
+
+    candles = response.json()
+
+    if len(candles) < 2:
+        raise RuntimeError("Недостаточно данных от Binance.")
+
+    # Последняя свеча может быть ещё не закрыта.
+    last = candles[-1]
+
+    now_ms = int(datetime.now(timezone.utc).timestamp() * 1000)
+
+    close_time = last[6]
+
+    if now_ms >= close_time:
+        closed_candle = last
+    else:
+        closed_candle = candles[-2]
+
+    return float(closed_candle[4])
 
 
 def load_csv():
-    with open(FILENAME, newline='') as f:
+    with open(FILENAME, newline="", encoding="utf-8") as f:
         return list(csv.reader(f))
 
 
-def save_csv(data):
-    with open(FILENAME, 'w', newline='') as f:
-        csv.writer(f).writerows(data)
+def save_csv(rows):
+    with open(FILENAME, "w", newline="", encoding="utf-8") as f:
+        csv.writer(f).writerows(rows)
 
 
 def update_csv():
-    data = load_csv()
-    header = data[0]
-    idx_date = header.index('date')
-    idx_btc = header.index('BTC')
-    idx_ma = header.index('moving_average')
 
-    # Берём вчерашнюю дату по UTC — в эту строку будем записывать close
-    target_date = (datetime.utcnow().date() - timedelta(days=1)).strftime('%Y-%m-%d')
+    rows = load_csv()
 
-    # CoinGecko возвращает цену на начало дня, поэтому запрашиваем день +1 (т.е. сегодняшний)
-    api_date = datetime.utcnow().date().strftime('%Y-%m-%d')
-    btc_close = fetch_btc_price_closed(api_date)
+    header = rows[0]
 
-    if btc_close is None:
-        print(f"❌ Не удалось получить цену закрытия за {target_date}")
-        return
+    date_idx = header.index("date")
+    btc_idx = header.index("BTC")
+    ma_idx = header.index("moving_average")
 
-    # Находим строку с нужной датой
-    i = next((i for i, row in enumerate(data) if row[idx_date] == target_date), None)
-    if i is None:
-        print(f"❌ Дата {target_date} не найдена в {FILENAME}")
-        return
+    target_date = (
+        datetime.now(timezone.utc).date()
+        - timedelta(days=1)
+    ).isoformat()
 
-    # Обновляем цену
-    data[i][idx_btc] = f"{btc_close:.2f}"
+    btc_close = fetch_previous_day_close()
 
-    # Считаем 30-дневное скользящее среднее
-    prices = [float(r[idx_btc]) for r in data[i-30:i] if r[idx_btc]]
+    row_index = None
+
+    for i in range(1, len(rows)):
+        if rows[i][date_idx] == target_date:
+            row_index = i
+            break
+
+    if row_index is None:
+        raise RuntimeError(f"Дата {target_date} не найдена.")
+
+    rows[row_index][btc_idx] = f"{btc_close:.2f}"
+
+    prices = []
+
+    start = max(1, row_index - 30)
+
+    for r in rows[start:row_index]:
+        try:
+            prices.append(float(r[btc_idx]))
+        except ValueError:
+            pass
+
     if len(prices) == 30:
         ma = sum(prices) / 30
-        data[i][idx_ma] = f"{ma:.2f}"
+        rows[row_index][ma_idx] = f"{ma:.2f}"
     else:
-        data[i][idx_ma] = ""
+        rows[row_index][ma_idx] = ""
 
-    save_csv(data)
-    print(f"✅ {target_date} обновлено: BTC={btc_close:.2f}, MA={data[i][idx_ma]}")
+    save_csv(rows)
+
+    print(f"Updated {target_date}: BTC={btc_close:.2f}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     update_csv()
