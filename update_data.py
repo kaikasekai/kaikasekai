@@ -1,11 +1,9 @@
 import csv
 from datetime import datetime, timedelta, timezone
 
-import requests
+import yfinance as yf
 
 FILENAME = "data.csv"
-
-URL = "https://api.binance.com/api/v3/klines"
 
 
 def fetch_previous_day_close():
@@ -13,33 +11,28 @@ def fetch_previous_day_close():
     Возвращает цену закрытия предыдущего завершённого дня UTC.
     """
 
-    params = {
-        "symbol": "BTCUSDT",
-        "interval": "1d",
-        "limit": 2
-    }
+    df = yf.download(
+        "BTC-USD",
+        period="5d",
+        interval="1d",
+        auto_adjust=False,
+        progress=False,
+    )
 
-    response = requests.get(URL, params=params, timeout=20)
-    response.raise_for_status()
+    if len(df) < 2:
+        raise RuntimeError("Недостаточно данных Yahoo Finance.")
 
-    candles = response.json()
+    yesterday = (
+        datetime.now(timezone.utc).date() - timedelta(days=1)
+    )
 
-    if len(candles) < 2:
-        raise RuntimeError("Недостаточно данных от Binance.")
+    df.index = df.index.tz_localize(None)
 
-    # Последняя свеча может быть ещё не закрыта.
-    last = candles[-1]
+    for index, row in df.iterrows():
+        if index.date() == yesterday:
+            return float(row["Close"])
 
-    now_ms = int(datetime.now(timezone.utc).timestamp() * 1000)
-
-    close_time = last[6]
-
-    if now_ms >= close_time:
-        closed_candle = last
-    else:
-        closed_candle = candles[-2]
-
-    return float(closed_candle[4])
+    raise RuntimeError(f"Свеча за {yesterday} не найдена.")
 
 
 def load_csv():
@@ -83,11 +76,9 @@ def update_csv():
 
     prices = []
 
-    start = max(1, row_index - 30)
-
-    for r in rows[start:row_index]:
+    for row in rows[max(1, row_index - 30):row_index]:
         try:
-            prices.append(float(r[btc_idx]))
+            prices.append(float(row[btc_idx]))
         except ValueError:
             pass
 
