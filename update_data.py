@@ -1,38 +1,67 @@
 import csv
+import time
 from datetime import datetime, timedelta, timezone
 
-import yfinance as yf
+import requests
 
 FILENAME = "data.csv"
 
+URL = "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range"
 
-def fetch_previous_day_close():
-    """
-    Возвращает цену закрытия предыдущего завершённого дня UTC.
-    """
+HEADERS = {
+    "User-Agent": "btc-updater"
+}
 
-    df = yf.download(
-        "BTC-USD",
-        period="5d",
-        interval="1d",
-        auto_adjust=False,
-        progress=False,
+
+def fetch_close():
+
+    yesterday = datetime.now(timezone.utc).date() - timedelta(days=1)
+
+    start = datetime.combine(
+        yesterday,
+        datetime.min.time(),
+        tzinfo=timezone.utc
     )
 
-    if len(df) < 2:
-        raise RuntimeError("Недостаточно данных Yahoo Finance.")
+    end = start + timedelta(days=1)
 
-    yesterday = (
-        datetime.now(timezone.utc).date() - timedelta(days=1)
-    )
+    params = {
+        "vs_currency": "usd",
+        "from": int(start.timestamp()),
+        "to": int(end.timestamp())
+    }
 
-    df.index = df.index.tz_localize(None)
+    for attempt in range(5):
 
-    for index, row in df.iterrows():
-        if index.date() == yesterday:
-            return float(row["Close"])
+        try:
 
-    raise RuntimeError(f"Свеча за {yesterday} не найдена.")
+            r = requests.get(
+                URL,
+                params=params,
+                headers=HEADERS,
+                timeout=20
+            )
+
+            if r.status_code == 429:
+                time.sleep(10)
+                continue
+
+            r.raise_for_status()
+
+            prices = r.json()["prices"]
+
+            if not prices:
+                raise RuntimeError("No prices")
+
+            return float(prices[-1][1])
+
+        except Exception as e:
+
+            print(f"Attempt {attempt+1}: {e}")
+
+            time.sleep(5)
+
+    raise RuntimeError("CoinGecko unavailable")
 
 
 def load_csv():
@@ -45,53 +74,52 @@ def save_csv(rows):
         csv.writer(f).writerows(rows)
 
 
-def update_csv():
+def update():
 
     rows = load_csv()
 
     header = rows[0]
 
-    date_idx = header.index("date")
-    btc_idx = header.index("BTC")
-    ma_idx = header.index("moving_average")
+    date_col = header.index("date")
+    btc_col = header.index("BTC")
+    ma_col = header.index("moving_average")
 
-    target_date = (
+    target = (
         datetime.now(timezone.utc).date()
         - timedelta(days=1)
     ).isoformat()
 
-    btc_close = fetch_previous_day_close()
+    close = fetch_close()
 
-    row_index = None
+    idx = None
 
     for i in range(1, len(rows)):
-        if rows[i][date_idx] == target_date:
-            row_index = i
+        if rows[i][date_col] == target:
+            idx = i
             break
 
-    if row_index is None:
-        raise RuntimeError(f"Дата {target_date} не найдена.")
+    if idx is None:
+        raise RuntimeError(f"{target} not found")
 
-    rows[row_index][btc_idx] = f"{btc_close:.2f}"
+    rows[idx][btc_col] = f"{close:.2f}"
 
     prices = []
 
-    for row in rows[max(1, row_index - 30):row_index]:
+    for row in rows[max(1, idx - 30):idx]:
         try:
-            prices.append(float(row[btc_idx]))
+            prices.append(float(row[btc_col]))
         except ValueError:
             pass
 
     if len(prices) == 30:
-        ma = sum(prices) / 30
-        rows[row_index][ma_idx] = f"{ma:.2f}"
+        rows[idx][ma_col] = f"{sum(prices)/30:.2f}"
     else:
-        rows[row_index][ma_idx] = ""
+        rows[idx][ma_col] = ""
 
     save_csv(rows)
 
-    print(f"Updated {target_date}: BTC={btc_close:.2f}")
+    print(f"{target} -> {close:.2f}")
 
 
 if __name__ == "__main__":
-    update_csv()
+    update()
