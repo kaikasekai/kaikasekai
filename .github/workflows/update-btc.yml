@@ -1,106 +1,47 @@
-import csv
-from datetime import datetime, timedelta, timezone
+name: Update BTC Data Daily
 
-import requests
+permissions:
+  contents: write
 
-FILENAME = "data.csv"
+on:
+  schedule:
+    # 00:15 UTC каждый день
+    - cron: "15 0 * * *"
 
-URL = "https://api.binance.com/api/v3/klines"
+  workflow_dispatch:
 
+jobs:
+  update:
+    runs-on: ubuntu-latest
 
-def fetch_previous_day_close():
-    """
-    Возвращает цену закрытия предыдущего завершённого дня UTC.
-    """
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
 
-    params = {
-        "symbol": "BTCUSDT",
-        "interval": "1d",
-        "limit": 2
-    }
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
 
-    response = requests.get(URL, params=params, timeout=20)
-    response.raise_for_status()
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
 
-    candles = response.json()
+      - name: Update BTC data
+        run: python update_data.py
 
-    if len(candles) < 2:
-        raise RuntimeError("Недостаточно данных от Binance.")
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
 
-    # Последняя свеча может быть ещё не закрыта.
-    last = candles[-1]
+          git add data.csv
 
-    now_ms = int(datetime.now(timezone.utc).timestamp() * 1000)
+          if git diff --cached --quiet; then
+            echo "No changes"
+            exit 0
+          fi
 
-    close_time = last[6]
-
-    if now_ms >= close_time:
-        closed_candle = last
-    else:
-        closed_candle = candles[-2]
-
-    return float(closed_candle[4])
-
-
-def load_csv():
-    with open(FILENAME, newline="", encoding="utf-8") as f:
-        return list(csv.reader(f))
-
-
-def save_csv(rows):
-    with open(FILENAME, "w", newline="", encoding="utf-8") as f:
-        csv.writer(f).writerows(rows)
-
-
-def update_csv():
-
-    rows = load_csv()
-
-    header = rows[0]
-
-    date_idx = header.index("date")
-    btc_idx = header.index("BTC")
-    ma_idx = header.index("moving_average")
-
-    target_date = (
-        datetime.now(timezone.utc).date()
-        - timedelta(days=1)
-    ).isoformat()
-
-    btc_close = fetch_previous_day_close()
-
-    row_index = None
-
-    for i in range(1, len(rows)):
-        if rows[i][date_idx] == target_date:
-            row_index = i
-            break
-
-    if row_index is None:
-        raise RuntimeError(f"Дата {target_date} не найдена.")
-
-    rows[row_index][btc_idx] = f"{btc_close:.2f}"
-
-    prices = []
-
-    start = max(1, row_index - 30)
-
-    for r in rows[start:row_index]:
-        try:
-            prices.append(float(r[btc_idx]))
-        except ValueError:
-            pass
-
-    if len(prices) == 30:
-        ma = sum(prices) / 30
-        rows[row_index][ma_idx] = f"{ma:.2f}"
-    else:
-        rows[row_index][ma_idx] = ""
-
-    save_csv(rows)
-
-    print(f"Updated {target_date}: BTC={btc_close:.2f}")
-
-
-if __name__ == "__main__":
-    update_csv()
+          git commit -m "Update BTC $(date -u +'%Y-%m-%d')"
+          git push
