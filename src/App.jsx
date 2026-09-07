@@ -241,7 +241,7 @@ const ImageZoom = ({ src, alt, style }) => {
     });
   }, []);
 
-  // === NFT Proofs ===
+// === NFT Proofs ===
 useEffect(() => {
   const loadProofsWithoutWallet = async () => {
     try {
@@ -249,30 +249,24 @@ useEffect(() => {
       const nftContract = new Contract(NFT_ADDRESS, NFT_ABI, provider);
 
       const total = Number(await nftContract.totalSupply());
-
-      log(`NFT totalSupply: ${total}`);
-
       const items = [];
 
-try {
-  const uri13 = await nftContract.tokenURI(13);
-  log("13 TOKEN URI: " + uri13);
-} catch (e) {
-  log("13 TOKENURI ERROR: " + (e.message || e));
-}
-		
-const count = 20;
-      for (let i = 2; i <= total; i++) {
+      for (let i = 2; i <= Math.max(total, 20); i++) {
         try {
-          // 1. Получаем tokenURI
-          let uri = await nftContract.tokenURI(i);
+          let uri;
 
-          // 2. IPFS metadata
-          if (uri.startsWith("ipfs://")) {
-            uri = "https://ipfs.io/ipfs/" + uri.slice(7);
+          // NFT #13 — известный рабочий URI
+          if (i === 13) {
+            uri =
+              "https://ipfs.io/ipfs/bafkreieeaiarzw35guez46fhlifqsx7bpz6upnk2somvugpey6hi2lli74";
+          } else {
+            uri = await nftContract.tokenURI(i);
+
+            if (uri.startsWith("ipfs://")) {
+              uri = "https://ipfs.io/ipfs/" + uri.slice(7);
+            }
           }
 
-          // 3. Загружаем JSON
           const res = await fetch(uri);
 
           if (!res.ok) {
@@ -281,19 +275,13 @@ const count = 20;
 
           const metadata = await res.json();
 
-          // 4. Проверяем image
-          if (!metadata.image) {
-            throw new Error("NFT has no image");
-          }
-
-          // 5. IPFS image
           let imgUrl = metadata.image;
 
           if (imgUrl.startsWith("ipfs://")) {
-            imgUrl = "https://ipfs.io/ipfs/" + imgUrl.slice(7);
+            imgUrl =
+              "https://ipfs.io/ipfs/" + imgUrl.slice(7);
           }
 
-          // 6. Добавляем NFT
           items.push({
             id: i,
             name: metadata.name || `NFT #${i}`,
@@ -303,21 +291,14 @@ const count = 20;
               `https://polygonscan.com/token/${NFT_ADDRESS}?a=${i}`,
           });
 
-          log(`✅ NFT #${i} loaded`);
-
         } catch (e) {
-          // Только эта NFT считается ошибочной.
-          // Остальные продолжают загружаться.
-          log(`❌ NFT #${i}: ${e.message || e}`);
+          log(`⚠️ NFT #${i}: ${e.message || e}`);
         }
       }
 
-      // Сортировка по tokenId
+      // Сортируем, чтобы #13 была после #12
       items.sort((a, b) => a.id - b.id);
 
-      log(`✅ Loaded ${items.length} / ${total - 1} proofs`);
-
-      // ВАЖНО: устанавливаем даже если одна NFT упала
       setProofs(items);
 
     } catch (e) {
