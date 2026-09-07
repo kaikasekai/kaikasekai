@@ -253,7 +253,7 @@ useEffect(() => {
       log(`NFT totalSupply: ${total}`);
 
       const items = [];
-const count = Math.min(total, 20);
+const count = 20;
       for (let i = 2; i <= total; i++) {
         try {
           // 1. Получаем tokenURI
