@@ -251,7 +251,7 @@ const ImageZoom = ({ src, alt, style }) => {
         const items = [];
         const count = Math.min(total, 13);
         for (let i = 2; i <= count; i++) {
-          let uri = await nftContract.tokenURI(13);
+          let uri = await nftContract.tokenURI(12);
           if (uri.startsWith("ipfs://"))
             uri = "https://ipfs.io/ipfs/" + uri.slice(7);
           const res = await fetch(uri);
