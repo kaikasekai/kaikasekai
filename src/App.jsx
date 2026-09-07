@@ -253,6 +253,14 @@ useEffect(() => {
       log(`NFT totalSupply: ${total}`);
 
       const items = [];
+
+try {
+  const uri13 = await nftContract.tokenURI(13);
+  log("13 TOKEN URI: " + uri13);
+} catch (e) {
+  log("13 TOKENURI ERROR: " + (e.message || e));
+}
+		
 const count = 20;
       for (let i = 2; i <= total; i++) {
         try {
