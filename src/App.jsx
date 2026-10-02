@@ -251,7 +251,7 @@ useEffect(() => {
       const total = Number(await nftContract.totalSupply());
       const items = [];
 
-      for (let i = 2; i <= Math.max(total, 20); i++) {
+      for (let i = 2; i <= Math.max(total); i++) {
         try {
           let uri;
 
