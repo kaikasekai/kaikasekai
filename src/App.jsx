@@ -243,37 +243,70 @@ const ImageZoom = ({ src, alt, style }) => {
 
 // === NFT Proofs ===
   useEffect(() => {
-    const loadProofsWithoutWallet = async () => {
-      try {
-        const provider = new JsonRpcProvider("https://polygon.drpc.org");
-        const nftContract = new Contract(NFT_ADDRESS, NFT_ABI, provider);
-        const total = Number(await nftContract.totalSupply());
-        const items = [];
-        const count = Math.min(total, 13);
-        for (let i = 2; i <= count; i++) {
+  const loadProofsWithoutWallet = async () => {
+    const provider = new JsonRpcProvider("https://polygon.drpc.org");
+    const nftContract = new Contract(NFT_ADDRESS, NFT_ABI, provider);
+
+    try {
+      const total = Number(await nftContract.totalSupply());
+      const items = [];
+      const count = Math.min(total, 20);
+
+      for (let i = 2; i <= count; i++) {
+        try {
           let uri = await nftContract.tokenURI(i);
-          if (uri.startsWith("ipfs://"))
+
+          if (uri.startsWith("ipfs://")) {
             uri = "https://ipfs.io/ipfs/" + uri.slice(7);
+          }
+
           const res = await fetch(uri);
+
+          if (!res.ok) {
+            throw new Error(`Metadata HTTP ${res.status}`);
+          }
+
           const metadata = await res.json();
-          let imgUrl = metadata.image.startsWith("ipfs://")
-            ? "https://ipfs.io/ipfs/" + metadata.image.slice(7)
-            : metadata.image;
+
+          if (!metadata.image || typeof metadata.image !== "string") {
+            throw new Error("metadata.image отсутствует или не является строкой");
+          }
+
+          let imgUrl = metadata.image;
+
+          if (imgUrl.startsWith("ipfs://")) {
+            imgUrl = "https://ipfs.io/ipfs/" + imgUrl.slice(7);
+          }
+
           items.push({
             id: i,
             name: metadata.name,
             description: metadata.description,
             image: imgUrl,
-            polygonscan: `https://polygonscan.com/token/${NFT_ADDRESS}?a=${i}`,
+            polygonscan:
+              `https://polygonscan.com/token/${NFT_ADDRESS}?a=${i}`,
           });
+
+          console.log(`NFT #${i} OK`, {
+            uri,
+            name: metadata.name,
+            image: imgUrl,
+          });
+
+        } catch (e) {
+          console.error(`NFT #${i} FAILED:`, e);
         }
-        setProofs(items);
-      } catch (e) {
-        log("❌ Error loading Proofs: " + (e.message || e));
       }
-    };
-    loadProofsWithoutWallet();
-  }, []);
+
+      setProofs(items);
+
+    } catch (e) {
+      log("❌ Error loading Proofs: " + (e.message || e));
+    }
+  };
+
+  loadProofsWithoutWallet();
+}, []);
 
   // === Wallet connection ===
   const connectWallet = async () => {
